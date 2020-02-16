@@ -28,8 +28,9 @@ public class ReverseList {
 
     private static ListNode zsSolutionReversePointer(ListNode head) {
         ListNode pre = null;
+        ListNode next = null;
         while (head != null) {
-            ListNode next = head.next;
+            next = head.next;
             head.next = pre;
             pre = head;
             head = next;

@@ -1,7 +1,7 @@
 package tree.e07;
 
-import section05.myclass05.BTNode;
-
+import zhelper.TreeUtils.*;
+import zhelper.TreeUtils;
 import java.util.HashMap;
 
 /**
@@ -11,6 +11,16 @@ import java.util.HashMap;
  * @create 2019-10-21 21:47
  */
 public class BuildTreeByPreAndInSeq {
+
+    public static void main(String[] args) {
+        BTNode head = new BTNode(1);
+        head.leftChild = new BTNode(2);
+        head.rightChild = new BTNode(3);
+        head.leftChild.leftChild = new BTNode(4);
+        head.leftChild.rightChild = new BTNode(5);
+        head.rightChild.leftChild = new BTNode(6);
+        head.rightChild.rightChild = new BTNode(7);
+    }
 
     // 准备一个hashMap存inSeq的数据，键是inSeq的值，值是下标
     HashMap<Integer, Integer> inMap = new HashMap<>();

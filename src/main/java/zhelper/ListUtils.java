@@ -1,27 +1,47 @@
 package zhelper;
 
+
 /**
  * @author Shane Tang
  * @create 2019-10-04 21:27
  */
 public class ListUtils {
 
+    public static ListNode convertToLinkedList(int[] arr) {
+        ListNode newHead = new ListNode(-1);
+        if (arr == null || arr.length < 1) {
+            return null;
+        }
+        ListNode cur = newHead;
+        for (int i = 0; i < arr.length; i++) {
+            cur.next = new ListNode(arr[i]);
+            cur = cur.next;
+        }
+        return newHead.next;
+    }
+
 
     public static void printSingleList(ListNode head) {
-        while (head != null) {
-            if(head.next == null){
-                System.out.print(head.val);
-                return;
-            }
-            System.out.print(head.val + "-->");
-            head = head.next;
+        if (head == null) {
+            System.out.println("linkedList = null" );
+            return;
         }
-        System.out.println();
+        System.out.print("linkedList = ");
+        while (head != null) {
+            if (head.next != null) {
+                System.out.print(head.val + " --> ");
+                head = head.next;
+                continue;
+            }
+            System.out.print(head.val);
+            System.out.println();
+            return;
+        }
     }
 
     public static void printDoubleList(DoubleNode head) {
         while (head != null) {
-            if(head.next == null){
+            if (head.next == null) {
                 System.out.print(head.data);
                 return;
             }
@@ -46,6 +66,13 @@ public class ListUtils {
         public ListNode(int val, ListNode next) {
             this.val = val;
             this.next = next;
+        }
+
+        @Override
+        public String toString() {
+            return "ListNode{" +
+                    "val=" + val +
+                    '}';
         }
     }
 
