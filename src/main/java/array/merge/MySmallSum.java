@@ -1,4 +1,4 @@
-package sort.merge;
+package array.merge;
 
 /**
  * 小和问题

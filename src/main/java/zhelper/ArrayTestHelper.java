@@ -42,8 +42,8 @@ public class ArrayTestHelper {
                 break;
             }
         }
+        System.out.println(succeed ? "Nice!" : "Fucking fucked!");
         if (succeed) {
-            System.out.println(succeed ? "Nice!" : "Fucking fucked!");
             // 一次实验展示
             int[] arr = generateRandomArray(maxSize, maxValue);
             System.out.println("一次成功实验展示:");

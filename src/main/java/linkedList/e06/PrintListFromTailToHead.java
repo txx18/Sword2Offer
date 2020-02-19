@@ -23,12 +23,18 @@ public class PrintListFromTailToHead {
         System.out.println(reverseValues.toString());
     }
 
+    /**
+     * NK
+     * @param listNode
+     * @return
+     */
     public static ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
 //        return solutionStack(listNode);
 //        return stoSolutionRecur(listNode);
 //        return zsSolutionReversePointer(listNode);
         return cycSolutionInsertHeadNode(listNode);
     }
+
 
     /**
      *
@@ -38,19 +44,19 @@ public class PrintListFromTailToHead {
     private static ArrayList<Integer> cycSolutionInsertHeadNode(ListNode head) {
         ArrayList<Integer> res = new ArrayList<>();
         // 创建新的结点
-        ListNode newNode = new ListNode(-1);
+        ListNode newHead = new ListNode(-1);
         while (head != null) {
             // 记住head的nextNode
             ListNode next = head.next;
             // 断开原来的next指针，指向新增结点的next
-            head.next = newNode.next;
+            head.next = newHead.next;
             // 新结点的next指针指向head
-            newNode.next = head;
+            newHead.next = head;
             // head后移
             head = next;
         }
         // 循环结束后，链表反转完毕，头结点就是newNode.next
-        head = newNode.next;
+        head = newHead.next;
         addToArrayListLoop(head, res);
         return res;
     }

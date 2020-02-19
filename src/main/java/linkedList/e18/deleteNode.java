@@ -32,6 +32,12 @@ public class deleteNode {
         ListUtils.printSingleList(res);
     }
 
+    /**
+     * LC
+     * @param head
+     * @param val
+     * @return
+     */
     public static ListNode deleteNode(ListNode head, int val) {
 //        return solutionTrav(head, val);
         return mySolutionInsertHeadTraverse(head, val);
@@ -78,14 +84,24 @@ public class deleteNode {
     /**
      * 通过LC
      * 而且我认为我的支持重复数字的删除
+     * 执行用时 :
+     * 0 ms
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * 内存消耗 :
+     * 41.7 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
      * @param head
      * @param val
      * @return
      */
     private static ListNode mySolutionInsertHeadTraverse(ListNode head, int val) {
-        ListNode newNode = new ListNode(-1);
-        newNode.next = head;
-        ListNode cur = newNode;
+        ListNode newHead = new ListNode(-1);
+        newHead.next = head;
+        ListNode cur = newHead;
         while (cur.next != null) {
             // 如果不是要删的，跳过
             if (cur.next.val != val) {
@@ -95,12 +111,21 @@ public class deleteNode {
             // 如果是要删的，跨越
             cur.next = cur.next.next;
         }
-        return newNode.next;
+        return newHead.next;
     }
 
     /**
      * 遍历法
-     *
+     *执行用时 :
+     * 0 ms
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * 内存消耗 :
+     * 41.3 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
      * @param head
      * @param val
      * @return

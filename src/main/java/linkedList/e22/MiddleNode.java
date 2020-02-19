@@ -34,6 +34,16 @@ public class MiddleNode {
 
     /**
      * 通过LC
+     * 执行用时 :
+     * 0 ms
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * 内存消耗 :
+     * 40.2 MB
+     * , 在所有 Java 提交中击败了
+     * 5.17%
+     * 的用户
      * @param head
      * @return
      */

@@ -4,10 +4,9 @@ import java.util.Arrays;
 
 /**
  * 统计一个数字在排序数组中出现的次数。
- * 不能用对数器！因为必须是排序的数组！
+ *
  * @author Shane Tang
  * @version V1.0
- * @Description
  * @create 2020-02-06 11:53
  */
 public class CountOfNumOfSortedArr {
@@ -15,17 +14,45 @@ public class CountOfNumOfSortedArr {
     public static void main(String[] args) {
         int[] arr1 = {3, 5, 11, 17, 21, 23, 28, 28, 28, 28, 30, 32, 50, 64, 64, 78, 81, 95, 101};
         int[] arr2 = {1, 2, 3, 3, 3, 3, 4, 6};
-        int res = mySolutionBSRecur(arr2, 3);
+        int res = search(arr2, 3);
         System.out.println("res = " + res);
     }
 
+    /**
+     * NK
+     * @param array
+     * @param k
+     * @return
+     */
     public static int GetNumberOfK(int[] array, int k) {
 //        return stoSolutionBSLoop(array, k);
         return mySolutionBSRecur(array, k);
     }
 
     /**
+     * LC
+     * @param nums
+     * @param target
+     * @return
+     */
+    public static int search(int[] nums, int target) {
+//        return mySolutionBSRecur(nums, target);
+//        return solutionByTraverse(nums, target);
+        return cycGetNumberOfK(nums, target);
+    }
+
+    /**
      * 通过NK
+     * 执行用时 :
+     * 0 ms
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * 内存消耗 :
+     * 48.5 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
      * @param array
      * @param k
      * @return
@@ -37,23 +64,6 @@ public class CountOfNumOfSortedArr {
             return 0;
         }
         int lastIdx = getLastIdxByRecur(array, l, r, k);
-//        System.out.println("firstIdx = " + firstIdx);
-//        System.out.println("lastIdx = " + lastIdx);
-        return lastIdx - firstIdx + 1;
-    }
-
-    /**
-     * 已通过NKOJ
-     * @param sortedArr
-     * @param k
-     * @return
-     */
-    public static int stoSolutionBSLoop(int[] sortedArr, int k) {
-        int firstIdx = getFirstIdx(sortedArr, k);
-        if (firstIdx < 0) {
-            return 0;
-        }
-        int lastIdx = getLastIdx(sortedArr, k);
 //        System.out.println("firstIdx = " + firstIdx);
 //        System.out.println("lastIdx = " + lastIdx);
         return lastIdx - firstIdx + 1;
@@ -91,6 +101,23 @@ public class CountOfNumOfSortedArr {
             }
             return getLastIdxByRecur(array, mid + 1, r, k);
         }
+    }
+
+    /**
+     * 已通过NKOJ
+     * @param sortedArr
+     * @param k
+     * @return
+     */
+    private static int stoSolutionBSLoop(int[] sortedArr, int k) {
+        int firstIdx = getFirstIdx(sortedArr, k);
+        if (firstIdx < 0) {
+            return 0;
+        }
+        int lastIdx = getLastIdx(sortedArr, k);
+//        System.out.println("firstIdx = " + firstIdx);
+//        System.out.println("lastIdx = " + lastIdx);
+        return lastIdx - firstIdx + 1;
     }
 
     private static int getFirstIdx(int[] sortedArr, int k) {
@@ -145,7 +172,7 @@ public class CountOfNumOfSortedArr {
      * @param k
      * @return
      */
-    public static int useJdkSolution(int[] sortedArr, int k) {
+    private static int useJdkSolution(int[] sortedArr, int k) {
         int cnt = 0;
         // https://docs.oracle.com/javase/8/docs/api/index.html
         // binarySearch()方法的返回值为：
@@ -168,7 +195,22 @@ public class CountOfNumOfSortedArr {
         return cnt;
     }
 
-    public static int solutionByTraverse(int[] arr, int k) {
+    /**
+     * 执行用时 :
+     * 1 ms
+     * , 在所有 Java 提交中击败了
+     * 44.93%
+     * 的用户
+     * 内存消耗 :
+     * 48.9 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * @param arr
+     * @param k
+     * @return
+     */
+    private static int solutionByTraverse(int[] arr, int k) {
         // 出现一次，就记录一次
         int count = 0;
         for (int value : arr) {
@@ -181,12 +223,21 @@ public class CountOfNumOfSortedArr {
 
     /**
      * 已通过NKOJ
-     *
+     *执行用时 :
+     * 0 ms
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * 内存消耗 :
+     * 46.9 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
      * @param array
      * @param k
      * @return
      */
-    public static int cycGetNumberOfK(int[] array, int k) {
+    private static int cycGetNumberOfK(int[] array, int k) {
         int first = cycBinarySearch(array, k);
         int last = cycBinarySearch(array, k + 1);
         return (first == array.length || array[first] != k) ? 0 : last - first;

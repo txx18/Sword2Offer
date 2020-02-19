@@ -7,6 +7,18 @@ package zhelper;
  */
 public class ListUtils {
 
+    public static void main(String[] args) {
+        int[] arr1 = {1, 2, 3, 4, 5};
+        int[] arr2 = {1, 2, 3, 4, 5, 6};
+        int[] arr3 = {1, 2};
+        int[] arr4 = {1};
+        int[] arr5 = null;
+        int[] arr6 = {1, 3, 5, 7};
+        int[] arr7 = {2, 4, 6, 8};
+        ListNode head = convertToLinkedList(arr1);
+        printSingleList(head);
+    }
+
     public static ListNode convertToLinkedList(int[] arr) {
         ListNode newHead = new ListNode(-1);
         if (arr == null || arr.length < 1) {
@@ -18,6 +30,16 @@ public class ListUtils {
             cur = cur.next;
         }
         return newHead.next;
+/*        if (arr == null || arr.length < 1) {
+            return null;
+        }
+        ListNode head = new ListNode(arr[0]);
+        ListNode cur = head;
+        for (int i = 1; i < arr.length; i++) {
+            cur.next = new ListNode(arr[i]);
+            cur = cur.next;
+        }
+        return head;*/
     }
 
 

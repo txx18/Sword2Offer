@@ -30,8 +30,9 @@ public class deleteDuplicateNode {
     }
 
     public static ListNode deleteDuplication(ListNode pHead) {
-        return mySolutionInsertHeadTrav(pHead);
+        return mySolutionInsertHeadTraverse(pHead);
     }
+
 
 
     /**
@@ -40,7 +41,7 @@ public class deleteDuplicateNode {
      * @param pHead
      * @return
      */
-    private static ListNode mySolutionInsertHeadTrav(ListNode pHead) {
+    private static ListNode mySolutionInsertHeadTraverse(ListNode pHead) {
         ListNode newHead = new ListNode(-1);
         newHead.next = pHead;
         ListNode cur = newHead;

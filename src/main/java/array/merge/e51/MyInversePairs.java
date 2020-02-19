@@ -1,4 +1,4 @@
-package sort.merge.e51;
+package array.merge.e51;
 
 /**
  * 逆序对
@@ -14,6 +14,14 @@ public class MyInversePairs {
 
 
     public static int InversePairs(int[] array) {
+        if (array == null || array.length < 2) {
+            return 0;
+        }
+        return getInversePairCount(array, 0, array.length - 1);
+//        return solutionByTraverse(array);
+    }
+
+    public int reversePairs(int[] array) {
         if (array == null || array.length < 2) {
             return 0;
         }

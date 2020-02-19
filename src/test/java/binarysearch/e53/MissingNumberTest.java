@@ -2,7 +2,7 @@ package binarysearch.e53;
 
 import org.junit.Test;
 
-public class NotAppearNumTest {
+public class MissingNumberTest {
 
     @Test
     public void getNotAppearNum() {
@@ -11,7 +11,7 @@ public class NotAppearNumTest {
         int[] arr3 = {0, 1, 2, 3, 4, 6, 7, 8, 9};
 //        int notAppearNum = NotAppearNum.solutionByTraverse(arr);
 //        int notAppearNum = NotAppearNum.solutionByBinarySearch(arr2);
-        int notAppearNum = NotAppearNum.solutionByBinarySearch(arr3);
+        int notAppearNum = MissingNumber.stoSolutionBS(arr3);
         System.out.println("notAppearNum = " + notAppearNum);
     }
 
@@ -33,7 +33,7 @@ public class NotAppearNumTest {
         if(testName != null)
             System.out.printf("%s begins: ", testName);
 
-        int result = NotAppearNum.solutionByBinarySearch(numbers);
+        int result = MissingNumber.stoSolutionBS(numbers);
         if(result == expected)
             System.out.printf("Passed.\n");
         else

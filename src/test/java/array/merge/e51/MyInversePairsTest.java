@@ -1,4 +1,4 @@
-package sort.merge.e51;
+package array.merge.e51;
 
 import org.junit.Test;
 

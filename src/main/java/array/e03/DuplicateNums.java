@@ -6,24 +6,59 @@ import java.util.HashSet;
 
 /**
  * 数组中重复的数字
- * 在一个长度为n的数组里的所有数字都在0到n-1的范围内。 数组中某些数字是重复的，但不知道有几个数字是重复的。
- * 也不知道每个数字重复几次。请找出数组中任意一个重复的数字。 例如，如果输入长度为7的数组{2,3,1,0,2,5,3}，那么对应的输出是第一个重复的数字2。
+ 在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。
+ 请找出数组中任意一个重复的数字。
+
+ 来源：力扣（LeetCode）
+ 链接：https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof
+ 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * @author Shane Tang
  * @version V1.0
  * @create 2020-02-07 11:22
  */
 public class DuplicateNums {
 
+    /**
+     * NK
+     * @param numbers
+     * @param length
+     * @param duplication
+     * @return
+     */
     public boolean duplicate(int[] numbers, int length, int[] duplication) {
 //        return solutionBySort(numbers, length, duplication);
 //        return solutionByHashMap(numbers, length, duplication);
 //        return solutionByHashSet(numbers, length, duplication);
         return solutionSwap(numbers, length, duplication);
-//        return solutionBSRecur(numbers, length, duplication);
     }
 
-    private boolean solutionBSRecur(int[] numbers, int length, int[] duplication) {
-        return false;
+    /**
+     * LC
+     * @param nums
+     * @return
+     */
+    public int findRepeatNumber(int[] nums) {
+        return stoSolutionSwap(nums);
+    }
+
+    private int stoSolutionSwap(int[] nums) {
+        if (nums == null || nums.length < 2) {
+            return -1;
+        }
+        // 遍历数组，arr[i]的值本来是i，如果是不是i，则准备与下标为arr[i]的元素交换（换到它应该在的位置）
+        for (int i = 0; i < nums.length; i++) {
+            // 如果正常，判断下一个
+            if (nums[i] == i){
+                continue;
+            }
+            // 如果两元素相等，则返回
+            if (nums[i] == nums[nums[i]]) {
+                return nums[i];
+            }
+            // 否则把该元素交换到本来的位置
+            swap(nums, nums[i], i);
+        }
+        return -1;
     }
 
 

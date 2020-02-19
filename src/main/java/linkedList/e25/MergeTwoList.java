@@ -4,7 +4,7 @@ import zhelper.ListUtils;
 import zhelper.ListUtils.*;
 
 /**
- * 输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
+ * 输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。
  *
  * @author Shane Tang
  * @version V1.0
@@ -28,20 +28,48 @@ public class MergeTwoList {
 
     }
 
+    /**
+     * NK
+     * @param list1
+     * @param list2
+     * @return
+     */
     public static ListNode Merge(ListNode list1, ListNode list2) {
 //        return mySolutionLoop(list1, list2);
         return cycSolutionRecur(list1, list2);
     }
 
     /**
+     * LC
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+//        return mySolutionLoop(l1, l2);
+        return cycSolutionRecur(l1, l2);
+    }
+
+
+    /**
      * 通过NK
+     * 执行用时 :
+     * 1 ms
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * 内存消耗 :
+     * 45.5 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
      * @param list1
      * @param list2
      * @return
      */
     private static ListNode mySolutionLoop(ListNode list1, ListNode list2) {
-        ListNode insertNode = new ListNode(-1);
-        ListNode cur = insertNode;
+        ListNode newHead = new ListNode(-1);
+        ListNode cur = newHead;
         while (list1 != null && list2 != null) {
             if (list1.val <= list2.val) {
                 cur.next = list1;
@@ -63,14 +91,31 @@ public class MergeTwoList {
             list2 = list2.next;
             cur = cur.next;
         }
-        return insertNode.next;
+        return newHead.next;
     }
 
+    /**
+     * 执行用时 :
+     * 2 ms
+     * , 在所有 Java 提交中击败了
+     * 9.42%
+     * 的用户
+     * 内存消耗 :
+     * 44.4 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * @param list1
+     * @param list2
+     * @return
+     */
     public static ListNode cycSolutionRecur(ListNode list1, ListNode list2) {
-        if (list1 == null)
+        if (list1 == null) {
             return list2;
-        if (list2 == null)
+        }
+        if (list2 == null) {
             return list1;
+        }
         if (list1.val <= list2.val) {
             list1.next = cycSolutionRecur(list1.next, list2);
             return list1;
