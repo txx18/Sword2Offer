@@ -1,6 +1,8 @@
 package zhelper;
 
 
+import java.util.Arrays;
+
 /**
  * @author Shane Tang
  * @create 2019-10-04 21:27
@@ -15,8 +17,20 @@ public class ListUtils {
         int[] arr5 = null;
         int[] arr6 = {1, 3, 5, 7};
         int[] arr7 = {2, 4, 6, 8};
-        ListNode head = convertToLinkedList(arr1);
-        printSingleList(head);
+        ListNode head = convertToLinkedList(arr2);
+        ListNode res = printSingleList(head);
+        int listSize = getListSize(res);
+        System.out.println("listSize = " + listSize);
+    }
+
+    public static int getListSize(ListNode head) {
+        ListNode cur = head;
+        int listSize = 0;
+        while (cur != null) {
+            listSize++;
+            cur = cur.next;
+        }
+        return listSize;
     }
 
     public static ListNode convertToLinkedList(int[] arr) {
@@ -42,23 +56,38 @@ public class ListUtils {
         return head;*/
     }
 
-
-    public static void printSingleList(ListNode head) {
+    /**
+     * 不修改原链表原则！不然你再定位head的时候都不知道错哪儿
+     * @param head
+     */
+    public static ListNode printSingleList(ListNode head) {
         if (head == null) {
             System.out.println("linkedList = null" );
-            return;
+            return null;
         }
         System.out.print("linkedList = ");
-        while (head != null) {
-            if (head.next != null) {
-                System.out.print(head.val + " --> ");
-                head = head.next;
+        ListNode cur = head;
+//        ListNode next = null;
+        while (cur != null) {
+            if (cur.next != null) {
+                System.out.print(cur.val + " --> ");
+            }
+            else {
+                System.out.print(cur.val + " --> null");
+            }
+            cur = cur.next;
+            /*            if (cur.next != null) {
+                System.out.print(cur.val + " --> ");
+                cur = cur.next;
                 continue;
             }
-            System.out.print(head.val);
+            // cur.next == null
+            System.out.print(cur.val + " --> null");
             System.out.println();
-            return;
+            break;*/
         }
+        System.out.println();
+        return head;
     }
 
     public static void printDoubleList(DoubleNode head) {
@@ -70,6 +99,10 @@ public class ListUtils {
             System.out.print(head.data + " ");
             head = head.next;
         }
+    }
+
+    public static void convertToArray(ListNode head) {
+
     }
 
     public static class ListNode {

@@ -19,14 +19,15 @@ public class MissingNumber {
         int[] arr3 = {0, 1, 2, 3, 4};
         int[] arr4 = {};
         int[] arr5 = {0};
+        int[] arr6 = {0, 1};
 //        System.out.println(arr4 == null);
-        int res = missingNumber(arr5);
+        int res = missingNumber(arr6);
         System.out.println("res = " + res);
     }
 
     public static int missingNumber(int[] nums) {
-        return stoSolutionBS(nums);
-
+//        return solutionBSLoopME(nums);
+        return solutionTraverse(nums);
     }
 
     /**
@@ -46,7 +47,7 @@ public class MissingNumber {
      * @param arr
      * @return
      */
-    public static int stoSolutionBS(int[] arr) {
+    public static int solutionBSLoopME(int[] arr) {
         if (arr == null) {
             return -1;
         }
@@ -76,12 +77,28 @@ public class MissingNumber {
         return -1;
     }
 
-    public static int solutionByTraverse(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
+    /**
+     * 执行用时 :
+     * 0 ms
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * 内存消耗 :
+     * 42.9 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * @param arr
+     * @return
+     */
+    public static int solutionTraverse(int[] arr) {
+        int i = 0;
+        for (; i < arr.length; i++) {
             if (arr[i] != i) {
                 return arr[i] - 1;
             }
         }
-        return -1;
+        // 缺的是最后一个数字
+        return i;
     }
 }

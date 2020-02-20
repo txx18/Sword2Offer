@@ -28,7 +28,7 @@ public class MiddleNode {
     }
 
     public static ListNode middleNode(ListNode head) {
-        return mySolution(head);
+        return solutionME(head);
 
     }
 
@@ -47,7 +47,7 @@ public class MiddleNode {
      * @param head
      * @return
      */
-    private static ListNode mySolution(ListNode head) {
+    private static ListNode solutionME(ListNode head) {
         if (head == null) {
             return null;
         }

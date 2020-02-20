@@ -38,10 +38,10 @@ public class DuplicateNums {
      * @return
      */
     public int findRepeatNumber(int[] nums) {
-        return stoSolutionSwap(nums);
+        return solutionSwapSTO(nums);
     }
 
-    private int stoSolutionSwap(int[] nums) {
+    private int solutionSwapSTO(int[] nums) {
         if (nums == null || nums.length < 2) {
             return -1;
         }

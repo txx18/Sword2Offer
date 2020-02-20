@@ -3,10 +3,12 @@ package linkedList.e18;
 import zhelper.ListUtils;
 import zhelper.ListUtils.*;
 
+import java.util.Stack;
+
 /**
  * 给定单向链表的头指针和一个要删除的节点的值，定义一个函数删除该节点。
  * 返回删除后的链表的头节点。
- *
+ * <p>
  * 我感觉并不需要是排序的链表啊
  *
  * @author Shane Tang
@@ -34,13 +36,87 @@ public class deleteNode {
 
     /**
      * LC
+     *
      * @param head
      * @param val
      * @return
      */
     public static ListNode deleteNode(ListNode head, int val) {
-//        return solutionTrav(head, val);
-        return mySolutionInsertHeadTraverse(head, val);
+//        return mySolutionInsertHeadTraverse(head, val);
+//        return solutionZS(head, val);
+        return solutionStackZS(head, val);
+    }
+
+    /**
+     * 执行用时 :
+     * 2 ms
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * 内存消耗 :
+     * 39.5 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * @param head
+     * @param val
+     * @return
+     */
+    private static ListNode solutionStackZS(ListNode head, int val) {
+        Stack<ListNode> stack = new Stack<>();
+        ListNode cur = head;
+        // 不是指定节点的放进栈中
+        while (cur != null) {
+            if (cur.val != val) {
+                stack.push(cur);
+            }
+            cur = cur.next;
+        }
+        // 重新连接栈中元素，从尾到头地连
+        while (!stack.isEmpty()) {
+            stack.peek().next = cur;
+            cur = stack.pop();
+        }
+        return cur;
+    }
+
+    /**
+     * 执行用时 :
+     * 0 ms
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * 内存消耗 :
+     * 39.1 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     *
+     * @param head
+     * @param val
+     * @return
+     */
+    private static ListNode solutionZS(ListNode head, int val) {
+        // 如果删的是头几个，就换头
+        while (head != null) {
+            if (head.val != val) {
+                break;
+            }
+            head = head.next;
+        }
+        ListNode pre = head;
+        ListNode cur = head;
+        while (cur != null) {
+            if (cur.val == val) {
+                pre.next = cur.next;
+            }
+            // 跳出待删区域
+            else {
+                pre = cur;
+            }
+            cur = cur.next;
+        }
+        return head;
     }
 
     /**
@@ -51,7 +127,7 @@ public class deleteNode {
      * @return
      */
     public static ListNode deleteNode(ListNode head, ListNode toDelNode) {
-        return stoSolutionCover(head, toDelNode);
+        return solutionCoverSTO(head, toDelNode);
     }
 
     /**
@@ -61,7 +137,7 @@ public class deleteNode {
      * @param toDelNode
      * @return
      */
-    private static ListNode stoSolutionCover(ListNode head, ListNode toDelNode) {
+    private static ListNode solutionCoverSTO(ListNode head, ListNode toDelNode) {
         ListNode newHead = new ListNode(-1);
         newHead.next = head;
         ListNode cur = newHead;
@@ -94,11 +170,12 @@ public class deleteNode {
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
+     *
      * @param head
      * @param val
      * @return
      */
-    private static ListNode mySolutionInsertHeadTraverse(ListNode head, int val) {
+    private static ListNode solutionInsertHeadTraverseME(ListNode head, int val) {
         ListNode newHead = new ListNode(-1);
         newHead.next = head;
         ListNode cur = newHead;
@@ -114,50 +191,5 @@ public class deleteNode {
         return newHead.next;
     }
 
-    /**
-     * 遍历法
-     *执行用时 :
-     * 0 ms
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * 内存消耗 :
-     * 41.3 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * @param head
-     * @param val
-     * @return
-     */
-    private static ListNode solutionTrav(ListNode head, int val) {
-        // 防御
-        if (head == null) {
-            return null;
-        }
-        // 如果只有一个节点且删除的就是第一个
-        if (head.next == null && head.val == val) {
-            return null;
-        }
-        // 如果多个节点，要删除第一个节点
-        if (head.val == val) {
-            return head.next;
-        }
-        ListNode cur = head;
-        // 多个节点，删除不是第一个节点，如果nextNode是待删除节点就越过它
-        while (cur.next != null) {
-            if (cur.next.val == val) {
-                cur.next = cur.next.next;
-                break;
-            }
-            // 如果不是则下一个
-            cur = cur.next;
-        }
-/*        while (cur.next.val != val) {
-            cur = cur.next;
-        }
-        cur.next = cur.next.next;*/
-        return head;
-    }
 
 }

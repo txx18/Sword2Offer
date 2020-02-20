@@ -26,7 +26,7 @@ public class CountOfNumOfSortedArr {
      */
     public static int GetNumberOfK(int[] array, int k) {
 //        return stoSolutionBSLoop(array, k);
-        return mySolutionBSRecur(array, k);
+        return solutionBSRecurME(array, k);
     }
 
     /**
@@ -38,7 +38,7 @@ public class CountOfNumOfSortedArr {
     public static int search(int[] nums, int target) {
 //        return mySolutionBSRecur(nums, target);
 //        return solutionByTraverse(nums, target);
-        return cycGetNumberOfK(nums, target);
+        return solutionBSLoopCYC(nums, target);
     }
 
     /**
@@ -57,7 +57,7 @@ public class CountOfNumOfSortedArr {
      * @param k
      * @return
      */
-    public static int mySolutionBSRecur(int[] array, int k) {
+    public static int solutionBSRecurME(int[] array, int k) {
         int l = 0, r = array.length - 1;
         int firstIdx = getFirstIdxByRecur(array, l, r, k);
         if (firstIdx < 0) {
@@ -109,7 +109,7 @@ public class CountOfNumOfSortedArr {
      * @param k
      * @return
      */
-    private static int stoSolutionBSLoop(int[] sortedArr, int k) {
+    private static int solutionBSLoopSTO(int[] sortedArr, int k) {
         int firstIdx = getFirstIdx(sortedArr, k);
         if (firstIdx < 0) {
             return 0;
@@ -172,7 +172,7 @@ public class CountOfNumOfSortedArr {
      * @param k
      * @return
      */
-    private static int useJdkSolution(int[] sortedArr, int k) {
+    private static int solutionUseJdk(int[] sortedArr, int k) {
         int cnt = 0;
         // https://docs.oracle.com/javase/8/docs/api/index.html
         // binarySearch()方法的返回值为：
@@ -210,7 +210,7 @@ public class CountOfNumOfSortedArr {
      * @param k
      * @return
      */
-    private static int solutionByTraverse(int[] arr, int k) {
+    private static int solutionTraverse(int[] arr, int k) {
         // 出现一次，就记录一次
         int count = 0;
         for (int value : arr) {
@@ -237,7 +237,7 @@ public class CountOfNumOfSortedArr {
      * @param k
      * @return
      */
-    private static int cycGetNumberOfK(int[] array, int k) {
+    public static int solutionBSLoopCYC(int[] array, int k) {
         int first = cycBinarySearch(array, k);
         int last = cycBinarySearch(array, k + 1);
         return (first == array.length || array[first] != k) ? 0 : last - first;

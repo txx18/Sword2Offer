@@ -49,13 +49,15 @@ public class ReOrderArray {
      * @return
      */
     public static int[] exchange(int[] nums) {
-        mySolutionTwoPartition(nums);
+        solutionSimplePartitionOnce(nums);
         // mySolutionPartition(nums);
         //stoSolutionSwap(nums);
         // cycSolutionBubble(nums);
         // cycSolutionNewArrayCopy(nums);
         return nums;
     }
+
+
 
     /**
      * 通过LC （3， 55.2）
@@ -73,10 +75,10 @@ public class ReOrderArray {
      * 的用户
      * @param array
      */
-    private static void mySolutionTwoPartition(int[] array) {
+    private static void solutionSimplePartitionOnce(int[] array) {
         int oddRightIdx = -1;
         for (int i = 0; i < array.length; i++) {
-            if (array[i] % 2 != 0) {
+            if (isOddNum(array[i])) {
                 swap(array, i, ++oddRightIdx);
             }
         }

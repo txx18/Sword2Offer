@@ -1,7 +1,5 @@
 package linkedList.e62;
 
-import zhelper.ListUtils;
-
 import zhelper.ListUtils.*;
 
 /**
@@ -32,7 +30,7 @@ public class Josephuse {
      * @return
      */
     public static int LastRemaining_Solution(int n, int m) {
-        return stoSolutionCircularList(n , m);
+        return solutionCircularListSTO(n , m);
     }
 
     /**
@@ -44,7 +42,7 @@ public class Josephuse {
     public static int lastRemaining(int n, int m) {
 //        return stoSolutionCircularList(n , m);
 //        return cycSolutionRecur(n , m);
-        return stoSolutionLoop(n, m);
+        return solutionFormulaLoop(n, m);
     }
 
     /**
@@ -62,7 +60,7 @@ public class Josephuse {
      * @param m
      * @return
      */
-    private static int stoSolutionLoop(int n, int m) {
+    private static int solutionFormulaLoop(int n, int m) {
         // 防御
         if (n < 1 || m < 1) {
             return -1;
@@ -89,12 +87,12 @@ public class Josephuse {
      * @param m
      * @return
      */
-    public static int cycSolutionRecur(int n, int m) {
+    public static int solutionFormulaRecur(int n, int m) {
         if (n == 0) /* 特殊输入的处理 */
             return -1;
         if (n == 1) /* 递归返回条件 */
             return 0;
-        return (cycSolutionRecur(n - 1, m) + m) % n;
+        return (solutionFormulaRecur(n - 1, m) + m) % n;
     }
 
 
@@ -108,7 +106,7 @@ public class Josephuse {
      * @param m
      * @return
      */
-    private static int stoSolutionCircularList(int n, int m) {
+    private static int solutionCircularListSTO(int n, int m) {
         // 防御
         if (n < 1 || m < 1) {
             return -1;

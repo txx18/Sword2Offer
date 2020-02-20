@@ -36,7 +36,7 @@ public class MergeTwoList {
      */
     public static ListNode Merge(ListNode list1, ListNode list2) {
 //        return mySolutionLoop(list1, list2);
-        return cycSolutionRecur(list1, list2);
+        return solutionRecurCYC(list1, list2);
     }
 
     /**
@@ -47,7 +47,7 @@ public class MergeTwoList {
      */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 //        return mySolutionLoop(l1, l2);
-        return cycSolutionRecur(l1, l2);
+        return solutionRecurCYC(l1, l2);
     }
 
 
@@ -67,7 +67,7 @@ public class MergeTwoList {
      * @param list2
      * @return
      */
-    private static ListNode mySolutionLoop(ListNode list1, ListNode list2) {
+    private static ListNode solutionLoopME(ListNode list1, ListNode list2) {
         ListNode newHead = new ListNode(-1);
         ListNode cur = newHead;
         while (list1 != null && list2 != null) {
@@ -109,7 +109,7 @@ public class MergeTwoList {
      * @param list2
      * @return
      */
-    public static ListNode cycSolutionRecur(ListNode list1, ListNode list2) {
+    public static ListNode solutionRecurCYC(ListNode list1, ListNode list2) {
         if (list1 == null) {
             return list2;
         }
@@ -117,10 +117,10 @@ public class MergeTwoList {
             return list1;
         }
         if (list1.val <= list2.val) {
-            list1.next = cycSolutionRecur(list1.next, list2);
+            list1.next = solutionRecurCYC(list1.next, list2);
             return list1;
         } else {
-            list2.next = cycSolutionRecur(list1, list2.next);
+            list2.next = solutionRecurCYC(list1, list2.next);
             return list2;
         }
     }

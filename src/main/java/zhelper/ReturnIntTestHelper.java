@@ -14,12 +14,12 @@ import static zhelper.ArrayUtils.*;
 public class ReturnIntTestHelper {
 
     private static int solution(int[] arr) {
-        return CountOfNumOfSortedArr.mySolutionBSRecur(arr, 1);
+        return CountOfNumOfSortedArr.solutionBSRecurME(arr, 1);
     }
 
     // for test
     public static int comparator(int[] arr) {
-        return CountOfNumOfSortedArr.cycGetNumberOfK(arr, 1);
+        return CountOfNumOfSortedArr.solutionBSLoopCYC(arr, 1);
     }
 
     // for test

@@ -3,7 +3,6 @@ package linkedList.e22;
 import zhelper.ListUtils;
 import zhelper.ListUtils.*;
 
-import java.util.List;
 import java.util.Stack;
 
 /**
@@ -40,7 +39,7 @@ public class FindKthToTail {
      */
     public static ListNode FindKthToTail(ListNode head, int k) {
 //        return mySolutionStack(head, k);
-        return stoSolutionTwoPointer(head, k);
+        return solutionTwoPointerSTO(head, k);
     }
 
     /**
@@ -50,7 +49,7 @@ public class FindKthToTail {
      * @return
      */
     public ListNode getKthFromEnd(ListNode head, int k) {
-        return stoSolutionTwoPointer(head, k);
+        return solutionTwoPointerSTO(head, k);
     }
 
     /**
@@ -68,7 +67,7 @@ public class FindKthToTail {
      * @param k
      * @return
      */
-    private static ListNode stoSolutionTwoPointer(ListNode head, int k) {
+    private static ListNode solutionTwoPointerSTO(ListNode head, int k) {
         if (head == null) {
             return null;
         }

@@ -19,7 +19,7 @@ public class ReverseList {
         int[] arr5 = null;
         int[] arr6 = {1, 3, 5, 7};
         int[] arr7 = {2, 4, 6, 8};
-        ListNode head1 = ListUtils.convertToLinkedList(arr1);
+        ListNode head1 = ListUtils.convertToLinkedList(arr5);
         ListUtils.printSingleList(head1);
 
         ListNode res = reverseList(head1);
@@ -35,7 +35,7 @@ public class ReverseList {
      */
     public static ListNode ReverseList(ListNode head) {
 //        return cycSolutionInsertHeadNode(head);
-        return zsSolutionReversePointer(head);
+        return solutionReversePointerZS(head);
     }
 
     /**
@@ -44,16 +44,33 @@ public class ReverseList {
      * @return
      */
     public static ListNode reverseList(ListNode head) {
-        return mycycSolutionNewHead(head);
+//        return mycycSolutionNewHead(head);
+        return solutionReversePointerZS(head);
     }
 
-    private static ListNode zsSolutionReversePointer(ListNode head) {
+    /**
+     * 执行用时 :
+     * 0 ms
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * 内存消耗 :
+     * 38.4 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * @param head
+     * @return
+     */
+    private static ListNode solutionReversePointerZS(ListNode head) {
+        ListNode next = null;
         ListNode pre = null;
-        while (head != null) {
-            ListNode next = head.next;
-            head.next = pre;
-            pre = head;
-            head = next;
+        ListNode cur = head;
+        while (cur != null) {
+            next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
         }
         // 如果head == null了，说明head移到边界之外了，只要返回pre记录的边界位置就行了
         return pre;
@@ -73,7 +90,7 @@ public class ReverseList {
      * @param head
      * @return
      */
-    private static ListNode mycycSolutionNewHead(ListNode head) {
+    private static ListNode solutionNewHeadCYC(ListNode head) {
         ListNode newHead = new ListNode(-1);
         ListNode cur = head;
         while (cur != null) {
@@ -90,7 +107,7 @@ public class ReverseList {
         return newHead.next;
     }
 
-    private static ListNode cycSolutionInsertHeadNode(ListNode head) {
+    private static ListNode solutionInsertHeadNodeCYC(ListNode head) {
         // 创建新的结点
         ListNode newHead = new ListNode(-1);
         while (head != null) {

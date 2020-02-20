@@ -32,7 +32,7 @@ public class MinOfRotateArray {
     public static int minNumberInRotateArray(int[] array) {
 //        return solutionBSLoop(array);
 //        return solutionBSRecur(array, 0, array.length - 1);
-        return cycMinNumberInRotateArray(array);
+        return solutionBSLoopCYC(array);
     }
 
     /**
@@ -43,17 +43,17 @@ public class MinOfRotateArray {
      */
     public static int minArray(int[] numbers) {
 //        return stoSolutionBSLoop(numbers);
-        return mySolutionBSRecur(numbers, 0, numbers.length - 1);
+        return solutionBSRecurME(numbers, 0, numbers.length - 1);
     }
 
     /**
      * 执行用时 :
      * 1 ms
      * , 在所有 Java 提交中击败了
-     * 56.55%
+     * 51.78%
      * 的用户
      * 内存消耗 :
-     * 48.5 MB
+     * 39.3 MB
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
@@ -62,38 +62,32 @@ public class MinOfRotateArray {
      * @param r
      * @return
      */
-    public static int mySolutionBSRecur(int[] array, int l, int r) {
+    public static int solutionBSRecurME(int[] array, int l, int r) {
         if (array == null || array.length == 0) {
             return 0;
         }
         if (array[l] < array[r]) {
             return array[l];
         }
-
+        if (r - l == 1) {
+            return array[r];
+        }
         int mid = l + ((r - l) >> 1);
         // 如果一开始中间和两边的数相等，只能采用遍历的方式找最小值
         if (array[mid] == array[l] && array[mid] == array[r]) {
             return findByTraverse(array, l, r);
         }
         // 否则递归
-        return recurProcess(array, l, r);
-    }
-
-    private static int recurProcess(int[] array, int l, int r) {
-        if (r - l == 1) {
-            return array[r];
-        }
-        int mid = l + ((r - l) >> 1);
         // 这里比较保守
         if (array[mid] >= array[l]) {
-            return recurProcess(array, mid, r);
+            return solutionBSRecurME(array, mid, r);
         } else if (array[mid] <= array[r]) {
-            return recurProcess(array, l, mid);
+            return solutionBSRecurME(array, l, mid);
         }
         return -1;
     }
 
-    public static int stoSolutionBSLoop(int[] rotateArr) {
+    public static int solutionBSLoopSTO(int[] rotateArr) {
         if (rotateArr == null || rotateArr.length == 0) {
             return -1;
         }
@@ -137,7 +131,7 @@ public class MinOfRotateArray {
      * @param nums
      * @return
      */
-    public static int cycMinNumberInRotateArray(int[] nums) {
+    public static int solutionBSLoopCYC(int[] nums) {
         if (nums.length == 0) {
             return 0;
         }

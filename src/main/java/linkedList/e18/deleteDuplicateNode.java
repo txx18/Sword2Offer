@@ -4,6 +4,15 @@ import zhelper.ListUtils;
 import zhelper.ListUtils.*;
 
 /**
+ * 给定一个排序链表，删除所有含有重复数字的节点，只保留原始链表中 没有重复出现 的数字。
+ * 示例 1:
+ *
+ * 输入: 1->2->3->3->4->4->5
+ * 输出: 1->2->5
+ * 示例 2:
+ *
+ * 输入: 1->1->1->2->3
+ * 输出: 2->3
  * @author Shane Tang
  * @version V1.0
  * @create 2020-02-16 12:57
@@ -22,26 +31,49 @@ public class deleteDuplicateNode {
         int[] arr1 = {1, 2, 3, 3, 4, 4, 5};
         int[] arr2 = {1, 1, 1, 1, 1};
         int[] arr3 = {1, 1, 2, 3, 3, 4, 5};
-        ListNode head = ListUtils.convertToLinkedList(arr3);
+        int[] arr4 = {1, 1, 2, 3, 3, 4, 5, 5};
+        ListNode head = ListUtils.convertToLinkedList(arr4);
         ListUtils.printSingleList(head);
 
-        ListNode res = deleteDuplication(head);
+        ListNode res = deleteDuplicates(head);
         ListUtils.printSingleList(res);
     }
 
-    public static ListNode deleteDuplication(ListNode pHead) {
-        return mySolutionInsertHeadTraverse(pHead);
-    }
-
-
-
     /**
-     * 通过NK
-     *
+     * NK
      * @param pHead
      * @return
      */
-    private static ListNode mySolutionInsertHeadTraverse(ListNode pHead) {
+    public static ListNode deleteDuplication(ListNode pHead) {
+        return solutionInsertHeadTraverseME(pHead);
+    }
+
+    /**
+     * LC
+     * @param head
+     * @return
+     */
+    public static ListNode deleteDuplicates(ListNode head) {
+        return solutionInsertHeadTraverseME(head);
+    }
+
+
+    /**
+     * 通过NK LC
+     *执行用时 :
+     * 1 ms
+     * , 在所有 Java 提交中击败了
+     * 98.44%
+     * 的用户
+     * 内存消耗 :
+     * 39.1 MB
+     * , 在所有 Java 提交中击败了
+     * 5.06%
+     * 的用户
+     * @param pHead
+     * @return
+     */
+    private static ListNode solutionInsertHeadTraverseME(ListNode pHead) {
         ListNode newHead = new ListNode(-1);
         newHead.next = pHead;
         ListNode cur = newHead;

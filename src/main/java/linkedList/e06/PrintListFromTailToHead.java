@@ -3,6 +3,7 @@ package linkedList.e06;
 import zhelper.ListUtils.ListNode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -19,8 +20,13 @@ public class PrintListFromTailToHead {
         head.next = new ListNode(61);
         head.next.next = new ListNode(81);
         head.next.next.next = new ListNode(5);
-        ArrayList<Integer> reverseValues = printListFromTailToHead(head);
-        System.out.println(reverseValues.toString());
+
+        ListNode head2 = new ListNode(1);
+        ListNode head3 = null;
+//        ArrayList<Integer> reverseValues = printListFromTailToHead(head);
+//        System.out.println(reverseValues.toString());
+        int[] res = reversePrint(head3);
+        System.out.println(Arrays.toString(res));
     }
 
     /**
@@ -29,10 +35,88 @@ public class PrintListFromTailToHead {
      * @return
      */
     public static ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
-//        return solutionStack(listNode);
 //        return stoSolutionRecur(listNode);
 //        return zsSolutionReversePointer(listNode);
-        return cycSolutionInsertHeadNode(listNode);
+        return solutionInsertHeadNodeCYC(listNode);
+    }
+
+    /**
+     * LC
+     * @param head
+     * @return
+     */
+    public static int[] reversePrint(ListNode head) {
+//        return solutionReversePointer(head);
+        return solutionStack(head);
+    }
+
+    /**
+     * 执行用时 :
+     * 2 ms
+     * , 在所有 Java 提交中击败了
+     * 69.12%
+     * 的用户
+     * 内存消耗 :
+     * 40.1 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * @param head
+     * @return
+     */
+    private static int[] solutionStack(ListNode head) {
+        Stack<Integer> stack = new Stack<>();
+        ListNode cur = head;
+        while (cur != null) {
+            stack.push(cur.val);
+            cur = cur.next;
+        }
+        int[] res = new int[stack.size()];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = stack.pop();
+        }
+        return res;
+    }
+
+    /**
+     * 执行用时 :
+     * 0 ms
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * 内存消耗 :
+     * 39.5 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * @param head
+     * @return
+     */
+    private static int[] solutionReversePointer(ListNode head) {
+        if (head == null) {
+            return new int[0];
+        }
+        ListNode pre = null;
+        ListNode next = null;
+        ListNode cur = head;
+        int listSize = 0;
+        while (cur != null) {
+            next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+            listSize++;
+        }
+        // 如果head == null了，说明head移到边界之外了，只要返回pre记录的边界位置就行了
+//        return pre;
+        cur = pre;
+        // 装进数组
+        int[] res = new int[listSize];
+        for (int i = 0; i < listSize; i++) {
+            res[i] = cur.val;
+            cur = cur.next;
+        }
+        return res;
     }
 
 
@@ -41,7 +125,7 @@ public class PrintListFromTailToHead {
      * @param head head
      * @return
      */
-    private static ArrayList<Integer> cycSolutionInsertHeadNode(ListNode head) {
+    private static ArrayList<Integer> solutionInsertHeadNodeCYC(ListNode head) {
         ArrayList<Integer> res = new ArrayList<>();
         // 创建新的结点
         ListNode newHead = new ListNode(-1);
@@ -74,7 +158,7 @@ public class PrintListFromTailToHead {
      *
      * @param head
      */
-    public static ArrayList<Integer> stoSolutionRecur(ListNode head) {
+    public static ArrayList<Integer> solutionRecurSTO(ListNode head) {
         // 防御
         if (head == null) {
             return new ArrayList<>(0);
@@ -101,7 +185,7 @@ public class PrintListFromTailToHead {
      * @param head
      * @return
      */
-    public static ArrayList<Integer> solutionStack(ListNode head) {
+    public static ArrayList<Integer> solutionStackArrayList(ListNode head) {
         ArrayList<Integer> res = new ArrayList<>();
         Stack<Integer> stack = new Stack<>();
         while (head != null) {
@@ -121,7 +205,7 @@ public class PrintListFromTailToHead {
      * @param head
      * @return
      */
-    public static ArrayList<Integer> zsSolutionReversePointer(ListNode head) {
+    public static ArrayList<Integer> solutionReversePointerZS(ListNode head) {
         ArrayList<Integer> res = new ArrayList<>();
         ListNode pre = null;
         ListNode next = null;

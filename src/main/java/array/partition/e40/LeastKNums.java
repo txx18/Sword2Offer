@@ -8,6 +8,7 @@ import java.util.PriorityQueue;
 /**
  * 输入整数数组 arr ，找出其中最小的 k 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。
  *
+ * TODO BFPRT算法
  * @author Shane Tang
  * @version V1.0
  * @create 2020-02-10 10:24
@@ -22,7 +23,7 @@ public class LeastKNums {
 //        int partition = partition(arr1, 0, arr1.length - 1);
 //        System.out.println("partition = " + partition);
 //        ArrayList<Integer> list = GetLeastNumbers_Solution(arr1, 4);
-        int[] res = getLeastNumbers(arr4, 0);
+        int[] res = getLeastNumbers(arr1, 4);
         System.out.println(Arrays.toString(res));
 
     }
@@ -48,46 +49,8 @@ public class LeastKNums {
      * @return
      */
     public static int[] getLeastNumbers(int[] arr, int k) {
-//        return solutionSimplePartition(arr, k);
-        return solutionPriorityQueue(arr, k);
-    }
-
-    /**
-     * 执行用时 :
-     * 679 ms
-     * , 在所有 Java 提交中击败了
-     * 5.30%
-     * 的用户
-     * 内存消耗 :
-     * 48.9 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * @param arr
-     * @param k
-     * @return
-     */
-    private static int[] solutionSimplePartition(int[] arr, int k) {
-        if (arr == null || arr.length < 1 || k > arr.length) {
-            return null;
-        }
-        int l = 0, r = arr.length - 1;
-        int pivotIdx = l + (int) (Math.random() * (r - l + 1));
-        swap(arr, pivotIdx, r);
-        int lessEqualIdx = simplePartition(arr, l, r);
-        while (lessEqualIdx != k - 1) {
-            if (lessEqualIdx < k - 1) {
-                lessEqualIdx = simplePartition(arr, lessEqualIdx + 1, r);
-            } else if (lessEqualIdx > k - 1) {
-                lessEqualIdx = simplePartition(arr, l, lessEqualIdx - 1);
-            }
-        }
-        // lessEqualIdx = k - 1 返回lessEqual区域的数
-        int[] res = new int[k];
-        for (int i = 0; i < k; i++) {
-            res[i] = arr[i];
-        }
-        return res;
+//        return solutionPriorityQueue(arr, k);
+        return solutionBigHeapZS(arr, k);
     }
 
     /**
@@ -132,7 +95,87 @@ public class LeastKNums {
     }
 
     /**
-     * 转化为：找partition中下标为k-1的下标
+     * 执行用时 :
+     * 5 ms
+     * , 在所有 Java 提交中击败了
+     * 89.66%
+     * 的用户
+     * 内存消耗 :
+     * 42.9 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * @param input
+     * @param k
+     * @return
+     */
+    private static int[] solutionBigHeapZS(int[] input, int k) {
+        // 防御
+        if (input == null || input.length < 1 || k > input.length || k == 0) {
+            return new int[0];
+        }
+        // 准备一个大小为k的大根堆
+        int heapSize = k;
+        int[] heap = new int[heapSize];
+        // 先进k个数
+        for (int i = 0; i < heapSize; i++) {
+            heap[i] = input[i];
+        }
+        // heapify
+        for (int i = heapSize - 1; i >= 0; i--) {
+            heapify(heap, i, heapSize);
+        }
+        // 剩下的数一个一个进，跟堆中最大数比较，如果大，那不可能是候选数；如果小，则替换原来的最大数
+        for (int i = heapSize; i < input.length; i++) {
+            if (input[i] < heap[0]) {
+                heap[0] = input[i];
+                heapify(heap, 0, heapSize);
+            }
+        }
+        // 返回heap中的元素
+        return heap;
+    }
+
+    /**
+     * 执行用时 :
+     * 679 ms
+     * , 在所有 Java 提交中击败了
+     * 5.30%
+     * 的用户
+     * 内存消耗 :
+     * 48.9 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * @param arr
+     * @param k
+     * @return
+     */
+    private static int[] solutionSimplePartitionSTO(int[] arr, int k) {
+        if (arr == null || arr.length < 1 || k > arr.length) {
+            return null;
+        }
+        int l = 0, r = arr.length - 1;
+        int pivotIdx = l + (int) (Math.random() * (r - l + 1));
+        swap(arr, pivotIdx, r);
+        int lessEqualIdx = simplePartition(arr, l, r);
+        while (lessEqualIdx != k - 1) {
+            if (lessEqualIdx < k - 1) {
+                lessEqualIdx = simplePartition(arr, lessEqualIdx + 1, r);
+            } else if (lessEqualIdx > k - 1) {
+                lessEqualIdx = simplePartition(arr, l, lessEqualIdx - 1);
+            }
+        }
+        // lessEqualIdx = k - 1 返回lessEqual区域的数
+        int[] res = new int[k];
+        for (int i = 0; i < k; i++) {
+            res[i] = arr[i];
+        }
+        return res;
+    }
+
+    /**
+     * TODO 转化为：找partition中下标为k-1的下标
      *
      * @param input
      * @param k
