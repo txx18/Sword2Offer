@@ -19,6 +19,14 @@ public class ArrayUtils {
         myPrintArrayList(list);
     }
 
+    public static int[] convertToArray(List<Integer> arrayList) {
+        int[] res = new int[arrayList.size()];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = arrayList.get(i);
+        }
+        return res;
+    }
+
     public static void swap(int[] arr, int i, int j) {
         int tmp = arr[i];
         arr[i] = arr[j];

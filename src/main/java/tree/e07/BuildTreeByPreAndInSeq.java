@@ -1,7 +1,7 @@
 package tree.e07;
 
 import zhelper.TreeUtils.*;
-import zhelper.TreeUtils;
+
 import java.util.HashMap;
 
 /**
@@ -13,19 +13,19 @@ import java.util.HashMap;
 public class BuildTreeByPreAndInSeq {
 
     public static void main(String[] args) {
-        BTNode head = new BTNode(1);
-        head.leftChild = new BTNode(2);
-        head.rightChild = new BTNode(3);
-        head.leftChild.leftChild = new BTNode(4);
-        head.leftChild.rightChild = new BTNode(5);
-        head.rightChild.leftChild = new BTNode(6);
-        head.rightChild.rightChild = new BTNode(7);
+        TreeNode head = new TreeNode(1);
+        head.left = new TreeNode(2);
+        head.right = new TreeNode(3);
+        head.left.left = new TreeNode(4);
+        head.left.right = new TreeNode(5);
+        head.right.left = new TreeNode(6);
+        head.right.right = new TreeNode(7);
     }
 
     // 准备一个hashMap存inSeq的数据，键是inSeq的值，值是下标
     HashMap<Integer, Integer> inMap = new HashMap<>();
 
-    public BTNode buildTreeByPreAndInSeq(int[] preSeq, int[] inSeq) {
+    public TreeNode buildTreeByPreAndInSeq(int[] preSeq, int[] inSeq) {
         if (preSeq == null || inSeq == null || preSeq.length == 0 || inSeq.length == 0) {
             return null;
         }
@@ -33,22 +33,22 @@ public class BuildTreeByPreAndInSeq {
         return buildProcess(preSeq, 0, preSeq.length - 1, 0);
     }
 
-    private BTNode buildProcess(int[] preSeq, int preL, int preR, int inL) {
+    private TreeNode buildProcess(int[] preSeq, int preL, int preR, int inL) {
         if(preL > preR){
             return null;
         }
         // 递归中头结点就是preSeq的第一个
         // 不断建立头结点和子树的头结点
-        BTNode head = new BTNode(preSeq[preL]);
+        TreeNode head = new TreeNode(preSeq[preL]);
         // 查出头结点在InSeq中的下标
-        int headIndexOfInSeq = inMap.get(head.data);
+        int headIndexOfInSeq = inMap.get(head.val);
         // 计算左子树长度
         int leftChildTreeSize = headIndexOfInSeq - inL;
         // 在preSeq中
         // 左子树递归
-        head.leftChild = buildProcess(preSeq, preL + 1, preL + leftChildTreeSize, inL);
+        head.left = buildProcess(preSeq, preL + 1, preL + leftChildTreeSize, inL);
         // 右子树递归
-        head.rightChild = buildProcess(preSeq, preL + leftChildTreeSize + 1, preR, headIndexOfInSeq + 1);
+        head.right = buildProcess(preSeq, preL + leftChildTreeSize + 1, preR, headIndexOfInSeq + 1);
         return head;
     }
 
