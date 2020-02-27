@@ -57,8 +57,8 @@ public class GetIntersectionNode {
      */
     private static ListNode solutionFSPointerME(ListNode head1, ListNode head2) {
         // 计算两个链表的长度差
-        int listSize1 = ListUtils.getListSize(head1);
-        int listSize2 = ListUtils.getListSize(head2);
+        int listSize1 = ListUtils.size(head1);
+        int listSize2 = ListUtils.size(head2);
         int diff = Math.abs(listSize1 - listSize2);
         ListNode cur1 = head1;
         ListNode cur2 = head2;

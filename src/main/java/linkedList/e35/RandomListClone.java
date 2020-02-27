@@ -44,6 +44,8 @@ public class RandomListClone {
     }
 
     /**
+     * 利用位置关系，克隆结点放在原节点的后面
+     *
      * 执行用时 :
      * 0 ms
      * , 在所有 Java 提交中击败了

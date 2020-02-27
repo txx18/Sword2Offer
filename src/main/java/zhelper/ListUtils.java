@@ -2,6 +2,7 @@ package zhelper;
 
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Shane Tang
@@ -17,13 +18,22 @@ public class ListUtils {
         int[] arr5 = null;
         int[] arr6 = {1, 3, 5, 7};
         int[] arr7 = {2, 4, 6, 8};
-        ListNode head = convertToLinkedList(arr2);
-        ListNode res = printSingleList(head);
-        int listSize = getListSize(res);
-        System.out.println("listSize = " + listSize);
+        ListNode list1 = convertToLinkedList(arr2);
+        printSingleList(list1);
+
+        ListNode[] res = convertToNodeArray(list1);
+        System.out.println(Arrays.toString(res));
     }
 
-    public static int getListSize(ListNode head) {
+    public static int[] convertToArray(List<Integer> arrayList) {
+        int[] res = new int[arrayList.size()];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = arrayList.get(i);
+        }
+        return res;
+    }
+
+    public static int size(ListNode head) {
         ListNode cur = head;
         int listSize = 0;
         while (cur != null) {
@@ -101,8 +111,34 @@ public class ListUtils {
         }
     }
 
-    public static void convertToArray(ListNode head) {
+    public static int[] convertToArray(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode cur = head;
+        int listSize = size(cur);
+        int[] arr = new int[listSize];
+        cur = head;
+        for (int i = 0; i < listSize; i++) {
+            arr[i] = cur.val;
+            cur = cur.next;
+        }
+        return arr;
+    }
 
+    public static ListNode[] convertToNodeArray(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode cur = head;
+        int listSize = size(cur);
+        ListNode[] arr = new ListNode[listSize];
+        cur = head;
+        for (int i = 0; i < listSize; i++) {
+            arr[i] = cur;
+            cur = cur.next;
+        }
+        return arr;
     }
 
     public static class ListNode {

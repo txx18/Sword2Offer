@@ -1,6 +1,7 @@
 package tree.e32;
 
 import zhelper.ArrayUtils;
+import zhelper.ListUtils;
 import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
 
@@ -68,6 +69,6 @@ public class PrintLevelOrder {
             }
         }
         // 返回数组;
-        return ArrayUtils.convertToArray(resList);
+        return ListUtils.convertToArray(resList);
     }
 }
