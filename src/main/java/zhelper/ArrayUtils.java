@@ -1,11 +1,11 @@
 package zhelper;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
-import zhelper.ListUtils;
 import zhelper.ListUtils.*;
+
+import zhelper.TreeUtils.*;
 
 /**
  * @author Shane Tang
@@ -15,16 +15,48 @@ public class ArrayUtils {
 
     public static void main(String[] args) {
         int[] arr1 = {4, 5, 1, 6, 2, 7, 3, 8};
-        ListNode list1 = ListUtils.convertToLinkedList(arr1);
-        ListUtils.printSingleList(list1);
+        Integer[] arr2 = {1,3,2,5,3, null, 9};
+        Integer[] arr3 = {5, 4, 7, 3, null, 2, null, -1, null, 9};
+        Integer[] arr4 = {1, 2, 3, 4, 5};
 
-        ListNode[] listArr = ListUtils.convertToNodeArray(list1);
-        System.out.println(Arrays.toString(listArr));
-        ListNode res = convertToLinkedList(listArr);
-        ListUtils.printSingleList(res);
+        TreeNode res = convertToCBT(arr4);
+        TreeUtils.printTree(res);
     }
 
-
+    /**
+     * 【注意】不是完全二叉树不能用索引
+     * @param arr 不能含null
+     * @return
+     */
+    public static TreeNode convertToCBT(Integer[] arr) {
+        if (arr == null) {
+            return null;
+        }
+        // 建节点，放入map<编号,节点>
+        HashMap<Integer, TreeNode> map = new HashMap<>(arr.length - 1);
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != null) {
+                TreeNode cur = new TreeNode(arr[i]);
+                map.put(i, cur);
+            }
+            else {
+                map.put(i, null);
+            }
+        }
+        // 按照完全二叉树连接指针
+        for (Integer i : map.keySet()) {
+            TreeNode cur = map.get(i);
+            int leftIdx = 2 * i + 1;
+            int rightIdx = 2 * i + 2;
+            if (leftIdx <= map.size()) {
+                cur.left = map.get(leftIdx);
+            }
+            if (rightIdx <= map.size()) {
+                cur.right = map.get(rightIdx);
+            }
+        }
+        return map.get(0);
+    }
 
     public static ListNode convertToLinkedList(int[] arr) {
         ListNode newHead = new ListNode(-1);

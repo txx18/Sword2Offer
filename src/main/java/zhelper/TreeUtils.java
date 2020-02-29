@@ -1,6 +1,7 @@
 package zhelper;
 
 import java.sql.PreparedStatement;
+import java.util.Objects;
 
 /**
  * @author Shane Tang
@@ -19,16 +20,16 @@ public class TreeUtils {
         tree1.right.right = new TreeNode(7);
 
         TreeNode tree2 = new TreeNode(5);
-		tree2.left = new TreeNode(3);
-		tree2.right = new TreeNode(8);
-		tree2.left.left = new TreeNode(2);
-		tree2.left.right = new TreeNode(4);
-		tree2.left.left.left = new TreeNode(1);
-		tree2.right.left = new TreeNode(7);
-		tree2.right.left.left = new TreeNode(6);
-		tree2.right.right = new TreeNode(10);
-		tree2.right.right.left = new TreeNode(9);
-		tree2.right.right.right = new TreeNode(11);
+        tree2.left = new TreeNode(3);
+        tree2.right = new TreeNode(8);
+        tree2.left.left = new TreeNode(2);
+        tree2.left.right = new TreeNode(4);
+        tree2.left.left.left = new TreeNode(1);
+        tree2.right.left = new TreeNode(7);
+        tree2.right.left.left = new TreeNode(6);
+        tree2.right.right = new TreeNode(10);
+        tree2.right.right.left = new TreeNode(9);
+        tree2.right.right.right = new TreeNode(11);
         printTree(tree2);
 
         boolean res = hasChild(tree2.left.right);
@@ -100,6 +101,21 @@ public class TreeUtils {
 
         public TreeNode(int x) {
             val = x;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            TreeNode treeNode = (TreeNode) o;
+            return val == treeNode.val &&
+                    Objects.equals(left, treeNode.left) &&
+                    Objects.equals(right, treeNode.right);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(val, left, right);
         }
     }
 }

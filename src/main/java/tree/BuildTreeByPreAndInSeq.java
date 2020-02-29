@@ -1,36 +1,64 @@
-package tree.e07;
+package tree;
 
-import zhelper.TreeUtils.*;
+import zhelper.TreeUtils.TreeNode;
 
 import java.util.HashMap;
 
 /**
- * 重建二叉树
+ * 重建二叉树 先序+中序
  *
+ * 输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+ *
+ *  
+ *
+ * 例如，给出
+ *
+ * 前序遍历 preorder = [3,9,20,15,7]
+ * 中序遍历 inorder = [9,3,15,20,7]
+ * 返回如下的二叉树：
+ *
+ *     3
+ *    / \
+ *   9  20
+ *     /  \
+ *    15   7
+ *  
+ *
+ * 限制：
+ *
+ * 0 <= 节点个数 <= 5000
+ *
+ *  
+ *
+ * 注意：本题与主站 105 题重复：https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+ *
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof
+ * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * @author Shane Tang
  * @create 2019-10-21 21:47
  */
 public class BuildTreeByPreAndInSeq {
 
     public static void main(String[] args) {
-        TreeNode head = new TreeNode(1);
-        head.left = new TreeNode(2);
-        head.right = new TreeNode(3);
-        head.left.left = new TreeNode(4);
-        head.left.right = new TreeNode(5);
-        head.right.left = new TreeNode(6);
-        head.right.right = new TreeNode(7);
+        TreeNode tree1 = new TreeNode(1);
+        tree1.left = new TreeNode(2);
+        tree1.right = new TreeNode(3);
+        tree1.left.left = new TreeNode(4);
+        tree1.left.right = new TreeNode(5);
+        tree1.right.left = new TreeNode(6);
+        tree1.right.right = new TreeNode(7);
     }
 
     // 准备一个hashMap存inSeq的数据，键是inSeq的值，值是下标
     HashMap<Integer, Integer> inMap = new HashMap<>();
 
-    public TreeNode buildTreeByPreAndInSeq(int[] preSeq, int[] inSeq) {
-        if (preSeq == null || inSeq == null || preSeq.length == 0 || inSeq.length == 0) {
+    public TreeNode buildTree(int[] preOrder, int[] inOrder) {
+        if (preOrder == null || inOrder == null || preOrder.length == 0 || inOrder.length == 0) {
             return null;
         }
-        inMap = this.putIntoMap(inSeq);
-        return buildProcess(preSeq, 0, preSeq.length - 1, 0);
+        inMap = this.putIntoMap(inOrder);
+        return buildProcess(preOrder, 0, preOrder.length - 1, 0);
     }
 
     private TreeNode buildProcess(int[] preSeq, int preL, int preR, int inL) {
