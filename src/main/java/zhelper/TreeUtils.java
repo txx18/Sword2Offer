@@ -50,6 +50,20 @@ public class TreeUtils {
         return x.left != null || x.right != null;
     }
 
+    public static boolean hasNoChild(TreeNode x) {
+        if (x == null) {
+            return true;
+        }
+        return x.left == null && x.right == null;
+    }
+
+    public static boolean hasTwoChild(TreeNode x) {
+        if (x == null) {
+            return true;
+        }
+        return x.left != null && x.right != null;
+    }
+
     public static boolean hasLeft(TreeNode x) {
         if (x == null) {
             return false;

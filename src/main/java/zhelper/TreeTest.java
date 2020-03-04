@@ -10,11 +10,11 @@ import zhelper.TreeUtils.TreeNode;
 public class TreeTest {
 
     public static void main(String[] args) {
-        TreeNode treeNode = notCBT();
+        TreeNode treeNode = CBTree();
         TreeUtils.printTree(treeNode);
     }
 
-    public static TreeNode fbt() {
+    public static TreeNode FBTree() {
         TreeNode tree = new TreeNode(1);
         tree.left = new TreeNode(2);
         tree.right = new TreeNode(3);
@@ -25,13 +25,25 @@ public class TreeTest {
         return tree;
     }
 
-    public static TreeNode cbt() {
+    /**
+     * Binary Tree:
+     *                         v3v
+     *                                          ^6^
+     *        H1H
+     *                                          v5v
+     *                         ^2^
+     *                                          ^4^
+     * @return
+     */
+    public static TreeNode CBTree() {
         TreeNode tree = new TreeNode(1);
         tree.left = new TreeNode(2);
         tree.right = new TreeNode(3);
         tree.left.left = new TreeNode(4);
         tree.left.right = new TreeNode(5);
         tree.right.left = new TreeNode(6);
+
+
         return tree;
     }
 
@@ -50,8 +62,8 @@ public class TreeTest {
      *                                                           ^1^
      * @return
      */
-    public static TreeNode notCBT() {
-        TreeNode tree = new TreeNode(5);
+    public static TreeNode notCBTree() {
+/*        TreeNode tree = new TreeNode(5);
         tree.left = new TreeNode(3);
         tree.right = new TreeNode(8);
         tree.left.left = new TreeNode(2);
@@ -61,7 +73,27 @@ public class TreeTest {
         tree.right.left.left = new TreeNode(6);
         tree.right.right = new TreeNode(10);
         tree.right.right.left = new TreeNode(9);
-        tree.right.right.right = new TreeNode(11);
+        tree.right.right.right = new TreeNode(11);*/
+
+        TreeNode tree = new TreeNode(1);
+        tree.left = new TreeNode(2);
+        tree.right = new TreeNode(3);
+        tree.left.left = new TreeNode(5);
+        tree.left.right = null;
+        tree.right.left = new TreeNode(7);
         return tree;
+    }
+
+    public static TreeNode integerMinTree(){
+        TreeNode tree = new TreeNode(Integer.MIN_VALUE);
+        tree.left = new TreeNode(Integer.MIN_VALUE);
+        return tree;
+    }
+
+    public static TreeNode BSTree() {
+        TreeNode treeNode = new TreeNode(2);
+        treeNode.left = new TreeNode(1);
+        treeNode.right = new TreeNode(3);
+        return treeNode;
     }
 }
