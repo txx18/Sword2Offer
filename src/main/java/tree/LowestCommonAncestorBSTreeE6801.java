@@ -7,7 +7,7 @@ import zhelper.TreeUtils.*;
  * @version V1.0
  * @create 2020-03-03 23:00
  */
-public class LowestCommonAncestorBSTree {
+public class LowestCommonAncestorBSTreeE6801 {
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         return solutionTraverse(root, p, q);

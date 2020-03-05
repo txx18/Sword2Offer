@@ -1,5 +1,6 @@
-package tree.taversal;
+package tree.taversal.inorder;
 
+import tree.taversal.TraversalRecur;
 import zhelper.TreeTest;
 import zhelper.TreeUtils.*;
 
