@@ -41,12 +41,12 @@ import java.util.Map;
  * @author Shane Tang
  * @create 2019-10-21 21:47
  */
-public class BuildTreeByPreOrderAndInOrderE07 {
+public class BuildTreeByPreorderAndInorderE07 {
 
     public static void main(String[] args) {
         int[] preorder = {3, 9, 20, 15, 7};
         int[] inorder = {9, 3, 15, 20, 7};
-        BuildTreeByPreOrderAndInOrderE07 obj = new BuildTreeByPreOrderAndInOrderE07();
+        BuildTreeByPreorderAndInorderE07 obj = new BuildTreeByPreorderAndInorderE07();
         TreeNode res = obj.buildTree(preorder, inorder);
         TreeUtils.printTree(res);
     }
@@ -100,5 +100,30 @@ public class BuildTreeByPreOrderAndInOrderE07 {
         return root;
     }
 
+
+
+
+    // 准备一个hashMap存inSeq的数据，键是inSeq的值，值是下标
+    Map<Integer, Integer> inMap = new HashMap<>();
+
+
+    private TreeNode buildProcess(int[] preSeq, int preL, int preR, int inL) {
+        if(preL > preR){
+            return null;
+        }
+        // 递归中头结点就是preSeq的第一个
+        // 不断建立头结点和子树的头结点
+        TreeNode head = new TreeNode(preSeq[preL]);
+        // 查出头结点在InSeq中的下标
+        int headIndexOfInSeq = inMap.get(head.val);
+        // 计算左子树长度
+        int leftChildTreeSize = headIndexOfInSeq - inL;
+        // 在preSeq中
+        // 左子树递归
+        head.left = buildProcess(preSeq, preL + 1, preL + leftChildTreeSize, inL);
+        // 右子树递归
+        head.right = buildProcess(preSeq, preL + leftChildTreeSize + 1, preR, headIndexOfInSeq + 1);
+        return head;
+    }
 
 }
