@@ -1,5 +1,6 @@
 package tree.taversal;
 
+import zhelper.TreeTest;
 import zhelper.TreeUtils.*;
 
 import java.util.ArrayList;
@@ -14,24 +15,11 @@ import java.util.List;
 public class TraversalRecur {
 
     public static void main(String[] args) {
-        TreeNode head = new TreeNode(1);
-        head.left = new TreeNode(2);
-        head.right = new TreeNode(3);
-        head.left.left = new TreeNode(4);
-        head.left.right = new TreeNode(5);
-        head.right.left = new TreeNode(6);
-        head.right.right = new TreeNode(7);
-/*        recurTraverse(head);
-        System.out.println();
-        preTraverse(head);
-        System.out.println();
-        inTraverse(head);
-        System.out.println();
-        posTraverse(head);
-        System.out.println();*/
+        TreeNode treeNode = TreeTest.FBTree();
+
         TraversalRecur obj = new TraversalRecur();
-        List<Integer> preorderTraversal = obj.preorderTraversal(head);
-        System.out.println(preorderTraversal.toString());
+        List<Integer> traversal = obj.recurorderTraversal(treeNode);
+        System.out.println(traversal.toString());
 
     }
 
@@ -44,6 +32,24 @@ public class TraversalRecur {
         System.out.print(head.val + " ");
         recurTraverse(head.right);
         System.out.print(head.val + " ");
+    }
+
+    /**
+     * 【注意】OJ不能用static
+     */
+    private ArrayList<Integer> res = new ArrayList<>();
+
+
+    public  List<Integer> recurorderTraversal(TreeNode head) {
+        if (head == null) {
+            return res;
+        }
+        res.add(head.val);
+        recurorderTraversal(head.left);
+        res.add(head.val);
+        recurorderTraversal(head.right);
+        res.add(head.val);
+        return res;
     }
 
 
@@ -59,10 +65,7 @@ public class TraversalRecur {
         preTraverse(head.right);
     }
 
-    /**
-     * 【注意】OJ不能用static
-     */
-    private ArrayList<Integer> res = new ArrayList<>();
+
 
     /**
      * 执行用时 :
