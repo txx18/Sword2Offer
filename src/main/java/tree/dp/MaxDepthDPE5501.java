@@ -1,4 +1,4 @@
-package tree.taversal;
+package tree.dp;
 
 import zhelper.TreeUtils.*;
 
@@ -7,7 +7,7 @@ import zhelper.TreeUtils.*;
  * @version V1.0
  * @create 2020-03-09 23:47
  */
-public class MaxDepthE5501 {
+public class MaxDepthDPE5501 {
 
 
     public int maxDepth(TreeNode root) {
@@ -36,7 +36,6 @@ public class MaxDepthE5501 {
     }
 
     private int recur(TreeNode x) {
-        // base case
         if (x == null) {
 //            return new Info(0);
             return 0;

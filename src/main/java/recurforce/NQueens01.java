@@ -1,4 +1,4 @@
-package greedy;
+package recurforce;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,15 +34,15 @@ import java.util.List;
  * 链接：https://leetcode-cn.com/problems/n-queens
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  *
- * FIXME
+ *
  * @author Shane Tang
  * @version V1.0
  * @create 2020-03-09 17:53
  */
-public class NQueens {
+public class NQueens01 {
 
     public static void main(String[] args) {
-        NQueens obj = new NQueens();
+        NQueens01 obj = new NQueens01();
 
         List<List<String>> res = obj.solveNQueens(4);
         for (List<String> oneRes : res) {
@@ -57,7 +57,11 @@ public class NQueens {
         return solution(n);
     }
 
+    /**
+     * 放全体结果
+     */
     List<List<String>> res = new ArrayList<>();
+
     List<String> oneRes = new ArrayList<>();
 
     private List<List<String>> solution(int n) {
@@ -70,36 +74,28 @@ public class NQueens {
     }
 
 
-    private void recur(int i, int n) {
+    private List<String> recur(int i, int n) {
         // base case
         if (i == n) {
-            this.res.add(this.oneRes);
-            return;
+            return oneRes;
         }
+        oneRes = new ArrayList<>();
         // 当前在第i行，尝试第j列
         for (int j = 0; j < n; j++) {
             // 如果在第i行找到合法位置
-            boolean isValid = isValid(i, j);
+            boolean isValid = isValid(i, j, oneRes);
             if (isValid) {
                 // 添加这一行到oneRes
-                addRow(j, n);
+                addRow(j, n, oneRes);
 //                record[i] = j;
                 // 继续尝试下一行
-                recur(i + 1, n);
+                this.res.add(recur(i + 1, n));
             }
         }
+        return oneRes;
     }
 
-    public static boolean isValid(int i, int j, int[] record) {
-        for (int k = 0; k < i; k++) { // 之前的某个k行的皇后
-            if (j == record[k] || Math.abs(record[k] - j) == Math.abs(i - k)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private void addRow(int j, int n) {
+    private void addRow(int j, int n, List<String> oneRes) {
         char[] chars = new char[n];
         for (int k = 0; k < n; k++) {
             if (k == j) {
@@ -112,17 +108,26 @@ public class NQueens {
         for (int k = 0; k < n; k++) {
             sb.append(chars[k]);
         }
-        this.oneRes.add(sb.toString());
+        oneRes.add(sb.toString());
     }
 
-    private boolean isValid(int i, int j) {
+    private boolean isValid(int i, int j, List<String> oneRes) {
         // 检查跟之前i行添加的Q有没有冲突
-        for (int k = 0; k < this.oneRes.size(); k++) {
+        for (int k = 0; k < oneRes.size(); k++) {
             // 1* 同列
             // 2* 同斜线（纵距离 == 横距离）
-            String row = this.oneRes.get(k);
+            String row = oneRes.get(k);
             if (j == row.indexOf("Q") ||
                     Math.abs(j - row.indexOf("Q")) == Math.abs(i - k)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isValid(int i, int j, int[] record) {
+        for (int k = 0; k < i; k++) { // 之前的某个k行的皇后
+            if (j == record[k] || Math.abs(record[k] - j) == Math.abs(i - k)) {
                 return false;
             }
         }

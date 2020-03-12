@@ -1,4 +1,4 @@
-package tree;
+package tree.taversal.preorder;
 
 import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
@@ -41,12 +41,12 @@ import java.util.Map;
  * @author Shane Tang
  * @create 2019-10-21 21:47
  */
-public class BuildTreeByPreorderAndInorderE07 {
+public class BuildTreeByPreAndInE07 {
 
     public static void main(String[] args) {
         int[] preorder = {3, 9, 20, 15, 7};
         int[] inorder = {9, 3, 15, 20, 7};
-        BuildTreeByPreorderAndInorderE07 obj = new BuildTreeByPreorderAndInorderE07();
+        BuildTreeByPreAndInE07 obj = new BuildTreeByPreAndInE07();
         TreeNode res = obj.buildTree(preorder, inorder);
         TreeUtils.printTree(res);
     }
@@ -55,12 +55,12 @@ public class BuildTreeByPreorderAndInorderE07 {
 
     /**
      * 执行用时 :
-     * 4 ms
+     * 2 ms
      * , 在所有 Java 提交中击败了
-     * 76.71%
+     * 99.23%
      * 的用户
      * 内存消耗 :
-     * 41.4 MB
+     * 41.7 MB
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
@@ -73,7 +73,7 @@ public class BuildTreeByPreorderAndInorderE07 {
             return null;
         }
         this.inorderMap = putIntoMap(inorder);
-        return recur(preorder, inorder, 0, preorder.length - 1, 0);
+        return recur(preorder, 0, preorder.length - 1, 0);
     }
 
     private Map<Integer, Integer> putIntoMap(int[] inOrder) {
@@ -83,20 +83,21 @@ public class BuildTreeByPreorderAndInorderE07 {
         return this.inorderMap;
     }
 
-    private TreeNode recur(int[] preorder, int[] inorder, int preL, int preR, int inL) {
+    private TreeNode recur(int[] preorder, int preL, int preR, int inL) {
+        // 先序框架
         // base case
-        if (preL == preR) {
+        if (preL > preR) {
             return null;
         }
-        // 建根结点
+        // 通过preorder的preL建根结点
         TreeNode root = new TreeNode(preorder[preL]);
         // 在inorder中找到根节点
         int rootIdxOfInorder = inorderMap.get(root.val);
         // 递归建左子树和右子树
         // inL的作用只是算出左子树的大小，inR没用
-        root.left = recur(preorder, inorder, preL + 1, preL + (rootIdxOfInorder - inL), inL);
-        root.right = recur(preorder, inorder, preL + (rootIdxOfInorder - inL) + 1, preR, rootIdxOfInorder + 1);
-        // 最终返回根节点
+        root.left = recur(preorder, preL + 1, preL + (rootIdxOfInorder - inL), inL);
+        root.right = recur(preorder,preL + (rootIdxOfInorder - inL) + 1, preR, rootIdxOfInorder + 1);
+        // 自己返回自己的根节点
         return root;
     }
 

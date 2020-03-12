@@ -30,7 +30,7 @@ import zhelper.TreeUtils.TreeNode;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * @author GFS
  */
-public class IsBBTreeDP {
+public class IsBBTreeDPE5502 {
 
 	public static void main(String[] args) {
 		TreeNode tree1 = new TreeNode(3);
@@ -38,7 +38,7 @@ public class IsBBTreeDP {
 		tree1.right = new TreeNode(20);
 		tree1.right.left = new TreeNode(15);
 		tree1.right.right = new TreeNode(7);
-		boolean res = new IsBBTreeDP().isBalanced(tree1);
+		boolean res = new IsBBTreeDPE5502().isBalanced(tree1);
 		System.out.println("res = " + res);
 	}
 

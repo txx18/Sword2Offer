@@ -1,4 +1,4 @@
-package tree;
+package tree.taversal.postorder;
 
 import zhelper.TreeUtils.*;
 
@@ -7,7 +7,7 @@ import zhelper.TreeUtils.*;
  * @version V1.0
  * @create 2020-03-03 22:59
  */
-public class LowestCommonAncestorE6802 {
+public class LCAE6802 {
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         return solutionTrick(root, p, q);
@@ -30,7 +30,6 @@ public class LowestCommonAncestorE6802 {
      * @return
      */
     private TreeNode solutionTrick(TreeNode root, TreeNode p, TreeNode q) {
-        // base case
         if (root == null || root == p || root == q) {
             return root;
         }
