@@ -28,15 +28,6 @@ public class ReverseListE24 {
     }
 
 
-    /**
-     * NK
-     * @param head
-     * @return
-     */
-    public static ListNode ReverseList(ListNode head) {
-//        return cycSolutionInsertHeadNode(head);
-        return solutionReversePointerZS(head);
-    }
 
     /**
      * LC
@@ -44,7 +35,6 @@ public class ReverseListE24 {
      * @return
      */
     public static ListNode reverseList(ListNode head) {
-//        return mycycSolutionNewHead(head);
         return solutionReversePointerZS(head);
     }
 

@@ -55,10 +55,10 @@ import java.util.PriorityQueue;
  * @version V1.0
  * @create 2020-03-09 16:10
  */
-public class MedianFinder {
+public class FindMedianOfStreamE4101 {
 
     public static void main(String[] args) {
-        MedianFinder obj = new MedianFinder();
+        FindMedianOfStreamE4101 obj = new FindMedianOfStreamE4101();
 
         obj.addNum(6);
         obj.addNum(10);
@@ -82,7 +82,7 @@ public class MedianFinder {
     /**
      * initialize your data structure here.
      */
-    public MedianFinder() {
+    public FindMedianOfStreamE4101() {
         SPQ = new PriorityQueue<>();
         BPQ = new PriorityQueue<>(new DESCComparator<Integer>());
     }

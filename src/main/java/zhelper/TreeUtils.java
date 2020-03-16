@@ -1,7 +1,9 @@
 package zhelper;
 
 import java.sql.PreparedStatement;
+import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Queue;
 
 /**
  * @author Shane Tang
@@ -105,6 +107,67 @@ public class TreeUtils {
             buf.append(space);
         }
         return buf.toString();
+    }
+
+    /**
+     * 【关键】 这个版本不需要写出所有null的叶子节点
+     *
+     * 执行用时 :
+     * 36 ms
+     * , 在所有 Java 提交中击败了
+     * 34.92%
+     * 的用户
+     * 内存消耗 :
+     * 42.3 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     * @param data
+     * @return
+     */
+    public static TreeNode deserialize(String data) {
+        if (data == null || "[]".equals(data)) {
+            return null;
+        }
+        // 取出元素，这里设置分隔符
+        String[] split = data.substring(1, data.length() - 1).split(",");
+        Queue<TreeNode> queue = new LinkedList<>();
+        // 构造一个节点队列，和一个下标指针
+        int idx = 0;
+        TreeNode root = generateTreeNode(split[idx++]);
+        // 配合removeEndNull，idx到头也就是剩下的全是null，就不手动设置null孩子了，而是默认null孩子
+        if (idx == split.length) {
+            return root;
+        }
+        queue.offer(root);
+        TreeNode cur = null;
+        while (!queue.isEmpty()) {
+            cur = queue.poll();
+            cur.left = generateTreeNode(split[idx++]);
+            // 配合removeEndNull，idx到头也就是剩下的全是null，就不手动设置null孩子了，而是默认null孩子
+            if (idx == split.length) {
+                break;
+            }
+            cur.right = generateTreeNode(split[idx++]);
+            // 配合removeEndNull，idx到头也就是剩下的全是null，就不手动设置null孩子了，而是默认null孩子
+            if (idx == split.length) {
+                break;
+            }
+            if (cur.left != null) {
+                queue.offer(cur.left);
+            }
+            if (cur.right != null) {
+                queue.offer(cur.right);
+            }
+        }
+        return root;
+    }
+
+    private static TreeNode generateTreeNode(String value) {
+        if ("null".equals(value)) {
+            return null;
+        }
+        return new TreeNode(Integer.valueOf(value));
     }
 
     public static class TreeNode {

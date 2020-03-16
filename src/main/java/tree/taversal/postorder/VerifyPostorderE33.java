@@ -21,7 +21,7 @@ public class VerifyPostorderE33 {
     // 如果是BST，以头结点可以二分数组，而且左边都是小于，右边都是大于
     // 递归判断
     public boolean verifyPostorder(int[] postorder) {
-        if(postorder == null) {
+        if (postorder == null) {
             return false;
         }
         recur(postorder, 0, postorder.length - 1);
@@ -47,24 +47,21 @@ public class VerifyPostorderE33 {
 
     private int getIdxOfPostorder(int[] arr, int l, int r, int pivot) {
         int i = l;
-        while(i < r && arr[i] <= pivot) {
+        while (i < r && arr[i] <= pivot) {
             i++;
         }
         return i;
     }
 
     private void judge(int[] postorder, int pivotIdx, int r) {
-        for(int j = pivotIdx; j< r; j++) {
+        for (int j = pivotIdx; j < r; j++) {
             // arr[r]就是pivot
-            if(postorder[j] < postorder[r]) {
+            if (postorder[j] < postorder[r]) {
                 isValid = false;
                 return;
             }
         }
     }
-
-
-
 
 
     public boolean VerifySquenceOfBST(int[] sequence) {

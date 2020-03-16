@@ -75,9 +75,15 @@ public class SerializeBFSE37 {
                 queue.offer(cur.right);
             }
         }
+        // removeEndNull版本不需要写出所有null的叶子节点
         return removeEndNull(sb.substring(0, sb.length() - 1) + "]");
     }
 
+    /**
+     * removeEndNull版本不需要写出所有null的叶子节点
+     * @param data
+     * @return
+     */
     private String removeEndNull(String data) {
         // 取出元素
         String[] split = data.substring(1, data.length() - 1).split(",");
@@ -85,8 +91,7 @@ public class SerializeBFSE37 {
         for (int i = split.length - 1; i >= 0; i--) {
             if ("null".equals(split[i])) {
                 size--;
-            }
-            else {
+            } else {
                 break;
             }
         }
@@ -97,24 +102,6 @@ public class SerializeBFSE37 {
         return Arrays.toString(res);
     }
 
-
-/*    public static String toString(Object[] a) {
-        if (a == null)
-            return "[]";
-
-        int iMax = a.length - 1;
-        if (iMax == -1)
-            return "[]";
-
-        StringBuilder b = new StringBuilder();
-        b.append('[');
-        for (int i = 0; ; i++) {
-            b.append(String.valueOf(a[i]));
-            if (i == iMax)
-                return b.append(']').toString();
-            b.append(",");
-        }
-    }*/
 
     /**
      * 执行用时 :
@@ -127,6 +114,7 @@ public class SerializeBFSE37 {
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
+     *
      * @param data
      * @return
      */

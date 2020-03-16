@@ -1,4 +1,4 @@
-package others;
+package recur;
 
 /**
  * 矩形覆盖问题
