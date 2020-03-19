@@ -1,6 +1,7 @@
 package tree.taversal;
 
 import zhelper.TreeTest;
+import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
 
 import java.util.ArrayList;
@@ -16,22 +17,25 @@ public class TraversalRecur {
 
     public static void main(String[] args) {
         TreeNode treeNode = TreeTest.FBTree();
+        TreeUtils.printTree(treeNode);
 
         TraversalRecur obj = new TraversalRecur();
-        List<Integer> traversal = obj.recurorderTraversal(treeNode);
-        System.out.println(traversal.toString());
+//        List<Integer> traversal = obj.recurorderTraversal(treeNode);
+//        System.out.println(traversal.toString());
+
+        obj.recurTraverse(treeNode);
 
     }
 
-    public static void recurTraverse(TreeNode head) {
+    public void recurTraverse(TreeNode head) {
         if (head == null) {
             return;
         }
-        System.out.print(head.val + " ");
+        System.out.print("前" + head.val + " ");
         recurTraverse(head.left);
-        System.out.print(head.val + " ");
+        System.out.print("中" + head.val + " ");
         recurTraverse(head.right);
-        System.out.print(head.val + " ");
+        System.out.print("后" + head.val + " ");
     }
 
     /**

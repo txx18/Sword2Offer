@@ -1,4 +1,4 @@
-package recurforce;
+package recurforcetry;
 
 import java.util.*;
 
@@ -77,12 +77,12 @@ public class Hanota {
             return;
         }
         // 分解子问题
-        // 0~i-1从from移到other
+        // 子问题 0~i-1从from移到other
         solution(i - 1, from, to, other);
         // 移动底元素到to
         to.add(from.get(from.size() - 1));
         from.remove(from.get(from.size() - 1));
-        // 把0~i-1从other移到to
+        // 子问题 把0~i-1从other移到to
         solution(i - 1, other, from, to);
     }
 
