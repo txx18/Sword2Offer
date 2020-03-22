@@ -1,4 +1,4 @@
-package recurforcetry;
+package recur;
 
 import java.util.*;
 

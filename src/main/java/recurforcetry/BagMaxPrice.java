@@ -45,7 +45,8 @@ public class BagMaxPrice {
 
     /**
      * 尝试
-     * 累加价值的方法
+     * res累加价值的方法
+     * 为什么要两个可变参数，因为有两种base case
      *
      * @param i         决定第i个物品
      * @param curWeight 之前的决定，达到的weight
@@ -56,19 +57,22 @@ public class BagMaxPrice {
         if (curWeight > bag) {
             return -1;
         }
-        // base case 2
+        // base case 2 达到总数
         if (i == weights.length) {
             return 0;
         }
-        // 两种情况取较大值 1、不要i货物 2、要i货物
+        // 两种情况
+        // 1、不要i货物
         int case1 = recur(i + 1, curWeight);
+        // 2、要i货物
         // case2 不只是下一个下标可能超，而且可能超重，故先尝试后检验
         int case2try = recur(i + 1, curWeight + weights[i]);
-        int case2 = Integer.MIN_VALUE;
+        int case2 = 0;
         // 如果重量没超，才真正把价值加上，如果超重，就不会加case2的价值
         if (case2try != -1) {
             case2 = values[i] + case2try;
         }
+        // 取两种情况的较大值
         return Math.max(case1, case2);
     }
 

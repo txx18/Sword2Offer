@@ -1,4 +1,4 @@
-package recurforcetry;
+package recurforcetry.backtrack;
 
 /**
  * 给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。
@@ -25,11 +25,12 @@ public class TranslateNumStringE46 {
 //        double pow = Math.pow(10, 2);
 //        System.out.println("pow = " + pow);
         TranslateNumStringE46 obj = new TranslateNumStringE46();
-        int res = obj.translateNum(18580);
+        int res = obj.translateNum(18580222);
         System.out.println("res = " + res);
     }
 
     int digitCount;
+    int num;
 
     /**
      * 执行用时 :
@@ -47,8 +48,9 @@ public class TranslateNumStringE46 {
      */
     public int translateNum(int num) {
         // 从尾到头尝试 i从头开始
-        digitCount = getDigitCount(num);
-        return recur(num, 0);
+        this.digitCount = getDigitCount(num);
+        this.num = num;
+        return recur( 0);
     }
 
     /**
@@ -65,7 +67,7 @@ public class TranslateNumStringE46 {
         return res;
     }
 
-    private int recur(int num, int i) {
+    private int recur(int i) {
         // base case
         if (i == digitCount) {
             return 1;
@@ -76,27 +78,27 @@ public class TranslateNumStringE46 {
         // 如果当前位是1
         if(curVal == 1) {
             // 第一种情况 i自己翻译成一个字母，后面有多少种
-            res = recur(num, i + 1);
+            res = recur(i + 1);
             // 第二种情况 i和i+1凑一对，后面有多少种
             if (i + 1 < digitCount) {
-                res += recur(num, i + 2);
+                res += recur(i + 2);
             }
         }
         // 如果当前位是2
         else if (curVal == 2) {
             // 第一种情况 i自己翻译成一个字母，后面有多少种
-            res = recur(num, i + 1);
+            res = recur(i + 1);
             // 第二种情况 i和i+1凑一对，而且没有超过25，后面有多少种
             if (i + 1 < digitCount){
                 int nextVal = num / (int)Math.pow(10, digitCount - i - 2) % 10;
                 if (nextVal <= 5) {
-                    res += recur(num, i + 2);
+                    res += recur(i + 2);
                 }
             }
         }
         else {
             // 如果当前位是3~9
-            res = recur(num, i + 1);
+            res = recur(i + 1);
         }
         return res;
     }

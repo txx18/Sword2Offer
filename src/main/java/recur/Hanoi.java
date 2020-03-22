@@ -1,4 +1,4 @@
-package recurforcetry;
+package recur;
 
 /**
  * @author Shane Tang

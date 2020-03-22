@@ -4,7 +4,7 @@ package recurforcetry;
  * 给定一个整型数组arr，代表数值不同的纸牌排成一条线。玩家A和玩家B依次拿走每张纸
  * 牌，规定玩家A先拿，玩家B后拿，但是每个玩家每次只能拿走最左或最右的纸牌，玩家A
  * 和玩家B都绝顶聪明。请返回最后获胜者的分数。
- *
+ * <p>
  * 【举例】
  * arr=[1,2,100,4]。
  * 开始时，玩家A只能拿走1或4。如果开始时玩家A拿走1，则排列变为[2,100,4]，接下来
@@ -38,11 +38,14 @@ public class CardMax {
             return 0;
         }
         // 返回先手情况和后手情况的最大值
-        return Math.max(pre(arr, 0, arr.length - 1), post(arr, 0, arr.length - 1));
+        return Math.max(
+                pre(arr, 0, arr.length - 1),
+                post(arr, 0, arr.length - 1)
+        );
     }
 
     /**
-     *  先手情况
+     * 先手情况
      * 在 [l, r]范围上尝试
      *
      * @param arr
@@ -51,15 +54,18 @@ public class CardMax {
      * @return
      */
     private int pre(int[] arr, int l, int r) {
-
         // base case 只剩一张牌，拿走
         if (l == r) {
             return arr[l];
         }
         // 先手获得的总收益有两部分 （1）先手拿走的牌 （2）后手的决策
         // 先手拿左和拿右是两种情况，用或连接
-        return Math.max(arr[l] + post(arr, l + 1, r), arr[r] + post(arr, l, r - 1));
+        return Math.max(
+                arr[l] + post(arr, l + 1, r),
+                arr[r] + post(arr, l, r - 1)
+        );
     }
+
     /**
      * 后手情况
      * 在 [l, r]范围上尝试
@@ -76,7 +82,10 @@ public class CardMax {
         }
         // 后手受先手控制，先手会把最小值留给后手
         // 先手拿左和拿右是两种情况，用或连接
-        return Math.min(pre(arr, l + 1, r), pre(arr, l, r - 1));
+        return Math.min(
+                pre(arr, l + 1, r),
+                pre(arr, l, r - 1)
+        );
     }
 
 }

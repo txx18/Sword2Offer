@@ -1,8 +1,6 @@
-package recurforcetry;
+package recurforcetry.backtrack;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * 输入一个字符串，打印出该字符串中字符的所有排列。
@@ -31,7 +29,7 @@ import java.util.List;
  * @version V1.0
  * @create 2020-03-16 21:11
  */
-public class StringsPermutationE38 {
+public class StringsPermutationCount {
 
     /*
      * 回溯法
@@ -79,57 +77,62 @@ public class StringsPermutationE38 {
      * 再对字符串进行“去重”处理，之后按照回溯框架即可。
      * */
 
-    List<String> resList = new ArrayList<>();
-    StringBuilder sb = new StringBuilder();
-    boolean[] hasUsed = null;
+    public static void main(String[] args) {
 
-    public String[] permutation(String s) {
-        if(s == null || s.length() == 0) {
-            return null;
+        String str = "abc";
+
+        StringsPermutationCount obj = new StringsPermutationCount();
+
+        int resCnt = obj.permutationCnt(str);
+        System.out.println("resCnt = " + resCnt);
+    }
+
+    char[] chars;
+    boolean[] hasUsed;
+
+    public int permutationCnt(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
         }
-        char[] chars = s.toCharArray();
-        hasUsed = new boolean[chars.length];
+        this.chars = s.toCharArray();
+        this.hasUsed = new boolean[chars.length];
         // 先对字符数组排序，使重复的相邻
         Arrays.sort(chars);
         // 从下标0开始尝试
-        recur(chars, 0);
-        return convertToArray(resList);
+        return recurCnt(0);
+
     }
 
-    private void recur(char[] chars, int i) {
+    /**
+     * 全排列有多少种
+     *
+     * @param i
+     * @return
+     */
+    private int recurCnt(int i) {
         // 来到i位置
         // 结束条件：i来到最后一个位置。得到一种排列
-        if(i == chars.length) {
-            resList.add(sb.toString());
-            return;
+        if (i == chars.length) {
+            return 1;
         }
-        // chars[i..]范围上，所有的字符都可以在i位置，都去尝试
-        // chars[0..i-1]范围上，是之前做的选择
+        int resCnt = 0;
         for (int j = 0; j < chars.length; j++) {
             // 为了对“aab”这种字符串的排列去重，进行剪枝（分支限界）
-            if(hasUsed[j]) {
+            if (hasUsed[j]) {
                 continue;
             }
             if (j != 0 && !hasUsed[j - 1] && chars[j] == chars[j - 1]) {
                 continue;
             }
             // 做选择
-            sb.append(chars[j]);
             hasUsed[j] = true;
             // 递归尝试下一个位置
-            recur(chars, i + 1);
+            resCnt += recurCnt(i + 1);
             // 撤销选择
-            sb.deleteCharAt(sb.length() - 1);
             hasUsed[j] = false;
         }
+        return resCnt;
     }
 
 
-    private String[] convertToArray(List<String> resList) {
-        String[] res = new String[resList.size()];
-        for(int i = 0; i < res.length; i++) {
-            res[i] = resList.get(i);
-        }
-        return res;
-    }
 }

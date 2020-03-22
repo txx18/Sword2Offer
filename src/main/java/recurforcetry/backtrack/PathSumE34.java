@@ -1,9 +1,10 @@
-package tree.taversal;
+package recurforcetry.backtrack;
 
 import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -57,7 +58,8 @@ public class PathSumE34 {
     }
 
     List<List<Integer>> res = new ArrayList<>();
-    List<Integer> path = new ArrayList<>();
+    LinkedList<Integer> track = new LinkedList<>();
+    int sum;
     int thisCurSum;
 
     /**
@@ -77,32 +79,36 @@ public class PathSumE34 {
      * @return
      */
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
-        recur(root, sum);
+        this.sum = sum;
+        recur(root);
 //        pathS(root, sum);
         return res;
     }
 
-    private void recur(TreeNode cur, int sum) {
+    private void recur(TreeNode cur) {
         if (cur == null) {
             return;
         }
         // 到叶子之前，把每个节点加到path里，同时计入路径和
-        path.add(cur.val);
+        track.add(cur.val);
         thisCurSum += cur.val;
+        // 做选择
         // 来到叶子节点，检查路径和是否=sum
         if (cur.left == null && cur.right == null) {
 //            int curSum = calSum(path);
             // 如果符合条件，把这条path加进去
             if (thisCurSum == sum) {
                 // 一定要new一个ArrayList加进去，不能直接加，不然加的是同一个
-                res.add(new ArrayList<>(path));
+                res.add(new LinkedList<>(track));
             }
         }
-        recur(cur.left, sum);
-        recur(cur.right, sum);
+        // backTrack
+        recur(cur.left);
+        recur(cur.right);
+        // 撤销选择
         // 【关键】返回父节点之前弹出节点，同时减路径和
-        thisCurSum -= path.get(path.size() - 1);
-        path.remove(path.size() - 1);
+        thisCurSum -= track.get(track.size() - 1);
+        track.removeLast();
     }
 
 
@@ -118,15 +124,15 @@ public class PathSumE34 {
         if (root == null) {
             return;
         }
-        path.add(root.val);
+        track.add(root.val);
         // 【关键】 复用sum
         sum -= root.val;
         if (root.left == null && root.right == null && sum == 0) {
-            res.add(new ArrayList(path));
+            res.add(new ArrayList(track));
         }
         pathS(root.left, sum);
         pathS(root.right, sum);
-        path.remove(path.size() - 1);
+        track.remove(track.size() - 1);
     }
 
 }
