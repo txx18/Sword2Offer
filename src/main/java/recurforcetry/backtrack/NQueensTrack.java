@@ -61,6 +61,7 @@ public class NQueensTrack {
     List<String> oneRes = new ArrayList<>();
     /**
      * 第i行的皇后放在第j列
+     * 下标为i的值为j
      */
 //    HashMap<Integer, Integer> track;
     LinkedList<Integer> trackLinkedList;
@@ -96,7 +97,6 @@ public class NQueensTrack {
     private void recur(int i) {
         // base case
         if (i == n) {
-//            saveOneRes(track);
             saveOneRes(trackLinkedList);
             return;
         }
@@ -106,12 +106,10 @@ public class NQueensTrack {
             boolean isValid = isValid(i, j);
             if (isValid) {
                 // 把第i行的queen放到第j列
-//                track.put(i, j);
                 trackLinkedList.add(j);
                 // 继续尝试下一行
                 recur(i + 1);
                 // 撤销选择
-//                track.remove(i);
                 trackLinkedList.removeLast();
             }
 
@@ -147,7 +145,33 @@ public class NQueensTrack {
         return true;
     }
 
-    private void saveOneRes(HashMap<Integer, Integer> track) {
+/*
+    private void recur(int i) {
+        // base case
+        if (i == n) {
+//            saveOneRes(track);
+            saveOneRes(trackLinkedList);
+            return;
+        }
+        // 当前在第i行，尝试第j列
+        for (int j = 0; j < n; j++) {
+            // 如果在第i行找到合法位置
+            boolean isValid = isValid(i, j);
+            if (isValid) {
+                // 把第i行的queen放到第j列
+//                track.put(i, j);
+                trackLinkedList.add(j);
+                // 继续尝试下一行
+                recur(i + 1);
+                // 撤销选择
+//                track.remove(i);
+                trackLinkedList.removeLast();
+            }
+
+        }
+    }*/
+
+/*    private void saveOneRes(HashMap<Integer, Integer> track) {
         oneRes = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             StringBuilder sb = new StringBuilder();
@@ -161,7 +185,7 @@ public class NQueensTrack {
             oneRes.add(sb.toString());
         }
         res.add(oneRes);
-    }
+    }*/
 
 
 /*    private void addRow(int j) {
