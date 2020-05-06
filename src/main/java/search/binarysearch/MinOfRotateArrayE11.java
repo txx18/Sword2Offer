@@ -1,4 +1,4 @@
-package binarysearch;
+package search.binarysearch;
 
 /**
  * 旋转数组的最小数字

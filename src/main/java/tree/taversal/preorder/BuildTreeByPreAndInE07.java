@@ -86,11 +86,18 @@ public class BuildTreeByPreAndInE07 {
     private TreeNode recur(int[] preorder, int preL, int preR, int inL) {
         // 先序框架
         // base case
+        // 递归方法的基准情形有两个：
+        // 判断前序遍历的下标范围的开始和结束，若开始大于结束，则当前的二叉树中没有节点，返回空值 null。
+        // 若开始等于结束，则当前的二叉树中恰好有一个节点，根据节点值创建该节点作为根节点并返回。
         if (preL > preR) {
             return null;
         }
         // 通过preorder的preL建根结点
         TreeNode root = new TreeNode(preorder[preL]);
+/*        // 可以不用
+        if (preL == preR) {
+            return root;
+        }*/
         // 在inorder中找到根节点
         int rootIdxOfInorder = inorderMap.get(root.val);
         // 递归建左子树和右子树
@@ -101,30 +108,5 @@ public class BuildTreeByPreAndInE07 {
         return root;
     }
 
-
-
-
-    // 准备一个hashMap存inSeq的数据，键是inSeq的值，值是下标
-    Map<Integer, Integer> inMap = new HashMap<>();
-
-
-    private TreeNode buildProcess(int[] preSeq, int preL, int preR, int inL) {
-        if(preL > preR){
-            return null;
-        }
-        // 递归中头结点就是preSeq的第一个
-        // 不断建立头结点和子树的头结点
-        TreeNode head = new TreeNode(preSeq[preL]);
-        // 查出头结点在InSeq中的下标
-        int headIndexOfInSeq = inMap.get(head.val);
-        // 计算左子树长度
-        int leftChildTreeSize = headIndexOfInSeq - inL;
-        // 在preSeq中
-        // 左子树递归
-        head.left = buildProcess(preSeq, preL + 1, preL + leftChildTreeSize, inL);
-        // 右子树递归
-        head.right = buildProcess(preSeq, preL + leftChildTreeSize + 1, preR, headIndexOfInSeq + 1);
-        return head;
-    }
 
 }

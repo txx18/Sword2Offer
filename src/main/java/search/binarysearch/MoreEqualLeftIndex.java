@@ -1,4 +1,4 @@
-package binarysearch;
+package search.binarysearch;
 
 /**
  * 在arr上，找满足>=value的最左位置

@@ -1,5 +1,6 @@
 package zhelper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,6 +57,17 @@ public class ArrayUtils {
             }
         }
         return map.get(0);
+    }
+
+    public static ArrayList<Integer> convertToArrayList(int[] arr) {
+        if (arr == null || arr.length < 1) {
+            return null;
+        }
+        ArrayList<Integer> res = new ArrayList<>(arr.length);
+        for (int value : arr) {
+            res.add(value);
+        }
+        return res;
     }
 
     public static ListNode convertToLinkedList(int[] arr) {

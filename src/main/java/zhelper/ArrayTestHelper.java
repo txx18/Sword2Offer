@@ -1,6 +1,8 @@
 package zhelper;
 
 
+import sort.MyQuickSortV3;
+
 import java.util.Arrays;
 
 import static zhelper.ArrayUtils.*;
@@ -14,7 +16,7 @@ import static zhelper.ArrayUtils.*;
 public class ArrayTestHelper {
 
     private static void solution(int[] arr) {
-        Arrays.sort(arr);
+        MyQuickSortV3.solution(arr);
     }
 
     // for test

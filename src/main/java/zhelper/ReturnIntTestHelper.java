@@ -1,6 +1,6 @@
 package zhelper;
 
-import binarysearch.CountOfNumOfSortedArrE5301;
+import search.binarysearch.CountOfNumOfSortedArrE5301;
 
 import static zhelper.ArrayUtils.*;
 

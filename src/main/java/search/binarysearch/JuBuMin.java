@@ -1,4 +1,4 @@
-package binarysearch;
+package search.binarysearch;
 
 public class JuBuMin {
 
