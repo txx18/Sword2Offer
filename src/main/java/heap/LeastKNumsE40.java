@@ -29,8 +29,8 @@ public class LeastKNumsE40 {
 
 
     public static int[] getLeastNumbers(int[] arr, int k) {
-//        return solutionPriorityQueue(arr, k);
-        return solutionBigHeap(arr, k);
+        return solutionPQ(arr, k);
+//        return solutionBigHeap(arr, k);
     }
 
     /**
@@ -61,15 +61,15 @@ public class LeastKNumsE40 {
         }
         // 剩下的数一个一个进，跟堆中最大数比较，如果大，那不可能是候选数，跳过；如果小，则替换原来的最大数
         for (int i = k; i < arr.length; i++) {
-            if (arr[i] < priorityQueue.peek()) {
-                priorityQueue.poll();
+            if (arr[i] < priorityQueue.element()) {
+                priorityQueue.remove();
                 priorityQueue.add(arr[i]);
             }
         }
         // 返回queue中的元素
         int[] res = new int[k];
         for (int i = 0; i < k; i++) {
-            res[i] = priorityQueue.poll();
+            res[i] = priorityQueue.remove();
         }
         return res;
     }
