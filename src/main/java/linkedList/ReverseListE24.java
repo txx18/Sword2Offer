@@ -5,6 +5,7 @@ import zhelper.ListUtils;
 import zhelper.ListUtils.*;
 
 /**
+ * 反转链表
  * @author Shane Tang
  * @version V1.0
  * @create 2020-02-15 15:18
@@ -12,17 +13,22 @@ import zhelper.ListUtils.*;
 public class ReverseListE24 {
 
     public static void main(String[] args) {
-        int[] arr1 = {1, 2, 3, 4, 5};
+        int[] arr1 = {0, 1, 2, 3, 4};
         int[] arr2 = {1, 2, 3, 4, 5, 6};
         int[] arr3 = {1, 2};
         int[] arr4 = {1};
         int[] arr5 = null;
         int[] arr6 = {1, 3, 5, 7};
         int[] arr7 = {2, 4, 6, 8};
-        ListNode head1 = ListUtils.convertToLinkedList(arr5);
+        ListNode head1 = ListUtils.convertToLinkedList(arr1);
         ListUtils.printSingleList(head1);
 
-        ListNode res = reverseList(head1);
+//        ListNode res = reverseList(head1);
+
+        ListNode res = solutionReversePointerZS(head1);
+//        ListNode res = reverse(head1.next, head1.next.next.next.next);
+//        ListNode res = reverseBetween(head1, 2, 4);
+
         ListUtils.printSingleList(res);
 
     }

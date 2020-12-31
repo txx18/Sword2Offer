@@ -15,7 +15,7 @@ public class MyQuickSortV1 {
 
     // for test
     public static void main(String[] args) {
-        int[] arr1 = {4,5,1,6,2,7,3,8, 4};
+        int[] arr1 = {4, 5, 1, 6, 2, 7, 3, 8, 4};
         int partition = simplePartition(arr1, 0, arr1.length - 1);
         System.out.println("partition = " + partition);
         System.out.println(Arrays.toString(arr1));
@@ -31,6 +31,7 @@ public class MyQuickSortV1 {
 
     /**
      * 把最右边那个数当作num
+     *
      * @param arr
      * @param l
      * @param r
@@ -53,76 +54,48 @@ public class MyQuickSortV1 {
 
     /**
      * 利用simplePartition
+     *
      * @param arr
      * @param l
      * @param r
      * @return
      */
-    private static int simplePartition(int[] arr, int l, int r){
+    private static int simplePartition(int[] arr, int l, int r) {
+        int pivotVal = arr[r];
         int lessEqualIdx = l - 1;
-        for (; l <= r; l++){ //注意arr[r]也要判断
-            if(arr[l] <= arr[r]){
+        for (int i = l; i <= r; i++) { //注意arr[r]也要判断
+            if (arr[i] <= pivotVal) {
                 // 只靠小于等于区域右扩
-                ArrayUtils.swap(arr, ++lessEqualIdx, l);
+                ArrayUtils.swap(arr, i, ++lessEqualIdx);
+            } else {
+
             }
+
         }
         return lessEqualIdx;
     }
 
-    // for test
-    public static void comparator(int[] arr) {
-        Arrays.sort(arr);
-    }
+    /**
+     * 通过
+     * @param arr
+     * @param l
+     * @param r
+     * @return
+     */
+    private static int simplePartitionWZ(int[] arr, int l, int r) {
+        int pivot = arr[r];
+        int lessEqualIdx = l;
+        for (int i = l; i < r; i++) { //注意arr[r]也要判断
+            if (arr[i] <= pivot) {
+                // 只靠小于等于区域右扩
+                ArrayUtils.swap(arr, i, lessEqualIdx);
+                lessEqualIdx++;
+            } else {
 
-    // for test
-    public static int[] generateRandomArray(int maxSize, int maxValue) {
-        int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = (int) ((maxValue + 1) * Math.random()) - (int) (maxValue * Math.random());
-        }
-        return arr;
-    }
-
-    // for test
-    public static int[] copyArray(int[] arr) {
-        if (arr == null) {
-            return null;
-        }
-        int[] res = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            res[i] = arr[i];
-        }
-        return res;
-    }
-
-    // for test
-    public static boolean isEqual(int[] arr1, int[] arr2) {
-        if ((arr1 == null && arr2 != null) || (arr1 != null && arr2 == null)) {
-            return false;
-        }
-        if (arr1 == null && arr2 == null) {
-            return true;
-        }
-        if (arr1.length != arr2.length) {
-            return false;
-        }
-        for (int i = 0; i < arr1.length; i++) {
-            if (arr1[i] != arr2[i]) {
-                return false;
             }
         }
-        return true;
-    }
-
-    // for test
-    public static void printArray(int[] arr) {
-        if (arr == null) {
-            return;
-        }
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println();
+        ArrayUtils.swap(arr, r, lessEqualIdx);
+        return lessEqualIdx;
     }
 
     public static void swap(int[] arr, int i, int j) {

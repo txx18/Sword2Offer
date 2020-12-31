@@ -44,31 +44,63 @@ public class SerializePreorderE37 {
         TreeUtils.printTree(deserialize);
     }
 
-    /**
-     * 执行用时 :
-     * 13 ms
-     * , 在所有 Java 提交中击败了
-     * 85.20%
-     * 的用户
-     * 内存消耗 :
-     * 42.7 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     *
-     * @param root
-     * @return
-     */
-    // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
+    public String toSequence(TreeNode root) {
+        // write code here
         if (root == null) {
-            return "null,";
+            return "";
         }
-        // 按照先序序列化
-        StringBuilder sb = new StringBuilder();
-        return recurSerialize(root, sb);
+        sb.append("(");
+        toSequence(root.left);
+        toSequence(root.right);
+        sb.append(")");
+        return sb.toString();
+    }
+
+    String SEP = ",";
+    String NULL = "null";
+    StringBuilder sb = new StringBuilder();
+
+
+
+    public String serialize(TreeNode root) { // 默认自测测试用例是错的
+        if (root == null) {
+            return sb.append(NULL).append(SEP).toString();
+        }
+        sb.append(root.val).append(SEP);
+        serialize(root.left);
+        serialize(root.right);
+        return sb.toString();
+    }
+
+    public TreeNode deserialize(String str) {
+        if ((NULL + SEP).equals(str)) {
+            return null;
+        }
+        String[] splits = str.split(SEP);
+        Queue<String> q = putToQueue(splits);
+        return build(q);
 
     }
+
+    TreeNode build(Queue<String> q) {
+        String poll = q.poll();
+        if ((NULL).equals(poll)) {
+            return null;
+        }
+        TreeNode root = new TreeNode(Integer.parseInt(poll));
+        root.left = build(q);
+        root.right = build(q);
+        return root;
+    }
+
+    Queue<String> putToQueue(String[] strs) {
+        Queue<String> q = new LinkedList<>();
+        for (String str: strs) {
+            q.offer(str);
+        }
+        return q;
+    }
+
 
     private String recurSerialize(TreeNode root, StringBuilder sb) {
         if (root == null) {
@@ -79,33 +111,5 @@ public class SerializePreorderE37 {
         sb.append(serialize(root.left));
         sb.append(serialize(root.right));
         return sb.toString();
-    }
-
-
-    // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
-        if ("null,".equals(data)) {
-            return null;
-        }
-        // 把元素装进队列
-        Queue<String> queue = new LinkedList<>();
-        String[] split = data.split(",");
-        for (String s : split) {
-            queue.offer(s);
-        }
-        // 消费队列
-        return recurDeserialize(queue);
-
-    }
-
-    private TreeNode recurDeserialize(Queue<String> queue) {
-        String poll = queue.poll();
-        if ("null".equals(poll)) {
-            return null;
-        }
-        TreeNode treeNode = new TreeNode(Integer.parseInt(poll));
-        treeNode.left = recurDeserialize(queue);
-        treeNode.right = recurDeserialize(queue);
-        return treeNode;
     }
 }

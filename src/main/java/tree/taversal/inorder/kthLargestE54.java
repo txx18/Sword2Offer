@@ -51,6 +51,23 @@ public class kthLargestE54 {
         return solutionList(root, k);
     }
 
+    int rank = 0;
+    TreeNode res = null;
+
+    TreeNode KthNode(TreeNode pRoot, int k) {
+        if (pRoot == null) {
+            return null;
+        }
+        KthNode(pRoot.left, k);
+        rank++;
+        if (rank == k) {
+            res = pRoot;
+            return res;
+        }
+        KthNode(pRoot.right, k);
+        return res;
+    }
+
     List<Integer> inorderList = new ArrayList<>();
 
     /**
@@ -86,7 +103,7 @@ public class kthLargestE54 {
     }
 
 
-    int res;
+    int resInorder;
     int count;
 
     /**
@@ -107,7 +124,7 @@ public class kthLargestE54 {
     private int solution(TreeNode root, int k) {
         count = k;
         getTargetByInorder(root);
-        return res;
+        return resInorder;
 
     }
 
@@ -119,7 +136,7 @@ public class kthLargestE54 {
         getTargetByInorder(root.right);
         // 减到1返回
         if (count == 1) {
-            res = root.val;
+            resInorder = root.val;
             count--;
             return;
         }

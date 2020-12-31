@@ -101,9 +101,10 @@ public class BuildTreeByPreAndInE07 {
         // 在inorder中找到根节点
         int rootIdxOfInorder = inorderMap.get(root.val);
         // 递归建左子树和右子树
-        // inL的作用只是算出左子树的大小，inR没用
-        root.left = recur(preorder, preL + 1, preL + (rootIdxOfInorder - inL), inL);
-        root.right = recur(preorder,preL + (rootIdxOfInorder - inL) + 1, preR, rootIdxOfInorder + 1);
+        // inL的作用是算出左子树的大小，inR没用
+        int leftSize = rootIdxOfInorder - inL;
+        root.left = recur(preorder, preL + 1, preL + leftSize, inL);
+        root.right = recur(preorder,preL + leftSize + 1, preR, rootIdxOfInorder + 1);
         // 自己返回自己的根节点
         return root;
     }

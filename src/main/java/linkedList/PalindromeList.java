@@ -7,21 +7,22 @@ import java.util.Stack;
 
 /**
  * 请判断一个链表是否为回文链表。
- *
+ * <p>
  * 示例 1:
- *
+ * <p>
  * 输入: 1->2
  * 输出: false
  * 示例 2:
- *
+ * <p>
  * 输入: 1->2->2->1
  * 输出: true
  * 进阶：
  * 你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
- *
+ * <p>
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/palindrome-linked-list
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ *
  * @author Shane Tang
  * @version V1.0
  * @create 2020-02-25 20:57
@@ -36,15 +37,81 @@ public class PalindromeList {
         ListUtils.printSingleList(list1);
 
         PalindromeList obj = new PalindromeList();
+//        boolean res = obj.isPalindrome(list1);
+
+//        boolean res = obj.chkPalindrome(list1);
         boolean res = obj.isPalindrome(list1);
         System.out.println("res = " + res);
         ListUtils.printSingleList(list1);
     }
 
+    public boolean chkPalindrome(ListNode A) {
+        // write code here
+        // copy the list
+        if (A == null) {
+            return false;
+        }
+        ListNode copyHead = new ListNode(-1);
+        ListNode cur1 = A;
+        ListNode cur2 = copyHead;
+        while (cur1 != null) {
+            ListNode newNode = new ListNode(cur1.val);
+            cur2.next = newNode;
+            cur1 = cur1.next;
+            cur2 = cur2.next;
+        }
+        ListNode copyTail = reverse(copyHead.next);
+        cur1 = A;
+        cur2 = copyTail;
+        while (cur1 != null) {
+            if (cur1.val != cur2.val) {
+                return false;
+            }
+            cur1 = cur1.next;
+            cur2 = cur2.next;
+        }
+        return true;
+    }
+
+    private ListNode reverse(ListNode a) {
+        ListNode cur = a;
+        ListNode pre = null;
+        ListNode nxt = null;
+        while (cur != null) {
+            nxt = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = nxt;
+        }
+        return pre;
+    }
 
     public boolean isPalindrome(ListNode head) {
 //        return solutionStack(head);
-        return solutionFastSlowPointer(head);
+//        return solutionFastSlowPointer(head);
+        return solutionSlowFastPointer(head);
+    }
+
+    private boolean solutionSlowFastPointer(ListNode A) {
+        ListNode slow, fast;
+        slow = fast = A;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if (fast != null) {
+            slow = slow.next;
+        }
+        ListNode l = A;
+        ListNode r = reverse(slow);
+        while (r != null) {
+            if (l.val != r.val) {
+                return false;
+            }
+            l = l.next;
+            r = r.next;
+        }
+        return true;
     }
 
     /**
@@ -58,6 +125,7 @@ public class PalindromeList {
      * , 在所有 Java 提交中击败了
      * 22.60%
      * 的用户
+     *
      * @param head
      * @return
      */
@@ -119,6 +187,7 @@ public class PalindromeList {
      * , 在所有 Java 提交中击败了
      * 5.00%
      * 的用户
+     *
      * @param head
      * @return
      */
@@ -131,7 +200,7 @@ public class PalindromeList {
         }
         cur = head;
         while (cur != null) {
-            if (cur.val != stack.pop()){
+            if (cur.val != stack.pop()) {
                 return false;
             }
             cur = cur.next;
