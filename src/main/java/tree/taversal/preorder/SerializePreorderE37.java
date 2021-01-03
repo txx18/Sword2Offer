@@ -44,17 +44,7 @@ public class SerializePreorderE37 {
         TreeUtils.printTree(deserialize);
     }
 
-    public String toSequence(TreeNode root) {
-        // write code here
-        if (root == null) {
-            return "";
-        }
-        sb.append("(");
-        toSequence(root.left);
-        toSequence(root.right);
-        sb.append(")");
-        return sb.toString();
-    }
+
 
     String SEP = ",";
     String NULL = "null";

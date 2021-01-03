@@ -76,6 +76,36 @@ public class BuildTreeByPreAndInE07 {
         return recur(preorder, 0, preorder.length - 1, 0);
     }
 
+    public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
+        if (pre == null || in == null || pre.length == 0 || in.length == 0) {
+            return null;
+        }
+        putToMap(in);
+        return build(pre, 0, pre.length - 1, 0);
+    }
+
+    private TreeNode build(int[] pre, int preL, int preR, int inL) {
+        if (preL > preR) {
+            return null;
+        }
+        TreeNode root = new TreeNode(pre[preL]);
+        int index = inMap.get(root.val);
+        int leftSize = index - inL;
+        root.left = build(pre, preL + 1, preL + leftSize, inL);
+        root.right = build(pre, preL + leftSize + 1, preR, index + 1);
+        return root;
+    }
+
+    Map<Integer, Integer> inMap = null;
+
+    private Map<Integer, Integer> putToMap(int[] in) {
+        inMap = new HashMap<>();
+        for (int i = 0; i < in.length; i++) {
+            inMap.put(in[i], i);
+        }
+        return inMap;
+    }
+
     private Map<Integer, Integer> putIntoMap(int[] inOrder) {
         for (int i = 0; i < inOrder.length; i++) {
             this.inorderMap.put(inOrder[i], i);
