@@ -1,4 +1,4 @@
-package tree.taversal.multiMethod;
+package tree.taversal;
 
 import zhelper.TreeUtils.*;
 

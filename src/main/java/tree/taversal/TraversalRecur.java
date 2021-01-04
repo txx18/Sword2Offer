@@ -5,6 +5,7 @@ import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -27,6 +28,39 @@ public class TraversalRecur {
 
     }
 
+    int[][] resThreeOrders = null;
+    List<Integer> preorder = new LinkedList<>();
+    List<Integer> inorder = new LinkedList<>();
+    List<Integer> postorder = new LinkedList<>();
+
+    /**
+     * @param root TreeNode类 the root of binary tree
+     * @return int整型二维数组
+     */
+    public int[][] threeOrders(TreeNode root) {
+        // write code here
+        traverse(root);
+//        Integer[] preorderArr = preorder.toArray(new Integer[preorder.size()]);
+//        Integer[] inorderArr = inorder.toArray(new Integer[preorder.size()]);
+//        Integer[] postorderArr = postorder.toArray(new Integer[preorder.size()]);
+        resThreeOrders = new int[3][preorder.size()];
+        resThreeOrders[0] = preorder.stream().mapToInt(i -> i).toArray();
+        resThreeOrders[1] = inorder.stream().mapToInt(i -> i).toArray();
+        resThreeOrders[2] = postorder.stream().mapToInt(i -> i).toArray();
+        return resThreeOrders;
+    }
+
+    private void traverse(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        preorder.add(root.val);
+        traverse(root.left);
+        inorder.add(root.val);
+        traverse(root.right);
+        postorder.add(root.val);
+    }
+
     public void recurTraverse(TreeNode head) {
         if (head == null) {
             return;
@@ -44,7 +78,7 @@ public class TraversalRecur {
     private ArrayList<Integer> res = new ArrayList<>();
 
 
-    public  List<Integer> recurorderTraversal(TreeNode head) {
+    public List<Integer> recurorderTraversal(TreeNode head) {
         if (head == null) {
             return res;
         }
@@ -55,7 +89,6 @@ public class TraversalRecur {
         res.add(head.val);
         return res;
     }
-
 
 
     public static void preTraverse(TreeNode head) {
@@ -70,7 +103,6 @@ public class TraversalRecur {
     }
 
 
-
     /**
      * 执行用时 :
      * 0 ms
@@ -82,6 +114,7 @@ public class TraversalRecur {
      * , 在所有 Java 提交中击败了
      * 5.05%
      * 的用户
+     *
      * @param root
      * @return
      */
@@ -116,6 +149,7 @@ public class TraversalRecur {
      * , 在所有 Java 提交中击败了
      * 5.10%
      * 的用户
+     *
      * @param root
      * @return
      */
@@ -150,6 +184,7 @@ public class TraversalRecur {
      * , 在所有 Java 提交中击败了
      * 5.13%
      * 的用户
+     *
      * @param root
      * @return
      */
