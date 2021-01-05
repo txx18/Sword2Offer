@@ -1,5 +1,7 @@
 package zhelper;
 
+import tree.taversal.preorder.isBST;
+
 import java.sql.PreparedStatement;
 import java.util.LinkedList;
 import java.util.Objects;
@@ -178,6 +180,12 @@ public class TreeUtils {
 
         public TreeNode(int x) {
             val = x;
+        }
+
+        public TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
         }
     }
 }

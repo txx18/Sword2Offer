@@ -40,16 +40,13 @@ public class FindDuplicateSubtrees {
         }
         String leftStr = traversePost(root.left);
         String rightStr = traversePost(root.right);
-        // 这里好像不能用sb.append写法，会累加
+        // todo 这里好像不能用sb.append写法，会累加
         String subTree = leftStr + "," + rightStr + "," + root.val;
         int count = memo.getOrDefault(subTree, 0);
         if (count == 1) {
             res.add(root);
         }
         memo.put(subTree, count + 1);
-        sb = new StringBuilder();
         return subTree;
     }
-
-//    private putToMemo()
 }
