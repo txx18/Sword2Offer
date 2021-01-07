@@ -7,7 +7,26 @@ import zhelper.TreeUtils.*;
  * @version V1.0
  * @create 2020-03-03 22:59
  */
-public class LCAE6802 {
+public class LowestCommonAncestorE6802 {
+
+    public int lowestCommonAncestor (TreeNode root, int o1, int o2) {
+        // write code here
+        return dfsPost(root, o1, o2).val;
+    }
+
+    private TreeNode dfsPost(TreeNode root, int o1, int o2) {
+        // write code here
+        if (root == null || root.val == o1 || root.val == o2) {
+            return root;
+        }
+        TreeNode left = dfsPost(root.left, o1, o2);
+        TreeNode right = dfsPost(root.right, o1, o2);
+        if (left != null && right != null) {
+            return root;
+        }
+        // todo 没有特别懂
+        return left == null? right: left;
+    }
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         return solutionTrick(root, p, q);

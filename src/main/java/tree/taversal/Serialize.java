@@ -22,11 +22,11 @@ public class Serialize {
 
         Serialize obj = new Serialize();
 //        StringBuilder sbPost = new StringBuilder();
-        String serialize = obj.Serialize(test);
+        String serialize = obj.serializePre(test);
 //        String serialize = obj.serializePost(treeNode);
         System.out.println("serialize = " + serialize);
 
-        TreeNode deserialize = obj.Deserialize(serialize);
+        TreeNode deserialize = obj.deserializePre(serialize);
         TreeUtils.printTree(deserialize);
     }
 
@@ -35,12 +35,13 @@ public class Serialize {
     String SEP = ",";
     String NULL = "null";
     StringBuilder sb = new StringBuilder();
-    String serialize = "";
-    Queue<String> q = new LinkedList<>();
-    Stack<String> stack = new Stack<>();
 
 
-    String Serialize(TreeNode root) {
+
+    /**
+     * 层序
+     */
+/*    String Serialize(TreeNode root) {
         if (root == null) {
             return "";
         }
@@ -87,10 +88,10 @@ public class Serialize {
             }
         }
         return root;
-    }
+    }*/
 
 
-/*    public String Serialize(TreeNode root) {
+    public String serializePost(TreeNode root) {
 //        if (root == null) {
 //            sb.append(NULL).append(SEP);
 //            return sb.toString();
@@ -104,71 +105,67 @@ public class Serialize {
             return NULL + SEP;
         }
         // 左右子树加上自己，就是以自己为根的二叉树序列化结果
-        return Serialize(root.left) + Serialize(root.right) + root.val + SEP;
+        return serializePost(root.left) + serializePost(root.right) + root.val + SEP;
     }
 
-    public TreeNode Deserialize(String str) {
+    public TreeNode deserializePost(String str) {
         String[] splits = str.split(SEP);
-        putToStack(splits);
-        return buildPost();
-    }*/
+        Stack<String> stack = new Stack<>();
+        putToStack(splits, stack);
+        return buildPost(stack);
+    }
 
-    private TreeNode buildPost() {
+    private TreeNode buildPost(Stack<String> stack) {
         String pop = stack.pop();
         if(NULL.equals(pop)) {
             return null;
         }
         TreeNode root = new TreeNode(Integer.parseInt(pop));
-        root.right = buildPost();
-        root.left = buildPost();
+        // 先右后左
+        root.right = buildPost(stack);
+        root.left = buildPost(stack);
         return root;
     }
 
-    private void putToStack(String[] strs) {
+    private void putToStack(String[] strs, Stack<String> stack) {
         for (String str: strs) {
             stack.push(str);
         }
     }
 
-/*    public String Serialize(TreeNode root) { // 默认自测测试用例是错的
-//        if (root == null) {
-//            serialize += NULL + SEP;
-//            return serialize;
-//        }
-//        serialize += root.val + SEP;
-//        Serialize(root.left);
-//        Serialize(root.right);
-//        return serialize;
+    public String serializePre(TreeNode root) { // 默认自测测试用例是错的
         if (root == null) {
             return NULL + SEP;
         }
-        return root.val + SEP + Serialize(root.left) + Serialize(root.right);
+        return root.val + SEP + serializePre(root.left) + serializePre(root.right);
     }
 
-    public TreeNode Desialize(String str) {
+    public TreeNode deserializePre(String str) {
         if ((NULL + SEP).equals(str)) {
             return null;
         }
         String[] splits = str.split(SEP);
-        putToQueue(splits);
-        return buildPre();
-    }*/
+        Queue<String> q = new LinkedList<>();
+        putToQueue(splits, q);
+        return buildPre(q);
+    }
 
-    private TreeNode buildPre() {
+    private TreeNode buildPre(Queue<String> q) {
         String poll = q.poll();
         if ((NULL).equals(poll)) {
             return null;
         }
         TreeNode root = new TreeNode(Integer.parseInt(poll));
-        root.left = buildPre();
-        root.right = buildPre();
+        root.left = buildPre(q);
+        root.right = buildPre(q);
         return root;
     }
 
-    private void putToQueue(String[] strs) {
+    private Queue<String> putToQueue(String[] strs, Queue<String> q) {
         for (String str: strs) {
             q.offer(str);
         }
+        return q;
     }
 
 
@@ -177,10 +174,6 @@ public class Serialize {
         if (root == null) {
             return "";
         }
-        sb.append("(");
-        serializeBracket(root.left);
-        serializeBracket(root.right);
-        sb.append(")");
-        return sb.toString();
+        return "(" + serializeBracket(root.left) + serializeBracket(root.right) + ")";
     }
 }
