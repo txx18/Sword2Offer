@@ -35,7 +35,7 @@ public class TraversalLoop {
      *
      * @param head
      */
-    public static void preTraverseZS(TreeNode head) {
+    public static void preTraversePrint(TreeNode head) {
         if (head == null) {
             return;
         }
@@ -64,6 +64,7 @@ public class TraversalLoop {
 
     /**
      * 前序遍历
+     *
      * @param root
      * @return
      */
@@ -89,24 +90,21 @@ public class TraversalLoop {
 
     /**
      * 中序遍历
+     *
      * @param root
      * @return
      */
     public List<Integer> inorderTraversal(TreeNode root) {
-        LinkedList<Integer> res = new LinkedList<>();
+        List<Integer> res = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
-        TreeNode cur = root;
-        while (!stack.isEmpty() || cur != null) {
-            // 左子树全部入栈
-            if (cur != null) {
-                stack.push(cur);
-                cur = cur.left;
-            }
-            else {
-                cur = stack.pop();
-                res.add(cur.val);
+        while (!stack.isEmpty() || root != null) {
+            if (root != null) {
+                stack.push(root);
+                root = root.left;
+            } else {
+                res.add(root.val);
                 // 切换到右子树
-                cur = cur.right;
+                root = root.right;
             }
         }
         return res;
@@ -114,6 +112,7 @@ public class TraversalLoop {
 
     /**
      * 后序遍历
+     *
      * @param root
      * @return
      */
@@ -138,7 +137,7 @@ public class TraversalLoop {
         return res;
     }
 
-    public static void posTraverseZS(TreeNode head) {
+    public static void posTraversePrint(TreeNode head) {
         if (head == null) {
             return;
         }
@@ -167,13 +166,12 @@ public class TraversalLoop {
     }
 
 
-
     /**
      * bfs
      *
      * @param head
      */
-    public void BFSTraverseZS(TreeNode head) {
+    public void BFSTraversePrint(TreeNode head) {
         if (head == null) {
             return;
         }
@@ -223,7 +221,7 @@ public class TraversalLoop {
      *
      * @param head
      */
-    public static void inTraverseZS(TreeNode head) {
+    public static void inTraversePrint(TreeNode head) {
         if (head == null) {
             return;
         }

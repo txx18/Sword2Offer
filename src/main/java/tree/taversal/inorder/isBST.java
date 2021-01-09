@@ -1,11 +1,10 @@
-package tree.taversal.preorder;
+package tree.taversal.inorder;
 
 /**
  * @author ShaneTang
  * @create 2021-01-04 22:52
  */
 
-import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
 
 import java.util.*;
@@ -28,56 +27,51 @@ public class isBST {
         return isBST(root, null, null) ? 1: 0;
     }
 
-    int preVal = Integer.MIN_VALUE;
-
     private boolean isBST(TreeNode root) {
         if (root == null) {
             return true;
         }
         // 限制最大最小的第1种写法 73.33%
-        return isBST(root, null, null);
-        // 限制最大最小的第2种写法 86.67%
-/*        TreeNode leftMax = findMax(root.left);
-        TreeNode rightMin = findMin(root.right);
-        if (leftMax != null && leftMax.val >= root.val) {
-            return false;
-        }else if (rightMin != null && rightMin.val <= root.val) {
-            return false;
-        }
-        return isBST(root.left) && isBST(root.right);*/
-        // 中序遍历 递归写法 46.67%
-/*        isBST(root.left);
-        if (root.val <= preVal) {
-            return false;
-        }
-        preVal = root.val;
-        isBST(root.right);
-        return true;*/
+//        return isBST(root, null, null);
+        // 中序遍历 递归写法 73.33%
+        return isValidBST(root);
         // 中序遍历 压栈写法 通过
         /*return inorder(root);*/
+    }
+
+    TreeNode pre = null;
+
+    boolean isValidBST(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        boolean left = isValidBST(root.left);
+        if (pre != null && pre.val >= root.val) {
+            return false;
+        }
+        // 记录前一个节点
+        pre = root;
+        boolean right = isValidBST(root.right);
+        return left && right;
     }
 
     private boolean inorder(TreeNode root) {
         if (root == null) {
             return true;
         }
-        // 准备一个栈
         Stack<TreeNode> stack = new Stack();
-        // 进入循环
         while (!stack.isEmpty() || root != null) {
-            // 左子树全部入栈
             if (root != null) {
                 stack.push(root);
                 root = root.left;
             }
             else {
-                // 出栈
                 root = stack.pop();
-                if (root.val <= preVal) {
+                // 操作
+                if (pre != null && root.val <= pre.val) {
                     return false;
                 }
-                preVal = root.val;
-                // 切换到右子树
+                pre = root;
                 root = root.right;
             }
         }

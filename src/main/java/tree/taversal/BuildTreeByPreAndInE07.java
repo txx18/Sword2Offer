@@ -1,4 +1,4 @@
-package tree.taversal.preorder;
+package tree.taversal;
 
 import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
@@ -47,8 +47,37 @@ public class BuildTreeByPreAndInE07 {
         int[] preorder = {3, 9, 20, 15, 7};
         int[] inorder = {9, 3, 15, 20, 7};
         BuildTreeByPreAndInE07 obj = new BuildTreeByPreAndInE07();
-        TreeNode res = obj.buildTree(preorder, inorder);
+        TreeNode res = obj.reConstructBinaryTree(preorder, inorder);
         TreeUtils.printTree(res);
+    }
+
+
+    public TreeNode reConstructBinaryTree(int[] pre, int[] in) {
+        if (pre == null || in == null || pre.length == 0 || in.length == 0) {
+            return null;
+        }
+        Map<Integer, Integer> inMap = new HashMap<>();
+        putToMap(inMap, in);
+        return build(inMap, pre, 0, pre.length - 1, 0);
+    }
+
+    private TreeNode build(Map<Integer, Integer> inMap, int[] pre, int preL, int preR, int inL) {
+        if (preL > preR) {
+            return null;
+        }
+        TreeNode root = new TreeNode(pre[preL]);
+        int index = inMap.get(root.val);
+        int leftSize = index - inL;
+        root.left = build(inMap, pre, preL + 1, preL + leftSize, inL);
+        root.right = build(inMap, pre, preL + leftSize + 1, preR, index + 1);
+        return root;
+    }
+
+
+    private void putToMap(Map<Integer, Integer> inMap, int[] in) {
+        for (int i = 0; i < in.length; i++) {
+            inMap.put(in[i], i);
+        }
     }
 
     private Map<Integer, Integer> inorderMap = new HashMap<Integer, Integer>();
@@ -64,6 +93,7 @@ public class BuildTreeByPreAndInE07 {
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
+     *
      * @param preorder
      * @param inorder
      * @return
@@ -74,43 +104,6 @@ public class BuildTreeByPreAndInE07 {
         }
         this.inorderMap = putIntoMap(inorder);
         return recur(preorder, 0, preorder.length - 1, 0);
-    }
-
-    public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
-        if (pre == null || in == null || pre.length == 0 || in.length == 0) {
-            return null;
-        }
-        putToMap(in);
-        return build(pre, 0, pre.length - 1, 0);
-    }
-
-    private TreeNode build(int[] pre, int preL, int preR, int inL) {
-        if (preL > preR) {
-            return null;
-        }
-        TreeNode root = new TreeNode(pre[preL]);
-        int index = inMap.get(root.val);
-        int leftSize = index - inL;
-        root.left = build(pre, preL + 1, preL + leftSize, inL);
-        root.right = build(pre, preL + leftSize + 1, preR, index + 1);
-        return root;
-    }
-
-    Map<Integer, Integer> inMap = null;
-
-    private Map<Integer, Integer> putToMap(int[] in) {
-        inMap = new HashMap<>();
-        for (int i = 0; i < in.length; i++) {
-            inMap.put(in[i], i);
-        }
-        return inMap;
-    }
-
-    private Map<Integer, Integer> putIntoMap(int[] inOrder) {
-        for (int i = 0; i < inOrder.length; i++) {
-            this.inorderMap.put(inOrder[i], i);
-        }
-        return this.inorderMap;
     }
 
     private TreeNode recur(int[] preorder, int preL, int preR, int inL) {
@@ -134,10 +127,16 @@ public class BuildTreeByPreAndInE07 {
         // inL的作用是算出左子树的大小，inR没用
         int leftSize = rootIdxOfInorder - inL;
         root.left = recur(preorder, preL + 1, preL + leftSize, inL);
-        root.right = recur(preorder,preL + leftSize + 1, preR, rootIdxOfInorder + 1);
+        root.right = recur(preorder, preL + leftSize + 1, preR, rootIdxOfInorder + 1);
         // 自己返回自己的根节点
         return root;
     }
 
 
+    private Map<Integer, Integer> putIntoMap(int[] inOrder) {
+        for (int i = 0; i < inOrder.length; i++) {
+            this.inorderMap.put(inOrder[i], i);
+        }
+        return this.inorderMap;
+    }
 }

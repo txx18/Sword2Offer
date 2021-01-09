@@ -1,4 +1,4 @@
-package tree.taversal.postorder;
+package tree.taversal;
 
 import zhelper.TreeUtils;
 import zhelper.TreeUtils.TreeNode;

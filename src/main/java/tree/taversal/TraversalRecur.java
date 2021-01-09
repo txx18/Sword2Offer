@@ -5,7 +5,6 @@ import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -24,30 +23,31 @@ public class TraversalRecur {
 //        List<Integer> traversal = obj.recurorderTraversal(treeNode);
 //        System.out.println(traversal.toString());
 
-        obj.recurTraverse(treeNode);
+        obj.threeOrders(treeNode);
 
     }
 
     int[][] resThreeOrders = null;
-    List<Integer> preorder = new LinkedList<>();
-    List<Integer> inorder = new LinkedList<>();
-    List<Integer> postorder = new LinkedList<>();
+    List<Integer> preorder = new ArrayList<>();
+    List<Integer> inorder = new ArrayList<>();
+    List<Integer> postorder = new ArrayList<>();
 
-    /**
-     * @param root TreeNode类 the root of binary tree
-     * @return int整型二维数组
-     */
     public int[][] threeOrders(TreeNode root) {
         // write code here
         traverse(root);
-//        Integer[] preorderArr = preorder.toArray(new Integer[preorder.size()]);
-//        Integer[] inorderArr = inorder.toArray(new Integer[preorder.size()]);
-//        Integer[] postorderArr = postorder.toArray(new Integer[preorder.size()]);
         resThreeOrders = new int[3][preorder.size()];
-        resThreeOrders[0] = preorder.stream().mapToInt(i -> i).toArray();
-        resThreeOrders[1] = inorder.stream().mapToInt(i -> i).toArray();
-        resThreeOrders[2] = postorder.stream().mapToInt(i -> i).toArray();
+        resThreeOrders[0] = convertToIntArr(preorder);
+        resThreeOrders[1] = convertToIntArr(inorder);
+        resThreeOrders[2] = convertToIntArr(postorder);
         return resThreeOrders;
+    }
+
+    private int[] convertToIntArr(List<Integer> list) {
+        int[] res = new int[list.size()];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = list.get(i);
+        }
+        return res;
     }
 
     private void traverse(TreeNode root) {

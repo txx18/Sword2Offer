@@ -3,6 +3,7 @@ package linkedList;
 import zhelper.ListUtils;
 import zhelper.ListUtils.*;
 
+import java.util.Scanner;
 import java.util.Stack;
 
 /**
@@ -20,16 +21,51 @@ import java.util.Stack;
 public class FindKthToTailE2201 {
 
     public static void main(String[] args) {
-        int[] arr1 = {1, 2, 3, 4, 5};
+/*        int[] arr1 = {1, 2, 3, 4, 5};
         int[] arr2 = {1};
         int[] arr3 = null;
         ListNode head = ListUtils.convertToLinkedList(arr1);
         ListUtils.printSingleList(head);
 
         ListNode res = FindKthToTail(head, 0);
-        System.out.println("res = " + res);
-
+        System.out.println("res = " + res);*/
+        FindKthToTailE2201 obj = new FindKthToTailE2201();
+        ListNode head = obj.input("1,2,3,4,5,6,7");
+        Scanner sc = new Scanner(System.in);
+        int k = Integer.parseInt(sc.nextLine());
+        int res =  obj.findLastK(head, k);
+        System.out.println(res);
     }
+
+
+
+    private ListNode input(String str) {
+        String[] splits = str.split(",");
+        ListNode preHead = new ListNode(-1);
+        ListNode cur = preHead;
+        for (String split: splits) {
+            cur.next = new ListNode(Integer.parseInt(split));
+            cur = cur.next;
+        }
+        return preHead.next;
+    }
+
+    private int findLastK(ListNode head, int k) {
+        if (head == null) {
+            return -1;
+        }
+        ListNode slow, fast;
+        slow = fast = head;
+        while (k-- > 0) {
+            fast = fast.next;
+        }
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow.val;
+    }
+
 
     /**
      * NK

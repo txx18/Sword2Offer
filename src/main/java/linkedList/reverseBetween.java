@@ -19,14 +19,35 @@ public class reverseBetween {
         int[] arr7 = {2, 4, 6, 8};
         ListNode head1 = ListUtils.convertToLinkedList(arr1);
         ListUtils.printSingleList(head1);
-
-        ListNode res = reverseBetween(head1, 2, 4);
-
+        reverseBetween obj = new reverseBetween();
+        ListNode res = obj.reverseBetween(head1, 2, 4);
         ListUtils.printSingleList(res);
 
     }
 
-    public static ListNode reverseBetween (ListNode head, int m, int n) {
+    ListNode nxt = null;
+
+    public ListNode reverseBetween (ListNode head, int m, int n) {
+        // write code here
+        if (m == 1) {
+            return reverseN(head, n);
+        }
+        head.next = reverseBetween(head.next, m - 1, n - 1);
+        return head;
+    }
+
+    private ListNode reverseN(ListNode head, int n) {
+        if (n == 1) {
+            nxt = head.next;
+            return head;
+        }
+        ListNode newHead = reverseN(head.next, n - 1);
+        head.next.next = head;
+        head.next = nxt;
+        return newHead;
+    }
+
+/*    public static ListNode reverseBetween (ListNode head, int m, int n) {
         // write code here
         // FIXME 防御有问题
         if (head == null || head.next == null || m == n) {
@@ -49,7 +70,7 @@ public class reverseBetween {
         pre.next = end;
         start.next = nxt;
         return head;
-    }
+    }*/
 
     /**
      * 左闭右开

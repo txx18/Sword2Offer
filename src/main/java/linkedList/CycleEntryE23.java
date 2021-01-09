@@ -3,6 +3,8 @@ package linkedList;
 import zhelper.ListUtils;
 import zhelper.ListUtils.*;
 
+import java.util.List;
+
 /**
  * 给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。
  * <p>
@@ -43,6 +45,39 @@ public class CycleEntryE23 {
         return solutionFastSlowPointerZS(head);
 //        return solutionFastSlowPointerFloyd(head);
 //        return solutionFastSlowPointerSTO(head);
+    }
+
+    public boolean hasCycle(ListNode head) {
+        ListNode slow, fast;
+        fast = slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ListNode detectCycleNK(ListNode head) {
+        ListNode fast, slow;
+        fast = slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            // 相遇点meet == fast == slow
+            if (fast == slow) {
+                ListNode p1 = head;
+                ListNode p2 = slow;
+                while (p1 != p2) {
+                    p1 = p1.next;
+                    p2 = p2.next;
+                }
+                return p1;
+            }
+        }
+        return null;
     }
 
     /**
