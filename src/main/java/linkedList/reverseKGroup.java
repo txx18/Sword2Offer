@@ -20,12 +20,11 @@ public class reverseKGroup {
         ListNode preHead = new ListNode(-1);
         ListNode cur = preHead;
         for (String str : strs) {
-            cur.next = new ListNode(Integer.valueOf(str));
+            cur.next = new ListNode(Integer.parseInt(str));
             cur = cur.next;
         }
         int k = sc.nextInt();
-        ListNode head = solution(preHead.next, k);
-        cur = head;
+        cur = solution(preHead.next, k);
         while (cur != null) {
             System.out.print(cur.val + " ");
             cur = cur.next;
@@ -36,7 +35,6 @@ public class reverseKGroup {
         if (head == null || head.next == null) {
             return head;
         }
-        ListNode a = head;
         ListNode b = head;
         for (int i = 0; i < k; i++) {
             if (b == null) {
@@ -44,14 +42,15 @@ public class reverseKGroup {
             }
             b = b.next;
         }
-        ListNode newHead = reverse(a, b);
-        a.next = solution(b, k);
+        ListNode newHead = reverse(head, b);
+        // 先序
+        head.next = solution(b, k);
         return newHead;
     }
 
     private static ListNode reverse(ListNode a, ListNode b) {
-        ListNode pre = null;
-        ListNode nxt = null;
+        ListNode pre, nxt;
+        pre = nxt = null;
         ListNode cur = a;
         while (cur != b) {
             nxt = cur.next;

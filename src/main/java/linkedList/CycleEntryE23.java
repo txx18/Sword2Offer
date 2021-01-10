@@ -80,6 +80,26 @@ public class CycleEntryE23 {
         return null;
     }
 
+    public ListNode detectCycle1(ListNode head) {
+        ListNode fast, slow;
+        fast = slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                break;
+            }
+        }
+        // labuladong的写法在NK通不过
+        slow = head;
+        while (slow != fast) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return fast;
+    }
+
+
     /**
      * 执行用时 :
      * 1 ms

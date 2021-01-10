@@ -2,7 +2,7 @@ package linkedList;
 
 public class FindFirstIntersectNode {
 
-	static class Node {
+	private static class Node {
 		public int value;
 		public Node next;
 

@@ -30,56 +30,58 @@ package search.binarysearch;
 public class MoreEqualLeftIndex {
 
     public static void main(String[] args) {
-        int[] arr = {1, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5};
+        int[] arr = {1, 1, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5};
         int[] arr2 = {1, 3, 5, 6};
         MoreEqualLeftIndex obj = new MoreEqualLeftIndex();
 
-        int index = obj.upper_bound_BS2(arr2.length, 0, arr2);
+        int index = obj.left_bound(arr, 2);
         System.out.println("index = " + index);
     }
 
-    // todo 鬼题目从1开始数
-    int upper_bound_BS2(int n, int v, int[] a) {
+    public int upper_bound_(int n, int v, int[] a) {
+        if (a.length == 0) {
+            return -1;
+        }
         int left = 0;
-        int right = n; // 定义target在左闭右开的区间里，[left, right)  target
-        int middle = -1;
-        while (left < right) { // 因为left == right的时候，在[left, right)是无效的空间
-            middle = left + ((right - left) >> 1);
-            if (a[middle] > v) {
-                right = middle; // target 在左间，在[left, middle)中
-            } else if (a[middle] < v) {
-                left = middle + 1; // target 在右区间，在 [middle+1, right)中
-            } else { // nums[middle] == target
-                return middle; // 数组中找到目标值的情况，直接返回下标
+        int right = a.length; // 注意
+        while (left < right) { // 注意
+            int mid = left + ((right - left) >> 1);
+            if (a[mid] == v) {
+                right = mid;
+            } else if (a[mid] < v) {
+                left = mid + 1;
+            } else if (v < a[mid]) {
+                right = mid; // 注意
             }
         }
-        // 分别处理如下四种情况
-        // 目标值在数组所有元素之前 [0,0)
-        // 目标值等于数组中某一个元素 return middle
-        // 目标值插入数组中的位置 [left, right) ，return right 即可
-        // 目标值在数组所有元素之后的情况 [left, right)，return right 即可
-        return middle + 1;
+        return left + 1;
     }
 
-    int upper_bound_BS1(int n, int v, int[] a) {
+    int left_bound(int[] nums, int target) {
+        if (nums.length == 0) {
+            return -1;
+        }
         int left = 0;
-        int right = n - 1; // 定义target在左闭右闭的区间里，[left, right]
-        while (left <= right) { // 当left==right，区间[left, right]依然有效
-            int middle = left + ((right - left) / 2);// 防止溢出 等同于(left + right)/2
-            if (a[middle] > v) {
-                right = middle - 1; // target 在左区间，所以[left, middle - 1]
-            } else if (a[middle] < v) {
-                left = middle + 1; // target 在右区间，所以[middle + 1, right]
-            } else { // nums[middle] == target
-                return middle;
+        int right = nums.length; // 注意
+        while (left < right) { // 注意
+            int mid = left + ((right - left) >> 1);
+            if (nums[mid] == target) {
+                right = mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else if (target < nums[mid]) {
+                right = mid; // 注意
             }
         }
-        // 分别处理如下四种情况
-        // 目标值在数组所有元素之前  [0, -1]
-        // 目标值等于数组中某一个元素  return middle;
-        // 目标值插入数组中的位置 [left, right]，return  right + 1
-        // 目标值在数组所有元素之后的情况 [left, right]， return right + 1
-        return right + 1;
+        // 如果需求是顺序插入位置
+        return left;
+        // 如果需求是不存在时返回-1
+/*        // target 比所有数都大
+        if (left == nums.length) {
+            return -1;
+        }
+        // 类似之前算法的处理方式
+        return nums[left] == target ? left : -1;*/
     }
 
 
@@ -118,7 +120,7 @@ public class MoreEqualLeftIndex {
      * @param v
      * @return
      */
-    // 在arr上，找满足>=value的最左位置 todo
+    // 在arr上，找满足>=value的最左位置
     public static int solutionZS(int[] a, int v) {
         int pl = 0;
         int pr = a.length - 1;

@@ -65,6 +65,7 @@ public class kthLargestE54 {
             return res;
         }
         KthNode(pRoot.right, k);
+        // 这个必须返回外部变量，不然递归返回的就是根结点了
         return res;
     }
 
