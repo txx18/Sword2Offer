@@ -43,9 +43,34 @@ public class PalindromeList {
         boolean res = obj.isPalindrome(list1);
         System.out.println("res = " + res);
         ListUtils.printSingleList(list1);
+
+
     }
 
-    public boolean chkPalindrome(ListNode A) {
+    public boolean isPail (ListNode head) {
+        // write code here
+        ListNode slow, fast;
+        slow = fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if (fast != null) {
+            slow = slow.next;
+        }
+        ListNode l = head;
+        ListNode r = reverse(slow);
+        while (r != null) {
+            if (l.val != r.val) {
+                return false;
+            }
+            l = l.next;
+            r = r.next;
+        }
+        return true;
+    }
+
+    public boolean chkPalindrome1(ListNode A) {
         // write code here
         // copy the list
         if (A == null) {

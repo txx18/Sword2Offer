@@ -32,19 +32,20 @@ public class reverseKGroup {
     }
 
     private static ListNode solution(ListNode head, int k) {
-        if (head == null || head.next == null) {
+        if (head == null) {
             return head;
         }
-        ListNode b = head;
+        ListNode l, r;
+        l = r = head;
         for (int i = 0; i < k; i++) {
-            if (b == null) {
+            if (r == null) {
                 return head;
             }
-            b = b.next;
+            r = r.next;
         }
-        ListNode newHead = reverse(head, b);
+        ListNode newHead = reverse(l, r);
         // 先序
-        head.next = solution(b, k);
+        l.next = solution(r, k);
         return newHead;
     }
 

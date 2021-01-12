@@ -37,15 +37,56 @@ public class NQueensCount {
 
     public static void main(String[] args) {
         NQueensCount obj = new NQueensCount();
-        int res = obj.totalNQueens(8);
+        int res = obj.Nqueen(15);
         System.out.println("res = " + res);
     }
 
+    int solutionCount = 0;
+
+    public int Nqueen (int n) {
+        if (n < 1) {
+            return 0;
+        }
+        int[] track = new int[n];
+        // 从第0行开始
+        return backtrack(n, 0, track);
+    }
+
+    /**
+     *
+     * @param n n皇后
+     * @0param row 选择列表
+     * @param track 路径
+     * @return
+     */
+    private int backtrack(int n, int row, int[] track) {
+        if (row == n) {
+            solutionCount++;
+        }
+        for (int col = 0; col < n; col++) {
+            if (!isValid(row, col, track)) {
+                continue;
+            }
+            track[row] = col;
+            backtrack(n, row + 1, track);
+            track[row] = -1;
+        }
+        return solutionCount;
+    }
+
+    private boolean isValid(int i, int j, int[] track) {
+        for (int k = 0; k < i; k++) {
+            if (j == track[k] || Math.abs(j - track[k]) == Math.abs(i - k)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * [i] == j  第i行的皇后放在第j列
      */
-    int[] track = null;
+    int[] trackMV = null;
     /**
      * n皇后问题：棋盘有n行n列
      */
@@ -70,7 +111,7 @@ public class NQueensCount {
             return 0;
         }
         this.n = n;
-        this.track = new int[n];
+        this.trackMV = new int[n];
         // 从第0行开始
         return recur(0);
     }
@@ -94,7 +135,7 @@ public class NQueensCount {
             // isValid受到上一行决策的影响
             if (isValid) {
                 // 记录第i行
-                track[i] = j;
+                trackMV[i] = j;
                 // 【关键】继续尝试下一行
                 res += recur(i + 1);
             }
@@ -110,7 +151,7 @@ public class NQueensCount {
      */
     private boolean isValid(int i, int j) {
         for (int k = 0; k < i; k++) {
-            if (j == track[k] || Math.abs(j - track[k]) == Math.abs(i - k)) {
+            if (j == trackMV[k] || Math.abs(j - trackMV[k]) == Math.abs(i - k)) {
                 return false;
             }
         }
