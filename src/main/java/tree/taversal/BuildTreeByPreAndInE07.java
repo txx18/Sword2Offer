@@ -52,31 +52,28 @@ public class BuildTreeByPreAndInE07 {
     }
 
 
-    public TreeNode reConstructBinaryTree(int[] pre, int[] in) {
-        if (pre == null || in == null || pre.length == 0 || in.length == 0) {
-            return null;
-        }
-        Map<Integer, Integer> inMap = new HashMap<>();
-        putToMap(inMap, in);
-        return build(inMap, pre, 0, pre.length - 1, 0);
+    Map<Integer, Integer> map = new HashMap<>();
+
+    public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
+        putToMap(in);
+        return build(pre, 0, pre.length - 1, in, 0);
     }
 
-    private TreeNode build(Map<Integer, Integer> inMap, int[] pre, int preL, int preR, int inL) {
+    private TreeNode build(int[] pre, int preL, int preR, int[] in, int inL) {
         if (preL > preR) {
             return null;
         }
         TreeNode root = new TreeNode(pre[preL]);
-        int index = inMap.get(root.val);
-        int leftSize = index - inL;
-        root.left = build(inMap, pre, preL + 1, preL + leftSize, inL);
-        root.right = build(inMap, pre, preL + leftSize + 1, preR, index + 1);
+        int rootIndexOfIn = map.get(root.val);
+        int leftSize = rootIndexOfIn - inL;
+        root.left = build(pre, preL + 1, preL + leftSize, in, inL);
+        root.right = build(pre, preL + leftSize + 1, preR, in, rootIndexOfIn + 1);
         return root;
     }
 
-
-    private void putToMap(Map<Integer, Integer> inMap, int[] in) {
-        for (int i = 0; i < in.length; i++) {
-            inMap.put(in[i], i);
+    private void putToMap(int[] ints) {
+        for (int i = 0; i < ints.length; i++) {
+            map.put(ints[i], i);
         }
     }
 

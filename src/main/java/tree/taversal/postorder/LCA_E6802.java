@@ -7,7 +7,7 @@ import zhelper.TreeUtils.*;
  * @version V1.0
  * @create 2020-03-03 22:59
  */
-public class LowestCommonAncestorE6802 {
+public class LCA_E6802 {
 
     public int lowestCommonAncestor (TreeNode root, int o1, int o2) {
         // write code here
@@ -24,7 +24,6 @@ public class LowestCommonAncestorE6802 {
         if (left != null && right != null) {
             return root;
         }
-        // todo 没有特别懂
         return left == null? right: left;
     }
 

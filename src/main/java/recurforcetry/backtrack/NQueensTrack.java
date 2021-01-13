@@ -1,7 +1,7 @@
 package recurforcetry.backtrack;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -54,41 +54,84 @@ public class NQueensTrack {
         }
     }
 
+    List<List<String>> res = new LinkedList<>();
     /**
-     * 放全体结果
+     * 一张棋盘，一个解
      */
-    List<List<String>> res = new ArrayList<>();
-    List<String> oneRes = new ArrayList<>();
+    List<String> resTrack = new LinkedList<>();
+    int n;
+//    char[][] board;
+//    List<char[][]> resBoardList = new LinkedList<>();
+    List<int[]> myRes;
+    int[] myTrack;
+
+    public List<List<String>> solveNQueens(int n) {
+        if (n < 1) {
+            return new LinkedList<>();
+        }
+        this.n = n;
+        myTrack = new int[n];
+        myRes =  new LinkedList<>();
+        bt(0);
+        convertToShaBi();
+        return res;
+    }
+
+    private void convertToShaBi() {
+        for (int i = 0; i < myRes.size(); i++) {
+            resTrack = new LinkedList<>();
+            for (int row = 0; row < n; row++) {
+                StringBuilder s = new StringBuilder();
+                for (int col = 0; col < n; col++) {
+                    if (myRes.get(i)[row] != col) {
+                        s.append(".");
+                    }else {
+                        s.append("Q");
+                    }
+                }
+                resTrack.add(s.toString());
+            }
+            res.add(resTrack);
+        }
+    }
+
+    private void bt(int row) {
+        if (row == n) {
+            myRes.add(Arrays.copyOf(myTrack, myTrack.length));
+        }
+        for (int col = 0; col < n; col++) {
+            if (!myIsValid(row, col)) {
+                continue;
+            }
+            myTrack[row] = col;
+            bt(row + 1);
+            myTrack[row] = -1;
+        }
+    }
+
+    private boolean myIsValid(int row, int col) {
+        for (int i = 0; i < row; i++) {
+            int queenCol = myTrack[i];
+            if (col == queenCol || Math.abs(col - queenCol) == Math.abs(row - i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
     /**
      * 第i行的皇后放在第j列
      * 下标为i的值为j
      */
-//    HashMap<Integer, Integer> track;
-    LinkedList<Integer> trackLinkedList;
-    int n;
+    LinkedList<Integer> track = new LinkedList<>();
 
-    /**
-     * 执行用时 :
-     * 7 ms
-     * , 在所有 Java 提交中击败了
-     * 33.57%
-     * 的用户
-     * 内存消耗 :
-     * 41.2 MB
-     * , 在所有 Java 提交中击败了
-     * 8.67%
-     * 的用户
-     *
-     * @param n
-     * @return
-     */
-    public List<List<String>> solveNQueens(int n) {
+    public List<List<String>> solveNQueens1(int n) {
         if (n < 1) {
-            return null;
+            return new LinkedList<>();
         }
         this.n = n;
-//        this.track = new HashMap<>(n);
-        this.trackLinkedList = new LinkedList<>();
+        this.track = new LinkedList<>();
         recur(0);
         return res;
     }
@@ -97,7 +140,7 @@ public class NQueensTrack {
     private void recur(int i) {
         // base case
         if (i == n) {
-            saveOneRes(trackLinkedList);
+            saveOneRes(track);
             return;
         }
         // 当前在第i行，尝试第j列
@@ -106,18 +149,18 @@ public class NQueensTrack {
             boolean isValid = isValid(i, j);
             if (isValid) {
                 // 把第i行的queen放到第j列
-                trackLinkedList.add(j);
+                track.add(j);
                 // 继续尝试下一行
                 recur(i + 1);
                 // 撤销选择
-                trackLinkedList.removeLast();
+                track.removeLast();
             }
 
         }
     }
 
     private void saveOneRes(LinkedList<Integer> track) {
-        oneRes = new ArrayList<>();
+        this.resTrack = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             StringBuilder sb = new StringBuilder();
             for (int j = 0; j < n; j++) {
@@ -127,9 +170,9 @@ public class NQueensTrack {
                     sb.append(".");
                 }
             }
-            oneRes.add(sb.toString());
+            this.resTrack.add(sb.toString());
         }
-        res.add(oneRes);
+        res.add(this.resTrack);
     }
 
     private boolean isValid(int i, int j) {
@@ -137,7 +180,7 @@ public class NQueensTrack {
         for (int k = 0; k < i; k++) {
             // 1* 同列
             // 2* 同斜线（纵距离 == 横距离）
-            Integer queenIdx = trackLinkedList.get(k);
+            Integer queenIdx = track.get(k);
             if (j == queenIdx || Math.abs(j - queenIdx) == Math.abs(i - k)) {
                 return false;
             }

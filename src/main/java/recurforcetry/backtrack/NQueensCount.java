@@ -41,37 +41,34 @@ public class NQueensCount {
         System.out.println("res = " + res);
     }
 
-    int solutionCount = 0;
+    int res = 0;
+    int[] track;
+    int n;
 
     public int Nqueen (int n) {
         if (n < 1) {
             return 0;
         }
-        int[] track = new int[n];
-        // 从第0行开始
-        return backtrack(n, 0, track);
+        this.n = n;
+        track = new int[n];
+        // 从第0行（层）开始决策
+        backtrack(0);
+        return res;
     }
 
-    /**
-     *
-     * @param n n皇后
-     * @0param row 选择列表
-     * @param track 路径
-     * @return
-     */
-    private int backtrack(int n, int row, int[] track) {
+    private void backtrack(int row) {
+        // 决策到最后一层，满足决策条件
         if (row == n) {
-            solutionCount++;
+            res++;
         }
         for (int col = 0; col < n; col++) {
             if (!isValid(row, col, track)) {
                 continue;
             }
             track[row] = col;
-            backtrack(n, row + 1, track);
+            backtrack(row + 1);
             track[row] = -1;
         }
-        return solutionCount;
     }
 
     private boolean isValid(int i, int j, int[] track) {
@@ -90,7 +87,6 @@ public class NQueensCount {
     /**
      * n皇后问题：棋盘有n行n列
      */
-    int n;
 
     /**
      * 执行用时 :
