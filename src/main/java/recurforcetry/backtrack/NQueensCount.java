@@ -37,7 +37,7 @@ public class NQueensCount {
 
     public static void main(String[] args) {
         NQueensCount obj = new NQueensCount();
-        int res = obj.Nqueen(15);
+        int res = obj.Nqueen(8);
         System.out.println("res = " + res);
     }
 
@@ -62,7 +62,7 @@ public class NQueensCount {
             res++;
         }
         for (int col = 0; col < n; col++) {
-            if (!isValid(row, col, track)) {
+            if (!isValid(row, col)) {
                 continue;
             }
             track[row] = col;
@@ -70,8 +70,17 @@ public class NQueensCount {
             track[row] = -1;
         }
     }
+    
+    private boolean isValid(int row, int col) {
+        for (int i = 0; i < row; i++) {
+            if (col == track[i] || Math.abs(col - track[i]) == Math.abs(row - i)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-    private boolean isValid(int i, int j, int[] track) {
+    private boolean isValidTrack(int i, int j, int[] track) {
         for (int k = 0; k < i; k++) {
             if (j == track[k] || Math.abs(j - track[k]) == Math.abs(i - k)) {
                 return false;
@@ -80,10 +89,7 @@ public class NQueensCount {
         return true;
     }
 
-    /**
-     * [i] == j  第i行的皇后放在第j列
-     */
-    int[] trackMV = null;
+
     /**
      * n皇后问题：棋盘有n行n列
      */
@@ -107,7 +113,7 @@ public class NQueensCount {
             return 0;
         }
         this.n = n;
-        this.trackMV = new int[n];
+        this.track = new int[n];
         // 从第0行开始
         return recur(0);
     }
@@ -131,7 +137,7 @@ public class NQueensCount {
             // isValid受到上一行决策的影响
             if (isValid) {
                 // 记录第i行
-                trackMV[i] = j;
+                track[i] = j;
                 // 【关键】继续尝试下一行
                 res += recur(i + 1);
             }
@@ -139,18 +145,5 @@ public class NQueensCount {
         return res;
     }
 
-    /**
-     * 检查[0..i]行是否合法
-     * @param i 来到第i行
-     * @param j 来到第j列
-     * @return
-     */
-    private boolean isValid(int i, int j) {
-        for (int k = 0; k < i; k++) {
-            if (j == trackMV[k] || Math.abs(j - trackMV[k]) == Math.abs(i - k)) {
-                return false;
-            }
-        }
-        return true;
-    }
+
 }

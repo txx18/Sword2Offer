@@ -1,4 +1,4 @@
-package tree.taversal.bfs;
+package bfs;
 
 import java.util.*;
 

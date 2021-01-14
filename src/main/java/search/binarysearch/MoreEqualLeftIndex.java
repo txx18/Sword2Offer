@@ -38,6 +38,13 @@ public class MoreEqualLeftIndex {
         System.out.println("index = " + index);
     }
 
+    /**
+     * 输出位置从1开始计算
+     * @param n
+     * @param v
+     * @param a
+     * @return
+     */
     public int upper_bound_(int n, int v, int[] a) {
         if (a.length == 0) {
             return -1;

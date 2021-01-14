@@ -47,7 +47,6 @@ public class Combine {
         // 到达树的底部
         if (track.size() == k) {
             res.add(new LinkedList<>(track));
-            return;
         }
         // 注意 i 从 start 开始递增
         for (int i = index; i <= n; i++) {

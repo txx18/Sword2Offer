@@ -64,6 +64,8 @@ public class NQueensTrack {
 //    List<char[][]> resBoardList = new LinkedList<>();
     List<int[]> myRes;
     int[] myTrack;
+    StringBuilder boardRowSb = new StringBuilder();
+    String boardRow = "";
 
     public List<List<String>> solveNQueens(int n) {
         if (n < 1) {
@@ -72,9 +74,56 @@ public class NQueensTrack {
         this.n = n;
         myTrack = new int[n];
         myRes =  new LinkedList<>();
-        bt(0);
-        convertToShaBi();
+//        bt(0);
+//        convertToShaBi();
+        for (int i = 0; i < n; i++) {
+            boardRowSb.append(".");
+        }
+//        btStringBuilder(0);
+        btCharArray(0);
         return res;
+    }
+
+    private void btCharArray(int row) {
+        if (row == n) {
+            res.add(new LinkedList<>(resTrack));
+        }
+        for (int col = 0; col < n; col++) {
+            if (!isValidStringBuilder(row, col)) {
+                continue;
+            }
+            char[] chars = boardRowSb.toString().toCharArray();
+            chars[col] = 'Q';
+            resTrack.add(new String(chars));
+            btStringBuilder(row + 1);
+            resTrack.remove(resTrack.size() - 1);
+        }
+    }
+
+    private void btStringBuilder(int row) {
+        if (row == n) {
+            res.add(new LinkedList<>(resTrack));
+        }
+        for (int col = 0; col < n; col++) {
+            if (!isValidStringBuilder(row, col)) {
+                continue;
+            }
+            StringBuilder sb = new StringBuilder(boardRowSb);
+            sb.setCharAt(col, 'Q');
+            resTrack.add(sb.toString());
+            btStringBuilder(row + 1);
+            resTrack.remove(resTrack.size() - 1);
+        }
+    }
+
+    private boolean isValidStringBuilder(int row, int col) {
+        for (int i = 0; i < row; i++) {
+            int queenCol = resTrack.get(i).indexOf('Q');
+            if (col == queenCol || Math.abs(col - queenCol) == Math.abs(row - i)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void convertToShaBi() {

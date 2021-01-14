@@ -1,7 +1,9 @@
 package recurforcetry.backtrack;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 给定一个 没有重复 数字的序列，返回其所有可能的全排列。
@@ -28,16 +30,37 @@ import java.util.List;
  */
 public class Permute {
 
+    public static void main(String[] args) {
+        Permute obj = new Permute();
+        int[] arr = {1, 2, 3};
+        obj.permute(arr);
+    }
+
     List<List<Integer>> res = new LinkedList<>();
-    // 记录「路径」
     LinkedList<Integer> track = new LinkedList<>();
     int[] nums;
+    Map<Integer, Integer> trackMap = new HashMap<>();
 
-    /* 主函数，输入一组不重复的数字，返回它们的全排列 */
     List<List<Integer>> permute(int[] nums) {
         this.nums = nums;
-        backtrack();
+        bt(0);
         return res;
+    }
+
+    private void bt(int index) {
+        if (index == nums.length) {
+            res.add(new LinkedList<>(track));
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (trackMap.getOrDefault(nums[i],  0) != 0) {
+                continue;
+            }
+            track.add(nums[i]);
+            trackMap.put(nums[i], trackMap.getOrDefault(nums[i], 0) + 1);
+            bt(index + 1);
+            track.remove(track.size() - 1);
+            trackMap.put(nums[i], 0);
+        }
     }
 
     // 路径：记录在 track 中
