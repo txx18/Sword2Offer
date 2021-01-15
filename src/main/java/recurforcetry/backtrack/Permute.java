@@ -43,8 +43,28 @@ public class Permute {
 
     List<List<Integer>> permute(int[] nums) {
         this.nums = nums;
-        bt(0);
+        backtrack();
         return res;
+    }
+
+    // 路径：记录在 track 中
+    // 选择列表：nums 中不存在于 track 的那些元素
+    // 结束条件：nums 中的元素全都在 track 中出现
+
+    void backtrack() {
+        if (track.size() == nums.length) {
+            res.add(new LinkedList<>(track));
+            return;
+        }
+        // 全选择集遍历，跳过重复的，每一层都是全选择集遍历
+        for (int i = 0; i < nums.length; i++) {
+            if (track.contains(nums[i])) {
+                continue;
+            }
+            track.add(nums[i]);
+            backtrack();
+            track.removeLast();
+        }
     }
 
     private void bt(int index) {
@@ -63,27 +83,4 @@ public class Permute {
         }
     }
 
-    // 路径：记录在 track 中
-    // 选择列表：nums 中不存在于 track 的那些元素
-    // 结束条件：nums 中的元素全都在 track 中出现
-
-    void backtrack() {
-        // 触发结束条件
-        if (track.size() == nums.length) {
-            res.add(new LinkedList(track));
-            return;
-        }
-        for (int i = 0; i < nums.length; i++) {
-            // 排除不合法的选择
-            if (track.contains(nums[i])) {
-                continue;
-            }
-            // 做选择
-            track.add(nums[i]);
-            // 进入下一层决策树
-            backtrack();
-            // 取消选择
-            track.removeLast();
-        }
-    }
 }

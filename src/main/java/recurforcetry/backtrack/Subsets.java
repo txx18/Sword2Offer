@@ -1,6 +1,8 @@
 package recurforcetry.backtrack;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 题目描述
@@ -23,16 +25,16 @@ public class Subsets {
 
     public static void main(String[] args) {
         Subsets obj = new Subsets();
-        ArrayList<ArrayList<Integer>> res = obj.subsets(new int[]{1, 2, 3});
+        List<List<Integer>> res = obj.subsets(new int[]{1, 2, 3});
         System.out.println("res = " + res);
     }
 
 
-    ArrayList<ArrayList<Integer>> res = new ArrayList<>();
-    ArrayList<Integer> track = new ArrayList<>();
+    List<List<Integer>> res = new LinkedList<>();
+    List<Integer> track = new LinkedList<>();
     int[] S;
 
-    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
+    public List<List<Integer>> subsets(int[] S) {
         this.S = S;
 //        ArrayList<Integer> track = new ArrayList<>();
 //        btParam(track, S,0);
@@ -41,10 +43,12 @@ public class Subsets {
     }
 
     private void backtrackMV(int index) {
-        // new ArrayList<>(track) 必须构造再加入
-        res.add(new ArrayList<>(track));
+        // 每一层的track都是一个结果
+        res.add(new LinkedList<>(track));
+        // 从 index 开始逐渐缩小选择集，
         for (int i = index; i < S.length; i++) {
             track.add(S[i]);
+            // 不含以前有的（交换位置不算）
             backtrackMV(i + 1);
             track.remove(track.size() - 1);
         }

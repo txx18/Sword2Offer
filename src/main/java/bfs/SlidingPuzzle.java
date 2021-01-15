@@ -3,6 +3,7 @@ package bfs;
 import sun.font.FontRunIterator;
 
 import java.util.*;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * 在一个 2 x 3 的板上（board）有 5 块砖瓦，用数字 1~5 来表示, 以及一块空缺用 0 来表示.
@@ -50,19 +51,23 @@ public class SlidingPuzzle {
 
     public static void main(String[] args) {
         SlidingPuzzle obj = new SlidingPuzzle();
-        int res = obj.slidingPuzzle(new int[][]{{1, 2, 3}, {5, 4, 0}});
+//        int res = obj.slidingPuzzle(new int[][]{{1, 2, 3}, {5, 4, 0}});
+        int res = obj.slidingPuzzle(new int[][]{{4, 1, 2}, {5, 0, 3}});
         System.out.println("res = " + res);
     }
+
+    final char HOLE = '0';
+    final String TARGET = "123450";
 
     public int slidingPuzzle(int[][] board) {
         int m = 2, n = 3;
         String start = "";
-        String TARGET = "123450";
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 start += board[i][j];
             }
         }
+        // 邻居的下标，对于一个2*3来说是固定的
         int[][] neighbor = {
                 {1, 3},
                 {0, 4, 2},
@@ -82,12 +87,13 @@ public class SlidingPuzzle {
                 if (TARGET.equals(cur)) {
                     return step;
                 }
-                int indexOfHole = cur.indexOf('0');
-                for (int adj: neighbor[indexOfHole]) {
-                    String nextBoard = String.copyValueOf(cur.toCharArray());
-                    char ch = (char)(adj + '0');
-                    int indexOfAdj = nextBoard.indexOf(ch);
-                    nextBoard = swap(nextBoard, indexOfAdj, indexOfHole);
+                if (cur == null) {
+                    continue;
+                }
+                int holeIndex = cur.indexOf(HOLE);
+                for (int adjIndex : neighbor[holeIndex]) {
+                    // 这个地方并没有修改cur也无法修改
+                    String nextBoard = swap(cur, adjIndex, holeIndex);
                     if (!visited.contains(nextBoard)) {
                         queue.offer(nextBoard);
                         visited.add(nextBoard);
@@ -99,6 +105,13 @@ public class SlidingPuzzle {
         return -1;
     }
 
+    /**
+     * 交换字符串中的两个字符
+     * @param str
+     * @param i
+     * @param j
+     * @return
+     */
     private String swap(String str, int i, int j) {
         char[] chars = str.toCharArray();
         char tmp = chars[i];
