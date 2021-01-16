@@ -43,16 +43,12 @@ public class Permute {
 
     List<List<Integer>> permute(int[] nums) {
         this.nums = nums;
-        backtrack();
+        btContains(0);
         return res;
     }
 
-    // 路径：记录在 track 中
-    // 选择列表：nums 中不存在于 track 的那些元素
-    // 结束条件：nums 中的元素全都在 track 中出现
-
-    void backtrack() {
-        if (track.size() == nums.length) {
+    void btContains(int index) {
+        if (index == nums.length) {
             res.add(new LinkedList<>(track));
             return;
         }
@@ -62,7 +58,7 @@ public class Permute {
                 continue;
             }
             track.add(nums[i]);
-            backtrack();
+            btContains(index + 1);
             track.removeLast();
         }
     }
@@ -83,4 +79,20 @@ public class Permute {
         }
     }
 
+    // 路径：记录在 track 中
+    // 选择列表：nums 中不存在于 track 的那些元素
+    // 结束条件：nums 中的元素全都在 track 中出现
+    private void btTrack() {
+        if (track.size() == nums.length) {
+            res.add(new LinkedList(track));
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (track.contains(nums[i])) {
+                continue;
+            }
+            track.add(nums[i]);
+            btTrack();
+            track.removeLast();
+        }
+    }
 }

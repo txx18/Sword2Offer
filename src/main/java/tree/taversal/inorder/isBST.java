@@ -55,6 +55,7 @@ public class isBST {
         return left && right;
     }
 
+
     private boolean inorder(TreeNode root) {
         if (root == null) {
             return true;
@@ -76,6 +77,30 @@ public class isBST {
             }
         }
         return true;
+    }
+
+    private double preVal = -Double.MAX_VALUE;
+
+    private boolean solutionInTraverseRecur(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        // 递归左子树
+        boolean isLeftBST = solutionInTraverseRecur(root.left);
+        // 处理
+        if (!isLeftBST) {
+            return false;
+        }
+        // 判断如果当前值<=preVal，则不成立
+        if (root.val <= this.preVal) {
+            return false;
+        }
+        // cur.val > preVal
+        else {
+            this.preVal = root.val;
+        }
+        boolean isRightBST = solutionInTraverseRecur(root.right);
+        return isRightBST;
     }
 
     private boolean isBST(TreeNode root, TreeNode min, TreeNode max) {

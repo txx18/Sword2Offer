@@ -31,12 +31,45 @@ public class Serialize {
     }
 
 
-
     String SEP = ",";
     String NULL = "null";
     StringBuilder sb = new StringBuilder();
+    Queue<String> q = new LinkedList<>();
+    Stack<String> stack = new Stack<>();
+
+    public String serializePre(TreeNode root) { // 默认自测测试用例是错的
+        if (root == null) {
+            return NULL + SEP;
+        }
+        return root.val + SEP + serializePre(root.left) + serializePre(root.right);
+    }
+
+    public TreeNode deserializePre(String str) {
+        if ((NULL + SEP).equals(str)) {
+            return null;
+        }
+        String[] splits = str.split(SEP);
+        putToQueue(splits);
+        return buildPre();
+    }
+
+    private TreeNode buildPre() {
+        String poll = q.poll();
+        if ((NULL).equals(poll)) {
+            return null;
+        }
+        TreeNode root = new TreeNode(Integer.parseInt(poll));
+        root.left = buildPre();
+        root.right = buildPre();
+        return root;
+    }
 
 
+    private void putToQueue(String[] strs) {
+        for (String str : strs) {
+            q.offer(str);
+        }
+    }
 
     /**
      * 层序
@@ -89,8 +122,6 @@ public class Serialize {
         }
         return root;
     }*/
-
-
     public String serializePost(TreeNode root) {
 //        if (root == null) {
 //            sb.append(NULL).append(SEP);
@@ -117,7 +148,7 @@ public class Serialize {
 
     private TreeNode buildPost(Stack<String> stack) {
         String pop = stack.pop();
-        if(NULL.equals(pop)) {
+        if (NULL.equals(pop)) {
             return null;
         }
         TreeNode root = new TreeNode(Integer.parseInt(pop));
@@ -128,44 +159,9 @@ public class Serialize {
     }
 
     private void putToStack(String[] strs, Stack<String> stack) {
-        for (String str: strs) {
+        for (String str : strs) {
             stack.push(str);
         }
-    }
-
-    public String serializePre(TreeNode root) { // 默认自测测试用例是错的
-        if (root == null) {
-            return NULL + SEP;
-        }
-        return root.val + SEP + serializePre(root.left) + serializePre(root.right);
-    }
-
-    public TreeNode deserializePre(String str) {
-        if ((NULL + SEP).equals(str)) {
-            return null;
-        }
-        String[] splits = str.split(SEP);
-        Queue<String> q = new LinkedList<>();
-        putToQueue(splits, q);
-        return buildPre(q);
-    }
-
-    private TreeNode buildPre(Queue<String> q) {
-        String poll = q.poll();
-        if ((NULL).equals(poll)) {
-            return null;
-        }
-        TreeNode root = new TreeNode(Integer.parseInt(poll));
-        root.left = buildPre(q);
-        root.right = buildPre(q);
-        return root;
-    }
-
-    private Queue<String> putToQueue(String[] strs, Queue<String> q) {
-        for (String str: strs) {
-            q.offer(str);
-        }
-        return q;
     }
 
 
