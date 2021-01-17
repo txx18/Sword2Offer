@@ -54,18 +54,15 @@ public class NQueensTrack {
         }
     }
 
-    List<List<String>> res = new LinkedList<>();
-    /**
-     * 一张棋盘，一个解
-     */
-    List<String> resTrack = new LinkedList<>();
-    int n;
 //    char[][] board;
 //    List<char[][]> resBoardList = new LinkedList<>();
     List<int[]> myRes;
     int[] myTrack;
+
+    List<List<String>> res = new LinkedList<>();
+    List<String> resTrack = new LinkedList<>();
+    int n;
     StringBuilder boardRowSb = new StringBuilder();
-    String boardRow = "";
 
     public List<List<String>> solveNQueens(int n) {
         if (n < 1) {
