@@ -59,7 +59,6 @@ public class Changes {
     }
 
     int[] coins;
-    Map<Integer, Integer> memo = new HashMap<>();
 
     public int coinChange(int[] coins, int amount) {
         // write code here
@@ -84,6 +83,7 @@ public class Changes {
         return dp[amount] != amount + 1 ? dp[amount] : -1;
     }
 
+    Map<Integer, Integer> memo = new HashMap<>();
 
     private int dpMemo(int amount) {
         if (amount == 0) {

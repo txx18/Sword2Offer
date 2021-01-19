@@ -1,4 +1,4 @@
-package tree.taversal;
+package tree.dfs;
 
 import zhelper.TreeTest;
 import zhelper.TreeUtils;

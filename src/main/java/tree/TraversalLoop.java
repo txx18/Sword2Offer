@@ -1,4 +1,4 @@
-package tree.taversal;
+package tree;
 
 import zhelper.TreeTest;
 import zhelper.TreeUtils.*;
@@ -26,7 +26,9 @@ public class TraversalLoop {
         System.out.println();*/
 
         TraversalLoop obj = new TraversalLoop();
-        List<Integer> res = obj.preorderTraversal(null);
+//        obj.inTraversePrint(tree);
+
+        List<Integer> res = obj.inorderTraversal(tree);
         System.out.println(res.toString());
     }
 
@@ -95,16 +97,18 @@ public class TraversalLoop {
      * @return
      */
     public List<Integer> inorderTraversal(TreeNode root) {
+//        Stack<TreeNode> stack = new Stack<>();
+        Deque<TreeNode> stack = new LinkedList<>();
         List<Integer> res = new ArrayList<>();
-        Stack<TreeNode> stack = new Stack<>();
-        while (!stack.isEmpty() || root != null) {
-            if (root != null) {
-                stack.push(root);
-                root = root.left;
-            } else {
-                res.add(root.val);
-                // 切换到右子树
-                root = root.right;
+        TreeNode cur = root;
+        while (!stack.isEmpty() || cur != null) {
+            if (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }else {
+                cur = stack.pop();
+                res.add(cur.val);
+                cur = cur.right;
             }
         }
         return res;
@@ -118,7 +122,7 @@ public class TraversalLoop {
      */
     public List<Integer> postorderTraversal(TreeNode root) {
         LinkedList<Integer> res = new LinkedList<>();
-        Stack<TreeNode> stack = new Stack<>();
+        Deque<TreeNode> stack = new LinkedList<>();
         //  head先入栈
         TreeNode cur = root;
         stack.push(cur);
@@ -221,7 +225,7 @@ public class TraversalLoop {
      *
      * @param head
      */
-    public static void inTraversePrint(TreeNode head) {
+    public void inTraversePrint(TreeNode head) {
         if (head == null) {
             return;
         }

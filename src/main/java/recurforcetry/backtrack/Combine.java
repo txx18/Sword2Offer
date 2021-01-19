@@ -51,7 +51,7 @@ public class Combine {
         return res;
     }
 
-    void bt(int index) {
+    private void bt(int index) {
         // 到达树的底部，要求层数为k
         if (track.size() == k) {
             res.add(new LinkedList<>(track));

@@ -4,7 +4,7 @@ public class LessEqualRightIndex {
 
     public static void main(String[] args) {
         int[] arr = {1, 1, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5};
-        int index = right_bound(arr, 2);
+        int index = right_bound(arr, 3);
         System.out.println("index = " + index);
     }
 
@@ -16,10 +16,8 @@ public class LessEqualRightIndex {
 
         while (left < right) {
             int mid = left + ((right - left) >> 1);
-            if (nums[mid] == target) {
+            if (target >= nums[mid]) {
                 left = mid + 1; // 注意
-            } else if (nums[mid] < target) {
-                left = mid + 1;
             } else if (target < nums[mid]) {
                 right = mid;
             }

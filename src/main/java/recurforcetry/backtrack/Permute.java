@@ -33,7 +33,8 @@ public class Permute {
     public static void main(String[] args) {
         Permute obj = new Permute();
         int[] arr = {1, 2, 3};
-        obj.permute(arr);
+        List<List<Integer>> res = obj.permute(arr);
+        System.out.println("res = " + res);
     }
 
     List<List<Integer>> res = new LinkedList<>();
@@ -48,7 +49,7 @@ public class Permute {
     }
 
     void btContains(int index) {
-        if (index == nums.length) {
+        if (track.size() == nums.length) {
             res.add(new LinkedList<>(track));
             return;
         }

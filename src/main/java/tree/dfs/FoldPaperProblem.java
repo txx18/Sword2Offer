@@ -1,4 +1,4 @@
-package tree.taversal;
+package tree.dfs;
 
 /**
  * 用1代表凸，用0代表凹

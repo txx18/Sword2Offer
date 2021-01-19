@@ -31,14 +31,15 @@ public class Subsets {
 
 
     List<List<Integer>> res = new LinkedList<>();
-    List<Integer> track = new LinkedList<>();
+    LinkedList<Integer> track = new LinkedList<>();
     int[] S;
 
     public List<List<Integer>> subsets(int[] S) {
         this.S = S;
 //        ArrayList<Integer> track = new ArrayList<>();
-//        btParam(track, S,0);
-        backtrackMV(0);
+        track = new LinkedList<>();
+        btParam(track, S,0);
+//        backtrackMV(0);
         return res;
     }
 
@@ -54,9 +55,9 @@ public class Subsets {
         }
     }
 
-    private void btParam(ArrayList<Integer> track, int[] S, int index) {
+    private void btParam(LinkedList<Integer> track, int[] S, int index) {
         // new ArrayList<>(list)将复制list，以确保将元素存储到中res。如果list直接添加res，则该remove调用也会进行修改res
-        res.add(new ArrayList<>(track));
+        res.add(new LinkedList<>(track));
         for (int i = index; i < S.length; i++) {
             track.add(S[i]);
             btParam(track, S, i + 1);

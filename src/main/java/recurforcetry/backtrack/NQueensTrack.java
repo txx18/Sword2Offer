@@ -54,7 +54,7 @@ public class NQueensTrack {
         }
     }
 
-//    char[][] board;
+    //    char[][] board;
 //    List<char[][]> resBoardList = new LinkedList<>();
     List<int[]> myRes;
     int[] myTrack;
@@ -70,18 +70,19 @@ public class NQueensTrack {
         }
         this.n = n;
         myTrack = new int[n];
-        myRes =  new LinkedList<>();
+        myRes = new LinkedList<>();
 //        bt(0);
 //        convertToShaBi();
         for (int i = 0; i < n; i++) {
             boardRowSb.append(".");
         }
+//        btCharArray(0);
 //        btStringBuilder(0);
-        btCharArray(0);
+        btStringBuilderTrack(resTrack, 0);
         return res;
     }
 
-    private void btCharArray(int row) {
+    private void btStringBuilderTrack(List<String> resTrack, int row) {
         if (row == n) {
             res.add(new LinkedList<>(resTrack));
         }
@@ -89,10 +90,10 @@ public class NQueensTrack {
             if (!isValidStringBuilder(row, col)) {
                 continue;
             }
-            char[] chars = boardRowSb.toString().toCharArray();
-            chars[col] = 'Q';
-            resTrack.add(new String(chars));
-            btStringBuilder(row + 1);
+            StringBuilder sb = new StringBuilder(boardRowSb);
+            sb.setCharAt(col, 'Q');
+            resTrack.add(sb.toString());
+            btStringBuilderTrack(resTrack, row + 1);
             resTrack.remove(resTrack.size() - 1);
         }
     }
@@ -108,6 +109,22 @@ public class NQueensTrack {
             StringBuilder sb = new StringBuilder(boardRowSb);
             sb.setCharAt(col, 'Q');
             resTrack.add(sb.toString());
+            btStringBuilder(row + 1);
+            resTrack.remove(resTrack.size() - 1);
+        }
+    }
+
+    private void btCharArray(int row) {
+        if (row == n) {
+            res.add(new LinkedList<>(resTrack));
+        }
+        for (int col = 0; col < n; col++) {
+            if (!isValidStringBuilder(row, col)) {
+                continue;
+            }
+            char[] chars = boardRowSb.toString().toCharArray();
+            chars[col] = 'Q';
+            resTrack.add(new String(chars));
             btStringBuilder(row + 1);
             resTrack.remove(resTrack.size() - 1);
         }
@@ -131,7 +148,7 @@ public class NQueensTrack {
                 for (int col = 0; col < n; col++) {
                     if (myRes.get(i)[row] != col) {
                         s.append(".");
-                    }else {
+                    } else {
                         s.append("Q");
                     }
                 }

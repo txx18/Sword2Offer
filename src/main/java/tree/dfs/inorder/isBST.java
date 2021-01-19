@@ -1,4 +1,4 @@
-package tree.taversal.inorder;
+package tree.dfs.inorder;
 
 /**
  * @author ShaneTang

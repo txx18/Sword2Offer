@@ -72,12 +72,10 @@ public class MoreEqualLeftIndex {
         int right = nums.length; // 注意
         while (left < right) { // 注意
             int mid = left + ((right - left) >> 1);
-            if (nums[mid] == target) {
+            if (target <= nums[mid]) {
                 right = mid;
-            } else if (nums[mid] < target) {
+            } else if (target > nums[mid]) {
                 left = mid + 1;
-            } else if (target < nums[mid]) {
-                right = mid; // 注意
             }
         }
         // 如果需求是顺序插入位置

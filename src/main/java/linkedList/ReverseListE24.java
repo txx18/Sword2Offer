@@ -33,7 +33,17 @@ public class ReverseListE24 {
 
     }
 
-
+    private ListNode reverse(ListNode head) {
+        ListNode pre = null, nxt, cur;
+        cur = head;
+        while (cur != null) {
+            nxt = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = nxt;
+        }
+        return pre;
+    }
 
     /**
      * LC

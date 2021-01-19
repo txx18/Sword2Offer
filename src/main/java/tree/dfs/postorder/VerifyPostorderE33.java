@@ -1,4 +1,4 @@
-package tree.taversal.postorder;
+package tree.dfs.postorder;
 
 /**
  * @author Shane Tang
