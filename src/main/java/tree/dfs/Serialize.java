@@ -49,7 +49,9 @@ public class Serialize {
             return null;
         }
         String[] splits = str.split(SEP);
-        putToQueue(splits);
+        for (String split : splits) {
+            q.offer(split);
+        }
         return buildPre();
     }
 
@@ -66,9 +68,7 @@ public class Serialize {
 
 
     private void putToQueue(String[] strs) {
-        for (String str : strs) {
-            q.offer(str);
-        }
+
     }
 
     /**

@@ -1,10 +1,9 @@
-package recurforcetry.backtrack;
+package tree.dfs;
 
 import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -51,38 +50,52 @@ public class PathSumE34 {
 //        TreeUtils.printTree(treeNode);
 
         PathSumE34 obj = new PathSumE34();
-        List<List<Integer>> res = obj.pathSum(treeNode, 22);
+        ArrayList<ArrayList<Integer>> res = obj.pathSum(treeNode, 22);
         for (List<Integer> path : res) {
             System.out.println(path.toString());
         }
     }
 
-    List<List<Integer>> res = new ArrayList<>();
-    LinkedList<Integer> track = new LinkedList<>();
+    ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+    ArrayList<Integer> track = new ArrayList<>();
     int sum;
-    int thisCurSum;
+    int curSum;
+    boolean resBool;
 
-    /**
-     * 执行用时 :
-     * 2 ms
-     * , 在所有 Java 提交中击败了
-     * 70.91%
-     * 的用户
-     * 内存消耗 :
-     * 41.2 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     *
-     * @param root
-     * @param sum
-     * @return
-     */
-    public List<List<Integer>> pathSum(TreeNode root, int sum) {
-        this.sum = sum;
-        recur(root);
-//        pathS(root, sum);
+    public ArrayList<ArrayList<Integer>> pathSum(TreeNode root, int sum) {
+        // write code here
+        if (root == null) {
+            return res;
+        }
+        curSum += root.val;
+        track.add(root.val);
+        if (root.left == null && root.right == null) {
+            if (curSum == sum) {
+                res.add(new ArrayList<>(track));
+            }
+        }
+        pathSum(root.left, sum);
+        pathSum(root.right, sum);
+        curSum -= root.val;
+        track.remove(track.size() - 1);
         return res;
+    }
+
+    public boolean hasPathSum(TreeNode root, int sum) {
+        // write code here
+        if (root == null) {
+            return resBool;
+        }
+        curSum += root.val;
+        if (root.left == null && root.right == null) {
+            if (curSum == sum) {
+                resBool = true;
+            }
+        }
+        hasPathSum(root.left, sum);
+        hasPathSum(root.right, sum);
+        curSum -= root.val;
+        return resBool;
     }
 
     private void recur(TreeNode cur) {
@@ -91,15 +104,15 @@ public class PathSumE34 {
         }
         // 到叶子之前，把每个节点加到path里，同时计入路径和
         track.add(cur.val);
-        thisCurSum += cur.val;
+        curSum += cur.val;
         // 做选择
         // 来到叶子节点，检查路径和是否=sum
         if (cur.left == null && cur.right == null) {
 //            int curSum = calSum(path);
             // 如果符合条件，把这条path加进去
-            if (thisCurSum == sum) {
+            if (curSum == sum) {
                 // 一定要new一个ArrayList加进去，不能直接加，不然加的是同一个
-                res.add(new LinkedList<>(track));
+                res.add(new ArrayList<>(track));
             }
         }
         // backTrack
@@ -107,32 +120,25 @@ public class PathSumE34 {
         recur(cur.right);
         // 撤销选择
         // 【关键】返回父节点之前弹出节点，同时减路径和
-        thisCurSum -= track.get(track.size() - 1);
-        track.removeLast();
+        curSum -= track.get(track.size() - 1);
+        track.remove(track.size() - 1);
     }
 
 
-    private int calSum(List<Integer> path) {
-        int sum = 0;
-        for (int i = 0; i < path.size(); i++) {
-            sum += path.get(i);
-        }
-        return sum;
-    }
-
-    public void pathS(TreeNode root, int sum) {
+    public ArrayList<ArrayList<Integer>> pathSum4(TreeNode root, int sum) {
         if (root == null) {
-            return;
+            return res;
         }
         track.add(root.val);
         // 【关键】 复用sum
         sum -= root.val;
         if (root.left == null && root.right == null && sum == 0) {
-            res.add(new ArrayList(track));
+            res.add(new ArrayList<>(track));
         }
-        pathS(root.left, sum);
-        pathS(root.right, sum);
+        pathSum4(root.left, sum);
+        pathSum4(root.right, sum);
         track.remove(track.size() - 1);
+        return res;
     }
 
 }

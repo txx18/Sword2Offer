@@ -1,9 +1,6 @@
 package recurforcetry.backtrack;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
@@ -77,25 +74,9 @@ public class NQueensTrack {
             boardRowSb.append(".");
         }
 //        btCharArray(0);
-//        btStringBuilder(0);
-        btStringBuilderTrack(resTrack, 0);
+        btStringBuilder(0);
+//        btStringBuilderTrack(resTrack, 0);
         return res;
-    }
-
-    private void btStringBuilderTrack(List<String> resTrack, int row) {
-        if (row == n) {
-            res.add(new LinkedList<>(resTrack));
-        }
-        for (int col = 0; col < n; col++) {
-            if (!isValidStringBuilder(row, col)) {
-                continue;
-            }
-            StringBuilder sb = new StringBuilder(boardRowSb);
-            sb.setCharAt(col, 'Q');
-            resTrack.add(sb.toString());
-            btStringBuilderTrack(resTrack, row + 1);
-            resTrack.remove(resTrack.size() - 1);
-        }
     }
 
     private void btStringBuilder(int row) {
@@ -114,6 +95,32 @@ public class NQueensTrack {
         }
     }
 
+    private void btStringBuilderTrack(List<String> resTrack, int row) {
+        if (row == n) {
+            res.add(new LinkedList<>(resTrack));
+        }
+        for (int col = 0; col < n; col++) {
+            if (!isValidStringBuilder(row, col)) {
+                continue;
+            }
+            StringBuilder sb = new StringBuilder(boardRowSb);
+            sb.setCharAt(col, 'Q');
+            resTrack.add(sb.toString());
+            btStringBuilderTrack(resTrack, row + 1);
+            resTrack.remove(resTrack.size() - 1);
+        }
+    }
+
+    private boolean isValidStringBuilder(int row, int col) {
+        for (int i = 0; i < row; i++) {
+            int queenCol = resTrack.get(i).indexOf('Q');
+            if (col == queenCol || Math.abs(col - queenCol) == Math.abs(row - i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private void btCharArray(int row) {
         if (row == n) {
             res.add(new LinkedList<>(resTrack));
@@ -128,16 +135,6 @@ public class NQueensTrack {
             btStringBuilder(row + 1);
             resTrack.remove(resTrack.size() - 1);
         }
-    }
-
-    private boolean isValidStringBuilder(int row, int col) {
-        for (int i = 0; i < row; i++) {
-            int queenCol = resTrack.get(i).indexOf('Q');
-            if (col == queenCol || Math.abs(col - queenCol) == Math.abs(row - i)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private void convertToShaBi() {

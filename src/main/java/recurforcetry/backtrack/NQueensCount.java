@@ -1,5 +1,8 @@
 package recurforcetry.backtrack;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
  *
@@ -44,6 +47,7 @@ public class NQueensCount {
     int res = 0;
     int[] track;
     int n;
+    Map<Integer, Integer> map = new HashMap<>();
 
     public int Nqueen (int n) {
         if (n < 1) {
@@ -52,8 +56,34 @@ public class NQueensCount {
         this.n = n;
         track = new int[n];
         // 从第0行（层）开始决策
-        backtrack(0);
+//        backtrack(0);
+        btMap(0);
         return res;
+    }
+
+    private void btMap(int row) {
+        if (row == n) {
+            res++;
+        }
+        for (int col = 0; col < n; col++) {
+            if (!isValidMap(row, col)) {
+                continue;
+            }
+            map.put(row, col);
+            btMap(row + 1);
+            // map.put(row,)
+        }
+    }
+
+    private boolean isValidMap(int row ,int col) {
+        for (int i = 0; i < row; i++) {
+            // int qCol = track[i];
+            int qCol = map.get(i);
+            if (qCol == col || (int)Math.abs(row - i) == (int)Math.abs(qCol - col)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void backtrack(int row) {
@@ -67,7 +97,7 @@ public class NQueensCount {
             }
             track[row] = col;
             backtrack(row + 1);
-            track[row] = -1;
+//            track[row] = -1; // 这句不需要
         }
     }
     

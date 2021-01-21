@@ -44,11 +44,11 @@ public class Permute {
 
     List<List<Integer>> permute(int[] nums) {
         this.nums = nums;
-        btContains(0);
+        btContainsNoParam();
         return res;
     }
 
-    void btContains(int index) {
+    void btContainsNoParam() {
         if (track.size() == nums.length) {
             res.add(new LinkedList<>(track));
             return;
@@ -59,8 +59,26 @@ public class Permute {
                 continue;
             }
             track.add(nums[i]);
+            btContainsNoParam();
+            track.remove(track.size() - 1);
+        }
+    }
+
+
+    void btContains(int index) {
+        // 用index作参数可以
+        if (index == nums.length) {
+            res.add(new LinkedList<>(track));
+            return;
+        }
+        // 全选择集遍历，跳过重复的，每一层都是全选择集遍历
+        for (int i = 0; i < nums.length; i++) {
+            if (track.contains(nums[i])) {
+                continue;
+            }
+            track.add(nums[i]);
             btContains(index + 1);
-            track.removeLast();
+            track.remove(track.size() - 1);
         }
     }
 

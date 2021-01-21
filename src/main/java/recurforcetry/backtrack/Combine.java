@@ -30,8 +30,9 @@ public class Combine {
 
     public static void main(String[] args) {
         Combine obj = new Combine();
+        int[] test = new int[]{4, 1, 3, 2};
 //        List<List<Integer>> res = obj.combine(4, 2);
-        List<List<Integer>> res = obj.combine(new int[]{4, 1, 3, 2}, 2);
+        List<List<Integer>> res = obj.combine(test, test.length);
         System.out.println("res = " + res);
     }
 

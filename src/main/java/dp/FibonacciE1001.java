@@ -41,7 +41,7 @@ public class FibonacciE1001 {
 
     public static void main(String[] args) {
 
-        long res = dpTable(19);
+        long res = fibDpTable(19);
 //        long res = dp(45);
         System.out.println("res = " + res);
     }
@@ -57,7 +57,7 @@ public class FibonacciE1001 {
      * @param n 从0开始数
      * @return
      */
-    public static int fib(int n) {
+    public static int fibOpt(int n) {
         if (n == 1 || n == 2) {
             return 1;
         }
@@ -79,7 +79,7 @@ public class FibonacciE1001 {
      * @param n
      * @return
      */
-    public static int dpTable(int n) {
+    public static int fibDpTable(int n) {
         if (n == 1 || n == 2) {
             return first;
         }
@@ -101,10 +101,13 @@ public class FibonacciE1001 {
         if (n == 1 || n == 2) {
             return first;
         }
+        // 如果计算过，查备忘录
         if (memo.get(n) != null) {
             return memo.get(n);
         }
+        // 没计算过，递归
         int sum = fibMemoMap(n - 1) + fibMemoMap(n - 2);
+        // 加入备忘录
         memo.put(n, sum);
         return memo.get(n);
     }
