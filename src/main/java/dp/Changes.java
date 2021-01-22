@@ -1,7 +1,5 @@
 package dp;
 
-import zhelper.ArrayUtils;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,57 +52,89 @@ public class Changes {
     public static void main(String[] args) {
         Changes obj = new Changes();
         int[] coins = new int[]{1, 2, 5};
-        int res = obj.coinChange(coins, 11);
+        int[] coins2 = new int[]{3, 2, 5};
+        int res = obj.minMoney(coins2, 20);
         System.out.println("res = " + res);
     }
 
-    int[] coins;
+    int[] arr;
+    int[] memoArr;
 
-    public int coinChange(int[] coins, int amount) {
+    public int minMoney(int[] arr, int aim) {
         // write code here
-        this.coins = coins;
-//        return dpMemo(amount);
-        return dpTable(amount);
+        this.arr = arr;
+        memoArr = new int[aim + 1];
+        Arrays.fill(memoArr, -1);
+        dpMemoArr(aim);
+        return memoArr[aim];
+/*        return dpTable(aim);*/
     }
 
-    private int dpTable(int amount) {
-        // 初始化dp数组
-        int[] dp = new int[amount + 1];
-        Arrays.fill(dp, amount + 1);
+    private int dpTable(int aim) {
+        // 初始化dp数组，dp[n]代表aim==n时最少的硬币数
+        int[] dp = new int[aim + 1];
+        Arrays.fill(dp, aim + 1);
         dp[0] = 0;
         for (int i = 0; i < dp.length; i++) {
-            for (int coin : coins) {
+            for (int coin : arr) {
                 if (i - coin < 0) {
                     continue;
                 }
                 dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
             }
         }
-        return dp[amount] != amount + 1 ? dp[amount] : -1;
+        return dp[aim] != aim + 1 ? dp[aim] : -1;
     }
 
-    Map<Integer, Integer> memo = new HashMap<>();
-
-    private int dpMemo(int amount) {
-        if (amount == 0) {
+    private int dpMemoArr(int aim) {
+        // base case
+        if (aim == 0) {
             return 0;
         }
-        if (amount < 0) {
-            return -1;
+        if (memoArr[aim] != -1) {
+            return memoArr[aim];
         }
-        if (memo.get(amount) != null) {
-            return memo.get(amount);
-        }
-        int res = Integer.MAX_VALUE;
-        for (int coin : coins) {
-            int subDp = dpMemo(amount - coin);
-            if (subDp == -1) {
+        // 初始最大值
+        int curRes = aim + 1;
+        for (int coin : arr) {
+            if (aim - coin < 0) {
                 continue;
             }
-            res = Math.min(res, 1 + subDp);
+            int preRes = dpMemoArr(aim - coin);
+            if (preRes == -1) {
+                continue;
+            }
+            curRes = Math.min(curRes, 1 + preRes);
         }
-        memo.put(amount, res != Integer.MAX_VALUE ? res : -1);
-        return memo.get(amount);
+        // 更新res
+        memoArr[aim] = curRes == aim + 1 ? -1 : curRes;
+        return memoArr[aim];
     }
+
+    Map<Integer, Integer> memoMap = new HashMap<>();
+
+    private int dpMemoMap(int aim) {
+        if (aim == 0) {
+            return 0;
+        }
+        if (memoMap.get(aim) != -1) {
+            return memoMap.get(aim);
+        }
+        int res = Integer.MAX_VALUE;
+        for (int coin : arr) {
+            if (aim - coin < 0) {
+                continue;
+            }
+            int subRes = dpMemoMap(aim - coin);
+            if (subRes == -1) {
+                continue;
+            }
+            res = Math.min(res, 1 + subRes);
+        }
+        memoMap.put(aim, res == Integer.MAX_VALUE ? -1 : res);
+        return memoMap.get(aim);
+    }
+
+
 
 }
