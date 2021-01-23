@@ -32,11 +32,6 @@ public class TraversalLoop {
         System.out.println(res.toString());
     }
 
-    /**
-     * 先序遍历
-     *
-     * @param head
-     */
     public static void preTraversePrint(TreeNode head) {
         if (head == null) {
             return;
@@ -64,19 +59,12 @@ public class TraversalLoop {
 
     private ArrayList<Integer> res = new ArrayList<>();
 
-    /**
-     * 前序遍历
-     *
-     * @param root
-     * @return
-     */
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
-        Stack<TreeNode> stack = new Stack<>();
+        Deque<TreeNode> stack = new LinkedList<>();
         //  head先入栈
         stack.push(root);
         while (!stack.isEmpty()) {
-            // 出栈，中
             TreeNode cur = stack.pop();
             if (cur != null) {
                 res.add(cur.val);

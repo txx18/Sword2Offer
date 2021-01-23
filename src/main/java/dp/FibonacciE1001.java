@@ -1,5 +1,6 @@
 package dp;
 
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,14 +41,15 @@ import java.util.Map;
 public class FibonacciE1001 {
 
     public static void main(String[] args) {
-
-        long res = fibDpTable(19);
+        FibonacciE1001 obj = new FibonacciE1001();
+//        long res = obj.fibDpTable(19);
+        long res = obj.fibMemoArray(19);
 //        long res = dp(45);
         System.out.println("res = " + res);
     }
 
-    static int first = 1;
-    static int second = 1;
+    int first = 1;
+    int second = 1;
 
     /**
      * 优化空间
@@ -57,7 +59,7 @@ public class FibonacciE1001 {
      * @param n 从0开始数
      * @return
      */
-    public static int fibOpt(int n) {
+    public int fibOpt(int n) {
         if (n == 1 || n == 2) {
             return 1;
         }
@@ -74,12 +76,12 @@ public class FibonacciE1001 {
     }
 
     /**
-     *
      * 用dp数组 替换备忘录
+     *
      * @param n
      * @return
      */
-    public static int fibDpTable(int n) {
+    public int fibDpTable(int n) {
         if (n == 1 || n == 2) {
             return first;
         }
@@ -94,10 +96,27 @@ public class FibonacciE1001 {
     }
 
 
-    static int[] memoArray;
-    static Map<Integer, Integer> memo = new HashMap<>();
+    int[] memoArray;
 
-    public static int fibMemoMap(int n) {
+    public int fibMemoArray(int n) {
+        memoArray = new int[n + 1];
+        return recurMemoArray(n);
+    }
+
+    private int recurMemoArray(int n) {
+        if (n == 1 || n == 2) {
+            return first;
+        }
+        if (memoArray[n] != 0) {
+            return memoArray[n];
+        }
+        memoArray[n] = recurMemoArray(n - 1) + recurMemoArray(n - 2);
+        return memoArray[n];
+    }
+
+    Map<Integer, Integer> memo = new HashMap<>();
+
+    public int fibMemoMap(int n) {
         if (n == 1 || n == 2) {
             return first;
         }
@@ -112,21 +131,6 @@ public class FibonacciE1001 {
         return memo.get(n);
     }
 
-    public static int fibMemoArray(int n) {
-        memoArray = new int[n];
-        return recurMemoArray(n);
-    }
-
-    private static int recurMemoArray(int n) {
-        if (n == 1 || n == 2) {
-            return first;
-        }
-        if (memoArray[n - 1] != 0) {
-            return memoArray[n - 1];
-        }
-        memoArray[n - 1] = recurMemoArray(n - 1) + recurMemoArray(n - 2);
-        return memoArray[n - 1];
-    }
 
     /**
      * 递归
