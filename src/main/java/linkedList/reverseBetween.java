@@ -21,6 +21,7 @@ public class reverseBetween {
         ListUtils.printSingleList(head1);
         reverseBetween obj = new reverseBetween();
         ListNode res = obj.reverseBetween(head1, 2, 4);
+//        ListNode res = obj.reverseMToLength(head1, 3);
         ListUtils.printSingleList(res);
 
     }
@@ -30,58 +31,36 @@ public class reverseBetween {
     public ListNode reverseBetween (ListNode head, int m, int n) {
         // write code here
         if (m == 1) {
-            return reverseN(head, n);
+            return reverse1ToN(head, n);
         }
         head.next = reverseBetween(head.next, m - 1, n - 1);
         return head;
     }
 
-    private ListNode reverseN(ListNode head, int n) {
+    private ListNode reverse1ToN(ListNode head, int n) {
         if (n == 1) {
             nxt = head.next;
             return head;
         }
-        ListNode newHead = reverseN(head.next, n - 1);
+        ListNode newHead = reverse1ToN(head.next, n - 1);
         head.next.next = head;
         head.next = nxt;
         return newHead;
     }
 
-/*    public static ListNode reverseBetween (ListNode head, int m, int n) {
-        // write code here
-        // FIXME 防御有问题
-        if (head == null || head.next == null || m == n) {
-            return head;
+    private  ListNode reverseMToLength(ListNode head, int m) {
+        if (m == 1) {
+            return reverse(head);
         }
-        ListNode start = head;
-        ListNode pre = null;
-        for (int i = 1; i < m; i++){
-            if (i == m - 1) {
-                pre = start;
-            }
-            start = start.next;
-        }
-        ListNode end = start;
-        for (int i = m; i < n; i++) {
-            end = end.next;
-        }
-        ListNode nxt = end.next;
-        reverse(start, nxt);
-        pre.next = end;
-        start.next = nxt;
+        head.next = reverseMToLength(head.next, m - 1);
         return head;
-    }*/
+    }
 
-    /**
-     * 左闭右开
-     * @param a
-     * @param b
-     * @return
-     */
-    private static ListNode reverse(ListNode a, ListNode b) {
-        ListNode nxt = a;
+    private ListNode reverse(ListNode head) {
+        ListNode cur = head;
         ListNode pre = null;
-        for (ListNode cur = a; cur != b;) {
+        ListNode nxt = null;
+        while (cur != null) {
             nxt = cur.next;
             cur.next = pre;
             pre = cur;
