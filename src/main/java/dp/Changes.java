@@ -71,19 +71,20 @@ public class Changes {
     }
 
     private int dpTable(int aim) {
-        // 初始化dp数组，dp[n]代表aim==n时最少的硬币数
+        // write code
+        // 初始化dp数组，dp[i]代表 aim==i 时最少的硬币数
         int[] dp = new int[aim + 1];
-        Arrays.fill(dp, aim + 1);
+        Arrays.fill(dp, aim);
         dp[0] = 0;
         for (int i = 0; i < dp.length; i++) {
-            for (int coin : arr) {
+            for (int coin: arr) {
                 if (i - coin < 0) {
                     continue;
                 }
                 dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
             }
         }
-        return dp[aim] != aim + 1 ? dp[aim] : -1;
+        return dp[aim] != aim? dp[aim]: -1;
     }
 
     private int dpMemoArr(int aim) {

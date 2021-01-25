@@ -13,7 +13,6 @@ public class LessEqualRightIndex {
             return -1;
         }
         int left = 0, right = nums.length;
-
         while (left < right) {
             int mid = left + ((right - left) >> 1);
             if (target >= nums[mid]) {

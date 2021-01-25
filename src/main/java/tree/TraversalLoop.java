@@ -28,7 +28,7 @@ public class TraversalLoop {
         TraversalLoop obj = new TraversalLoop();
 //        obj.inTraversePrint(tree);
 
-        List<Integer> res = obj.inorderTraversal(tree);
+        List<Integer> res = obj.inorderLoop(tree);
         System.out.println(res.toString());
     }
 
@@ -57,9 +57,8 @@ public class TraversalLoop {
         }
     }
 
-    private ArrayList<Integer> res = new ArrayList<>();
 
-    public List<Integer> preorderTraversal(TreeNode root) {
+    public List<Integer> preorderLoop(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         Deque<TreeNode> stack = new LinkedList<>();
         //  head先入栈
@@ -84,7 +83,7 @@ public class TraversalLoop {
      * @param root
      * @return
      */
-    public List<Integer> inorderTraversal(TreeNode root) {
+    public List<Integer> inorderLoop(TreeNode root) {
 //        Stack<TreeNode> stack = new Stack<>();
         Deque<TreeNode> stack = new LinkedList<>();
         List<Integer> res = new ArrayList<>();
@@ -108,20 +107,19 @@ public class TraversalLoop {
      * @param root
      * @return
      */
-    public List<Integer> postorderTraversal(TreeNode root) {
+    public List<Integer> postorderLoop(TreeNode root) {
         LinkedList<Integer> res = new LinkedList<>();
         Deque<TreeNode> stack = new LinkedList<>();
-        //  head先入栈
+        // root先入栈
         TreeNode cur = root;
         stack.push(cur);
         while (!stack.isEmpty()) {
-            // 出栈，放入收集栈，或者前插LinkedList，再或者正常后插LinkedList最后反转返回
+            // 出栈，几种方法：1、前插LinkedList 2、正常后插LinkedList最后反转返回 3、放入收集栈
             cur = stack.pop();
-            if (cur != null) {
-                res.addFirst(cur.val);
-            } else {
+            if (cur == null) {
                 continue;
             }
+            res.addFirst(cur.val);
             // 先左后右
             stack.push(cur.left);
             stack.push(cur.right);
@@ -184,16 +182,22 @@ public class TraversalLoop {
         }
     }
 
-    public ArrayList<Integer> BFSTraverse(TreeNode root) {
+    /**
+     * 另一个需要收集每一层的见bfs包
+     * @param root
+     * @return
+     */
+    public ArrayList<Integer> BFSorder(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<>();
         if (root == null) {
             return res;
         }
-        // 准备一个队列
+        // 准备一个队列，不存在visited, target
         Queue<TreeNode> queue = new LinkedList<>();
         TreeNode cur = root;
         queue.add(cur);
         while (!queue.isEmpty()) {
-            // 出队列，打印
+            // 出队列
             cur = queue.poll();
             res.add(cur.val);
             // 入栈，先左后右

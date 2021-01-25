@@ -68,8 +68,7 @@ public class MoreEqualLeftIndex {
         if (nums.length == 0) {
             return -1;
         }
-        int left = 0;
-        int right = nums.length; // 注意
+        int left = 0, right = nums.length; // 注意
         while (left < right) { // 注意
             int mid = left + ((right - left) >> 1);
             if (target <= nums[mid]) {

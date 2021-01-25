@@ -21,8 +21,8 @@ public class PrintLevelOrderInLevelE3202 {
         tree1.right.right = new TreeNode(7);
 
         TreeNode tree2 = null;
-//        ArrayList<ArrayList<Integer>> res = levelOrderList(tree1);
-        List<List<Integer>> res = levelOrderList(tree1);
+        ArrayList<ArrayList<Integer>> res = levelOrderList(tree1);
+//        List<List<Integer>> res = levelOrderList(tree1);
         for (List<Integer> level : res) {
             System.out.println(level.toString());
             System.out.println();
@@ -34,51 +34,24 @@ public class PrintLevelOrderInLevelE3202 {
 
     }
 
-    public static ArrayList<ArrayList<Integer>> levelOrderLoop(TreeNode root) {
+    public static ArrayList<ArrayList<Integer>> levelOrderList(TreeNode root) {
         // write code here
         ArrayList<ArrayList<Integer>> allLevelList = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         if (root != null) {
             queue.offer(root);
         }
+        // 对所有层
         while (!queue.isEmpty()) {
             int size = queue.size();
             ArrayList<Integer> singleLevelList = new ArrayList<>();
+            // 对每一层
             for (int i = 0; i < size; i++) {
                 TreeNode cur = queue.poll();
                 if (cur == null) {
                     continue;
-                } else {
-                    singleLevelList.add(cur.val);
                 }
-                queue.offer(cur.left);
-                queue.offer(cur.right);
-            }
-            if (singleLevelList.size() == 0) {
-                continue;
-            }
-            allLevelList.add(singleLevelList);
-        }
-        return allLevelList;
-    }
-
-    public static List<List<Integer>> levelOrderList(TreeNode root) {
-        // write code here
-        List<List<Integer>> allLevelList = new ArrayList<>();
-        Queue<TreeNode> queue = new LinkedList<>();
-        if (root != null) {
-            queue.offer(root);
-        }
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            ArrayList<Integer> singleLevelList = new ArrayList<>();
-            for (int i = 0; i < size; i++) {
-                TreeNode cur = queue.poll();
-                if (cur == null) {
-                    continue;
-                } else {
-                    singleLevelList.add(cur.val);
-                }
+                singleLevelList.add(cur.val);
                 queue.offer(cur.left);
                 queue.offer(cur.right);
             }
