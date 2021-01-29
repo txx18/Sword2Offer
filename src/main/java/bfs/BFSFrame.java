@@ -44,7 +44,7 @@ public class BFSFrame {
                         continue;
                     }
                     queue.offer(adj);
-                    visited.add(cur);
+                    visited.add(adj);
                 }
             }
             step++;

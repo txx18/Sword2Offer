@@ -1,6 +1,5 @@
 package dp;
 
-import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,7 +58,7 @@ public class FibonacciE1001 {
      * @param n 从0开始数
      * @return
      */
-    public int fibOpt(int n) {
+    public int dpOpt(int n) {
         if (n == 1 || n == 2) {
             return 1;
         }
@@ -81,7 +80,7 @@ public class FibonacciE1001 {
      * @param n
      * @return
      */
-    public int fibDpTable(int n) {
+    public int dpTable(int n) {
         if (n == 1 || n == 2) {
             return first;
         }
@@ -116,7 +115,7 @@ public class FibonacciE1001 {
 
     Map<Integer, Integer> memo = new HashMap<>();
 
-    public int fibMemoMap(int n) {
+    public int recurMemoMap(int n) {
         if (n == 1 || n == 2) {
             return first;
         }
@@ -125,7 +124,7 @@ public class FibonacciE1001 {
             return memo.get(n);
         }
         // 没计算过，递归
-        int sum = fibMemoMap(n - 1) + fibMemoMap(n - 2);
+        int sum = recurMemoMap(n - 1) + recurMemoMap(n - 2);
         // 加入备忘录
         memo.put(n, sum);
         return memo.get(n);
@@ -139,10 +138,10 @@ public class FibonacciE1001 {
      * @param n 从0开始数f(0) = 0
      * @return
      */
-    public int fibForce(int n) {
+    public int recurForce(int n) {
         if (n <= 1) {
             return n;
         }
-        return fibForce(n - 1) + fibForce(n - 2);
+        return recurForce(n - 1) + recurForce(n - 2);
     }
 }

@@ -7,29 +7,26 @@ import zhelper.TreeUtils.*;
  * @author ShaneTang
  * @create 2021-01-06 20:34
  */
-public class CBTNodeNum {
+public class NodeNumCBT {
 
     public static void main(String[] args) {
         TreeNode test = TreeUtils.deserialize("[1,2,null]");
-        CBTNodeNum obj = new CBTNodeNum();
-        int count = obj.nodeNum(test);
+        NodeNumCBT obj = new NodeNumCBT();
+        int count = obj.nodeNum(null);
         System.out.println("count = " + count);
 
     }
 
     public int nodeNum(TreeNode head) {
-        if (head == null) {
-            return 0;
-        }
-        int hl = 0;
-        int hr = 0;
-        TreeNode pl = head;
-        TreeNode pr = head;
+        int hl, hr;
+        hl = hr = 0;
+        TreeNode pl, pr;
+        pl = pr = head;
         while (pl != null) {
             pl = pl.left;
             hl++;
         }
-        while(pr != null) {
+        while (pr != null) {
             pr = pr.right;
             hr++;
         }

@@ -1,18 +1,12 @@
 package linkedList;
 
+import zhelper.ListUtils.*;
+
 import java.util.*;
 
 
 public class reverseKGroup {
 
-    private static class ListNode {
-        int val;
-        ListNode next = null;
-
-        public ListNode(int val) {
-            this.val = val;
-        }
-    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -24,38 +18,38 @@ public class reverseKGroup {
             cur = cur.next;
         }
         int k = sc.nextInt();
-        cur = solution(preHead.next, k);
+        cur = reverseKGroup(preHead.next, k);
         while (cur != null) {
             System.out.print(cur.val + " ");
             cur = cur.next;
         }
     }
 
-    private static ListNode solution(ListNode head, int k) {
+    private static ListNode reverseKGroup(ListNode head, int k) {
         if (head == null) {
-            return head;
+            return null;
         }
-        ListNode l, r;
-        l = r = head;
+        ListNode p1, p2;
+        p1 = p2 = head;
         for (int i = 0; i < k; i++) {
-            if (r == null) {
+            if (p2 == null) {
                 return head;
             }
-            r = r.next;
+            p2 = p2.next;
         }
-        ListNode newHead = reverse(l, r);
+        ListNode newHead = reverse(p1, p2);
         // 先序
-        l.next = solution(r, k);
+        p1.next = reverseKGroup(p2, k);
         return newHead;
     }
 
     private static ListNode reverse(ListNode a, ListNode b) {
-        ListNode pre, nxt;
+        ListNode pre, nxt, cur;
         pre = nxt = null;
-        ListNode cur = a;
+        cur = a;
         while (cur != b) {
             nxt = cur.next;
-            cur.next = pre;
+            cur.next= pre;
             pre = cur;
             cur = nxt;
         }

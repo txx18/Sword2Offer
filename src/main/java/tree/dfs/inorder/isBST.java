@@ -41,6 +41,12 @@ public class isBST {
 
     TreeNode pre = null;
 
+    /**
+     * 中序递归方法
+     * 在NK有错误
+     * @param root
+     * @return
+     */
     boolean isValidBST(TreeNode root) {
         if (root == null) {
             return true;
@@ -56,11 +62,16 @@ public class isBST {
     }
 
 
+    /**
+     * 中序循环方法
+     * @param root
+     * @return
+     */
     private boolean inorder(TreeNode root) {
         if (root == null) {
             return true;
         }
-        Stack<TreeNode> stack = new Stack();
+        Deque<TreeNode> stack = new LinkedList<>();
         while (!stack.isEmpty() || root != null) {
             if (root != null) {
                 stack.push(root);
