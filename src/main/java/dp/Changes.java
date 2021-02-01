@@ -63,11 +63,11 @@ public class Changes {
     public int minMoney(int[] arr, int aim) {
         // write code here
         this.arr = arr;
-        memoArr = new int[aim + 1];
+/*        memoArr = new int[aim + 1];
         Arrays.fill(memoArr, -1);
         dpMemoArr(aim);
-        return memoArr[aim];
-/*        return dpTable(aim);*/
+        return memoArr[aim];*/
+        return dpTable(aim);
     }
 
     private int dpTable(int aim) {
@@ -76,7 +76,7 @@ public class Changes {
         int[] dp = new int[aim + 1];
         Arrays.fill(dp, aim);
         dp[0] = 0;
-        for (int i = 0; i < dp.length; i++) {
+        for (int i = 0; i <= aim; i++) {
             for (int coin: arr) {
                 if (i - coin < 0) {
                     continue;

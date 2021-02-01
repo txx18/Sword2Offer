@@ -1,4 +1,4 @@
-package recur;
+package dp;
 
 /**
  * 青蛙跳台阶问题
@@ -27,6 +27,21 @@ package recur;
  */
 public class FrogJumpStepsE1002 {
 
+    public int frogByLoop(int n) {
+        if(n <= 2){
+            return n;
+        }
+        int pre1 = 1;
+        int pre2 = 2;
+        int res = 0;
+        for (int i = 3; i <= n; i++) {
+            res = pre1 + pre2;
+            pre1 = pre2;
+            pre2 = res;
+        }
+        return res;
+    }
+
     /**
      * 方法一：递归
      * f(n)f(n) 为以上两种情况之和，即 f(n)=f(n-1)+f(n-2)f(n)=f(n−1)+f(n−2) ，以上递推性质为斐波那契数列。本题可转化为 求斐波那契数列第 nn 项的值 ，与 面试题10- I. 斐波那契数列 等价，唯一的不同在于起始数字不同。
@@ -44,25 +59,5 @@ public class FrogJumpStepsE1002 {
             return n;
         }
         return numWays(n - 1) + numWays(n - 2);
-    }
-
-    /**
-     * 方法二：循环
-     * @param n 从1开始数
-     * @return
-     */
-    public int frogByLoop(int n) {
-        if(n <= 2){
-            return n;
-        }
-        int pre1 = 1;
-        int pre2 = 2;
-        int res = 0;
-        for (int i = 3; i <= n; i++) {
-            res = pre1 + pre2;
-            pre1 = pre2;
-            pre2 = res;
-        }
-        return res;
     }
 }

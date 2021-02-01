@@ -42,11 +42,11 @@ public class Combine {
     int k;
     int[] nums;
 
-    List<List<Integer>> combine(int[] nums, int k) {
-        if (k <= 0 || nums.length <= 0) {
+    List<List<Integer>> combine(int[] num, int k) {
+        if (k <= 0 || num.length <= 0) {
             return res;
         }
-        this.nums = nums;
+        this.nums = num;
         this.k = k;
         bt(0);
         return res;

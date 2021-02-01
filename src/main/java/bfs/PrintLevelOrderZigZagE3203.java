@@ -33,6 +33,38 @@ public class PrintLevelOrderZigZagE3203 {
         return solutionDeque(root);
     }
 
+    public List<List<Integer>> zigzagLevelOrder (TreeNode root) {
+        // write code here
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        int step = 0;
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            LinkedList<Integer> level = new LinkedList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = queue.poll();
+                if (cur == null) {
+                    continue;
+                }else {
+                    if (step % 2 == 0) {
+                        level.add(cur.val);
+                    }else {
+                        level.addFirst(cur.val);
+                    }
+
+                }
+                queue.offer(cur.left);
+                queue.offer(cur.right);
+            }
+            if (level.size() != 0) {
+                res.add(new ArrayList<>(level));
+            }
+            step++;
+        }
+        return res;
+    }
+
     /**
      * 执行用时 :
      * 2 ms

@@ -1,9 +1,6 @@
 package recurforcetry.backtrack;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 给定一个 没有重复 数字的序列，返回其所有可能的全排列。
@@ -33,33 +30,33 @@ public class Permute {
     public static void main(String[] args) {
         Permute obj = new Permute();
         int[] arr = {1, 2, 3};
-        List<List<Integer>> res = obj.permute(arr);
+        ArrayList<ArrayList<Integer>> res = obj.permute(arr);
         System.out.println("res = " + res);
     }
 
-    List<List<Integer>> res = new LinkedList<>();
+    ArrayList<ArrayList<Integer>> res = new ArrayList<>();
     LinkedList<Integer> track = new LinkedList<>();
-    int[] nums;
+    int[] num;
     Map<Integer, Integer> trackMap = new HashMap<>();
 
-    List<List<Integer>> permute(int[] nums) {
-        this.nums = nums;
-//        btContainsNoParam();
-        btMap();
+    ArrayList<ArrayList<Integer>> permute(int[] num) {
+        this.num = num;
+        btContainsNoParam();
+//        btMap();
         return res;
     }
 
     void btContainsNoParam() {
-        if (track.size() == nums.length) {
-            res.add(new LinkedList<>(track));
+        if (track.size() == num.length) {
+            res.add(new ArrayList<>(track));
             return;
         }
         // 全选择集遍历，跳过重复的，每一层都是全选择集遍历
-        for (int i = 0; i < nums.length; i++) {
-            if (track.contains(nums[i])) {
+        for (int i = 0; i < num.length; i++) {
+            if (track.contains(num[i])) {
                 continue;
             }
-            track.add(nums[i]);
+            track.add(num[i]);
             btContainsNoParam();
             track.remove(track.size() - 1);
         }
@@ -68,34 +65,34 @@ public class Permute {
 
     void btContains(int index) {
         // 用index作参数可以
-        if (index == nums.length) {
-            res.add(new LinkedList<>(track));
+        if (index == num.length) {
+            res.add(new ArrayList<>(track));
             return;
         }
         // 全选择集遍历，跳过重复的，每一层都是全选择集遍历
-        for (int i = 0; i < nums.length; i++) {
-            if (track.contains(nums[i])) {
+        for (int i = 0; i < num.length; i++) {
+            if (track.contains(num[i])) {
                 continue;
             }
-            track.add(nums[i]);
+            track.add(num[i]);
             btContains(index + 1);
             track.remove(track.size() - 1);
         }
     }
 
     private void btMap() {
-        if (track.size()  == nums.length) {
-            res.add(new LinkedList<>(track));
+        if (track.size()  == num.length) {
+            res.add(new ArrayList<>(track));
         }
-        for (int i = 0; i < nums.length; i++) {
-            if (trackMap.getOrDefault(nums[i],  0) != 0) {
+        for (int i = 0; i < num.length; i++) {
+            if (trackMap.getOrDefault(num[i],  0) != 0) {
                 continue;
             }
-            track.add(nums[i]);
-            trackMap.put(nums[i], trackMap.getOrDefault(nums[i], 0) + 1);
+            track.add(num[i]);
+            trackMap.put(num[i], trackMap.getOrDefault(num[i], 0) + 1);
             btMap();
             track.remove(track.size() - 1);
-            trackMap.put(nums[i], 0);
+            trackMap.put(num[i], 0);
         }
     }
 

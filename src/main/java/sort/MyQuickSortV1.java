@@ -67,8 +67,6 @@ public class MyQuickSortV1 {
             if (arr[i] <= pivotVal) {
                 // 只靠小于等于区域右扩
                 ArrayUtils.swap(arr, i, ++lessEqualIdx);
-            } else {
-
             }
 
         }
