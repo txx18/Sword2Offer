@@ -12,22 +12,23 @@ public class LessEqualRightIndex {
         if (nums.length == 0) {
             return -1;
         }
-        int left = 0, right = nums.length;
-        while (left < right) {
-            int mid = left + ((right - left) >> 1);
+        int l = 0, r = nums.length;
+        while (l < r) {
+            int mid = l + ((r - l) >> 1);
             if (target >= nums[mid]) {
-                left = mid + 1; // 注意
+                l = mid + 1; // 注意
             } else if (target < nums[mid]) {
-                right = mid;
+                r = mid;
             }
         }
         // 如果需求是顺序插入位置
 //		return left - 1; // 注意
         // 如果需求是不存在时返回-1
-        if (left == 0) {
+        // left已经到0了
+        if (l == 0) {
             return -1;
         }
-        return nums[left - 1] == target ? (left - 1) : -1;
+        return nums[l - 1] == target ? (l - 1) : -1;
     }
 
 

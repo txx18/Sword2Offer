@@ -27,7 +27,7 @@ public class reverseKGroup {
 
     private static ListNode reverseKGroup(ListNode head, int k) {
         if (head == null) {
-            return null;
+            return head;
         }
         ListNode p1, p2;
         p1 = p2 = head;

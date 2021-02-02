@@ -49,19 +49,17 @@ public class MoreEqualLeftIndex {
         if (a.length == 0) {
             return -1;
         }
-        int left = 0;
-        int right = a.length; // 注意
-        while (left < right) { // 注意
-            int mid = left + ((right - left) >> 1);
-            if (a[mid] == v) {
-                right = mid;
-            } else if (a[mid] < v) {
-                left = mid + 1;
-            } else if (v < a[mid]) {
-                right = mid; // 注意
+        int l = 0;
+        int r = a.length; // 注意
+        while (l < r) { // 注意
+            int mid = l + ((r - l) >> 1);
+            if (v <= a[mid]) {
+                r = mid;
+            } else if (v > a[mid]) {
+                l = mid + 1;
             }
         }
-        return left + 1;
+        return l + 1;
     }
 
     int left_bound(int[] nums, int target) {

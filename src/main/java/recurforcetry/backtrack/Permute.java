@@ -36,27 +36,27 @@ public class Permute {
 
     ArrayList<ArrayList<Integer>> res = new ArrayList<>();
     LinkedList<Integer> track = new LinkedList<>();
-    int[] num;
+    int[] nums;
     Map<Integer, Integer> trackMap = new HashMap<>();
 
     ArrayList<ArrayList<Integer>> permute(int[] num) {
-        this.num = num;
+        this.nums = num;
         btContainsNoParam();
 //        btMap();
         return res;
     }
 
     void btContainsNoParam() {
-        if (track.size() == num.length) {
+        if (track.size() == nums.length) {
             res.add(new ArrayList<>(track));
             return;
         }
         // 全选择集遍历，跳过重复的，每一层都是全选择集遍历
-        for (int i = 0; i < num.length; i++) {
-            if (track.contains(num[i])) {
+        for (int i = 0; i < nums.length; i++) {
+            if (track.contains(nums[i])) {
                 continue;
             }
-            track.add(num[i]);
+            track.add(nums[i]);
             btContainsNoParam();
             track.remove(track.size() - 1);
         }
@@ -65,34 +65,34 @@ public class Permute {
 
     void btContains(int index) {
         // 用index作参数可以
-        if (index == num.length) {
+        if (index == nums.length) {
             res.add(new ArrayList<>(track));
             return;
         }
         // 全选择集遍历，跳过重复的，每一层都是全选择集遍历
-        for (int i = 0; i < num.length; i++) {
-            if (track.contains(num[i])) {
+        for (int i = 0; i < nums.length; i++) {
+            if (track.contains(nums[i])) {
                 continue;
             }
-            track.add(num[i]);
+            track.add(nums[i]);
             btContains(index + 1);
             track.remove(track.size() - 1);
         }
     }
 
     private void btMap() {
-        if (track.size()  == num.length) {
+        if (track.size()  == nums.length) {
             res.add(new ArrayList<>(track));
         }
-        for (int i = 0; i < num.length; i++) {
-            if (trackMap.getOrDefault(num[i],  0) != 0) {
+        for (int i = 0; i < nums.length; i++) {
+            if (trackMap.getOrDefault(nums[i],  0) != 0) {
                 continue;
             }
-            track.add(num[i]);
-            trackMap.put(num[i], trackMap.getOrDefault(num[i], 0) + 1);
+            track.add(nums[i]);
+            trackMap.put(nums[i], trackMap.getOrDefault(nums[i], 0) + 1);
             btMap();
             track.remove(track.size() - 1);
-            trackMap.put(num[i], 0);
+            trackMap.put(nums[i], 0);
         }
     }
 

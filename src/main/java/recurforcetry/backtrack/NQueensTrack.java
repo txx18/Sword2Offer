@@ -95,7 +95,17 @@ public class NQueensTrack {
         }
     }
 
-    private void btStringBuilderTrack(List<String> resTrack, int row) {
+    private boolean isValidStringBuilder(int row, int col) {
+        for (int i = 0; i < row; i++) {
+            int queenCol = resTrack.get(i).indexOf('Q');
+            if (col == queenCol || Math.abs(col - queenCol) == Math.abs(row - i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void btStringBuilderParam(List<String> resTrack, int row) {
         if (row == n) {
             res.add(new LinkedList<>(resTrack));
         }
@@ -106,19 +116,9 @@ public class NQueensTrack {
             StringBuilder sb = new StringBuilder(boardRowSb);
             sb.setCharAt(col, 'Q');
             resTrack.add(sb.toString());
-            btStringBuilderTrack(resTrack, row + 1);
+            btStringBuilderParam(resTrack, row + 1);
             resTrack.remove(resTrack.size() - 1);
         }
-    }
-
-    private boolean isValidStringBuilder(int row, int col) {
-        for (int i = 0; i < row; i++) {
-            int queenCol = resTrack.get(i).indexOf('Q');
-            if (col == queenCol || Math.abs(col - queenCol) == Math.abs(row - i)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private void btCharArray(int row) {
