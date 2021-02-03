@@ -1,138 +1,63 @@
 package dp.subsequence;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * @author ShaneTang
- * @create 2021-01-25 10:31
+ * @create 2021-02-03 11:09
  */
 public class LIS {
 
     public static void main(String[] args) {
-        int[] arr = new int[]{1, 4, 3, 4, 2, 3};
-        int[] arr1 = new int[]{2, 1, 5, 3, 6, 4, 8, 9, 7};
+        int[] arr = {2, 1, 5, 3, 6, 4, 8, 9, 7};
+        int[] arr2 = {1, 2, 8, 6, 4};
         LIS obj = new LIS();
-//        int[] res = obj.LIS(arr1);
-//        System.out.println("res = " + Arrays.toString(res));
-
-        int res = obj.dpTable0(arr1, arr1.length);
-        System.out.println("res = " + res);
+        int[] res = obj.LIS(arr2);
+        System.out.println("res = " + Arrays.toString(res));
     }
 
-    public int dpTable0(int[] A, int n) {
-        // write code here
-        int[] dp = new int[n];
-        // 在子数组array[0..i]中，以下标i结尾的目标子序列（最长递增子序列）的长度是dp[i]。
-        Arrays.fill(dp, 1);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < i; j++) {
-                if (A[j] < A[i]) {
-                    dp[i] = Math.max(dp[i], 1 + dp[j]);
-                }
-            }
-        }
-        int res = 0;
-        for (int val: dp) {
-            res = Math.max(res, val);
-        }
-        return res;
-    }
 
-    public int dpTable1(int[] A, int n) {
-        // write code here
-        // 在子数组array[0..i]中，以下标i结尾的目标子序列（最长递增子序列）的长度是dp[i]。
-        int[] dp = new int[n + 1];
-        Arrays.fill(dp, 1);
+    public int[] LIS(int[] A) {
+        // todo 超时 write code here
+        int n = A.length;
+        StringBuilder[] dpSb = new StringBuilder[n + 1];
+        for (int i = 1; i <= n; i++) {
+            dpSb[i] = new StringBuilder(String.valueOf(A[i - 1]));
+        }
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j < i; j++) {
                 if (A[j - 1] < A[i - 1]) {
-                    dp[i] = Math.max(dp[i], 1 + dp[j]);
+                    StringBuilder newSb = new StringBuilder(dpSb[j]).append(A[i - 1]);
+                    if (newSb.length() > dpSb[i].length() || smallerDicOrder(newSb, dpSb[i])) {
+                        dpSb[i] = newSb;
+                    }
                 }
             }
         }
-        int res = 0;
-        for (int val : dp) {
-            res = Math.max(res, val);
+        StringBuilder resSb = new StringBuilder();
+        for (int i = 1; i <= n; i++) {
+            if (dpSb[i].length() > resSb.length() || smallerDicOrder(dpSb[i], resSb)) {
+                resSb = dpSb[i];
+            }
+        }
+        return toIntArray(resSb);
+    }
+
+    private int[] toIntArray(StringBuilder sb) {
+        char[] chars = sb.toString().toCharArray();
+        int[] res = new int[sb.length()];
+        for (int i = 0; i < chars.length; i++) {
+            res[i] = Character.getNumericValue(chars[i]);
         }
         return res;
     }
 
-
-    public int findLongestBS(int[] A, int n) {
-        // 存储牌
-        int[] top = new int[A.length];
-        int pileCount = 0;
-        for (int poker : A) {
-            int left = 0;
-            int right = pileCount;
-            // 左边界二分查找
-            while (left < right) {
-                int mid = left + ((right - left) >> 1);
-                if (poker <= top[mid]) {
-                    right = mid;
-                } else {
-                    left = mid + 1;
-                }
-            }
-            if (left == pileCount) {
-                pileCount++;
-            }
-            top[left] = poker;
-        }
-        return pileCount;
-    }
-
-    public int[] LIS(int[] A) {
-        // todo write code here
-        LinkedList<Integer>[] dp = new LinkedList[A.length];
-        for (int i = 0; i < dp.length; i++) {
-            dp[i] = new LinkedList<>();
-            dp[i].add(A[i]);
-            for (int j = 0; j < i; j++) {
-                if (A[j] < A[i]) {
-                    if (dp[i].size() == 1) {
-                        dp[i] = new LinkedList<>(dp[j]);
-                        dp[i].add(A[i]);
-                    } else if (dp[j].size() + 1 > dp[i].size() && dicOrder(dp[j], dp[i])) {
-                        dp[i] = new LinkedList<>(dp[j]);
-                        dp[i].add(A[i]);
-                    }
-                }
-            }
-        }
-        LinkedList<Integer> resList = new LinkedList<>();
-        for (LinkedList<Integer> item : dp) {
-            if (item.size() > resList.size()) {
-                resList = item;
-            }/*else if (item.size() == resList.size()) {
-                boolean replace = false;
-                // 要求字典序最小
-                for (int i = 0; i < item.size(); i++) {
-                    if (item.get(i) < resList.get(i)) {
-                        replace = true;
-                        break;
-                    }
-                }
-                if (replace) {
-                    resList = item;
-                }
-            }*/
-        }
-        return convertToArray(resList);
-    }
-
-    private boolean dicOrder(LinkedList<Integer> dpi, LinkedList<Integer> dpj) {
-        boolean replace = false;
-        // 要求字典序最小
-        for (int i = 0; i < dpi.size(); i++) {
-            if (dpj.get(i) < dpi.get(i)) {
-                replace = true;
-                break;
-            }
-        }
-        return replace;
+    private boolean smallerDicOrder(StringBuilder sb1, StringBuilder sb2) {
+        int compare = sb1.toString().compareTo(sb2.toString());
+        return compare < 0;
     }
 
     public int[] convertToArray(List<Integer> list) {

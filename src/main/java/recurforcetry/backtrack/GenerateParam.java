@@ -31,11 +31,31 @@ public class GenerateParam {
         this.n = n;
 //        btFor(1, 0);
 //        btFenKaiXie(1, 0);
-        btRight(0, 0);
+        btLeftRight(0, 0);
         return res;
     }
 
-    private void btFor(int leftCount, int rightCount) {
+
+    private void btLeftRight(int leftCount, int rightCount) {
+        if (leftCount == n && rightCount == n) {
+            res.add(track.toString());
+            return;
+        }
+        if (leftCount > n || rightCount > n) {
+            return;
+        }
+        if (leftCount < rightCount) {
+            return;
+        }
+        track.append("(");
+        btLeftRight(leftCount + 1, rightCount);
+        track.deleteCharAt(track.length() - 1);
+        track.append(")");
+        btLeftRight(leftCount, rightCount + 1);
+        track.deleteCharAt(track.length() - 1);
+    }
+
+    private void btIfElse(int leftCount, int rightCount) {
         // 如果leftCount < n，有两种选择；=3之后只能全右括号结束
         // 子序列的leftCount必须 >= rightCount
         if (leftCount == n) {
@@ -56,33 +76,15 @@ public class GenerateParam {
             }*/
             track.append(choose[i]);
             if ("(".equals(choose[i])) {
-                btFor(leftCount + 1, rightCount);
+                btIfElse(leftCount + 1, rightCount);
             } else {
-                btFor(leftCount, rightCount + 1);
+                btIfElse(leftCount, rightCount + 1);
             }
             // 删除StringBuilder的最后一个元素
             track.deleteCharAt(track.length() - 1);
         }
     }
 
-    private void btRight(int leftCount, int rightCount) {
-        if (leftCount == n && rightCount == n) {
-            res.add(track.toString());
-            return;
-        }
-        if (leftCount > n || rightCount > n) {
-            return;
-        }
-        if (leftCount < rightCount) {
-            return;
-        }
-        track.append("(");
-        btRight(leftCount + 1, rightCount);
-        track.deleteCharAt(track.length() - 1);
-        track.append(")");
-        btRight(leftCount, rightCount + 1);
-        track.deleteCharAt(track.length() - 1);
-    }
 
     private void btFenKaiXie(int leftCount, int rightCount) {
         if (leftCount == n) {
