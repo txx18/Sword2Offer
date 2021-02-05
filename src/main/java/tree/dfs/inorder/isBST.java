@@ -24,7 +24,7 @@ public class isBST {
             return 1;
         }
         // 限制最大最小的第1种写法 73.33%
-        return isBST(root, null, null) ? 1: 0;
+        return isBST(root) ? 1 : 0;
     }
 
     private boolean isBST(TreeNode root) {
@@ -34,40 +34,20 @@ public class isBST {
         // 限制最大最小的第1种写法 73.33%
 //        return isBST(root, null, null);
         // 中序遍历 递归写法 73.33%
-        return isValidBST(root);
+//        return inorderRecur(root);
         // 中序遍历 压栈写法 通过
-        /*return inorder(root);*/
+        return inorderLoop(root);
     }
 
     TreeNode pre = null;
 
     /**
-     * 中序递归方法
-     * 在NK有错误
-     * @param root
-     * @return
-     */
-    boolean isValidBST(TreeNode root) {
-        if (root == null) {
-            return true;
-        }
-        boolean left = isValidBST(root.left);
-        if (pre != null && pre.val >= root.val) {
-            return false;
-        }
-        // 记录前一个节点
-        pre = root;
-        boolean right = isValidBST(root.right);
-        return left && right;
-    }
-
-
-    /**
      * 中序循环方法
+     *
      * @param root
      * @return
      */
-    private boolean inorder(TreeNode root) {
+    private boolean inorderLoop(TreeNode root) {
         if (root == null) {
             return true;
         }
@@ -76,8 +56,7 @@ public class isBST {
             if (root != null) {
                 stack.push(root);
                 root = root.left;
-            }
-            else {
+            } else {
                 root = stack.pop();
                 // 操作
                 if (pre != null && root.val <= pre.val) {
@@ -89,6 +68,28 @@ public class isBST {
         }
         return true;
     }
+
+    /**
+     * 中序递归方法
+     * 在NK有错误
+     *
+     * @param root
+     * @return
+     */
+    boolean inorderRecur(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        boolean left = inorderRecur(root.left);
+        if (pre != null && pre.val >= root.val) {
+            return false;
+        }
+        // 记录前一个节点
+        pre = root;
+        boolean right = inorderRecur(root.right);
+        return left && right;
+    }
+
 
     private double preVal = -Double.MAX_VALUE;
 
@@ -199,4 +200,6 @@ public class isBST {
         TreeNode root = treeNodeMap.get(data[0][0]);
         return root;
     }
+
+
 }

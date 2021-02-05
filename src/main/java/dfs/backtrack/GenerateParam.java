@@ -1,4 +1,4 @@
-package recurforcetry.backtrack;
+package dfs.backtrack;
 
 import java.util.ArrayList;
 

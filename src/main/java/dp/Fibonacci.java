@@ -37,10 +37,10 @@ import java.util.Map;
  * @author Shane Tang
  * @create 2019-10-06 16:08
  */
-public class FibonacciE1001 {
+public class Fibonacci {
 
     public static void main(String[] args) {
-        FibonacciE1001 obj = new FibonacciE1001();
+        Fibonacci obj = new Fibonacci();
 //        long res = obj.fibDpTable(19);
         long res = obj.fibMemoArray(19);
 //        long res = dp(45);

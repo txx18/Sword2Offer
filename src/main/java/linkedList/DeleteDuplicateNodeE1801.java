@@ -66,19 +66,19 @@ public class DeleteDuplicateNodeE1801 {
     }
 
     private ListNode deleteDuplicatesNoLeaveRecur(ListNode head) {
+        // write code here
         if (head == null || head.next == null) {
             return head;
         }
         ListNode nxt = head.next;
         if (head.val == nxt.val) {
-            while (nxt != null && head.val == nxt.val) {
+            while (nxt != null && nxt.val == head.val) {
                 nxt = nxt.next;
             }
             return deleteDuplicatesNoLeaveRecur(nxt);
-        } else {
-            head.next = deleteDuplicatesNoLeaveRecur(nxt);
-            return head;
         }
+        head.next = deleteDuplicatesNoLeaveRecur(nxt);
+        return head;
     }
 
     public ListNode deleteDuplicatesLeaveOneLoop(ListNode head) {

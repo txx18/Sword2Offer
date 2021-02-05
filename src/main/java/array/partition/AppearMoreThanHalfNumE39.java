@@ -19,9 +19,33 @@ public class AppearMoreThanHalfNumE39 {
         int[] arr3 = {1};
         int[] arr4 = {2, 2, 2, 2, 2, 1, 3, 4, 5};
         int[] arr5 = {2, 2, 1, 1, 1, 2, 2};
-        int res = majorityElement(arr1);
+        AppearMoreThanHalfNumE39 obj = new AppearMoreThanHalfNumE39();
+        int res = obj.BoyerMooreMajorityVoteAlgorithm(arr1);
 
         System.out.println("res = " + res);
+    }
+
+    public int BoyerMooreMajorityVoteAlgorithm(int[] array) {
+        int majority = array[0];
+        int count = 1;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == majority) {
+                count++;
+            } else {
+                count--;
+            }
+            if (count == 0) {
+                majority = array[i];
+                count = 1;
+            }
+        }
+        int majorityCount = 0;
+        for (int val : array) {
+            if (val == majority) {
+                majorityCount++;
+            }
+        }
+        return majorityCount > array.length / 2 ? majority : 0;
     }
 
     /**
@@ -52,7 +76,7 @@ public class AppearMoreThanHalfNumE39 {
 
     /**
      * 转化为：找排序后的中位数，而且中位数出现的次数确实得超过一半
-     *
+     * <p>
      * 执行用时 :
      * 2095 ms
      * , 在所有 Java 提交中击败了
@@ -63,6 +87,7 @@ public class AppearMoreThanHalfNumE39 {
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
+     *
      * @param arr
      * @param l
      * @param r
@@ -81,8 +106,7 @@ public class AppearMoreThanHalfNumE39 {
         while (lessEqualIdx != mid) {
             if (lessEqualIdx < mid) {
                 lessEqualIdx = simplePartition(arr, lessEqualIdx + 1, r);
-            }
-            else {
+            } else {
 
                 lessEqualIdx = simplePartition(arr, l, lessEqualIdx - 1);
             }
@@ -98,7 +122,7 @@ public class AppearMoreThanHalfNumE39 {
 
     /**
      * 转化为：找排序后的中位数，而且中位数出现的次数确实得超过一半
-     *
+     * <p>
      * 执行用时 :
      * 831 ms
      * , 在所有 Java 提交中击败了
@@ -127,8 +151,7 @@ public class AppearMoreThanHalfNumE39 {
         int lessEqualIdx = simplePartition(arr, l, r);
         if (lessEqualIdx < mid) {
             return solutionSimplePartitionRecur(arr, lessEqualIdx + 1, r);
-        }
-        else if (lessEqualIdx > mid) {
+        } else if (lessEqualIdx > mid) {
             return solutionSimplePartitionRecur(arr, l, lessEqualIdx - 1);
         }
         // 如果lessEqualIdx == mid

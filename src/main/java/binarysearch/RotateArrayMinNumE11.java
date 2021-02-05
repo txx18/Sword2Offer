@@ -1,4 +1,4 @@
-package search.binarysearch;
+package binarysearch;
 
 /**
  * 旋转数组的最小数字
@@ -10,7 +10,7 @@ package search.binarysearch;
  * @author Shane Tang
  * @create 2019-10-07 10:45
  */
-public class MinOfRotateArrayE11 {
+public class RotateArrayMinNumE11 {
 
     public static void main(String[] args) {
         int[] rotateArr1 = {21, 23, 28, 30, 32, 50, 64, 78, 81, 95, 101, 3, 5, 11, 17};
@@ -23,6 +23,64 @@ public class MinOfRotateArrayE11 {
         System.out.println("res = " + res);
     }
 
+
+    public static int BSLoop(int[] array) {
+        if (array.length == 0) {
+            return 0;
+        }
+        int l = 0, r = array.length - 1;
+        while (l < r) {
+            int m = l + (r - l) / 2;
+            if (array[l] == array[m] && array[m] == array[r]) {
+                return findByTraverse(array, l, r);
+            }
+            // 右边是非递减数组，target在左边
+            else if (array[m] <= array[r]) {
+                r = m;
+            } else {
+                l = m + 1;
+            }
+        }
+        return array[l];
+    }
+
+    public static int BSLoop1(int[] array) {
+        if (array.length == 0) {
+            return 0;
+        }
+        int l = 0, r = array.length - 1;
+        while (l < r) {
+            int mid = l + (r - l) / 2;
+            if (array[l] == array[mid] && array[mid] == array[r]) {
+                return findByTraverse(array, l, r);
+            }
+             else if (array[l] <= array[mid]){
+                l = mid + 1;
+            } else {
+                r = mid;
+            }
+        }
+        return array[l];
+    }
+
+    private static int findByTraverse(int[] array, int l, int r) {
+        for (int i = l; i < r; i++) {
+            if (array[i + 1] < array[i])
+                return array[i + 1];
+        }
+        return array[l];
+    }
+
+    private static int findByTraverse2(int[] array, int l, int r) {
+        int minIndex = l;
+        for (int i = l + 1; i <= r; i++) {
+            if (array[i] < array[minIndex]) {
+                minIndex = i;
+            }
+        }
+        return array[minIndex];
+    }
+
     /**
      * NK
      *
@@ -32,7 +90,7 @@ public class MinOfRotateArrayE11 {
     public static int minNumberInRotateArray(int[] array) {
 //        return solutionBSLoop(array);
 //        return solutionBSRecur(array, 0, array.length - 1);
-        return solutionBSLoopCYC(array);
+        return BSLoop(array);
     }
 
     /**
@@ -113,47 +171,5 @@ public class MinOfRotateArrayE11 {
             }
         }
         return rotateArr[mid];
-    }
-
-    private static int findByTraverse(int[] rotateArr, int l, int r) {
-        int minIndex = l;
-        for (int i = l + 1; i <= r; i++) {
-            if (rotateArr[i] < rotateArr[minIndex]) {
-                minIndex = i;
-            }
-        }
-        return rotateArr[minIndex];
-    }
-
-    /**
-     * 通过NK
-     *
-     * @param nums
-     * @return
-     */
-    public static int solutionBSLoopCYC(int[] nums) {
-        if (nums.length == 0) {
-            return 0;
-        }
-        int l = 0, h = nums.length - 1;
-        while (l < h) {
-            int m = l + (h - l) / 2;
-            if (nums[l] == nums[m] && nums[m] == nums[h]) {
-                return minNumber(nums, l, h);
-            } else if (nums[m] <= nums[h]) {
-                h = m;
-            } else {
-                l = m + 1;
-            }
-        }
-        return nums[l];
-    }
-
-    private static int minNumber(int[] nums, int l, int h) {
-        for (int i = l; i < h; i++) {
-            if (nums[i] > nums[i + 1])
-                return nums[i + 1];
-        }
-        return nums[l];
     }
 }

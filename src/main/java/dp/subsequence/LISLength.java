@@ -13,11 +13,12 @@ public class LISLength {
     public static void main(String[] args) {
         int[] arr = new int[]{1, 4, 3, 4, 2, 3};
         int[] arr1 = new int[]{2, 1, 5, 3, 6, 4, 8, 9, 7};
+        int [] arr2 = new int[0];
         LISLength obj = new LISLength();
 //        int[] res = obj.LIS(arr1);
 //        System.out.println("res = " + Arrays.toString(res));
 
-        int res = obj.dpTable1(arr1, arr1.length);
+        int res = obj.dpTable1(arr2, arr2.length);
         System.out.println("res = " + res);
     }
 
@@ -39,6 +40,8 @@ public class LISLength {
         }
         return res;
     }
+
+
 
     public int dpTable0(int[] A, int n) {
         // write code here

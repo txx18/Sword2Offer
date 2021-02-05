@@ -6,6 +6,7 @@ import zhelper.ListUtils.*;
 
 /**
  * 反转链表
+ *
  * @author Shane Tang
  * @version V1.0
  * @create 2020-02-15 15:18
@@ -45,8 +46,35 @@ public class ReverseListE24 {
         return pre;
     }
 
+    ListNode nxt = null;
+
+    private ListNode reverseRecur(ListNode a, ListNode b) {
+        if (a.next == b) {
+            nxt = a.next;
+            return a;
+        }
+        ListNode newHead = reverseRecur(a.next, b);
+        // 后序
+        a.next.next = a;
+        a.next = nxt;
+        return newHead;
+    }
+
+    private ListNode reverse(ListNode a, ListNode b) {
+        ListNode pre, nxt;
+        pre = nxt = null;
+        while (a != b) {
+            nxt = a.next;
+            a.next = pre;
+            pre = a;
+            a = nxt;
+        }
+        return pre;
+    }
+
     /**
      * LC
+     *
      * @param head
      * @return
      */
@@ -65,6 +93,7 @@ public class ReverseListE24 {
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
+     *
      * @param head
      * @return
      */
@@ -82,37 +111,6 @@ public class ReverseListE24 {
         return pre;
     }
 
-    /**
-     * 执行用时 :
-     * 0 ms
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * 内存消耗 :
-     * 42.2 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * @param head
-     * @return
-     */
-    private static ListNode solutionNewHeadCYC(ListNode head) {
-        ListNode newHead = new ListNode(-1);
-        ListNode cur = head;
-        while (cur != null) {
-            // 记住head的nextNode
-            ListNode next = cur.next;
-            // 断开原来的next指针，指向新增结点的next
-            cur.next = newHead.next;
-            // 新结点的next指针指向head
-            newHead.next = cur;
-            // head后移
-            cur = next;
-        }
-        // 循环结束后，链表反转完毕，头结点就是newNode.next
-        return newHead.next;
-    }
-
     private static ListNode solutionInsertHeadNodeCYC(ListNode head) {
         // 创建新的结点
         ListNode newHead = new ListNode(-1);
@@ -126,6 +124,7 @@ public class ReverseListE24 {
             // head后移
             head = next;
         }
+        // 循环结束后，链表反转完毕，头结点就是newNode.next
         return newHead.next;
     }
 }

@@ -76,7 +76,7 @@ public class Changes {
         int[] dp = new int[aim + 1];
         Arrays.fill(dp, aim);
         dp[0] = 0;
-        for (int i = 0; i <= aim; i++) {
+        for (int i = 1; i <= aim; i++) {
             for (int coin: arr) {
                 if (i - coin < 0) {
                     continue;

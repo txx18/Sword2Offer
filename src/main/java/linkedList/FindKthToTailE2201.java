@@ -1,6 +1,5 @@
 package linkedList;
 
-import zhelper.ListUtils;
 import zhelper.ListUtils.*;
 
 import java.util.Scanner;

@@ -1,5 +1,6 @@
 package tree.dfs.inorder;
 
+import zhelper.TreeTest;
 import zhelper.TreeUtils.*;
 
 import java.util.ArrayList;
@@ -46,6 +47,13 @@ import java.util.List;
  */
 public class kthLargestE54 {
 
+    public static void main(String[] args) {
+        TreeNode treeNode = TreeTest.BSTree();
+        kthLargestE54 obj = new kthLargestE54();
+        TreeNode res = obj.KthNode(treeNode, 1);
+        System.out.println("res = " + res.val);
+    }
+
     public int kthLargest(TreeNode root, int k) {
 //        return solution(root, k);
         return solutionList(root, k);
@@ -68,6 +76,7 @@ public class kthLargestE54 {
         // 这个必须返回外部变量，不然递归返回的就是根结点了
         return res;
     }
+
 
     List<Integer> inorderList = new ArrayList<>();
 
@@ -118,6 +127,7 @@ public class kthLargestE54 {
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
+     *
      * @param root
      * @param k
      * @return
