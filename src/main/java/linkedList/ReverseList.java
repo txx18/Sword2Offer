@@ -11,7 +11,7 @@ import zhelper.ListUtils.*;
  * @version V1.0
  * @create 2020-02-15 15:18
  */
-public class ReverseListE24 {
+public class ReverseList {
 
     public static void main(String[] args) {
         int[] arr1 = {0, 1, 2, 3, 4};
@@ -23,10 +23,10 @@ public class ReverseListE24 {
         int[] arr7 = {2, 4, 6, 8};
         ListNode head1 = ListUtils.convertToLinkedList(arr1);
         ListUtils.printSingleList(head1);
-
+        ReverseList obj = new ReverseList();
 //        ListNode res = reverseList(head1);
 
-        ListNode res = solutionReversePointerZS(head1);
+        ListNode res = obj.reverseRecur(head1);
 //        ListNode res = reverse(head1.next, head1.next.next.next.next);
 //        ListNode res = reverseBetween(head1, 2, 4);
 
@@ -34,40 +34,25 @@ public class ReverseListE24 {
 
     }
 
-    private ListNode reverse(ListNode head) {
-        ListNode pre = null, nxt, cur;
+    public ListNode reverseRecur(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode newHead = reverseRecur(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
+
+    private ListNode reverseLoop(ListNode head) {
+        ListNode pre, nxt, cur;
+        pre = nxt = null;
         cur = head;
         while (cur != null) {
             nxt = cur.next;
             cur.next = pre;
             pre = cur;
             cur = nxt;
-        }
-        return pre;
-    }
-
-    ListNode nxt = null;
-
-    private ListNode reverseRecur(ListNode a, ListNode b) {
-        if (a.next == b) {
-            nxt = a.next;
-            return a;
-        }
-        ListNode newHead = reverseRecur(a.next, b);
-        // 后序
-        a.next.next = a;
-        a.next = nxt;
-        return newHead;
-    }
-
-    private ListNode reverse(ListNode a, ListNode b) {
-        ListNode pre, nxt;
-        pre = nxt = null;
-        while (a != b) {
-            nxt = a.next;
-            a.next = pre;
-            pre = a;
-            a = nxt;
         }
         return pre;
     }
@@ -82,21 +67,6 @@ public class ReverseListE24 {
         return solutionReversePointerZS(head);
     }
 
-    /**
-     * 执行用时 :
-     * 0 ms
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * 内存消耗 :
-     * 38.4 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     *
-     * @param head
-     * @return
-     */
     private static ListNode solutionReversePointerZS(ListNode head) {
         ListNode next = null;
         ListNode pre = null;

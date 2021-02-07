@@ -12,7 +12,7 @@ import java.util.Stack;
  * @author Shane Tang
  * @create 2019-10-06 11:34
  */
-public class PrintListFromTailToHeadE06 {
+public class PrintListFromTailToHead {
 
 
     public static void main(String[] args) {
@@ -29,12 +29,23 @@ public class PrintListFromTailToHeadE06 {
         System.out.println(Arrays.toString(res));
     }
 
+    ArrayList<Integer> res = new ArrayList<>();
+
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+        if (listNode == null) {
+            return res;
+        }
+        printListFromTailToHead(listNode.next);
+        res.add(listNode.val);
+        return res;
+    }
+
     /**
      * NK
      * @param listNode
      * @return
      */
-    public static ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+    public static ArrayList<Integer> solution(ListNode listNode) {
 //        return stoSolutionRecur(listNode);
 //        return zsSolutionReversePointer(listNode);
         return solutionInsertHeadNodeCYC(listNode);
@@ -50,20 +61,7 @@ public class PrintListFromTailToHeadE06 {
         return solutionStack(head);
     }
 
-    /**
-     * 执行用时 :
-     * 2 ms
-     * , 在所有 Java 提交中击败了
-     * 69.12%
-     * 的用户
-     * 内存消耗 :
-     * 40.1 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * @param head
-     * @return
-     */
+
     private static int[] solutionStack(ListNode head) {
         Stack<Integer> stack = new Stack<>();
         ListNode cur = head;
@@ -78,20 +76,7 @@ public class PrintListFromTailToHeadE06 {
         return res;
     }
 
-    /**
-     * 执行用时 :
-     * 0 ms
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * 内存消耗 :
-     * 39.5 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * @param head
-     * @return
-     */
+
     private static int[] solutionReversePointer(ListNode head) {
         if (head == null) {
             return new int[0];

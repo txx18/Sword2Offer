@@ -7,7 +7,7 @@ import zhelper.TreeUtils.*;
  * @version V1.0
  * @create 2020-03-03 22:59
  */
-public class LCA_E6802 {
+public class LCA {
 
     public int lowestCommonAncestor (TreeNode root, int o1, int o2) {
         // write code here

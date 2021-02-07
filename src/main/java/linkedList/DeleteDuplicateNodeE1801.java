@@ -65,20 +65,20 @@ public class DeleteDuplicateNodeE1801 {
         }
     }
 
-    private ListNode deleteDuplicatesNoLeaveRecur(ListNode head) {
+    private ListNode deleteDuplicatesNoLeaveRecur(ListNode pHead) {
         // write code here
-        if (head == null || head.next == null) {
-            return head;
+        if (pHead == null || pHead.next == null) {
+            return pHead;
         }
-        ListNode nxt = head.next;
-        if (head.val == nxt.val) {
-            while (nxt != null && nxt.val == head.val) {
+        ListNode nxt = pHead.next;
+        if (pHead.val == nxt.val) {
+            while (nxt != null && nxt.val == pHead.val) {
                 nxt = nxt.next;
             }
             return deleteDuplicatesNoLeaveRecur(nxt);
         }
-        head.next = deleteDuplicatesNoLeaveRecur(nxt);
-        return head;
+        pHead.next = deleteDuplicatesNoLeaveRecur(nxt);
+        return pHead;
     }
 
     public ListNode deleteDuplicatesLeaveOneLoop(ListNode head) {

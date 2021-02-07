@@ -5,7 +5,7 @@ import zhelper.ListUtils.*;
 import java.util.*;
 
 
-public class reverseKGroup {
+public class ReverseKGroup {
 
 
     public static void main(String[] args) {
@@ -18,7 +18,7 @@ public class reverseKGroup {
             cur = cur.next;
         }
         int k = sc.nextInt();
-        reverseKGroup obj = new reverseKGroup();
+        ReverseKGroup obj = new ReverseKGroup();
         cur = obj.reverseKGroup(preHead.next, k);
         while (cur != null) {
             System.out.print(cur.val + " ");

@@ -6,6 +6,12 @@ package string;
  */
 public class FirstNotRepeatingChar {
 
+    public static void main(String[] args) {
+        FirstNotRepeatingChar obj = new FirstNotRepeatingChar();
+        int res = obj.FirstNotRepeatingChar("google");
+        System.out.println("res = " + res);
+    }
+
     public int FirstNotRepeatingChar(String str) {
         // char只有256种可能
         int[] counts = new int[256];

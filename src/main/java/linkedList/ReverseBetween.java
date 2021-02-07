@@ -7,7 +7,7 @@ import zhelper.ListUtils.*;
  * @author ShaneTang
  * @create 2020-12-27 20:22
  */
-public class reverseBetween {
+public class ReverseBetween {
 
     public static void main(String[] args) {
         int[] arr1 = {0, 1, 2, 3, 4};
@@ -19,7 +19,7 @@ public class reverseBetween {
         int[] arr7 = {2, 4, 6, 8};
         ListNode head1 = ListUtils.convertToLinkedList(arr1);
         ListUtils.printSingleList(head1);
-        reverseBetween obj = new reverseBetween();
+        ReverseBetween obj = new ReverseBetween();
         ListNode res = obj.reverseBetween(head1, 2, 4);
 //        ListNode res = obj.reverseMToLength(head1, 3);
         ListUtils.printSingleList(res);
