@@ -42,31 +42,42 @@ public class Fibonacci {
     public static void main(String[] args) {
         Fibonacci obj = new Fibonacci();
 //        long res = obj.fibDpTable(19);
-        long res = obj.fibMemoArray(19);
+        long res = obj.solutionDpTable(50);
 //        long res = dp(45);
         System.out.println("res = " + res);
     }
-
-    int first = 1;
-    int second = 1;
 
     /**
      * 优化空间
      * 当前状态只跟前两个状态有关
      * 时间n，空间1
-     *
+     * i从几开始，到几，要看语境，有的把第0项叫第一项。。
      * @param n 从0开始数
      * @return
      */
-    public int dpOpt(int n) {
-        if (n == 1 || n == 2) {
-            return 1;
+    public int solutionDpOpt(int n) {
+        if (n <= 1) {
+            return n;
         }
-        int p1 = first;
-        int p2 = second;
+        int p1 = 0;
+        int p2 = 1;
         int res = 0;
-        // i从几开始，到几，要看语境，有的把第0项叫第一项。。
-        for (int i = 2; i < n; i++) {
+        for (int i = 2; i <= n; i++) {
+            res = p1 + p2;
+            p1 = p2;
+            p2 = res;
+        }
+        return res;
+    }
+
+    public int rectCover(int target) {
+        if (target <= 2) {
+            return target;
+        }
+        int p1 = 1;
+        int p2 = 2;
+        int res = 0;
+        for (int i = 3; i <= target; i++) {
             res = p1 + p2;
             p1 = p2;
             p2 = res;
@@ -80,13 +91,13 @@ public class Fibonacci {
      * @param n
      * @return
      */
-    public int dpTable(int n) {
+    public int solutionDpTable(int n) {
         if (n == 1 || n == 2) {
-            return first;
+            return 1;
         }
         int[] dp = new int[n + 1];
-        dp[1] = first;
-        dp[2] = second;
+        dp[1] = 0;
+        dp[2] = 1;
         for (int i = 3; i <= n; i++) {
             dp[i] = dp[i - 1] + dp[i - 2];
             dp[i] %= 1000000007;
@@ -97,14 +108,14 @@ public class Fibonacci {
 
     int[] memoArray;
 
-    public int fibMemoArray(int n) {
+    public int solutionMemoArray(int n) {
         memoArray = new int[n + 1];
         return recurMemoArray(n);
     }
 
     private int recurMemoArray(int n) {
         if (n == 1 || n == 2) {
-            return first;
+            return 1;
         }
         if (memoArray[n] != 0) {
             return memoArray[n];
@@ -115,16 +126,16 @@ public class Fibonacci {
 
     Map<Integer, Integer> memo = new HashMap<>();
 
-    public int recurMemoMap(int n) {
+    public int solutionRecurMemoMap(int n) {
         if (n == 1 || n == 2) {
-            return first;
+            return 1;
         }
         // 如果计算过，查备忘录
         if (memo.get(n) != null) {
             return memo.get(n);
         }
         // 没计算过，递归
-        int sum = recurMemoMap(n - 1) + recurMemoMap(n - 2);
+        int sum = solutionRecurMemoMap(n - 1) + solutionRecurMemoMap(n - 2);
         // 加入备忘录
         memo.put(n, sum);
         return memo.get(n);
@@ -138,10 +149,10 @@ public class Fibonacci {
      * @param n 从0开始数f(0) = 0
      * @return
      */
-    public int recurForce(int n) {
+    public int solutionRecurForce(int n) {
         if (n <= 1) {
             return n;
         }
-        return recurForce(n - 1) + recurForce(n - 2);
+        return solutionRecurForce(n - 1) + solutionRecurForce(n - 2);
     }
 }

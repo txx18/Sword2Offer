@@ -25,10 +25,10 @@ import java.util.*;
  * @author ShaneTang
  * @create 2021-01-12 11:09
  */
-public class Permute {
+public class PermuteNoDup {
 
     public static void main(String[] args) {
-        Permute obj = new Permute();
+        PermuteNoDup obj = new PermuteNoDup();
         int[] arr = {1, 2, 3};
         ArrayList<ArrayList<Integer>> res = obj.permute(arr);
         System.out.println("res = " + res);

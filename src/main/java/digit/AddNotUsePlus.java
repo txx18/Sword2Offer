@@ -6,14 +6,14 @@ package digit;
  */
 public class AddNotUsePlus {
 
-    public int recur(int num1, int num2) {
+    public int solutionRecur(int num1, int num2) {
         if (num2 == 0) {
             return num1;
         }
-        return recur(num1 ^ num2, (num1 & num2) << 1);
+        return solutionRecur(num1 ^ num2, (num1 & num2) << 1);
     }
 
-    public int loop(int num1, int num2) {
+    public int solutionLoop(int num1, int num2) {
         int sum = 0;
         int carry = 0;
         while (num2 != 0) {

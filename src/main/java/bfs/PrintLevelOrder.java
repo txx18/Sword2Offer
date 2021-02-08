@@ -10,7 +10,7 @@ import java.util.*;
  * @version V1.0
  * @create 2020-02-21 16:37
  */
-public class PrintLevelOrderE3201 {
+public class PrintLevelOrder {
 
     public static void main(String[] args) {
         TreeNode head = new TreeNode(1);
@@ -24,6 +24,25 @@ public class PrintLevelOrderE3201 {
         System.out.println("res = " + Arrays.toString(res));
 
     }
+
+    private static ArrayList<Integer> PrintFromTopToBottom(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        TreeNode cur = root;
+        queue.offer(cur);
+        while (!queue.isEmpty()) {
+            cur = queue.poll();
+            if (cur != null) {
+                res.add(cur.val);
+            }else {
+                continue;
+            }
+            queue.offer(cur.left);
+            queue.offer(cur.right);
+        }
+        return res;
+    }
+
 
     public static int[] levelOrder(TreeNode root) {
         return solutionQueue(root);
@@ -40,6 +59,7 @@ public class PrintLevelOrderE3201 {
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
+     *
      * @param root
      * @return
      */
@@ -63,7 +83,7 @@ public class PrintLevelOrderE3201 {
                 queue.offer(cur.left);
             }
             if (cur.right != null) {
-                queue.offer(cur. right);
+                queue.offer(cur.right);
             }
         }
         // 返回数组;

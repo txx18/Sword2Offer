@@ -47,7 +47,7 @@ public class CloneRandomList {
             RandomListNode clone = new RandomListNode(cur.label);
             clone.next = cur.next;
             cur.next = clone;
-            cur = cur.next.next;
+            cur = clone.next;
         }
         // 设置random指针
         cur = pHead;
@@ -63,9 +63,9 @@ public class CloneRandomList {
         cur = pHead;
         RandomListNode pCloneHead = pHead.next;
         while (cur.next != null) {
-            RandomListNode nxt = cur.next;
-            cur.next = nxt.next;
-            cur = nxt;
+            RandomListNode clone = cur.next;
+            cur.next = clone.next;
+            cur = clone;
         }
         return pCloneHead;
     }

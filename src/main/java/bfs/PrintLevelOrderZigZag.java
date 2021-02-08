@@ -10,7 +10,7 @@ import zhelper.TreeUtils.*;
  * @version V1.0
  * @create 2020-02-21 21:09
  */
-public class PrintLevelOrderZigZagE3203 {
+public class PrintLevelOrderZigZag {
 
     public static void main(String[] args) {
         TreeNode tree1 = new TreeNode(1);
@@ -33,20 +33,22 @@ public class PrintLevelOrderZigZagE3203 {
         return solutionDeque(root);
     }
 
-    public List<List<Integer>> zigzagLevelOrder (TreeNode root) {
+    public List<List<Integer>> zigzagLevelOrder (TreeNode pRoot) {
         // write code here
         List<List<Integer>> res = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         int step = 0;
-        queue.offer(root);
+        queue.offer(pRoot);
         while(!queue.isEmpty()) {
             int size = queue.size();
-            LinkedList<Integer> level = new LinkedList<>();
+            // 双向链表
+            Deque<Integer> level = new LinkedList<>();
             for (int i = 0; i < size; i++) {
                 TreeNode cur = queue.poll();
                 if (cur == null) {
                     continue;
                 }else {
+                    // 偶数层往后加，奇数层往前加
                     if (step % 2 == 0) {
                         level.add(cur.val);
                     }else {

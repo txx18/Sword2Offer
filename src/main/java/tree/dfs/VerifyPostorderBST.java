@@ -1,20 +1,65 @@
-package tree.dfs.postorder;
+package tree.dfs;
 
 /**
  * @author Shane Tang
  * @version V1.0
  * @create 2020-03-13 21:55
  */
-public class VerifyPostorderE33 {
+public class VerifyPostorderBST {
 
     public static void main(String[] args) {
         int[] arr1 = {5, 4, 3, 2, 1};
-        VerifyPostorderE33 obj = new VerifyPostorderE33();
+        VerifyPostorderBST obj = new VerifyPostorderBST();
 //        boolean res = obj.verifyPostorder(arr1);
 //        System.out.println("res = " + res);
 
-        boolean res = obj.VerifySquenceOfBST(arr1);
+        boolean res = obj.VerifySequenceOfBST(arr1);
         System.out.println("res = " + res);
+    }
+
+    public boolean VerifySequenceOfBST(int[] sequence) {
+        if (sequence == null || sequence.length == 0)
+            return false;
+        return verify(sequence, 0, sequence.length - 1);
+    }
+
+    private boolean verify(int[] seq, int l, int r) {
+        // base case
+        if (r - l <= 1)
+            return true;
+        int rootVal = seq[r];
+        // 就当做BST来检验，试图找到左右子树分界点
+        int cutIndex = l;
+        while (cutIndex < r && seq[cutIndex] <= rootVal){
+            cutIndex++;
+        }
+        // 验证 右 >= 根
+        for (int i = cutIndex; i < r; i++)
+            if (seq[i] < rootVal) {
+                return false;
+            }
+        return verify(seq, l, cutIndex - 1) && verify(seq, cutIndex, r - 1);
+    }
+
+    private boolean test(int[] seq, int l, int r) {
+        if (r - l <= 1) {
+            return true;
+        }
+        int rootVal = seq[r];
+        int cutIndex = l;
+        for (int i = l; i < r; i++) {
+            if (seq[i] > rootVal) {
+                cutIndex = i;
+                break;
+            }
+            cutIndex = r;
+        }
+        for (int i = cutIndex; i < r; i++) {
+            if (seq[i] < rootVal) {
+                return false;
+            }
+        }
+        return test(seq, l, cutIndex - 1) && test(seq, cutIndex, r - 1);
     }
 
     // 数组的最后一个元素是头结点的值
@@ -64,22 +109,4 @@ public class VerifyPostorderE33 {
     }
 
 
-    public boolean VerifySquenceOfBST(int[] sequence) {
-        if (sequence == null || sequence.length == 0)
-            return false;
-        return verify(sequence, 0, sequence.length - 1);
-    }
-
-    private boolean verify(int[] sequence, int first, int last) {
-        if (last - first <= 1)
-            return true;
-        int rootVal = sequence[last];
-        int cutIndex = first;
-        while (cutIndex < last && sequence[cutIndex] <= rootVal)
-            cutIndex++;
-        for (int i = cutIndex; i < last; i++)
-            if (sequence[i] < rootVal)
-                return false;
-        return verify(sequence, first, cutIndex - 1) && verify(sequence, cutIndex, last - 1);
-    }
 }

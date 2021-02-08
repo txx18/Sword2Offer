@@ -42,63 +42,35 @@ import zhelper.TreeUtils.*;
  * @version V1.0
  * @create 2020-03-11 20:36
  */
-public class IsSubStructureE26 {
+public class IsSubtree {
 
-    public boolean isSubStructure(TreeNode A, TreeNode B) {
-        return solution(A, B);
-    }
 
-    /**
-     * 执行用时 :
-     * 1 ms
-     * , 在所有 Java 提交中击败了
-     * 39.57%
-     * 的用户
-     * 内存消耗 :
-     * 42.7 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * @param A
-     * @param B
-     * @return
-     */
-    private boolean solution(TreeNode A, TreeNode B) {
-        // 必须要
-        if (A == null || B == null) {
+    public boolean HasSubtree(TreeNode root1, TreeNode root2) {
+        if (root1 == null || root2 == null) {
             return false;
         }
-        // 先序遍历框架
-        boolean isSub = check(A, B);
-        if (isSub) {
+        boolean res = check(root1, root2);
+        if (res) {
             return true;
         }
-        boolean isLeftSub = solution(A.left, B);
-        if (isLeftSub) {
+        boolean leftRes = HasSubtree(root1.left, root2);
+        if (leftRes) {
             return true;
         }
-        return solution(A.right, B);
-//        return check(A, B) || solution(A.left, B) || solution(A.right, B);
+        return HasSubtree(root1.right, root2);
     }
 
     private boolean check(TreeNode A, TreeNode B) {
-        // 先序遍历框架
-        // 如果B跟随A遍历完，返回true
         if (B == null) {
             return true;
         }
-        // 如果A遍历完都没成功，或者值不相等
         if (A == null) {
             return false;
         }
         if (A.val != B.val) {
             return false;
         }
-        // B跟随A遍历过程
-        boolean checkLeft = check(A.left, B.left);
-        boolean checkRight = check(A.right, B.right);
-        return checkLeft && checkRight;
-//        return check(A.left, B.left) && check(A.right, B.right);
-
+        return check(A.left, B.left) && check(A.right, B.right);
     }
+
 }

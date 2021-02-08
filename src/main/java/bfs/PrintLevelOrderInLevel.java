@@ -9,7 +9,7 @@ import zhelper.TreeUtils.*;
  * @version V1.0
  * @create 2020-02-21 17:21
  */
-public class PrintLevelOrderInLevelE3202 {
+public class PrintLevelOrderInLevel {
 
     public static void main(String[] args) {
         TreeNode tree1 = new TreeNode(1);
@@ -29,14 +29,10 @@ public class PrintLevelOrderInLevelE3202 {
         }
     }
 
-    public static List<List<Integer>> levelOrder(TreeNode root) {
-        return solutionQueue(root);
-
-    }
 
     public static ArrayList<ArrayList<Integer>> levelOrderList(TreeNode root) {
         // write code here
-        ArrayList<ArrayList<Integer>> allLevelList = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         if (root != null) {
             queue.offer(root);
@@ -44,23 +40,27 @@ public class PrintLevelOrderInLevelE3202 {
         // 对所有层
         while (!queue.isEmpty()) {
             int size = queue.size();
-            ArrayList<Integer> singleLevelList = new ArrayList<>();
+            ArrayList<Integer> level = new ArrayList<>();
             // 对每一层
             for (int i = 0; i < size; i++) {
                 TreeNode cur = queue.poll();
                 if (cur == null) {
                     continue;
                 }
-                singleLevelList.add(cur.val);
+                level.add(cur.val);
                 queue.offer(cur.left);
                 queue.offer(cur.right);
             }
-            if (singleLevelList.size() == 0) {
+            if (level.size() == 0) {
                 continue;
             }
-            allLevelList.add(singleLevelList);
+            res.add(level);
         }
-        return allLevelList;
+        return res;
+    }
+
+    public static List<List<Integer>> levelOrder(TreeNode root) {
+        return solutionQueue(root);
     }
 
     /**
