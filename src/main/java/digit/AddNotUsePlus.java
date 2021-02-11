@@ -19,7 +19,7 @@ public class AddNotUsePlus {
         while (num2 != 0) {
             // 1、不考虑进位，每一位相加
             sum = num1 ^ num2;
-            // 2、考虑进位
+            // 2、只考虑进位
             carry = (num1 & num2) << 1;
             // 3、相加
             num1 = sum;

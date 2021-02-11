@@ -66,24 +66,24 @@ public class MoreEqualLeftIndex {
         if (nums.length == 0) {
             return -1;
         }
-        int left = 0, right = nums.length; // 注意
-        while (left < right) { // 注意
-            int mid = left + ((right - left) >> 1);
+        int l = 0, r = nums.length; // 注意
+        while (l < r) { // 注意
+            int mid = l + ((r - l) >> 1);
             if (target <= nums[mid]) {
-                right = mid;
+                r = mid;
             } else if (target > nums[mid]) {
-                left = mid + 1;
+                l = mid + 1;
             }
         }
-        // 如果需求是顺序插入位置
-        return left;
+        // 如果需求是 左边界 / 顺序插入位置
+        return l;
         // 如果需求是不存在时返回-1
 /*        // target 比所有数都大
-        if (left == nums.length) {
+        if (l == nums.length) {
             return -1;
         }
         // 类似之前算法的处理方式
-        return nums[left] == target ? left : -1;*/
+        return nums[l] == target ? l : -1;*/
     }
 
 

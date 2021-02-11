@@ -13,14 +13,14 @@ public class FirstNotRepeatingChar {
     }
 
     public int FirstNotRepeatingChar(String str) {
-        // char只有256种可能
-        int[] counts = new int[256];
+        // char常用的有128个
+        int[] charCounts = new int[128];
         char[] chars = str.toCharArray();
-        for (char aChar : chars) {
-            counts[aChar]++;
+        for (int i = 0; i < chars.length; i++) {
+            charCounts[chars[i]]++;
         }
         for (int i = 0; i < chars.length; i++) {
-            if (counts[chars[i]] == 1) {
+            if (charCounts[chars[i]] == 1) {
                 return i;
             }
         }
