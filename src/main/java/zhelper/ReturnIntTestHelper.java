@@ -1,6 +1,6 @@
 package zhelper;
 
-import binarysearch.CountOfNumOfSortedArrE5301;
+import binarysearch.NumCountOfSortArr;
 
 import static zhelper.ArrayUtils.*;
 
@@ -14,12 +14,12 @@ import static zhelper.ArrayUtils.*;
 public class ReturnIntTestHelper {
 
     private static int solution(int[] arr) {
-        return CountOfNumOfSortedArrE5301.solutionBSRecurME(arr, 1);
+        return NumCountOfSortArr.solutionBSRecurME(arr, 1);
     }
 
     // for test
     public static int comparator(int[] arr) {
-        return CountOfNumOfSortedArrE5301.solutionBSLoopCYC(arr, 1);
+        return NumCountOfSortArr.solutionBSLoop(arr, 1);
     }
 
     // for test

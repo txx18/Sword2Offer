@@ -1,6 +1,4 @@
-package array.partition;
-
-import zhelper.ArrayUtils;
+package array;
 
 /**
  * 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
@@ -14,7 +12,7 @@ import zhelper.ArrayUtils;
 public class AppearMoreThanHalfNumE39 {
 
     public static void main(String[] args) {
-        int[] arr1 = {1, 2, 3, 2, 2, 2, 5, 4, 2};
+        int[] arr1 = {3, 2, 3, 3, 5, 4, 2};
         int[] arr2 = {1, 2, 3, 2, 4, 2, 5, 2, 3};
         int[] arr3 = {1};
         int[] arr4 = {2, 2, 2, 2, 2, 1, 3, 4, 5};
@@ -27,7 +25,7 @@ public class AppearMoreThanHalfNumE39 {
 
     public int BoyerMooreMajorityVoteAlgorithm(int[] array) {
         int majority = array[0];
-        int count = 1;
+        int count = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] == majority) {
                 count++;

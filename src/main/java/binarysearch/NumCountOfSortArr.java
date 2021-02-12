@@ -9,7 +9,7 @@ import java.util.Arrays;
  * @version V1.0
  * @create 2020-02-06 11:53
  */
-public class CountOfNumOfSortedArrE5301 {
+public class NumCountOfSortArr {
 
     public static void main(String[] args) {
         int[] arr1 = {3, 5, 11, 17, 21, 23, 28, 28, 28, 28, 30, 32, 50, 64, 64, 78, 81, 95, 101};
@@ -18,19 +18,10 @@ public class CountOfNumOfSortedArrE5301 {
         System.out.println("res = " + res);
     }
 
-    /**
-     * NK
-     * @param array
-     * @param k
-     * @return
-     */
-    public static int GetNumberOfK(int[] array, int k) {
-//        return stoSolutionBSLoop(array, k);
-        return solutionBSRecurME(array, k);
-    }
 
     /**
      * LC
+     *
      * @param nums
      * @param target
      * @return
@@ -38,7 +29,42 @@ public class CountOfNumOfSortedArrE5301 {
     public static int search(int[] nums, int target) {
 //        return mySolutionBSRecur(nums, target);
 //        return solutionByTraverse(nums, target);
-        return solutionBSLoopCYC(nums, target);
+        return solutionBSLoop(nums, target);
+    }
+
+    /**
+     * 已通过NKOJ
+     */
+    public static int solutionBSLoop(int[] array, int k) {
+        // 搜索k和k+1的左边界
+        int firstIndex = BS(array, k);
+        int lastIndex = BS(array, k + 1);
+        return (firstIndex == array.length || array[firstIndex] != k) ? 0 : lastIndex - firstIndex;
+    }
+
+    private static int BS(int[] nums, int k) {
+        int l = 0, r = nums.length;
+        while (l < r) {
+            int m = l + (r - l) / 2;
+            if (k <= nums[m]) {
+                r = m;
+            } else {
+                l = m + 1;
+            }
+        }
+        return l;
+    }
+
+    /**
+     * NK
+     *
+     * @param array
+     * @param k
+     * @return
+     */
+    public static int GetNumberOfK(int[] array, int k) {
+//        return stoSolutionBSLoop(array, k);
+        return solutionBSRecurME(array, k);
     }
 
     /**
@@ -53,6 +79,7 @@ public class CountOfNumOfSortedArrE5301 {
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
+     *
      * @param array
      * @param k
      * @return
@@ -105,6 +132,7 @@ public class CountOfNumOfSortedArrE5301 {
 
     /**
      * 已通过NKOJ
+     *
      * @param sortedArr
      * @param k
      * @return
@@ -206,6 +234,7 @@ public class CountOfNumOfSortedArrE5301 {
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
+     *
      * @param arr
      * @param k
      * @return
@@ -221,38 +250,5 @@ public class CountOfNumOfSortedArrE5301 {
         return count;
     }
 
-    /**
-     * 已通过NKOJ
-     *执行用时 :
-     * 0 ms
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * 内存消耗 :
-     * 46.9 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * @param array
-     * @param k
-     * @return
-     */
-    public static int solutionBSLoopCYC(int[] array, int k) {
-        int first = cycBinarySearch(array, k);
-        int last = cycBinarySearch(array, k + 1);
-        return (first == array.length || array[first] != k) ? 0 : last - first;
-    }
 
-    private static int cycBinarySearch(int[] nums, int K) {
-        int l = 0, h = nums.length;
-        while (l < h) {
-            int m = l + (h - l) / 2;
-            if (nums[m] >= K) {
-                h = m;
-            } else {
-                l = m + 1;
-            }
-        }
-        return l;
-    }
 }

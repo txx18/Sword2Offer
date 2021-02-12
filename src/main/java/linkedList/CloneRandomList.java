@@ -63,9 +63,9 @@ public class CloneRandomList {
         cur = pHead;
         RandomListNode pCloneHead = pHead.next;
         while (cur.next != null) {
-            RandomListNode clone = cur.next;
-            cur.next = clone.next;
-            cur = clone;
+            RandomListNode nxt = cur.next;
+            cur.next = nxt.next;
+            cur = nxt;
         }
         return pCloneHead;
     }

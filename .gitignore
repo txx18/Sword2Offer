@@ -3,6 +3,7 @@
 .idea/
 *.iml
 Course/
+test/
 
 ### Java template
 # Compiled class file

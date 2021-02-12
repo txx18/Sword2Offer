@@ -1,6 +1,4 @@
-package array.twoPointer;
-
-import java.util.Iterator;
+package twoPointer;
 
 /**
  * @author ShaneTang

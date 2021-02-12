@@ -16,7 +16,6 @@ import java.util.Arrays;
  * 使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，
  * 并保证奇数和奇数，偶数和偶数之间的相对位置不变。
  *
- *
  * @author Shane Tang
  * @version V1.0
  * @create 2020-02-14 14:53
@@ -26,12 +25,13 @@ public class ReOrderArrayE21 {
     public static void main(String[] args) {
         int[] arr1 = {1, 2, 3, 4, 5, 6, 7};
         int[] arr2 = {2, 16, 3, 5, 13, 1, 16, 1, 12, 18, 11, 8, 11, 11, 5, 1};
-        exchange(arr2);
+        reOrderArray(arr2);
         System.out.println(Arrays.toString(arr2));
     }
 
     /**
      * NK
+     *
      * @param array
      */
     public static void reOrderArray(int[] array) {
@@ -40,11 +40,37 @@ public class ReOrderArrayE21 {
 //        mySolutionPartition(array);
 //        stoSolutionSwap(array);
 //        cycSolutionBubble(array);
-        cycSolutionNewArrayCopy(array);
+        solutionCopyArray(array);
+    }
+
+    /**
+     * 通过LC（10， 57.3）
+     * 保证奇偶相对顺序稳定
+     *
+     * @param array
+     */
+    private static void solutionCopyArray(int[] array) {
+        int[] cloneArr = new int[array.length];
+        int oddCount = 0;
+        for (int i = 0; i < array.length; i++) {
+            cloneArr[i] = array[i];
+            if (array[i] % 2 != 0) {
+                oddCount++;
+            }
+        }
+        int oddRightIdx = 0;
+        for (int i = 0; i < cloneArr.length; i++) {
+            if (cloneArr[i] % 2 != 0) {
+                array[oddRightIdx++] = cloneArr[i];
+            } else {
+                array[oddCount++] = cloneArr[i];
+            }
+        }
     }
 
     /**
      * LC
+     *
      * @param nums
      * @return
      */
@@ -56,7 +82,6 @@ public class ReOrderArrayE21 {
         // cycSolutionNewArrayCopy(nums);
         return nums;
     }
-
 
 
     /**
@@ -73,6 +98,7 @@ public class ReOrderArrayE21 {
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
+     *
      * @param array
      */
     private static void solutionSimplePartitionOnce(int[] array) {
@@ -87,6 +113,7 @@ public class ReOrderArrayE21 {
     /**
      * 通过NK，LC（8，57）
      * 保证奇偶相对顺序稳定
+     *
      * @param array
      */
     private static void stoSolutionSwap(int[] array) {
@@ -94,49 +121,22 @@ public class ReOrderArrayE21 {
         while (l < r) {
             if (isOddNum(array[l]) && isOddNum(array[r])) {
                 l++;
-            }
-            else if (isOddNum(array[l]) && isEvenNum(array[r])) {
+            } else if (isOddNum(array[l]) && isEvenNum(array[r])) {
                 l++;
                 r--;
-            }
-            else if (isEvenNum(array[l]) && isOddNum(array[r])) {
+            } else if (isEvenNum(array[l]) && isOddNum(array[r])) {
                 swap(array, l, r);
-            }
-            else if (isEvenNum(array[l]) && isEvenNum(array[r])) {
+            } else if (isEvenNum(array[l]) && isEvenNum(array[r])) {
                 r--;
             }
         }
     }
 
-    /**
-     * 通过LC（10， 57.3）
-     * 保证奇偶相对顺序稳定
-     * @param array
-     */
-    private static void cycSolutionNewArrayCopy(int[] array) {
-        int[] help = new int[array.length];
-        int oddCount = 0;
-        for (int i = 0; i < array.length; i++) {
-            help[i] = array[i];
-            if (isOddNum(array[i])) {
-                oddCount++;
-            }
-        }
-        int oddRightIdx = 0;
-        for (int i = 0; i < help.length; i++) {
-            if (isOddNum(help[i])) {
-//                array[i] = help[i]; // 经典错误，i在变，一个指针不够
-                array[oddRightIdx++] = help[i];
-            }
-            else {
-                array[oddCount++] = help[i];
-            }
-        }
-    }
 
     /**
      * LC超时
      * 保证奇偶相对顺序稳定
+     *
      * @param array
      */
     private static void cycSolutionBubble(int[] array) {
@@ -151,7 +151,6 @@ public class ReOrderArrayE21 {
     }
 
 
-
     private static boolean isOddNum(int num) {
         return num % 2 != 0;
     }
@@ -163,6 +162,7 @@ public class ReOrderArrayE21 {
     /**
      * 通过NK，LC（529， 57.1）
      * 保证奇偶相对顺序稳定
+     *
      * @param array
      */
     private static void mySolutionPartition(int[] array) {
@@ -187,7 +187,6 @@ public class ReOrderArrayE21 {
 
     /**
      * FIXME   好像一个指针是不够的，停不下来
-     *
      */
 /*    private static void stoSolutionSimpleSwap(int[] array) {
         //
@@ -207,9 +206,6 @@ public class ReOrderArrayE21 {
             }
         }
     }*/
-
-
-
     public static void swap(int[] arr, int i, int j) {
         int tmp = arr[i];
         arr[i] = arr[j];

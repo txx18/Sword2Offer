@@ -79,7 +79,7 @@ public class NQueensCount {
         for (int i = 0; i < row; i++) {
             // int qCol = track[i];
             int qCol = map.get(i);
-            if (qCol == col || (int)Math.abs(row - i) == (int)Math.abs(qCol - col)) {
+            if (qCol == col || Math.abs(row - i) == Math.abs(qCol - col)) {
                 return false;
             }
         }

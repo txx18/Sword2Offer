@@ -50,7 +50,7 @@ public class MoreEqualLeftIndex {
             return -1;
         }
         int l = 0;
-        int r = a.length; // 注意
+        int r = a.length; // 注意 不是n-1
         while (l < r) { // 注意
             int mid = l + ((r - l) >> 1);
             if (v <= a[mid]) {

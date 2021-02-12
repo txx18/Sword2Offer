@@ -1,5 +1,6 @@
 package stack_queue;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -9,16 +10,16 @@ import java.util.Stack;
  */
 public class DesignGetStackMin {
 
-    Stack<Integer> dataStack = new Stack<>();
-    Stack<Integer> minStack = new Stack<>();
+    Deque<Integer> dataStack = new LinkedList<>();
+    Deque<Integer> minStack = new LinkedList<>();
 
     public void push(int node) {
         dataStack.push(node);
         if (!minStack.isEmpty()) {
             minStack.push(Math.min(minStack.peek(), node));
-        } else {
-            minStack.push(node);
+            return;
         }
+        minStack.push(node);
     }
 
     public void pop() {

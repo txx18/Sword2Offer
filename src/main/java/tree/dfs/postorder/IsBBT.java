@@ -31,7 +31,7 @@ public class IsBBT {
             return 0;
         }
         int hLeft = heightOpt(root.left);
-        // 如果判断非法，提前返回剪枝
+        // 用h判断的话，必须有提前判断（为啥呢？） 如果判断非法，提前返回剪枝
         if (hLeft == -1) {
             return -1;
         }
