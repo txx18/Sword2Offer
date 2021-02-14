@@ -38,7 +38,7 @@ public class PermuteStringHasDup {
                 continue;
             }
             // 此if使 i来到重复的最后一个下标处，之前的跳过
-            if (i > 0 && chars[i] == chars[i - 1] && !hasUsed[i - 1]) {
+            if (i > 0 && chars[i] == chars[i - 1] && !hasUsed[i - 1]) { // hasUsed[i-1]
                 continue;
             }
             track.append(chars[i]);

@@ -58,12 +58,13 @@ public class ReOrderArrayE21 {
                 oddCount++;
             }
         }
-        int oddRightIdx = 0;
+        int oddIndex = 0;
+        int evenIndex = oddCount;
         for (int i = 0; i < cloneArr.length; i++) {
             if (cloneArr[i] % 2 != 0) {
-                array[oddRightIdx++] = cloneArr[i];
+                array[oddIndex++] = cloneArr[i];
             } else {
-                array[oddCount++] = cloneArr[i];
+                array[evenIndex++] = cloneArr[i];
             }
         }
     }

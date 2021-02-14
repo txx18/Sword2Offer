@@ -62,12 +62,12 @@ public class HasDuplicateNum {
             if (numbers[i] == i) {
                 continue;
             }
-            // 如果两元素相等，则返回
-            if (numbers[i] == numbers[numbers[i]]) {
+            // 如果现在下标元素和正确下标元素相等，则有重复
+            if (numbers[numbers[i]] == numbers[i]) {
                 duplication[0] = numbers[i];
                 return true;
             }
-            // 否则把该元素交换到本来的位置
+            // 否则把该元素交换到正确的位置
             swap(numbers, numbers[i], i);
         }
         return false;

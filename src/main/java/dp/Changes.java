@@ -53,7 +53,7 @@ public class Changes {
         Changes obj = new Changes();
         int[] coins = new int[]{1, 2, 5};
         int[] coins2 = new int[]{3, 2, 5};
-        int res = obj.minMoney(coins2, 20);
+        int res = obj.solutionDpTable(coins2, 20);
         System.out.println("res = " + res);
     }
 
@@ -63,31 +63,30 @@ public class Changes {
     public int minMoney(int[] arr, int aim) {
         // write code here
         this.arr = arr;
-/*        memoArr = new int[aim + 1];
+        memoArr = new int[aim + 1];
         Arrays.fill(memoArr, -1);
-        dpMemoArr(aim);
-        return memoArr[aim];*/
-        return dpTable(aim);
+        solutionDpMemoArr(aim);
+        return memoArr[aim];
     }
 
-    private int dpTable(int aim) {
+    private int solutionDpTable(int[] arr, int aim) {
         // write code
-        // 初始化dp数组，dp[i]代表 aim==i 时最少的硬币数
+        // 根据实际情况初始化dp数组，dp[i]代表 aim==i 时最少的硬币数
         int[] dp = new int[aim + 1];
-        Arrays.fill(dp, aim);
+        Arrays.fill(dp, aim + 1);
         dp[0] = 0;
-        for (int i = 1; i <= aim; i++) {
-            for (int coin: arr) {
+        for (int i = 1; i < dp.length; i++) {
+            for (int coin : arr) {
                 if (i - coin < 0) {
                     continue;
                 }
                 dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
             }
         }
-        return dp[aim] != aim? dp[aim]: -1;
+        return dp[aim] != aim + 1 ? dp[aim] : -1;
     }
 
-    private int dpMemoArr(int aim) {
+    private int solutionDpMemoArr(int aim) {
         // base case
         if (aim == 0) {
             return 0;
@@ -101,7 +100,7 @@ public class Changes {
             if (aim - coin < 0) {
                 continue;
             }
-            int preRes = dpMemoArr(aim - coin);
+            int preRes = solutionDpMemoArr(aim - coin);
             if (preRes == -1) {
                 continue;
             }
@@ -135,7 +134,6 @@ public class Changes {
         memoMap.put(aim, res == Integer.MAX_VALUE ? -1 : res);
         return memoMap.get(aim);
     }
-
 
 
 }

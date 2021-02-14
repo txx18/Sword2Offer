@@ -24,7 +24,7 @@ public class IsSubtree {
     }
 
     private boolean check(TreeNode A, TreeNode B) {
-        // 必须先判断B
+        // 必须先判断子树B
         if (B == null) {
             return true;
         }

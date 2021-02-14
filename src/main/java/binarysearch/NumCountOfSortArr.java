@@ -37,15 +37,15 @@ public class NumCountOfSortArr {
      */
     public static int solutionBSLoop(int[] array, int k) {
         // 搜索k和k+1的左边界
-        int firstIndex = BS(array, k);
-        int lastIndex = BS(array, k + 1);
-        return (firstIndex == array.length || array[firstIndex] != k) ? 0 : lastIndex - firstIndex;
+        int l = leftBS(array, k);
+        int r = leftBS(array, k + 1);
+        return (l == array.length || array[l] != k) ? 0 : r - l;
     }
 
-    private static int BS(int[] nums, int k) {
+    private static int leftBS(int[] nums, int k) {
         int l = 0, r = nums.length;
         while (l < r) {
-            int m = l + (r - l) / 2;
+            int m = l + ((r - l) >> 1);
             if (k <= nums[m]) {
                 r = m;
             } else {

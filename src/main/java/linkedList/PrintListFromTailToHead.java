@@ -1,5 +1,6 @@
 package linkedList;
 
+import zhelper.ListUtils;
 import zhelper.ListUtils.ListNode;
 
 import java.util.ArrayList;
@@ -16,17 +17,15 @@ public class PrintListFromTailToHead {
 
 
     public static void main(String[] args) {
-        ListNode head = new ListNode(95);
-        head.next = new ListNode(61);
-        head.next.next = new ListNode(81);
-        head.next.next.next = new ListNode(5);
+        ListNode test = ListUtils.convertToLinkedList(new int[]{67, 0, 24, 58});
 
         ListNode head2 = new ListNode(1);
         ListNode head3 = null;
 //        ArrayList<Integer> reverseValues = printListFromTailToHead(head);
 //        System.out.println(reverseValues.toString());
-        int[] res = reversePrint(head3);
-        System.out.println(Arrays.toString(res));
+        PrintListFromTailToHead obj = new PrintListFromTailToHead();
+        ArrayList<Integer> res = obj.printListFromTailToHead(test);
+        System.out.println(res);
     }
 
     ArrayList<Integer> res = new ArrayList<>();
@@ -35,7 +34,8 @@ public class PrintListFromTailToHead {
         if (listNode == null) {
             return res;
         }
-        printListFromTailToHead(listNode.next);
+        ListNode nxt = listNode.next;
+        printListFromTailToHead(nxt);
         res.add(listNode.val);
         return res;
     }
