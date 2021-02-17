@@ -14,6 +14,7 @@ public class PrintMatrixClockwise {
         int r2 = matrix.length - 1;
         int c1 = 0;
         int c2 = matrix[0].length - 1;
+        // 所有的控制语句都用变量 r1 r2 c1 c2
         while (r1 <= r2 && c1 <= c2) {
             for (int j = c1; j <= c2; j++) {
                 res.add(matrix[r1][j]);

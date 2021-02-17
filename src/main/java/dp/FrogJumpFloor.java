@@ -1,7 +1,5 @@
 package dp;
 
-import math.TrailingZeroes;
-
 import java.util.Arrays;
 
 
@@ -50,5 +48,16 @@ public class FrogJumpFloor {
             memo[target] += memo[target - i];
         }
         return memo[target];
+    }
+
+    public int recurForce(int target) {
+        int res = 0;
+        if (target <= 1) {
+            return 1;
+        }
+        for (int i = 1; i <= target; i++) {
+            res += recurForce(target - i);
+        }
+        return res;
     }
 }

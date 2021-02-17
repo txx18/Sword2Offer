@@ -19,7 +19,6 @@ public class IsBBT {
         System.out.println("res = " + res);
     }
 
-    boolean res = true;
 
     public boolean IsBalanced_Solution(TreeNode root) {
         return heightOpt(root) != -1;
@@ -41,6 +40,20 @@ public class IsBBT {
         }
         if (Math.abs(hLeft - hRight) > 1) {
             return -1;
+        }
+        return 1 + Math.max(hLeft, hRight);
+    }
+
+    boolean res = true;
+
+    private int height(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int hLeft = height(root.left);
+        int hRight = height(root.right);
+        if (Math.abs(hLeft - hRight) > 1) {
+            res = false;
         }
         return 1 + Math.max(hLeft, hRight);
     }
@@ -79,18 +92,6 @@ public class IsBBT {
         return 1 + Math.max(hLeft, hRight);
     }
 
-
-    private int height(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int hLeft = height(root.left);
-        int hRight = height(root.right);
-        if (Math.abs(hLeft - hRight) > 1) {
-            res = false;
-        }
-        return 1 + Math.max(hLeft, hRight);
-    }
 
     private int heightTest(TreeNode root) {
         TestHelper.printIndent(recur++);

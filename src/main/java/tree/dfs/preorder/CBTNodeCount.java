@@ -1,4 +1,4 @@
-package tree.dfs;
+package tree.dfs.preorder;
 
 import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
@@ -7,31 +7,32 @@ import zhelper.TreeUtils.*;
  * @author ShaneTang
  * @create 2021-01-06 20:34
  */
-public class NodeNumCBT {
+public class CBTNodeCount {
 
     public static void main(String[] args) {
         TreeNode test = TreeUtils.deserialize("[1,2,null]");
-        NodeNumCBT obj = new NodeNumCBT();
+        CBTNodeCount obj = new CBTNodeCount();
         int count = obj.nodeNum(null);
         System.out.println("count = " + count);
 
     }
 
     public int nodeNum(TreeNode head) {
-        int hl, hr;
-        hl = hr = 0;
+        // 计算最左和最右叶子节点的深度
+        int dl, dr;
+        dl = dr = 0;
         TreeNode pl, pr;
         pl = pr = head;
         while (pl != null) {
             pl = pl.left;
-            hl++;
+            dl++;
         }
         while (pr != null) {
             pr = pr.right;
-            hr++;
+            dr++;
         }
-        if (hl == hr) {
-            return (int) (Math.pow(2, hl) - 1);
+        if (dl == dr) {
+            return (int) (Math.pow(2, dl) - 1);
         }
         return 1 + nodeNum(head.left) + nodeNum(head.right);
     }
