@@ -42,7 +42,7 @@ public class Fibonacci {
     public static void main(String[] args) {
         Fibonacci obj = new Fibonacci();
 //        long res = obj.fibDpTable(19);
-        long res = obj.solutionDpTable(50);
+        long res = obj.solutionDpTable(3);
 //        long res = dp(45);
         System.out.println("res = " + res);
     }
@@ -59,6 +59,7 @@ public class Fibonacci {
         if (n <= 1) {
             return n;
         }
+        // 从0开始，第0项为0，第1项是1
         int p1 = 0;
         int p2 = 1;
         int res = 0;
@@ -70,35 +71,15 @@ public class Fibonacci {
         return res;
     }
 
-    public int rectCover(int target) {
-        if (target <= 2) {
-            return target;
-        }
-        int p1 = 1;
-        int p2 = 2;
-        int res = 0;
-        for (int i = 3; i <= target; i++) {
-            res = p1 + p2;
-            p1 = p2;
-            p2 = res;
-        }
-        return res;
-    }
-
-    /**
-     * 用dp数组 替换备忘录
-     *
-     * @param n
-     * @return
-     */
     public int solutionDpTable(int n) {
-        if (n == 1 || n == 2) {
-            return 1;
+        if (n < 1) {
+            return n;
         }
         int[] dp = new int[n + 1];
-        dp[1] = 0;
-        dp[2] = 1;
-        for (int i = 3; i <= n; i++) {
+        // 从0开始，第0项为0，第1项是1
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
             dp[i] = dp[i - 1] + dp[i - 2];
             dp[i] %= 1000000007;
         }

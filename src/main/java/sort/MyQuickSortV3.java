@@ -54,8 +54,7 @@ public class MyQuickSortV3 {
         // 指针
         for (int i = l; i < greatIdx; ) {
             if (arr[i] < pivotVal) {
-                swap(arr, i, ++lessIdx);
-                i++;
+                swap(arr, i++, ++lessIdx);
             } else if (arr[i] > pivotVal) {
                 // i不++因为换过来的arr[moreIndex-1]还没判断
                 swap(arr, i, --greatIdx);
