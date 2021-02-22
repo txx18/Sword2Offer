@@ -13,7 +13,7 @@ public class LISLength {
     public static void main(String[] args) {
         int[] arr = new int[]{1, 4, 3, 4, 2, 3};
         int[] arr1 = new int[]{2, 1, 5, 3, 6, 4, 8, 9, 7};
-        int [] arr2 = new int[0];
+        int[] arr2 = new int[0];
         LISLength obj = new LISLength();
 //        int[] res = obj.LIS(arr1);
 //        System.out.println("res = " + Arrays.toString(res));
@@ -27,20 +27,17 @@ public class LISLength {
         // 在子数组array中，从1开始第i个的目标子序列（最长递增子序列）的长度是dp[i]。
         int[] dp = new int[n + 1];
         Arrays.fill(dp, 1);
+        int res = 0;
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j < i; j++) {
                 if (A[j - 1] < A[i - 1]) {
                     dp[i] = Math.max(dp[i], 1 + dp[j]);
                 }
             }
-        }
-        int res = 0;
-        for (int val : dp) {
-            res = Math.max(res, val);
+            res = Math.max(res, dp[i]);
         }
         return res;
     }
-
 
 
     public int dpTable0(int[] A, int n) {
@@ -56,7 +53,7 @@ public class LISLength {
             }
         }
         int res = 0;
-        for (int val: dp) {
+        for (int val : dp) {
             res = Math.max(res, val);
         }
         return res;

@@ -100,19 +100,19 @@ public class MinEdit {
      * @param word2
      * @return
      */
-    public int dpRecur(String word1, String word2) {
+    public int solutionRecur(String word1, String word2) {
         this.word1 = word1;
         this.word2 = word2;
-        return dp(word1.length() - 1, word2.length() - 1);
+        return solutionDpRecurForce(word1.length() - 1, word2.length() - 1);
 /*        memoArray = new int[word1.length() + 1][word2.length() + 1];
         for (int i = 0; i <= word1.length(); i++) {
             Arrays.fill(memoArray[i], Integer.MAX_VALUE);
         }
-        return dpMemoArray(word1.length() - 1, word2.length() - 1);*/
+        return solutionDpMemoArray(word1.length() - 1, word2.length() - 1);*/
     }
 
 
-    public int dpTable1(String word1, String word2) {
+    public int solutionDpTable1(String word1, String word2) {
         int m, n;
         m = word1.length();
         n = word2.length();
@@ -140,7 +140,7 @@ public class MinEdit {
         return dp[m][n];
     }
 
-    private int dpMemoArray(int i, int j) {
+    private int solutionDpMemoArray(int i, int j) {
         // todo
         if (i == -1) {
             return j + 1;
@@ -152,20 +152,20 @@ public class MinEdit {
             return memoArray[i][j];
         }
         if (word1Chars[i] == word2Chars[j]) {
-            memoArray[i][j] = dpMemoArray(i - 1, j - 1);
+            memoArray[i][j] = solutionDpMemoArray(i - 1, j - 1);
             return memoArray[i][j];
         } else {
             // 增删
-            memoArray[i][j - 1] = dpMemoArray(i, j - 1) + 1;
-            memoArray[i - 1][j] = dpMemoArray(i - 1, j) + 1;
-            memoArray[i - 1][j - 1] = dpMemoArray(i - 1, j - 1) + 1;
+            memoArray[i][j - 1] = solutionDpMemoArray(i, j - 1) + 1;
+            memoArray[i - 1][j] = solutionDpMemoArray(i - 1, j) + 1;
+            memoArray[i - 1][j - 1] = solutionDpMemoArray(i - 1, j - 1) + 1;
             int min = Math.min(memoArray[i][j - 1], memoArray[i - 1][j]);
             // 改
             return Math.min(min, memoArray[i - 1][j - 1]);
         }
     }
 
-    private int dp(int i, int j) {
+    private int solutionDpRecurForce(int i, int j) {
         if (i == -1) {
             return j + 1;
         }
@@ -173,11 +173,11 @@ public class MinEdit {
             return i + 1;
         }
         if (word1.charAt(i) == word2.charAt(j)) {
-            return dp(i - 1, j - 1);
+            return solutionDpRecurForce(i - 1, j - 1);
         } else {
-            return min(dp(i, j - 1) + 1, // 插入
-                    dp(i - 1, j) + 1, // 删除
-                    dp(i - 1, j - 1) + 1); // 替换
+            return min(solutionDpRecurForce(i, j - 1) + 1, // 插入
+                    solutionDpRecurForce(i - 1, j) + 1, // 删除
+                    solutionDpRecurForce(i - 1, j - 1) + 1); // 替换
         }
     }
 

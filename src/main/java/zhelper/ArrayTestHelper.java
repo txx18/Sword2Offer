@@ -1,9 +1,7 @@
 package zhelper;
 
 
-import sort.MyMergeSort;
 import sort.MyQuickSortV1;
-import sort.MyQuickSortV3;
 
 import java.util.Arrays;
 
@@ -18,7 +16,6 @@ import static zhelper.ArrayUtils.*;
 public class ArrayTestHelper {
 
     private static void solution(int[] arr) {
-        MyQuickSortV1.solution(arr);
     }
 
     // for test

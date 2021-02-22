@@ -60,6 +60,7 @@ public class PrintLevelOrderZigZag {
                 queue.offer(cur.right);
             }
             if (level.size() != 0) {
+                // 因为level是deque，所以有个转换
                 res.add(new ArrayList<>(level));
             }
             step++;

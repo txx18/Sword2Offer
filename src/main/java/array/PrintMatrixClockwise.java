@@ -32,6 +32,7 @@ public class PrintMatrixClockwise {
                     res.add(matrix[i][c1]);
                 }
             }
+            // 控制里外层数
             r1++;
             r2--;
             c1++;

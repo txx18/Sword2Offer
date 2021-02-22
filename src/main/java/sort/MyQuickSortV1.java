@@ -13,68 +13,60 @@ import java.util.Arrays;
  */
 public class MyQuickSortV1 {
 
-    // for test
     public static void main(String[] args) {
         int[] arr1 = {4, 5, 1, 6, 2, 7, 3, 8, 4};
-        int partition = simplePartition(arr1, 0, arr1.length - 1);
-        System.out.println("partition = " + partition);
-        System.out.println(Arrays.toString(arr1));
+//        int partition = simplePartition(arr1, 0, arr1.length - 1);
+//        System.out.println("partition = " + partition);
+//        System.out.println(Arrays.toString(arr1));
+        MyQuickSortV1 obj = new MyQuickSortV1();
+        int[] res = obj.MySort(arr1);
+        System.out.println("res = " + Arrays.toString(res));
 
     }
 
-    public static int solution(int[] arr) {
+    public int[] MySort(int[] arr) {
         if (arr == null || arr.length < 2) {
-            return -1;
+            return arr;
         }
-        return sortProcess(arr, 0, arr.length - 1); // 初始的l和r是arr的左右
+        return sortProcess(arr, 0, arr.length - 1);
     }
 
-    /**
-     * 把最右边那个数当作num
-     *
-     * @param arr
-     * @param l
-     * @param r
-     * @return num该放的位置
-     */
-    private static int sortProcess(int[] arr, int l, int r) {
-        int lessEqualIndex = -1;
-        if (l < r) { // 【不是while】
-            // 先partition
-            // 快排1.0，利用两段划分，注意r取的都是最右边的数
-            lessEqualIndex = simplePartition(arr, l, r);
-            // 左边排序
-            sortProcess(arr, l, lessEqualIndex - 1);
-            // 右边排序
-            sortProcess(arr, lessEqualIndex + 1, r);
-
+    private int[] sortProcess(int[] arr, int l, int r) {
+        if (l >= r) { // 不能写 l == r，可以写 l > r
+            return arr;
         }
-        return lessEqualIndex;
+        // 先partition
+        // 快排1.0，利用两段划分，注意r取的都是最右边的数
+        int lessEqualIndex = twoPartition(arr, l, r);
+        // 左边排序
+        sortProcess(arr, l, lessEqualIndex - 1);
+        // 右边排序
+        sortProcess(arr, lessEqualIndex + 1, r);
+        return arr;
     }
 
-    /**
-     * 利用simplePartition
-     *
-     * @param arr
-     * @param l
-     * @param r
-     * @return
-     */
-    private static int simplePartition(int[] arr, int l, int r) {
+    private int twoPartition(int[] arr, int l, int r) {
         int pivotVal = arr[r];
         int lessEqualIdx = l - 1;
         for (int i = l; i <= r; i++) { //注意arr[r]也要判断
             if (arr[i] <= pivotVal) {
-                // 只靠小于等于区域右扩
-                ArrayUtils.swap(arr, i, ++lessEqualIdx);
+                // 只靠lessEqual区域右扩
+                swap(arr, i, ++lessEqualIdx);
             }
 
         }
         return lessEqualIdx;
     }
 
+    public void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
     /**
      * 通过
+     *
      * @param arr
      * @param l
      * @param r
@@ -95,11 +87,4 @@ public class MyQuickSortV1 {
         ArrayUtils.swap(arr, r, lessEqualIdx);
         return lessEqualIdx;
     }
-
-    public static void swap(int[] arr, int i, int j) {
-        int tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-    }
-
 }

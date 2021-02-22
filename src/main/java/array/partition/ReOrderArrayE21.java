@@ -50,6 +50,7 @@ public class ReOrderArrayE21 {
      * @param array
      */
     private static void solutionCopyArray(int[] array) {
+        // 辅助数组
         int[] cloneArr = new int[array.length];
         int oddCount = 0;
         for (int i = 0; i < array.length; i++) {

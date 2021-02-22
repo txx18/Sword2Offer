@@ -1,4 +1,4 @@
-package greedy;
+package dp.greedy;
 
 import java.util.PriorityQueue;
 

@@ -12,7 +12,7 @@ public class IsSubtree {
             return false;
         }
         boolean res = check(root1, root2);
-        // 必须判true
+        // 必须判true，因为一true则true, 而不是一false则false
         if (res) {
             return true;
         }
