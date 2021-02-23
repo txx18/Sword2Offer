@@ -49,7 +49,7 @@ public class TreeToDoubleLinkedListE36 {
         root.left.right = new Node(3);
 
         TreeToDoubleLinkedListE36 obj = new TreeToDoubleLinkedListE36();
-        Node listHead = obj.treeToDoublyList(root);
+        Node listHead = obj.solutionInorder(root);
         Node cur = listHead;
         do {
             System.out.print(cur.val + " ");
@@ -57,54 +57,56 @@ public class TreeToDoubleLinkedListE36 {
         } while (cur != listHead);
     }
 
-    public Node treeToDoublyList(Node root) {
-//        return solutionZS(root);
-        return solutionInorder(root);
-    }
+    private Node pre;
+    private Node head;
 
-    /**
-     * 代表当前节点的前驱
-     */
-    public Node pre;
-    /**
-     * 代表链表头结点
-     */
-    public Node head;
-
-    private Node solutionInorder(Node root) {
-        recur(root);
+    private Node solutionInorder(Node pRootOfTree) {
+        if (pRootOfTree == null) {
+            return null;
+        }
+        inorder(pRootOfTree);
+        // 如果题目要求循环链表，最后设置一下循环链表
         // 此时 root回到root，而pre遍历到最后一个节点
-        // 最后设置一下循环链表
-        pre.right = head;
-        head.left = pre;
+/*        pre.right = head;
+        head.left = pre;*/
         return head;
     }
 
-    /**
-     * 有中序框架
-     * 有双指针技巧
-     * @param root
-     */
-    private void recur(Node root) {
-        // 中序框架
+    private void inorder(Node root) {
         if (root == null) {
             return;
         }
-        recur(root.left);
+        inorder(root.left);
         // 来到root节点，先设置left指针
         root.left = pre;
         // pre初始为null，设置head
-        if (pre == null) {
-            head = root;
+        if (pre != null) {
+            pre.right = root;
         }
         // pre不为null，设置right指针
         else {
-            pre.right = root;
+            head = root;
         }
         // 移动pre指针
         pre = root;
-        recur(root.right);
+        inorder(root.right);
     }
+
+    /*    private void inorder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left);
+        root.left = pre;
+        if (pre != null) {
+            pre.right = root;
+        }
+        pre = root;
+        if (head == null) {
+            head = root;
+        }
+        inorder(root.right);
+    }*/
 
     private Node solutionZS(Node root) {
         if (root == null) {
@@ -164,7 +166,7 @@ public class TreeToDoubleLinkedListE36 {
         }
     }
 
-    public static class Node {
+    private static class Node {
         public int val;
         public Node left;
         public Node right;

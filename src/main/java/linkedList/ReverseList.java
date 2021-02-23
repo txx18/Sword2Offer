@@ -57,29 +57,6 @@ public class ReverseList {
         return pre;
     }
 
-    /**
-     * LC
-     *
-     * @param head
-     * @return
-     */
-    public static ListNode reverseList(ListNode head) {
-        return solutionReversePointerZS(head);
-    }
-
-    private static ListNode solutionReversePointerZS(ListNode head) {
-        ListNode next = null;
-        ListNode pre = null;
-        ListNode cur = head;
-        while (cur != null) {
-            next = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = next;
-        }
-        // 如果head == null了，说明head移到边界之外了，只要返回pre记录的边界位置就行了
-        return pre;
-    }
 
     private static ListNode solutionInsertHeadNodeCYC(ListNode head) {
         // 创建新的结点

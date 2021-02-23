@@ -37,25 +37,24 @@ public class MyQuickSortV1 {
         }
         // 先partition
         // 快排1.0，利用两段划分，注意r取的都是最右边的数
-        int lessEqualIndex = twoPartition(arr, l, r);
+        int rLessEqual = twoPartition(arr, l, r);
         // 左边排序
-        sortProcess(arr, l, lessEqualIndex - 1);
+        sortProcess(arr, l, rLessEqual - 1);
         // 右边排序
-        sortProcess(arr, lessEqualIndex + 1, r);
+        sortProcess(arr, rLessEqual + 1, r);
         return arr;
     }
 
     private int twoPartition(int[] arr, int l, int r) {
         int pivotVal = arr[r];
-        int lessEqualIdx = l - 1;
+        int rLessEqual = l - 1;
         for (int i = l; i <= r; i++) { //注意arr[r]也要判断
             if (arr[i] <= pivotVal) {
                 // 只靠lessEqual区域右扩
-                swap(arr, i, ++lessEqualIdx);
+                swap(arr, i, ++rLessEqual);
             }
-
         }
-        return lessEqualIdx;
+        return rLessEqual;
     }
 
     public void swap(int[] arr, int i, int j) {

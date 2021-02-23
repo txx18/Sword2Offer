@@ -10,8 +10,9 @@ public class StockInfinity {
         // write code here
         int res = 0;
         for (int i = 1; i < prices.length; i++) {
-            if (prices[i] > prices[i - 1]) {
-                res += prices[i] - prices[i - 1];
+            int profit = prices[i] - prices[i - 1];
+            if (profit > 0) {
+                res += profit;
             }
         }
         return res;

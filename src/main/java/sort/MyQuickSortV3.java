@@ -56,7 +56,7 @@ public class MyQuickSortV3 {
             if (arr[i] < pivotVal) {
                 swap(arr, i++, ++lessIdx);
             } else if (arr[i] > pivotVal) {
-                // i不++因为换过来的arr[moreIndex-1]还没判断
+                // i不++因为换过来的arr[greatIdx-1]还没判断
                 swap(arr, i, --greatIdx);
             } else { // == num
                 i++;

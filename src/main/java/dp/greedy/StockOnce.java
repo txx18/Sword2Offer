@@ -9,10 +9,10 @@ public class StockOnce {
     public int maxProfit(int[] prices) {
         // write code here
         int res = 0;
-        int curMin = Integer.MAX_VALUE;
+        int min = Integer.MAX_VALUE;
         for (int price : prices) {
-            curMin = Math.min(curMin, price);
-            res = Math.max(res, price - curMin);
+            min = Math.min(min, price);
+            res = Math.max(res, price - min);
         }
         return res;
     }
