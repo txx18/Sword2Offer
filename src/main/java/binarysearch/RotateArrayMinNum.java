@@ -2,15 +2,16 @@ package binarysearch;
 
 /**
  * 旋转数组的最小数字
- *把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。例如，数组 [3,4,5,1,2] 为 [1,2,3,4,5] 的一个旋转，该数组的最小值为1。  
- *
+ * 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。例如，数组 [3,4,5,1,2] 为 [1,2,3,4,5] 的一个旋转，该数组的最小值为1。  
+ * <p>
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ *
  * @author Shane Tang
  * @create 2019-10-07 10:45
  */
-public class RotateArrayMinNumE11 {
+public class RotateArrayMinNum {
 
     public static void main(String[] args) {
         int[] rotateArr1 = {21, 23, 28, 30, 32, 50, 64, 78, 81, 95, 101, 3, 5, 11, 17};
@@ -19,12 +20,13 @@ public class RotateArrayMinNumE11 {
         int[] rotateArr3 = {1, 0, 1, 1, 1};
         int[] rotateArr4 = {1, 1, 1, 0, 1};
         int[] rotateArr5 = {1, 3, 5};
-        int res = minArray(rotateArr1);
+        RotateArrayMinNum obj = new RotateArrayMinNum();
+        int res = obj.solutionBSLoop(rotateArr1);
         System.out.println("res = " + res);
     }
 
 
-    public static int BSLoop(int[] array) {
+    public int solutionBSLoop(int[] array) {
         if (array.length == 0) {
             return 0;
         }
@@ -44,41 +46,20 @@ public class RotateArrayMinNumE11 {
         return array[l];
     }
 
-    public static int BSLoop1(int[] array) {
-        if (array.length == 0) {
-            return 0;
-        }
-        int l = 0, r = array.length - 1;
-        while (l < r) {
-            int mid = l + (r - l) / 2;
-            if (array[l] == array[mid] && array[mid] == array[r]) {
-                return findByTraverse(array, l, r);
-            }
-             else if (array[l] <= array[mid]){
-                l = mid + 1;
-            } else {
-                r = mid;
-            }
-        }
-        return array[l];
-    }
 
-    private static int findByTraverse(int[] array, int l, int r) {
+    private int findByTraverse(int[] array, int l, int r) {
         for (int i = l; i < r; i++) {
             if (array[i + 1] < array[i])
                 return array[i + 1];
         }
         return array[l];
-    }
-
-    private static int findByTraverse2(int[] array, int l, int r) {
-        int minIndex = l;
+/*        int minIndex = l;
         for (int i = l + 1; i <= r; i++) {
             if (array[i] < array[minIndex]) {
                 minIndex = i;
             }
         }
-        return array[minIndex];
+        return array[minIndex];*/
     }
 
     /**
@@ -87,10 +68,10 @@ public class RotateArrayMinNumE11 {
      * @param array
      * @return
      */
-    public static int minNumberInRotateArray(int[] array) {
+    public int minNumberInRotateArray(int[] array) {
 //        return solutionBSLoop(array);
 //        return solutionBSRecur(array, 0, array.length - 1);
-        return BSLoop(array);
+        return solutionBSLoop(array);
     }
 
     /**
@@ -99,7 +80,7 @@ public class RotateArrayMinNumE11 {
      * @param numbers
      * @return
      */
-    public static int minArray(int[] numbers) {
+    public int minArray(int[] numbers) {
 //        return stoSolutionBSLoop(numbers);
         return solutionBSRecurME(numbers, 0, numbers.length - 1);
     }
@@ -115,12 +96,13 @@ public class RotateArrayMinNumE11 {
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
+     *
      * @param array
      * @param l
      * @param r
      * @return
      */
-    public static int solutionBSRecurME(int[] array, int l, int r) {
+    public int solutionBSRecurME(int[] array, int l, int r) {
         if (array == null || array.length == 0) {
             return 0;
         }
@@ -145,7 +127,7 @@ public class RotateArrayMinNumE11 {
         return -1;
     }
 
-    public static int solutionBSLoopSTO(int[] rotateArr) {
+    public int solutionBSLoopSTO(int[] rotateArr) {
         if (rotateArr == null || rotateArr.length == 0) {
             return -1;
         }

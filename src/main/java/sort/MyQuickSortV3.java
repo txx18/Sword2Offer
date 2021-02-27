@@ -48,23 +48,23 @@ public class MyQuickSortV3 {
     public static int[] threePartition(int[] arr, int l, int r) {
         int pivotVal = arr[r];
         // 小于区右边界
-        int lessIdx = l - 1;
+        int lessRight = l - 1;
         // 大于区左边界
-        int greatIdx = r;
+        int greatLeft = r;
         // 指针
-        for (int i = l; i < greatIdx; ) {
+        for (int i = l; i < greatLeft; ) { // < 大于区左边界
             if (arr[i] < pivotVal) {
-                swap(arr, i++, ++lessIdx);
+                swap(arr, i++, ++lessRight);
             } else if (arr[i] > pivotVal) {
-                // i不++因为换过来的arr[greatIdx-1]还没判断
-                swap(arr, i, --greatIdx);
+                // i不++因为换过来的arr[greatLeft-1]还没判断
+                swap(arr, i, --greatLeft);
             } else { // == num
                 i++;
             }
         }
         // 交换 大于区域左边界 和 r位置，大于区域左边界变成了等于区域右边界
-        swap(arr, greatIdx, r);
-        return new int[]{lessIdx + 1, greatIdx};
+        swap(arr, greatLeft, r);
+        return new int[]{lessRight + 1, greatLeft};
     }
 
     private static void swap(int[] arr, int i, int j) {

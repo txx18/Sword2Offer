@@ -19,6 +19,7 @@ public class IsPopOrder {
         int n = pushA.length;
         Deque<Integer> stack = new LinkedList<>();
         for (int pushIndex = 0, popIndex = 0; pushIndex < n; pushIndex++) {
+            // pop之前的都要pushe
             stack.push(pushA[pushIndex]);
             while (!stack.isEmpty() && stack.peek() == popA[popIndex]) {
                 stack.pop();

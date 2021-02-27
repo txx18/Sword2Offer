@@ -11,17 +11,17 @@ public class LCA {
 
     public int lowestCommonAncestor(TreeNode root, int o1, int o2) {
         // write code here
-        return dfsPost(root, o1, o2).val;
+        return postorder(root, o1, o2).val;
     }
 
-    private TreeNode dfsPost(TreeNode root, int o1, int o2) {
+    private TreeNode postorder(TreeNode root, int o1, int o2) {
         // write code here
         if (root == null || root.val == o1 || root.val == o2) {
             return root;
         }
-        TreeNode left = dfsPost(root.left, o1, o2);
-        TreeNode right = dfsPost(root.right, o1, o2);
-        // 如果都不为null（互为祖先的情况）
+        TreeNode left = postorder(root.left, o1, o2);
+        TreeNode right = postorder(root.right, o1, o2);
+        // 如果都不为null（互为祖先的情况）e
         if (left != null && right != null) {
             return root;
         }

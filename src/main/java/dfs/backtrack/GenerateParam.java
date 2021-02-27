@@ -15,9 +15,9 @@ public class GenerateParam {
     }
 
     ArrayList<String> res = new ArrayList<>();
-    StringBuilder track = new StringBuilder("(");
+    StringBuilder track = new StringBuilder();
     int n;
-    String[] choose = new String[]{"(", ")"};
+
 
     /**
      * @param n int整型
@@ -54,6 +54,8 @@ public class GenerateParam {
         btLeftRight(leftCount, rightCount + 1);
         track.deleteCharAt(track.length() - 1);
     }
+
+    String[] choose = new String[]{"(", ")"};
 
     private void btIfElse(int leftCount, int rightCount) {
         // 如果leftCount < n，有两种选择；=3之后只能全右括号结束

@@ -34,6 +34,11 @@ public class ReverseList {
 
     }
 
+    /**
+     * 通过LC
+     * @param head
+     * @return
+     */
     public ListNode reverseRecur(ListNode head) {
         if (head == null || head.next == null) {
             return head;

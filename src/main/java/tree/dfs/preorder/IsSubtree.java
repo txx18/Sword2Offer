@@ -4,7 +4,12 @@ import zhelper.TreeUtils.*;
 
 public class IsSubtree {
 
-
+    /**
+     * 通过LC
+     * @param root1
+     * @param root2
+     * @return
+     */
     public boolean HasSubtree(TreeNode root1, TreeNode root2) {
         // 我们约定空树不是任意一个树的子结构
         // 必须有判断

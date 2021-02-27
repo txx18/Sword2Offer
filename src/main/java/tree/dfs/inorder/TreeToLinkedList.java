@@ -39,7 +39,7 @@ package tree.dfs.inorder;
  * @version V1.0
  * @create 2020-03-15 17:08
  */
-public class TreeToDoubleLinkedListE36 {
+public class TreeToLinkedList {
 
     public static void main(String[] args) {
         Node root = new Node(4);
@@ -48,7 +48,7 @@ public class TreeToDoubleLinkedListE36 {
         root.left.left = new Node(1);
         root.left.right = new Node(3);
 
-        TreeToDoubleLinkedListE36 obj = new TreeToDoubleLinkedListE36();
+        TreeToLinkedList obj = new TreeToLinkedList();
         Node listHead = obj.solutionInorder(root);
         Node cur = listHead;
         do {
@@ -65,8 +65,8 @@ public class TreeToDoubleLinkedListE36 {
             return null;
         }
         inorder(pRootOfTree);
-        // 如果题目要求循环链表，最后设置一下循环链表
-        // 此时 root回到root，而pre遍历到最后一个节点
+        // 如果题目要求循环链表，最后设置一下循环链表，两句不分先后
+        // 此时 root回到root，而pre遍历到最后一个节点（最大值）
 /*        pre.right = head;
         head.left = pre;*/
         return head;
