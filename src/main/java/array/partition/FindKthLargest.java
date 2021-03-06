@@ -2,10 +2,18 @@ package array.partition;
 
 /**
  * 根据快速排序的思路
+ *
  * @author ShaneTang
  * @create 2021-02-27 11:57
  */
 public class FindKthLargest {
+
+    public static void main(String[] args) {
+        FindKthLargest obj = new FindKthLargest();
+        int[] arr1 = new int[]{1, 3, 5, 2, 2};
+        int res = obj.findKth(arr1, arr1.length, 3);
+        System.out.println("res = " + res);
+    }
 
     /**
      * 通过LC NK
@@ -29,6 +37,15 @@ public class FindKthLargest {
             findK(a, lessEqualRight + 1, r, K);
         }
         return a[K];
+/*        int pivotIdx = l + (int) (Math.random() * (r - l + 1));
+        swap(a, pivotIdx, r);
+        int[] indexes = threePartition(a, l, r);
+        if (K > indexes[1]) {
+            findK(a, indexes[1] + 1, r, K);
+        } else if (K < indexes[0]) {
+            findK(a, l, indexes[0] - 1, K);
+        }
+        return a[K];*/
     }
 
     private int partition(int[] arr, int l, int r) {

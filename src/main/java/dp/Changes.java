@@ -58,15 +58,77 @@ public class Changes {
     }
 
     int[] arr;
+
+    int[] coins;
+
+
+    private int solutionRecurForce1(int[] coins, int amount) {
+        // base case
+        if (amount == 0) {
+            return 0;
+        }
+        if (amount < 0) {
+            return -1;
+        }
+        // 初始最大值
+        int curRes = amount + 1;
+        for (int coin : coins) {
+            if (amount - coin < 0) {
+                continue;
+            }
+            int preRes = solutionRecurForce1(coins, amount - coin);
+            if (preRes == -1) {
+                continue;
+            }
+            curRes = Math.min(curRes, 1 + preRes);
+        }
+        // 更新res
+        return curRes == amount + 1 ? -1 : curRes;
+    }
+
     int[] memoArr;
 
-    public int minMoney(int[] arr, int aim) {
+    /**
+     * 不通过LC
+     * @param coins
+     * @param amount
+     * @return
+     */
+    public int solutionMemoArr(int[] coins, int amount) {
         // write code here
-        this.arr = arr;
-        memoArr = new int[aim + 1];
+//        this.arr = coins;
+        this.coins = coins;
+        memoArr = new int[amount + 1];
         Arrays.fill(memoArr, -1);
-        solutionDpMemoArr(aim);
-        return memoArr[aim];
+        recurMemoArr(amount);
+        return memoArr[amount];
+    }
+
+    private int recurMemoArr(int amount) {
+        if (amount == 0) {
+            return 0;
+        }
+        if (amount < 0) {
+            return -1;
+        }
+        if (memoArr[amount] != -1) {
+            return memoArr[amount];
+        }
+        // 初始最大值
+        int curRes = amount + 1;
+        for (int coin : coins) {
+//            if (amount - coin < 0) {
+//                continue;
+//            }
+            int preRes = recurMemoArr(amount - coin);
+            if (preRes == -1) {
+                continue;
+            }
+            curRes = Math.min(curRes, 1 + preRes);
+        }
+        // 更新res
+        memoArr[amount] = curRes == amount + 1 ? -1 : curRes;
+        return memoArr[amount];
     }
 
     private int solutionDpTable(int[] arr, int aim) {
@@ -86,30 +148,6 @@ public class Changes {
         return dp[aim] != aim + 1 ? dp[aim] : -1;
     }
 
-    private int solutionDpMemoArr(int aim) {
-        // base case
-        if (aim == 0) {
-            return 0;
-        }
-        if (memoArr[aim] != -1) {
-            return memoArr[aim];
-        }
-        // 初始最大值
-        int curRes = aim + 1;
-        for (int coin : arr) {
-            if (aim - coin < 0) {
-                continue;
-            }
-            int preRes = solutionDpMemoArr(aim - coin);
-            if (preRes == -1) {
-                continue;
-            }
-            curRes = Math.min(curRes, 1 + preRes);
-        }
-        // 更新res
-        memoArr[aim] = curRes == aim + 1 ? -1 : curRes;
-        return memoArr[aim];
-    }
 
     Map<Integer, Integer> memoMap = new HashMap<>();
 
@@ -135,5 +173,43 @@ public class Changes {
         return memoMap.get(aim);
     }
 
+
+    /*    *//**
+     * 对于列举出重复硬币的题目要求
+     *
+     * @param coins
+     * @param amount
+     * @return
+     *//*
+    private int solutionRecurForce2(int[] coins, int amount) {
+        this.coins = coins;
+        return recur2(0, amount);
+    }
+
+    private int recur2(int index, int rest) {
+        if (rest < 0) {
+            return -1;
+        }
+        if (rest == 0) {
+            return 0;
+        }
+        // rest > 0
+        if (index == coins.length) {
+            return -1;
+        }
+        int res1 = recur2(index + 1, rest);
+        int res2 = recur2(index + 1, rest - coins[index]);
+        if (res1 == -1 && res2 == -1) {
+            return -1;
+        } else {
+            if (res1 == -1) {
+                return res2;
+            }
+            if (res2 == -1) {
+                return res1;
+            }
+            return Math.min(res1, 1 + res2);
+        }
+    }*/
 
 }

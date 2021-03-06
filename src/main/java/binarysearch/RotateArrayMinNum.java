@@ -48,18 +48,18 @@ public class RotateArrayMinNum {
 
 
     private int findByTraverse(int[] array, int l, int r) {
-        for (int i = l; i < r; i++) {
-            if (array[i + 1] < array[i])
-                return array[i + 1];
-        }
-        return array[l];
-/*        int minIndex = l;
+        int minIndex = l;
         for (int i = l + 1; i <= r; i++) {
             if (array[i] < array[minIndex]) {
                 minIndex = i;
             }
         }
-        return array[minIndex];*/
+        return array[minIndex];
+/*        for (int i = l; i < r; i++) {
+            if (array[i + 1] < array[i])
+                return array[i + 1];
+        }
+        return array[l];*/
     }
 
     /**

@@ -48,9 +48,28 @@ public class Hanota {
         System.out.println(listC.toString());
     }
 
+    ArrayList<String> res = new ArrayList<>();
+
+    public ArrayList<String> getSolution(int n) {
+        // write code here
+        recur(n, "left", "right", "mid");
+        return res;
+    }
+
+    private void recur(int i, String from, String to, String other) {
+        if (i == 1) {
+            res.add("move from " + from + " to " + to);
+            return;
+        }
+        recur(i - 1, from, other, to);
+        res.add("move from " + from + " to " + to);
+        recur(i - 1, other, to, from);
+    }
+
 
     public void hanota(List<Integer> A, List<Integer> B, List<Integer> C) {
         solution(A.size(), A, B, C);
+//        honoi(3, "左", "右", "中");
 //        move(A.size(), A, B, C);
     }
 
@@ -65,7 +84,8 @@ public class Hanota {
      * , 在所有 Java 提交中击败了
      * 100.00%
      * 的用户
-     * @param i 底元素
+     *
+     * @param i     底元素
      * @param from
      * @param other
      * @param to
@@ -97,6 +117,19 @@ public class Hanota {
         A.remove(A.size() - 1);
         move(n - 1, B, A, C);
 
+    }
+
+    private static void honoi(int i, String from, String to, String other) {
+        if (i == 1) {
+            System.out.println("1: " + from + "-->" + to);
+            return;
+        }
+        // from --> other
+        honoi(i - 1, from, other, to);
+        // 正式移动 from --> to
+        System.out.println(i + ": " + from + "-->" + to);
+        // other --> to
+        honoi(i - 1, other, to, from);
     }
 
 }

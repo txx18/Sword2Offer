@@ -16,15 +16,15 @@ public class TreeDepth {
      * @param root
      * @return
      */
-    public int TreeDepthRecur(TreeNode root) {
+    public int solutionRecur(TreeNode root) {
         if (root == null) {
             return 0;
         }
         // 本质是后序
-        return 1 + Math.max(TreeDepth(root.left), TreeDepth(root.right));
-/*        int left = TreeDepth(root.left);
+/*        return 1 + Math.max(TreeDepth(root.left), TreeDepth(root.right));*/
+        int left = TreeDepth(root.left);
         int right = TreeDepth(root.right);
-        return 1 + Math.max(left, right);*/
+        return 1 + Math.max(left, right);
     }
 
     int res;

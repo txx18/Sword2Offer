@@ -45,6 +45,7 @@ public class Serialize {
     }
 
     public TreeNode deserializePre(String str) {
+        // 多一步验证NULL+SEP
         if ((NULL + SEP).equals(str)) {
             return null;
         }
@@ -52,17 +53,18 @@ public class Serialize {
         for (String split : splits) {
             q.offer(split);
         }
-        return buildPre();
+        return preorder();
     }
 
-    private TreeNode buildPre() {
+    private TreeNode preorder() {
         String poll = q.poll();
+        // 从队列出来的自然没有+SEP
         if ((NULL).equals(poll)) {
             return null;
         }
         TreeNode root = new TreeNode(Integer.parseInt(poll));
-        root.left = buildPre();
-        root.right = buildPre();
+        root.left = preorder();
+        root.right = preorder();
         return root;
     }
 

@@ -105,6 +105,21 @@ public class Fibonacci {
         return memoArray[n];
     }
 
+
+    /**
+     * 递归
+     * LC 超时
+     *
+     * @param n 从0开始数f(0) = 0
+     * @return
+     */
+    public int solutionRecurForce(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        return solutionRecurForce(n - 1) + solutionRecurForce(n - 2);
+    }
+
     Map<Integer, Integer> memo = new HashMap<>();
 
     public int solutionRecurMemoMap(int n) {
@@ -120,20 +135,5 @@ public class Fibonacci {
         // 加入备忘录
         memo.put(n, sum);
         return memo.get(n);
-    }
-
-
-    /**
-     * 递归
-     * LC 超时
-     *
-     * @param n 从0开始数f(0) = 0
-     * @return
-     */
-    public int solutionRecurForce(int n) {
-        if (n <= 1) {
-            return n;
-        }
-        return solutionRecurForce(n - 1) + solutionRecurForce(n - 2);
     }
 }

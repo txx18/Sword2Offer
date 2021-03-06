@@ -42,6 +42,7 @@ public class ReverseBetween {
             nxt = head.next;
             return head;
         }
+        // 后序
         ListNode newHead = reverse1ToN(head.next, n - 1);
         head.next.next = head;
         head.next = nxt;

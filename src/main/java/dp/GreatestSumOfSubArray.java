@@ -31,12 +31,12 @@ public class GreatestSumOfSubArray {
         return res;
     }
 
-    public int solutionDpTable(int[] array) {
-        int n = array.length;
+    public int solutionDpTable(int[] arr) {
+        int n = arr.length;
         // 初始化为原数组copy
-        int[] dp = Arrays.copyOf(array, n);
+        int[] dp = Arrays.copyOf(arr, n);
         // res 初始化为第0个
-        int res = array[0];
+        int res = arr[0];
         for (int i = 1; i < n; i++) {
             if (dp[i - 1] > 0) { // 注意公式的含义，不是array[i - 1]
                 dp[i] += dp[i - 1];

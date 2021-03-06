@@ -38,7 +38,7 @@ public class ReverseKGroup {
             }
             p2 = p2.next;
         }
-        // 先序递归
+        // 先序，返回newHead
         ListNode newHead = reverse(p1, p2);
         // p1.next接上递归
         p1.next = reverseKGroup(p2, k);

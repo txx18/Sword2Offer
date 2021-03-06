@@ -42,7 +42,7 @@ public class MyHeapSort {
         while (2 * i + 1 <= heapSize) {
             // 子节点j
             int j = 2 * i + 1;
-            if (j < heapSize && arr[j] < arr[j + 1]) {
+            if (j < heapSize && arr[j] < arr[j + 1]) { // j < heapSize
                 j++;
             }
             // 停止：父节点 >= 子节点

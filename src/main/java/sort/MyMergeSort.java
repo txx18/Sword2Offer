@@ -7,6 +7,11 @@ public class MyMergeSort {
 
     int[] helpMember;
 
+    /**
+     * 通过LC NK
+     * @param arr
+     * @return
+     */
     public int[] MySort(int[] arr) {
         if (arr == null || arr.length < 2) {
             return arr;
@@ -16,7 +21,7 @@ public class MyMergeSort {
     }
 
     private int[] recur(int[] arr, int l, int r) {
-        if (r - l < 1) {
+        if (l >= r) { // l > r不行
             return arr;
         }
         int mid = l + ((r - l) >> 1);

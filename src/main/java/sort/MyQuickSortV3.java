@@ -27,7 +27,7 @@ public class MyQuickSortV3 {
     }
 
 
-    private static int[] recurProcess(int[] arr, int l, int r) {
+    private int[] recurProcess(int[] arr, int l, int r) {
         if (l >= r) {
             return arr;
         }
@@ -45,7 +45,7 @@ public class MyQuickSortV3 {
         return arr;
     }
 
-    public static int[] threePartition(int[] arr, int l, int r) {
+    private int[] threePartition(int[] arr, int l, int r) {
         int pivotVal = arr[r];
         // 小于区右边界
         int lessRight = l - 1;
@@ -67,7 +67,7 @@ public class MyQuickSortV3 {
         return new int[]{lessRight + 1, greatLeft};
     }
 
-    private static void swap(int[] arr, int i, int j) {
+    private void swap(int[] arr, int i, int j) {
         int tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;

@@ -30,7 +30,7 @@ public class VerifyPostorderBST {
         int rootVal = seq[r];
         // 就当做BST来检验，试图找到左右子树分界点
         int cutIndex = l;
-        while (cutIndex < r && seq[cutIndex] <= rootVal){
+        while (cutIndex < r && seq[cutIndex] <= rootVal) {
             cutIndex++;
         }
         // 验证 右 >= 根
