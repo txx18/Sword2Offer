@@ -22,25 +22,25 @@ package recur;
  * @version V1.0
  * @create 2020-03-18 17:28
  */
-public class CardMax {
+public class CardGame {
 
     public static void main(String[] args) {
         int[] arr1 = {1, 2, 100, 4};
 
-        CardMax obj = new CardMax();
+        CardGame obj = new CardGame();
         int res = obj.solution(arr1);
         System.out.println("res = " + res);
     }
 
 
-    private int solution(int[] arr) {
-        if (arr == null || arr.length == 0) {
+    private int solution(int[] A) {
+        if (A == null || A.length == 0) {
             return 0;
         }
         // 返回先手情况和后手情况的最大值
         return Math.max(
-                pre(arr, 0, arr.length - 1),
-                post(arr, 0, arr.length - 1)
+                pre(A, 0, A.length - 1),
+                post(A, 0, A.length - 1)
         );
     }
 

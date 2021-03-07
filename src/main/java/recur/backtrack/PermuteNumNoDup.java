@@ -70,7 +70,7 @@ public class PermuteNumNoDup {
             res.add(new ArrayList<>(track));
             return;
         }
-        // 全选择集遍历，跳过重复的，每一层都是全选择集遍历
+        // 全选择集遍历，跳过重复用过的，每一层都是全选择集遍历
         for (int i = 0; i < nums.length; i++) {
             if (track.contains(nums[i])) {
                 continue;
@@ -82,6 +82,7 @@ public class PermuteNumNoDup {
     }
 
     private void btContainsNoParam() {
+        // track的长度可以当做base case
         if (track.size() == nums.length) {
             res.add(new ArrayList<>(track));
             return;
@@ -97,22 +98,22 @@ public class PermuteNumNoDup {
         }
     }
 
-    Map<Integer, Integer> trackMap = new HashMap<>();
-
-    private void btMap() {
-        if (track.size() == nums.length) {
-            res.add(new ArrayList<>(track));
-        }
-        for (int i = 0; i < nums.length; i++) {
-            if (trackMap.getOrDefault(nums[i], 0) != 0) {
-                continue;
-            }
-            track.add(nums[i]);
-            trackMap.put(nums[i], trackMap.getOrDefault(nums[i], 0) + 1);
-            btMap();
-            track.remove(track.size() - 1);
-            trackMap.put(nums[i], 0);
-        }
-    }
+//    Map<Integer, Integer> trackMap = new HashMap<>();
+//
+//    private void btMap() {
+//        if (track.size() == nums.length) {
+//            res.add(new ArrayList<>(track));
+//        }
+//        for (int i = 0; i < nums.length; i++) {
+//            if (trackMap.getOrDefault(nums[i], 0) != 0) {
+//                continue;
+//            }
+//            track.add(nums[i]);
+//            trackMap.put(nums[i], trackMap.getOrDefault(nums[i], 0) + 1);
+//            btMap();
+//            track.remove(track.size() - 1);
+//            trackMap.put(nums[i], 0);
+//        }
+//    }
 
 }

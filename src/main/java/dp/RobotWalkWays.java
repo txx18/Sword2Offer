@@ -42,6 +42,11 @@ public class RobotWalkWays {
         return recurForce(K, S);
     }
 
+    /**
+     * @param rest 剩余步数
+     * @param cur  当前位置
+     * @return
+     */
     private int recurForce(int rest, int cur) {
         // rest == 0停止点
         if (rest == 0) {
@@ -55,16 +60,19 @@ public class RobotWalkWays {
         if (cur == N) {
             return recurForce(rest - 1, N - 1);
         }
-        // 中间位置
-        return recurForce(rest - 1, cur - 1) + recurForce(rest - 1, cur + 1);
+        // 中间位置，两种选择
+        return recurForce(rest - 1, cur - 1)
+                + recurForce(rest - 1, cur + 1);
     }
 
     int[][] dpMemo;
 
-    private int solutionRecurMemo(int N, int S, int E, int K) {
+    public int solutionRecurMemo(int N, int S, int E, int K) {
         this.N = N;
         this.E = E;
+        // 根据可变参数范围确定开多大数组
         dpMemo = new int[K + 1][N + 1];
+        // 数组默认是全0，改成全-1
         for (int i = 0; i <= K; i++) {
             Arrays.fill(dpMemo[i], -1);
         }
@@ -95,5 +103,15 @@ public class RobotWalkWays {
         return dpMemo[rest][cur];
     }
 
+    /**
+     * todo
+     * @return
+     */
+    public int solutionDpTable(int N, int S, int E, int K) {
+        this.N = N;
+        this.E = E;
+        return -1;
+
+    }
 
 }

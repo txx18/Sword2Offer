@@ -4,6 +4,9 @@ package recur;
  * 给定两个长度都为N的数组weights和values，weights[i]和values[i]分别代表
  * i号物品的重量和价值。给定一个正数bag，表示一个载重bag的袋子，你装的物
  * 品不能超过这个重量。返回你能装下最多的价值是多少？
+ * <p>
+ * 有描述为重量-价值的
+ * 有描述为体积-重量的
  *
  * @author Shane Tang
  * @version V1.0
@@ -25,12 +28,78 @@ public class BagMaxPrice {
         int bag = 11;
 
         BagMaxPrice obj = new BagMaxPrice();
-        int res = obj.solution(weights, values, bag);
+//        int res = obj.solution(weights, values, bag);
+        int res = obj.knapsack(10, 2, new int[][]{{1, 3}, {10, 4}});
         System.out.println("res = " + res);
     }
 
+    int[][] vw;
+    int V;
+    int n;
+
+    public int knapsack(int V, int n, int[][] vw) {
+        // write code here
+        this.vw = vw;
+        this.V = V;
+        this.n = n;
+        return recurNK1(0, 0);
+//        return recurNK2(0, V);
+    }
+
+    /**
+     * 参数少，形式简单，便于改动态规划
+     *
+     * @param i    决定第i个物品
+     * @param curV 之前的决定，达到的体积
+     * @return i..之后的最大价值
+     */
+    private int recurNK1(int i, int curV) {
+        // base case 1 如果超体积，无效方案，保证体积不超
+        if (curV > V) {
+            return -1;
+        }
+        // base case 2 达到总数，保证数量不超
+        if (i == n) {
+            return 0;
+        }
+        // 1、不要i货物
+        int res1 = recurNK1(i + 1, curV);
+        // 2、要i货物
+        // res2 不只是下一个下标可能超，而且可能超重，故先尝试后检验
+        int res2try = recurNK1(i + 1, curV + vw[i][0]);
+        int res2 = -1;
+        // 如果重量没超，才真正把价值加上，如果超重，就不会加case2的价值
+        if (res2try != -1) {
+            res2 = vw[i][1] + res2try;
+        }
+        // 取两种情况的较大值
+        return Math.max(res1, res2);
+    }
+
+    private int recurNK2(int i, int rest) {
+        if (rest < 0) {
+            return -1;
+        }
+        if (i == n) {
+            return 0;
+        }
+        int res1 = recurNK1(i + 1, rest);
+        int res2 = -1;
+        int res2try = recurNK2(i + 1, rest - vw[i][0]);
+        if (res2try != -1) {
+            res2 = vw[i][1] + res2try;
+        }
+        return Math.max(res1, res2);
+    }
+
+    /**
+     * @param weights
+     * @param values
+     * @param bag
+     * @return
+     */
     private int solution(int[] weights, int[] values, int bag) {
-        if (weights == null || values == null ||  bag == 0) {
+        if (weights == null || values == null || bag == 0) {
             return 0;
         }
         if (weights.length != values.length) {
@@ -43,41 +112,32 @@ public class BagMaxPrice {
 //        return recurWithCurValue(0, 0, 0);
     }
 
-    /**
-     * 尝试
-     * res累加价值的方法
-     * 为什么要两个可变参数，因为有两种base case
-     *
-     * @param i         决定第i个物品
-     * @param curWeight 之前的决定，达到的weight
-     * @return 最大价值
-     */
     private int recur(int i, int curWeight) {
-        // base case 1 如果超重，通过后续判断，不加上价值
+        // base case 1 如果超重，通过后续判断，不加上价值，保证重量不超
         if (curWeight > bag) {
-            return -1;
+            return -1; // 0
         }
-        // base case 2 达到总数
+        // base case 2 达到总数，保证下标不超
         if (i == weights.length) {
             return 0;
         }
-        // 两种情况
         // 1、不要i货物
-        int case1 = recur(i + 1, curWeight);
+        int res1 = recur(i + 1, curWeight);
         // 2、要i货物
-        // case2 不只是下一个下标可能超，而且可能超重，故先尝试后检验
-        int case2try = recur(i + 1, curWeight + weights[i]);
-        int case2 = 0;
+        // res2 不只是下一个下标可能超，而且可能超重，故先尝试后检验
+        int res2try = recur(i + 1, curWeight + weights[i]);
+        int res2 = 0;
         // 如果重量没超，才真正把价值加上，如果超重，就不会加case2的价值
-        if (case2try != -1) {
-            case2 = values[i] + case2try;
+        if (res2try != -1) {
+            res2 = values[i] + res2try;
         }
         // 取两种情况的较大值
-        return Math.max(case1, case2);
+        return Math.max(res1, res2);
     }
 
+
     /**
-     * 把当前价值作为参数的方法
+     * 可变参数多一个
      *
      * @param i
      * @param curWeight

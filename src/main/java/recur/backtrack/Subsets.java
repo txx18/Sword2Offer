@@ -1,7 +1,6 @@
 package recur.backtrack;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 题目描述
@@ -24,27 +23,36 @@ public class Subsets {
 
     public static void main(String[] args) {
         Subsets obj = new Subsets();
-        List<List<Integer>> res = obj.subsets(new int[]{1, 2, 3});
+//        List<List<Integer>> res = obj.subsets(new int[]{1, 2, 3});
+        ArrayList<ArrayList<Integer>> res = obj.subsets(new int[]{1, 2, 3});
+//        obj.processZS(new char[]{'a', 'b', 'c'}, 0);
         System.out.println("res = " + res);
     }
 
 
-    List<List<Integer>> res = new LinkedList<>();
-    LinkedList<Integer> track = new LinkedList<>();
+    ArrayList<Integer> track = new ArrayList<>();
     int[] S;
+    ArrayList<ArrayList<Integer>> resNK = new ArrayList<>();
 
-    public List<List<Integer>> subsets(int[] S) {
+    List<List<Integer>> resLC = new LinkedList<>();
+
+    /**
+     * 通过NK
+     *
+     * @param S
+     * @return
+     */
+    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
         this.S = S;
-//        ArrayList<Integer> track = new ArrayList<>();
-        track = new LinkedList<>();
         bt(0);
-//        backtrackMV(0);
-        return res;
+        return resNK;
     }
+
 
     private void bt(int index) {
         // 每一层的track都是一个结果
-        res.add(new LinkedList<>(track));
+        resNK.add(new ArrayList<>(track));
+//        resLC.add(new ArrayList<>(track));
         // 从 index 开始逐渐缩小选择集，
         for (int i = index; i < S.length; i++) {
             track.add(S[i]);
@@ -53,6 +61,20 @@ public class Subsets {
             track.remove(track.size() - 1);
         }
     }
+
+    /**
+     * 通过LC
+     *
+     * @param S
+     * @return
+     */
+    public List<List<Integer>> solutionBtLC(int[] S) {
+        this.S = S;
+        bt(0);
+        return resLC;
+    }
+
+
 
 //    private void btParam(LinkedList<Integer> track, int[] S, int index) {
 //        // new ArrayList<>(list)将复制list，以确保将元素存储到中res。如果list直接添加res，则该remove调用也会进行修改res

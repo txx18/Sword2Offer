@@ -8,11 +8,11 @@ import java.util.List;
  * @author ShaneTang
  * @create 2021-03-06 23:06
  */
-public class PermuteString {
+public class PermuteLetterString {
 
 
     public static void main(String[] args) {
-        PermuteString obj = new PermuteString();
+        PermuteLetterString obj = new PermuteLetterString();
         ArrayList<String> res = obj.Permutation("abbc");
         System.out.println("res = " + res);
     }
@@ -49,6 +49,7 @@ public class PermuteString {
         }
     }
 
+
     public void swap(char[] chs, int i, int j) {
         char tmp = chs[i];
         chs[i] = chs[j];
@@ -60,4 +61,6 @@ public class PermuteString {
         chs[i] = chs[j];
         chs[j] = tmp;
     }
+
+
 }
