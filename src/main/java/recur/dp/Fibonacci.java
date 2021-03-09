@@ -1,4 +1,4 @@
-package dp;
+package recur.dp;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,49 +43,16 @@ public class Fibonacci {
         Fibonacci obj = new Fibonacci();
 //        long res = obj.fibDpTable(19);
         long res = obj.solutionDpTable(3);
-//        long res = dp(45);
+//        long res = recur.dp(45);
         System.out.println("res = " + res);
     }
 
-    /**
-     * 优化空间
-     * 当前状态只跟前两个状态有关
-     * 时间n，空间1
-     * i从几开始，到几，要看语境，有的把第0项叫第一项。。
-     * @param n 从0开始数
-     * @return
-     */
-    public int solutionDpOpt(int n) {
+    public int solutionRecurForce(int n) {
         if (n <= 1) {
             return n;
         }
-        // 从0开始，第0项为0，第1项是1
-        int p1 = 0;
-        int p2 = 1;
-        int res = 0;
-        for (int i = 2; i <= n; i++) {
-            res = p1 + p2;
-            p1 = p2;
-            p2 = res;
-        }
-        return res;
+        return solutionRecurForce(n - 1) + solutionRecurForce(n - 2);
     }
-
-    public int solutionDpTable(int n) {
-        if (n < 1) {
-            return n;
-        }
-        int[] dp = new int[n + 1];
-        // 从0开始，第0项为0，第1项是1
-        dp[0] = 0;
-        dp[1] = 1;
-        for (int i = 2; i <= n; i++) {
-            dp[i] = dp[i - 1] + dp[i - 2];
-            dp[i] %= 1000000007;
-        }
-        return dp[n];
-    }
-
 
     int[] memoArray;
 
@@ -106,19 +73,46 @@ public class Fibonacci {
     }
 
 
+    public int solutionDpTable(int n) {
+        if (n < 1) {
+            return n;
+        }
+        int[] dp = new int[n + 1];
+        // 从0开始，第0项为0，第1项是1
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+            dp[i] %= 1000000007;
+        }
+        return dp[n];
+    }
+
     /**
-     * 递归
-     * LC 超时
+     * 优化空间
+     * 当前状态只跟前两个状态有关
+     * 时间n，空间1
+     * i从几开始，到几，要看语境，有的把第0项叫第一项。。
      *
-     * @param n 从0开始数f(0) = 0
+     * @param n 从0开始数
      * @return
      */
-    public int solutionRecurForce(int n) {
+    public int solutionDpOpt(int n) {
         if (n <= 1) {
             return n;
         }
-        return solutionRecurForce(n - 1) + solutionRecurForce(n - 2);
+        // 从0开始，第0项为0，第1项是1
+        int p1 = 0;
+        int p2 = 1;
+        int res = 0;
+        for (int i = 2; i <= n; i++) {
+            res = p1 + p2;
+            p1 = p2;
+            p2 = res;
+        }
+        return res;
     }
+
 
     Map<Integer, Integer> memo = new HashMap<>();
 

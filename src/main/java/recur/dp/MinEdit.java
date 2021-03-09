@@ -1,4 +1,4 @@
-package dp;
+package recur.dp;
 
 /**
  * @author ShaneTang
@@ -29,7 +29,7 @@ public class MinEdit {
      * @return
      */
     public int findMinCost(String A, int n, String B, int m, int c0, int c1, int c2) {
-        // dp[i][j]表示[0..i]与[0..j]的最短编辑距离
+        // recur.dp[i][j]表示[0..i]与[0..j]的最短编辑距离
         int[][] dp = new int[n + 1][m + 1];
         // base case，初始化第一行第一列
         // i走完A，从A插入j剩下的到B
@@ -116,7 +116,7 @@ public class MinEdit {
         int m, n;
         m = word1.length();
         n = word2.length();
-        // dp[i][j]表示[0..i]与[0..j]的最短编辑距离
+        // recur.dp[i][j]表示[0..i]与[0..j]的最短编辑距离
         int[][] dp = new int[m + 1][n + 1];
         // base case
         for (int j = 1; j <= n; j++) {

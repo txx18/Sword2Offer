@@ -37,17 +37,16 @@ import java.util.Map;
  * @version V1.0
  * @create 2020-03-10 21:10
  */
-public class NQueensCount {
+public class NQueensMethodCount {
 
     public static void main(String[] args) {
-        NQueensCount obj = new NQueensCount();
+        NQueensMethodCount obj = new NQueensMethodCount();
         int res = obj.Nqueen(8);
         System.out.println("res = " + res);
     }
 
     int[] track;
     int n;
-
 
     public int totalNQueens(int n) {
         if (n < 1) {
@@ -60,29 +59,24 @@ public class NQueensCount {
     }
 
 
-    /**
-     * @param i 来到第i行
-     * @return
-     */
     private int recur(int i) {
         // 如果 i == n 说明找到了一种
         if (i == n) {
-            return 1;
+            return 1; // 注意
         }
-        // 【关键】不成功要清0
-        int res = 0;
+        int res = 0; // 注意
         // 在第i 行，尝试第j列
         for (int j = 0; j < n; j++) {
             boolean isValid = isValid(i, j);
             // isValid受到上一行决策的影响
-            if (isValid) {
+            if (isValid) { // 分支限界
                 // 记录第i行
                 track[i] = j;
                 // 【关键】继续尝试下一行
                 res += recur(i + 1);
             }
         }
-        return res;
+        return res; // 注意
     }
 
     private boolean isValid(int row, int col) {
@@ -149,7 +143,6 @@ public class NQueensCount {
 //            track[row] = -1; // 这句不需要
         }
     }
-
 
 
     private boolean isValidTrack(int i, int j, int[] track) {

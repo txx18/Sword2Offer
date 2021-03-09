@@ -1,4 +1,4 @@
-package dp;
+package recur.dp;
 
 import java.util.Arrays;
 
@@ -41,7 +41,7 @@ public class GreatestSumOfSubArray {
             if (dp[i - 1] > 0) { // 注意公式的含义，不是array[i - 1]
                 dp[i] += dp[i - 1];
             }
-//            dp[i] += Math.max(dp[i - 1], 0); // 替换if的写法
+//            recur.dp[i] += Math.max(recur.dp[i - 1], 0); // 替换if的写法
             res = Math.max(res, dp[i]);
         }
         return res;

@@ -1,4 +1,4 @@
-package dp;
+package recur.dp;
 
 import java.util.Arrays;
 
@@ -50,7 +50,7 @@ public class RobotWalkWays {
     private int recurForce(int rest, int cur) {
         // rest == 0停止点
         if (rest == 0) {
-            return cur == E ? 1 : 0;
+            return cur == E ? 1 : 0; // 注意
         }
         // 左端
         if (cur == 1) {

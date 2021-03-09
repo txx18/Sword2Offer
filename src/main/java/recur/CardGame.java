@@ -28,19 +28,23 @@ public class CardGame {
         int[] arr1 = {1, 2, 100, 4};
 
         CardGame obj = new CardGame();
-        int res = obj.solution(arr1);
+        int res = obj.solutionRecur(arr1);
         System.out.println("res = " + res);
     }
 
-
-    private int solution(int[] A) {
+    /**
+     * NK超时
+     * @param A
+     * @return
+     */
+    private int solutionRecur(int[] A) {
         if (A == null || A.length == 0) {
             return 0;
         }
         // 返回先手情况和后手情况的最大值
         return Math.max(
-                pre(A, 0, A.length - 1),
-                post(A, 0, A.length - 1)
+                first(A, 0, A.length - 1),
+                second(A, 0, A.length - 1)
         );
     }
 
@@ -53,7 +57,7 @@ public class CardGame {
      * @param r
      * @return
      */
-    private int pre(int[] arr, int l, int r) {
+    private int first(int[] arr, int l, int r) {
         // base case 只剩一张牌，拿走
         if (l == r) {
             return arr[l];
@@ -61,8 +65,8 @@ public class CardGame {
         // 先手获得的总收益有两部分 （1）先手拿走的牌 （2）后手的决策
         // 先手拿左和拿右是两种情况，用或连接
         return Math.max(
-                arr[l] + post(arr, l + 1, r),
-                arr[r] + post(arr, l, r - 1)
+                arr[l] + second(arr, l + 1, r),
+                arr[r] + second(arr, l, r - 1)
         );
     }
 
@@ -75,7 +79,7 @@ public class CardGame {
      * @param r
      * @return
      */
-    private int post(int[] arr, int l, int r) {
+    private int second(int[] arr, int l, int r) {
         // base case 只剩一张牌，没牌了
         if (l == r) {
             return 0;
@@ -83,9 +87,49 @@ public class CardGame {
         // 后手受先手控制，先手会把最小值留给后手
         // 先手拿左和拿右是两种情况，用或连接
         return Math.min(
-                pre(arr, l + 1, r),
-                pre(arr, l, r - 1)
+                first(arr, l + 1, r),
+                first(arr, l, r - 1)
         );
     }
 
+
+    /**
+     * 通过NK
+     * @param A
+     * @return
+     */
+    private int solutionDpTable(int[] A) {
+        if (A == null || A.length == 0) {
+            return 0;
+        }
+        int N = A.length;
+        int[][] first = new int[N][N];
+        int[][] second = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            first[i][i] = A[i];
+        }
+/*        for (int i = 0; i < r; i++) {
+            second[i][i] = 0;
+        }*/
+        // 集中体现了，遍历顺序是根据暴力递归的依赖来的
+        for (int i = 1; i < N; i++) {
+            int l = 0;
+            int r = i;
+            // 填对角线右上方的斜线，从左上到右下
+            while (l < N && r < N) {
+                first[l][r] = Math.max(
+                        A[l] + second[l + 1][r],
+                        A[r] + second[l][r - 1]
+                );
+                second[l][r] = Math.min(
+                        first[l + 1][r],
+                        first[l][r - 1]
+                );
+                l++;
+                r++;
+            }
+
+        }
+        return Math.max(first[0][N - 1], second[0][N - 1]);
+    }
 }

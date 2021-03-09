@@ -17,7 +17,7 @@ public class IsBracketValid {
             if (c == '(' || c == '{' || c == '[') {
                 stack.push(c);
             } else { // 来了一个右括号
-                if (!stack.isEmpty() && leftOf(c) == stack.peek()) {
+                if (!stack.isEmpty() && leftOf(c) == stack.peek()) { // else if (!stack.isEmpty() && c == rightOf(stack.peek()))
                     stack.pop();
                 } else {
                     return false;
@@ -34,5 +34,14 @@ public class IsBracketValid {
             return '[';
         }
         return '{';
+    }
+
+    private char rightOf(char c) {
+        if (c == '(') {
+            return ')';
+        } else if (c == '{') {
+            return '}';
+        }
+        return ']';
     }
 }

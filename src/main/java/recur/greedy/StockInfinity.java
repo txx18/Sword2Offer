@@ -1,4 +1,4 @@
-package dp.greedy;
+package recur.greedy;
 
 /**
  * @author ShaneTang

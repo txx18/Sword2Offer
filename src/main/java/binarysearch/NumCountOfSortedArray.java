@@ -9,7 +9,7 @@ import java.util.Arrays;
  * @version V1.0
  * @create 2020-02-06 11:53
  */
-public class NumCountOfSortArr {
+public class NumCountOfSortedArray {
 
     public static void main(String[] args) {
         int[] arr1 = {3, 5, 11, 17, 21, 23, 28, 28, 28, 28, 30, 32, 50, 64, 64, 78, 81, 95, 101};
@@ -39,6 +39,7 @@ public class NumCountOfSortArr {
         // 搜索k和k+1的左边界
         int l = leftBS(array, k);
         int r = leftBS(array, k + 1);
+        // 有两种情况结果是0，否则是r-l
         return (l == array.length || array[l] != k) ? 0 : r - l;
     }
 

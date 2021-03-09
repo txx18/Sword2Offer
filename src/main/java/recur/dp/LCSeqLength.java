@@ -1,4 +1,4 @@
-package dp;
+package recur.dp;
 
 /**
  * @author ShaneTang
@@ -17,7 +17,7 @@ public class LCSeqLength {
 
     public int solutionDpTable1(String A, int n, String B, int m) {
         // write code here
-        // dp[i][j] A长度为i（从1开始数第i个） B长度为j时 LCS的长度
+        // recur.dp[i][j] A长度为i（从1开始数第i个） B长度为j时 LCS的长度
         int[][] dp = new int[n + 1][m + 1];
         // 默认初始为0了，主要是第一行第一列初始化为0，其余后面会更新
         for (int i = 1; i <= n; i++) {
@@ -42,19 +42,19 @@ public class LCSeqLength {
 //        int n = text1.length();
 //        int m = text2.length();
 //        // write code here
-//        // dp[i][j] A长度为i（从1开始数第i个） B长度为j时 LCS的长度
-//        int[][] dp = new int[n + 1][m + 1];
+//        // recur.dp[i][j] A长度为i（从1开始数第i个） B长度为j时 LCS的长度
+//        int[][] recur.dp = new int[n + 1][m + 1];
 //        // 默认初始为0了，主要是第一行第一列初始化为0，其余后面会更新
 //        for (int i = 1; i <= n; i++) {
 //            for (int j = 1; j <= m; j++) {
 //                if (text1.charAt(i - 1) == text2.charAt(j - 1)) {
-//                    dp[i][j] = 1 + dp[i - 1][j - 1];
+//                    recur.dp[i][j] = 1 + recur.dp[i - 1][j - 1];
 //                } else {
-//                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+//                    recur.dp[i][j] = Math.max(recur.dp[i - 1][j], recur.dp[i][j - 1]);
 //                }
 //            }
 //        }
-//        return dp[n][m];
+//        return recur.dp[n][m];
 //    }
 
 

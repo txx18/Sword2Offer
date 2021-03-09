@@ -1,4 +1,6 @@
-package dp;
+package recur.dp;
+
+import javafx.scene.Camera;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -47,19 +49,114 @@ import java.util.Map;
  * @author ShaneTang
  * @create 2021-01-17 13:40
  */
-public class Changes {
+public class ChangesMinCount {
 
     public static void main(String[] args) {
-        Changes obj = new Changes();
+        ChangesMinCount obj = new ChangesMinCount();
         int[] coins = new int[]{1, 2, 5};
         int[] coins2 = new int[]{3, 2, 5};
-        int res = obj.solutionDpTable(coins2, 20);
+        int res = obj.solutionRecurForce(coins2, 20);
         System.out.println("res = " + res);
     }
 
     int[] arr;
 
-    int[] coins;
+    int[] coinVals;
+
+    int amount;
+
+
+    private int solutionRecurForce(int[] coins, int amount) {
+        this.coinVals = coins;
+        this.amount = amount;
+        return dp(0, amount);
+    }
+
+    /**
+     * @param index
+     * @param rest
+     * @return 最小货币数
+     */
+    private int dp(int index, int rest) {
+        if (rest < 0) {
+            // 无效解
+            return -1;
+        }
+        if (rest == 0) {
+            // 有解，0个
+            return 0;
+        }
+        // rest > 0
+        if (index == coinVals.length) {
+            return -1;
+        }
+        int res = -1;
+        int res2try = -1;
+        for (int count = 0; coinVals[index] * count <= rest; count++) {
+            res2try = dp(index + 1, rest - (coinVals[index] * count));
+            if (res2try != -1) {
+                if (res == -1) {
+                    res = count + res2try;
+                } else {
+                    res = Math.min(res, res2try + count);
+                }
+            }
+        }
+        return res;
+    }
+
+    int[][] cache;
+
+    /**
+     * 通过LC
+     *
+     * @param coins
+     * @param amount
+     * @return
+     */
+    private int solutionRecurCache(int[] coins, int amount) {
+        this.coinVals = coins;
+        this.amount = amount;
+        cache = new int[coins.length + 1][amount + 1];
+        for (int i = 0; i < cache.length; i++) {
+            Arrays.fill(cache[i], -2);
+        }
+        return dpCache(0, amount);
+    }
+
+    private int dpCache(int index, int rest) {
+        if (rest < 0) {
+            // 无效解
+            return -1;
+        }
+        if (cache[index][rest] != -2) {
+            return cache[index][rest];
+        }
+        if (rest == 0) {
+            // 有解，0个
+            cache[index][rest] = 0;
+            return 0;
+        }
+        // rest > 0
+        if (index == coinVals.length) {
+            cache[index][rest] = -1;
+            return -1;
+        }
+        int res = -1;
+        int res2try = -1;
+        for (int count = 0; coinVals[index] * count <= rest; count++) {
+            res2try = dpCache(index + 1, rest - (coinVals[index] * count));
+            if (res2try != -1) {
+                if (res == -1) {
+                    res = count + res2try;
+                } else {
+                    res = Math.min(res, res2try + count);
+                }
+            }
+        }
+        cache[index][rest] = res;
+        return cache[index][rest];
+    }
 
 
     private int solutionRecurForce1(int[] coins, int amount) {
@@ -90,6 +187,7 @@ public class Changes {
 
     /**
      * 不通过LC
+     *
      * @param coins
      * @param amount
      * @return
@@ -97,7 +195,7 @@ public class Changes {
     public int solutionMemoArr(int[] coins, int amount) {
         // write code here
 //        this.arr = coins;
-        this.coins = coins;
+        this.coinVals = coins;
         memoArr = new int[amount + 1];
         Arrays.fill(memoArr, -1);
         recurMemoArr(amount);
@@ -116,7 +214,7 @@ public class Changes {
         }
         // 初始最大值
         int curRes = amount + 1;
-        for (int coin : coins) {
+        for (int coin : coinVals) {
 //            if (amount - coin < 0) {
 //                continue;
 //            }
@@ -133,7 +231,7 @@ public class Changes {
 
     private int solutionDpTable(int[] arr, int aim) {
         // write code
-        // 根据实际情况初始化dp数组，dp[i]代表 aim==i 时最少的硬币数
+        // 根据实际情况初始化dp数组，recur.dp[i]代表 aim==i 时最少的硬币数
         int[] dp = new int[aim + 1];
         Arrays.fill(dp, aim + 1);
         dp[0] = 0;

@@ -1,4 +1,4 @@
-package recur;
+package recur.dp;
 
 /**
  * 给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。
@@ -31,22 +31,26 @@ public class TranslateNumToLetter {
     }
 
     char[] chars;
-    int res;
 
-    public int solve(String nums) {
+
+    /**
+     * 通过NK
+     *
+     * @param nums
+     * @return
+     */
+    public int solutionRecur(String nums) {
         // write code here
         if (nums == null || nums.length() == 0) {
             return 0;
         }
         chars = nums.toCharArray();
-        return recur(0);
-
+//        return recur(0);
+        cache = new int[nums.length() + 1];
+        return recurCache(0);
     }
 
-    /**
-     * @param i
-     * @return
-     */
+
     private int recur(int i) {
         // 试到最后一个，找到一个解
         if (i == chars.length) {
@@ -69,7 +73,7 @@ public class TranslateNumToLetter {
             // 单个数字的选择
             int res = recur(i + 1);
             // 两个数字结合的选择
-            if (i + 1 < chars.length && (chars[i] >= '0' && chars[i + 1] <= '6')) {
+            if (i + 1 < chars.length && (chars[i] >= '0' && chars[i + 1] <= '6')) { // 注意
                 res += recur(i + 2);
             }
             return res;
@@ -80,25 +84,81 @@ public class TranslateNumToLetter {
         return res;*/
     }
 
+    int[] cache;
+
+    /**
+     * 通过NK
+     * @param i
+     * @return
+     */
+    private int recurCache(int i) {
+        if (i == chars.length) {
+            cache[i] = 1;
+            return cache[i];
+        }
+        if (chars[i] == '0') {
+            cache[i] = 0;
+            return cache[i];
+        }
+        if (chars[i] == '1') {
+            cache[i] = recurCache(i + 1);
+            if (i + 1 < chars.length) {
+                cache[i] += recur(i + 2);
+            }
+            return cache[i];
+        }
+        if (chars[i] == '2') {
+            cache[i] = recurCache(i + 1);
+            if (i + 1 < chars.length && (chars[i] >= '0' && chars[i + 1] <= '6')) { // 注意
+                cache[i] += recurCache(i + 2);
+            }
+            return cache[i];
+        }
+        cache[i] = recurCache(i + 1);
+        return cache[i];
+    }
+
+    /**
+     * 通过NK
+     *
+     * @param nums
+     * @return
+     */
+    public int solutionDpTable(String nums) {
+        // write code here
+        if (nums == null || nums.length() == 0) {
+            return 0;
+        }
+        int N = nums.length();
+        // recur.dp: [0..index]的解的个数
+        int[] dp = new int[N + 1];
+        dp[N] = 1;
+        // 注意遍历顺序，已知 下标N，要推下标0，应该逆序遍历
+        for (int i = N - 1; i >= 0; i--) { // 从N-1开始，不能越界
+            if (nums.charAt(i) == '0') {
+                dp[i] = 0;
+            } else if (nums.charAt(i) == '1') {
+                dp[i] = dp[i + 1];
+                if (i + 1 < N) {
+                    dp[i] += dp[i + 2];
+                }
+            } else if (nums.charAt(i) == '2') {
+                dp[i] = dp[i + 1];
+                if (i + 1 < N && (nums.charAt(i) >= '0' && nums.charAt(i + 1) <= '6')) { // 注意
+                    dp[i] += dp[i + 2];
+                }
+            } else {
+                dp[i] = dp[i + 1];
+            }
+        }
+        return dp[0];
+    }
+
 
     int digitCount;
     int num;
 
-    /**
-     * 执行用时 :
-     * 0 ms
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * 内存消耗 :
-     * 36.3 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     *
-     * @param num
-     * @return
-     */
+
     public int translateNum(int num) {
         // 从尾到头尝试 i从头开始
         this.digitCount = getDigitCount(num);

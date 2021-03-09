@@ -1,4 +1,4 @@
-package dp;
+package recur.dp;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -49,16 +49,16 @@ public class LISeqLength {
 //    public int lengthOfLIS(int[] nums) {
 //        // write code here
 //        // 在子数组array中，从1开始第i个的目标子序列（最长递增子序列）的长度是dp[i]。
-//        int[] dp = new int[nums.length + 1];
-//        Arrays.fill(dp, 1);
+//        int[] recur.dp = new int[nums.length + 1];
+//        Arrays.fill(recur.dp, 1);
 //        int res = 0;
 //        for (int i = 1; i <= nums.length; i++) {
 //            for (int j = 1; j < i; j++) {
 //                if (nums[j - 1] < nums[i - 1]) {
-//                    dp[i] = Math.max(dp[i], 1 + dp[j]);
+//                    recur.dp[i] = Math.max(recur.dp[i], 1 + recur.dp[j]);
 //                }
 //            }
-//            res = Math.max(res, dp[i]);
+//            res = Math.max(res, recur.dp[i]);
 //        }
 //        return res;
 //    }
