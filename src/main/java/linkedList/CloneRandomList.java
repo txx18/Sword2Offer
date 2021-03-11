@@ -75,12 +75,14 @@ public class CloneRandomList {
         // 定义一个哈希表存储node到newNode的映射
         Map<RandomListNode, RandomListNode> map = new HashMap<>();
         RandomListNode cur = pHead;
+        // 第一次遍历是复制节点本身并加入映射哈希
         while (cur != null) {
             RandomListNode newNode = new RandomListNode(cur.label);
             map.put(cur, newNode);
             cur = cur.next;
         }
         cur = pHead;
+        // 第二次遍历是根据映射连指针
         while (cur != null) {
             RandomListNode newNode = map.get(cur);
             newNode.next = map.get(cur.next);

@@ -1,4 +1,4 @@
-package recur;
+package recur.dp;
 
 import java.util.Arrays;
 
@@ -57,9 +57,12 @@ public class Bag01 {
 
     private int recurNK2(int index, int rest) {
         if (rest < 0) {
+            // 无效解
             return -1;
         }
+        // rest >= 0
         if (index == n) {
+            // 不能再产生价值，注意不是“找到1种方法”
             return 0;
         }
         int res1 = recurNK2(index + 1, rest);
@@ -105,6 +108,7 @@ public class Bag01 {
 
     /**
      * 通过NK
+     *
      * @param index
      * @param rest
      * @return
@@ -123,7 +127,8 @@ public class Bag01 {
         int res1 = recurCache2(index + 1, rest);
         int res2 = -1;
         if (rest - vw[index][0] >= 0) {
-            res2 = vw[index][1] + recurCache2(index + 1, rest - vw[index][0]);;
+            res2 = vw[index][1] + recurCache2(index + 1, rest - vw[index][0]);
+            ;
         }
         cache[index][rest] = Math.max(res1, res2);
         return cache[index][rest];

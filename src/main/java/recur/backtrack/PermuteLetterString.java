@@ -34,7 +34,7 @@ public class PermuteLetterString {
     // str[i..]范围上，所有的字符，都可以在i位置上，后续都去尝试
     // str[0..i-1]范围上，是之前做的选择
     // 请把所有的字符串形成的全排列，加入到res里去
-    public void processChars(int i) {
+    private void processChars(int i) {
         if (i == chars.length) {
             res.add(String.valueOf(chars));
         }
@@ -50,13 +50,13 @@ public class PermuteLetterString {
     }
 
 
-    public void swap(char[] chs, int i, int j) {
+    private void swap(char[] chs, int i, int j) {
         char tmp = chs[i];
         chs[i] = chs[j];
         chs[j] = tmp;
     }
 
-    public void swap(int[] chs, int i, int j) {
+    private void swap(int[] chs, int i, int j) {
         int tmp = chs[i];
         chs[i] = chs[j];
         chs[j] = tmp;

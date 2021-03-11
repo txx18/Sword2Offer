@@ -10,7 +10,7 @@ import zhelper.ListUtils.*;
  * @version V1.0
  * @create 2020-02-16 10:14
  */
-public class MergeTwoListE25 {
+public class MergeTwoList {
 
     public static void main(String[] args) {
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -22,14 +22,14 @@ public class MergeTwoListE25 {
         int[] arr7 = {2, 4, 6, 8};
         ListNode head1 = ListUtils.convertToLinkedList(arr1);
         ListNode head2 = ListUtils.convertToLinkedList(arr2);
-
-        ListNode res = mergeTwoLists(head1, head2);
+        MergeTwoList obj = new MergeTwoList();
+        ListNode res = obj.mergeTwoLists(head1, head2);
         ListUtils.printSingleList(res);
 
     }
 
 
-    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         // write code here
         if (l1 == null) {
             return l2;
@@ -46,11 +46,18 @@ public class MergeTwoListE25 {
         }
     }
 
-    private static ListNode solutionLoop(ListNode l1, ListNode l2) {
+    /**
+     * 通过LC
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode solutionLoop(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(-1);
         ListNode cur = dummy;
         while (l1 != null && l2 != null) {
-            if (l1.val <= l2.val) {
+            if (l1.val < l2.val) {
                 cur.next = l1;
                 l1 = l1.next;
             } else {

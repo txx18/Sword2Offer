@@ -30,21 +30,23 @@ public class PermuteNumNoDup {
     public static void main(String[] args) {
         PermuteNumNoDup obj = new PermuteNumNoDup();
         int[] arr = {1, 2, 3};
-        ArrayList<ArrayList<Integer>> res = obj.permute(arr);
+//        ArrayList<ArrayList<Integer>> res = obj.permute(arr);
+        List<List<Integer>> res = obj.solutionSwap(arr);
         System.out.println("res = " + res);
     }
 
     ArrayList<ArrayList<Integer>> res = new ArrayList<>();
     LinkedList<Integer> track = new LinkedList<>();
     int[] nums;
-    List<List<Integer>> resLC = new ArrayList<>();
+
 
     /**
      * 通过NK
+     *
      * @param num
      * @return
      */
-    ArrayList<ArrayList<Integer>> permute(int[] num) {
+    ArrayList<ArrayList<Integer>> solutionBt(int[] num) {
         this.nums = num;
         btContains(0);
 //        btMap();
@@ -79,6 +81,42 @@ public class PermuteNumNoDup {
             btContains(index + 1);
             track.remove(track.size() - 1);
         }
+    }
+
+    List<List<Integer>> resLC = new ArrayList<>();
+
+    /**
+     * 通过LC
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> solutionSwap(int[] nums) {
+        this.nums = nums;
+        process(0);
+        return resLC;
+    }
+
+    private void process(int i) {
+        if (i == nums.length) {
+            Integer[] integerArr = new Integer[nums.length];
+            for (int j = 0; j < integerArr.length; j++) {
+                integerArr[j] = nums[j];
+            }
+//            Integer[] integerArr = Arrays.stream(nums).boxed().toArray(Integer[]::new);
+            resLC.add(Arrays.asList(integerArr));
+        }
+        for (int j = i; j < nums.length; j++) {
+            swap(nums, i, j);
+            process(i + 1);
+            swap(nums, i, j);
+        }
+    }
+
+    private void swap(int[] ints, int i, int j) {
+        int tmp = ints[i];
+        ints[i] = ints[j];
+        ints[j] = tmp;
     }
 
     private void btContainsNoParam() {

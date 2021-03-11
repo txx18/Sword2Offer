@@ -9,6 +9,12 @@ import java.util.LinkedList;
  */
 public class IsBracketValid {
 
+
+    /**
+     * 通过LC NK
+     * @param s
+     * @return
+     */
     public boolean isValid(String s) {
         // write code here
         char[] chars = s.toCharArray();
@@ -20,7 +26,7 @@ public class IsBracketValid {
                 if (!stack.isEmpty() && leftOf(c) == stack.peek()) { // else if (!stack.isEmpty() && c == rightOf(stack.peek()))
                     stack.pop();
                 } else {
-                    return false;
+                    return false; // 必须提前判断不合法
                 }
             }
         }

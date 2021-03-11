@@ -26,24 +26,28 @@ public class RotateArrayMinNum {
     }
 
 
-    public int solutionBSLoop(int[] array) {
-        if (array.length == 0) {
+    int[] numbers;
+
+    public int solutionBSLoop(int[] numbers) {
+        if (numbers.length == 0) {
             return 0;
         }
-        int l = 0, r = array.length - 1;
+        int l = 0, r = numbers.length - 1;
         while (l < r) {
             int m = l + (r - l) / 2;
-            if (array[l] == array[m] && array[m] == array[r]) {
-                return findByTraverse(array, l, r);
+            // 必须先判断3个相等的情况
+            if (numbers[l] == numbers[m] && numbers[m] == numbers[r]) {
+                return findByTraverse(numbers, l, r);
             }
             // 右边是非递减数组，target在左边
-            else if (array[m] <= array[r]) {
+            else if (numbers[m] <= numbers[r]) {
                 r = m;
-            } else {
+            }
+            else {
                 l = m + 1;
             }
         }
-        return array[l];
+        return numbers[l];
     }
 
 

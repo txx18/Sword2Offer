@@ -7,7 +7,7 @@ import zhelper.ListUtils.*;
  * @author ShaneTang
  * @create 2020-12-27 20:22
  */
-public class ReverseBetween {
+public class ReverseBetweenMN {
 
     public static void main(String[] args) {
         int[] arr1 = {0, 1, 2, 3, 4};
@@ -19,7 +19,7 @@ public class ReverseBetween {
         int[] arr7 = {2, 4, 6, 8};
         ListNode head1 = ListUtils.convertToLinkedList(arr1);
         ListUtils.printSingleList(head1);
-        ReverseBetween obj = new ReverseBetween();
+        ReverseBetweenMN obj = new ReverseBetweenMN();
         ListNode res = obj.reverseBetween(head1, 2, 4);
 //        ListNode res = obj.reverseMToLength(head1, 3);
         ListUtils.printSingleList(res);
@@ -27,15 +27,6 @@ public class ReverseBetween {
     }
 
     ListNode nxt = null;
-
-    public ListNode reverseBetween (ListNode head, int m, int n) {
-        // write code here
-        if (m == 1) {
-            return reverse1ToN(head, n);
-        }
-        head.next = reverseBetween(head.next, m - 1, n - 1);
-        return head;
-    }
 
     private ListNode reverse1ToN(ListNode head, int n) {
         if (n == 1) {
@@ -49,7 +40,17 @@ public class ReverseBetween {
         return newHead;
     }
 
-    private  ListNode reverseMToLength(ListNode head, int m) {
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        // write code here
+        if (m == 1) {
+            return reverse1ToN(head, n);
+        }
+        head.next = reverseBetween(head.next, m - 1, n - 1);
+        return head;
+    }
+
+
+    private ListNode reverseMToLength(ListNode head, int m) {
         if (m == 1) {
             return reverse(head);
         }

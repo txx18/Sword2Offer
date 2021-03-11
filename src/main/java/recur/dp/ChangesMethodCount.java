@@ -31,12 +31,15 @@ public class ChangesMethodCount {
         if (rest < 0) {
             return 0;
         }
+        if (rest == 0) {
+            return 1;
+        }
         if (index == coinVals.length) {
-            return rest == 0 ? 1 : 0;
+            return 0;
         }
         int res = 0;
-        // 枚举行为
-        for (int count = 0; coinVals[index] * count <= rest; count++) {
+        // 有枚举行为，是可以斜率优化的
+        for (int count = 0; rest - coinVals[index] * count >= 0; count++) {
             res += dp(index + 1, rest - (coinVals[index] * count));
         }
         return res;
@@ -67,8 +70,12 @@ public class ChangesMethodCount {
         if (cache[index][rest] != -1) {
             return cache[index][rest];
         }
+        if (rest == 0) {
+            cache[index][rest] = 1;
+            return cache[index][rest];
+        }
         if (index == coinVals.length) {
-            cache[index][rest] = rest == 0 ? 1 : 0;
+            cache[index][rest] = 0;
             return cache[index][rest];
         }
         int res = 0;
@@ -85,11 +92,11 @@ public class ChangesMethodCount {
         int[][] dp = new int[N + 1][M + 1];
         dp[N][0] = 1;
         for (int index = N - 1; index >= 0; index--) {
-            // 枚举行为
-            for (int rest = 0; rest <= M; rest++) { // 不能反过来呀
+            for (int rest = 0; rest <= M; rest++) { // 可以反过来
                 int res = 0;
+                // 枚举行为
                 for (int count = 0; coins[index] * count <= rest; count++) {
-                    // 依赖下方格子 & 左边格子
+                    // 只依赖下方的格子 & 以左的格子，可以优化
                     res += dp[index + 1][rest - (coins[index] * count)];
                 }
                 dp[index][rest] = res;
@@ -106,6 +113,7 @@ public class ChangesMethodCount {
         for (int index = N - 1; index >= 0; index--) {
             // 枚举行为
             for (int rest = 0; rest <= M; rest++) {
+                // 斜率优化
                 dp[index][rest] = dp[index + 1][rest];
                 if (rest - coins[index] >= 0) { // >= 0
                     dp[index][rest] += dp[index][rest - coins[index]];
