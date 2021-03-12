@@ -42,7 +42,7 @@ public class Hanota {
         List<Integer> listC = new ArrayList<>();
 
         Hanota obj = new Hanota();
-        obj.hanota(listA, listB, listC);
+        obj.solutionRecurLC(listA, listB, listC);
         System.out.println(listA.toString());
         System.out.println(listB.toString());
         System.out.println(listC.toString());
@@ -67,57 +67,28 @@ public class Hanota {
     }
 
 
-    public void hanota(List<Integer> A, List<Integer> B, List<Integer> C) {
-        solution(A.size(), A, B, C);
+    public void solutionRecurLC(List<Integer> A, List<Integer> B, List<Integer> C) {
+        recur(A, B, C, A.size());
 //        honoi(3, "左", "右", "中");
 //        move(A.size(), A, B, C);
     }
 
-    /**
-     * 执行用时 :
-     * 2 ms
-     * , 在所有 Java 提交中击败了
-     * 19.60%
-     * 的用户
-     * 内存消耗 :
-     * 37.6 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     *
-     * @param i     底元素
-     * @param from
-     * @param other
-     * @param to
-     */
-    private void solution(int i, List<Integer> from, List<Integer> other, List<Integer> to) {
-        if (i == 1) {
-            to.add(from.get(from.size() - 1));
-            from.remove(from.size() - 1);
+    private void recur(List<Integer> from, List<Integer> other, List<Integer> to, int rest) {
+        if (rest == 1) {
+            Integer one = from.remove(from.size() - 1);
+            to.add(one);
             return;
         }
         // 分解子问题
         // 子问题 0~i-1从from移到other
-        solution(i - 1, from, to, other);
+        recur(from, to, other, rest - 1);
         // 移动底元素到to
-        to.add(from.get(from.size() - 1));
-        from.remove(from.get(from.size() - 1));
+        Integer one = from.remove(from.size() - 1);
+        to.add(one);
         // 子问题 把0~i-1从other移到to
-        solution(i - 1, other, from, to);
+        recur(other, from, to, rest - 1);
     }
 
-    public void move(int n, List<Integer> A, List<Integer> B, List<Integer> C) {
-        if (n == 1) {
-            C.add(A.get(A.size() - 1));
-            A.remove(A.size() - 1);
-            return;
-        }
-        move(n - 1, A, C, B);
-        C.add(A.get(A.size() - 1));
-        A.remove(A.size() - 1);
-        move(n - 1, B, A, C);
-
-    }
 
     private static void honoi(int i, String from, String to, String other) {
         if (i == 1) {

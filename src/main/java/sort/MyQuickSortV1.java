@@ -2,7 +2,9 @@ package sort;
 
 import zhelper.ArrayUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 
 /**
@@ -21,6 +23,8 @@ public class MyQuickSortV1 {
         MyQuickSortV1 obj = new MyQuickSortV1();
         int[] res = obj.MySort(arr1);
         System.out.println("res = " + Arrays.toString(res));
+        LinkedList<Object> linkedList = new LinkedList<>();
+        ArrayList<Integer> arrayList = new ArrayList<>();
 
     }
 

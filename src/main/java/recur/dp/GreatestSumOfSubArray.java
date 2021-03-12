@@ -14,6 +14,19 @@ public class GreatestSumOfSubArray {
         System.out.println("res = " + res);
     }
 
+    public int solutionAnalyse(int[] nums) {
+        int res = Integer.MIN_VALUE;
+        int curSum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            curSum += nums[i];
+            res = Math.max(res, curSum);
+            if (curSum < 0) {
+                curSum = 0;
+            }
+        }
+        return res;
+    }
+
     public int solutionDpOpt(int[] array) {
         if (array == null || array.length == 0) {
             return 0;

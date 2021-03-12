@@ -1,4 +1,4 @@
-package recur.dp;
+package recur.dp.methodcount;
 
 import java.util.Arrays;
 
