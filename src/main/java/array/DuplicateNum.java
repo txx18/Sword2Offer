@@ -17,7 +17,7 @@ import java.util.HashSet;
  * @version V1.0
  * @create 2020-02-07 11:22
  */
-public class HasDuplicateNum {
+public class DuplicateNum {
 
     /**
      * NK
@@ -34,18 +34,35 @@ public class HasDuplicateNum {
         return solutionSwap(numbers, length, duplication);
     }
 
+
     /**
-     * LC
+     * 通过LC
      *
      * @param nums
      * @return
      */
-    public int findRepeatNumber(int[] nums) {
-        return solutionSwapSTO(nums);
+    private int solutionSwapSTO(int[] nums) {
+        if (nums == null || nums.length < 2) {
+            return -1;
+        }
+        // 遍历数组，arr[i]的值本来是i，如果是不是i，则准备与下标为arr[i]的元素交换（换到它应该在的位置）
+        for (int i = 0; i < nums.length; i++) {
+            // 如果正常，判断下一个
+            if (nums[i] == i) {
+                continue;
+            }
+            // 如果两元素相等，则返回
+            if (nums[i] == nums[nums[i]]) {
+                return nums[i];
+            }
+            // 否则把该元素交换到本来的位置
+            swap(nums, nums[i], i);
+        }
+        return -1;
     }
 
     /**
-     * NK
+     * 通过NK
      *
      * @param numbers
      * @param length
@@ -73,7 +90,7 @@ public class HasDuplicateNum {
         return false;
     }
 
-    public static void swap(int[] arr, int i, int j) {
+    private static void swap(int[] arr, int i, int j) {
         int tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;
@@ -81,26 +98,6 @@ public class HasDuplicateNum {
 /*        arr[i] = arr[i] ^ arr[j];
         arr[j] = arr[i] ^ arr[j];
         arr[i] = arr[i] ^ arr[j];*/
-    }
-
-    private int solutionSwapSTO(int[] nums) {
-        if (nums == null || nums.length < 2) {
-            return -1;
-        }
-        // 遍历数组，arr[i]的值本来是i，如果是不是i，则准备与下标为arr[i]的元素交换（换到它应该在的位置）
-        for (int i = 0; i < nums.length; i++) {
-            // 如果正常，判断下一个
-            if (nums[i] == i) {
-                continue;
-            }
-            // 如果两元素相等，则返回
-            if (nums[i] == nums[nums[i]]) {
-                return nums[i];
-            }
-            // 否则把该元素交换到本来的位置
-            swap(nums, nums[i], i);
-        }
-        return -1;
     }
 
 

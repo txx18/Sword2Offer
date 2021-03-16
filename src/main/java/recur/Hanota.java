@@ -50,20 +50,20 @@ public class Hanota {
 
     ArrayList<String> res = new ArrayList<>();
 
-    public ArrayList<String> getSolution(int n) {
+    public ArrayList<String> solutionNK(int n) {
         // write code here
         recur(n, "left", "right", "mid");
         return res;
     }
 
-    private void recur(int i, String from, String to, String other) {
-        if (i == 1) {
+    private void recur(int rest, String from, String to, String other) {
+        if (rest == 1) {
             res.add("move from " + from + " to " + to);
             return;
         }
-        recur(i - 1, from, other, to);
+        recur(rest - 1, from, other, to);
         res.add("move from " + from + " to " + to);
-        recur(i - 1, other, to, from);
+        recur(rest - 1, other, to, from);
     }
 
 
@@ -90,7 +90,7 @@ public class Hanota {
     }
 
 
-    private static void honoi(int i, String from, String to, String other) {
+    private static  void honoi(int i, String from, String to, String other) {
         if (i == 1) {
             System.out.println("1: " + from + "-->" + to);
             return;

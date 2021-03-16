@@ -1,4 +1,4 @@
-package linkedList;
+package twoPointer.fastslow;
 
 import zhelper.ListUtils;
 import zhelper.ListUtils.*;
@@ -27,7 +27,7 @@ import java.util.Stack;
  * @version V1.0
  * @create 2020-02-25 20:57
  */
-public class PalindromeList {
+public class IsPalindromeList {
 
 
     public static void main(String[] args) {
@@ -36,7 +36,7 @@ public class PalindromeList {
         ListNode list1 = ListUtils.convertToLinkedList(arr2);
         ListUtils.printSingleList(list1);
 
-        PalindromeList obj = new PalindromeList();
+        IsPalindromeList obj = new IsPalindromeList();
 //        boolean res = obj.isPalindrome(list1);
 
 //        boolean res = obj.chkPalindrome(list1);
@@ -47,6 +47,11 @@ public class PalindromeList {
 
     }
 
+    /**
+     * 通过LC
+     * @param head
+     * @return
+     */
     public boolean isPail (ListNode head) {
         // write code here
         ListNode slow, fast;

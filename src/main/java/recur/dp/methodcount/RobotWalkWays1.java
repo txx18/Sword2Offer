@@ -24,10 +24,10 @@ import java.util.Arrays;
  * @author ShaneTang
  * @create 2021-03-04 14:51
  */
-public class RobotWalkWays {
+public class RobotWalkWays1 {
 
     public static void main(String[] args) {
-        RobotWalkWays obj = new RobotWalkWays();
+        RobotWalkWays1 obj = new RobotWalkWays1();
 //        int res = obj.solutionRecurForce(5, 2, 3, 3);
         int res = obj.solutionRecurMemo(5, 2, 3, 3);
         System.out.println("res = " + res);

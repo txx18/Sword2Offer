@@ -45,34 +45,58 @@ import java.util.List;
  * @version V1.0
  * @create 2020-03-12 22:08
  */
-public class kthLargestE54 {
+public class kthLargest {
 
     public static void main(String[] args) {
         TreeNode treeNode = TreeTest.BSTree();
-        kthLargestE54 obj = new kthLargestE54();
-        TreeNode res = obj.KthNode(treeNode, 1);
+        kthLargest obj = new kthLargest();
+        TreeNode res = obj.KthMinNK(treeNode, 1);
         System.out.println("res = " + res.val);
     }
 
-    public int kthLargest(TreeNode root, int k) {
-//        return solution(root, k);
-        return solutionList(root, k);
-    }
-
-    int rank = 0;
+    int rank;
     TreeNode res = null;
 
-    TreeNode KthNode(TreeNode pRoot, int k) {
+    /**
+     * 通过LC
+     *
+     * @param root
+     * @return
+     */
+    public int kthLargestLC(TreeNode root, int k) {
+        rank = k;
+        return process(root);
+    }
+
+
+    private int process(TreeNode root) {
+        if (root == null) {
+            return -1;
+        }
+        // 先右后左
+        process(root.right);
+        if (rank == 1) {
+            res = root;
+            rank--; // 注意
+            return res.val;
+        }
+        rank--;
+        process(root.left);
+        return res == null ? -1 : res.val;
+    }
+
+
+    TreeNode KthMinNK(TreeNode pRoot, int k) {
         if (pRoot == null) {
             return null;
         }
-        KthNode(pRoot.left, k);
+        KthMinNK(pRoot.left, k);
         rank++;
         if (rank == k) {
             res = pRoot;
             return res;
         }
-        KthNode(pRoot.right, k);
+        KthMinNK(pRoot.right, k);
         // 这个必须返回外部变量，不然递归返回的就是根结点了
         return res;
     }

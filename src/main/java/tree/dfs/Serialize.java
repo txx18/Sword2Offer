@@ -33,23 +33,29 @@ public class Serialize {
 
     String SEP = ",";
     String NULL = "null";
-    StringBuilder sb = new StringBuilder();
     Queue<String> q = new LinkedList<>();
+
+    StringBuilder sb = new StringBuilder();
     Stack<String> stack = new Stack<>();
 
-    public String serializePre(TreeNode root) { // 默认自测测试用例是错的
+    /**
+     * 通过LC
+     * @param root
+     * @return
+     */
+    public String serializePre(TreeNode root) { // NK默认自测测试用例是错的
         if (root == null) {
             return NULL + SEP;
         }
         return root.val + SEP + serializePre(root.left) + serializePre(root.right);
     }
 
-    public TreeNode deserializePre(String str) {
+    public TreeNode deserializePre(String data) {
         // 多一步验证NULL+SEP
-        if ((NULL + SEP).equals(str)) {
+        if ((NULL + SEP).equals(data)) {
             return null;
         }
-        String[] splits = str.split(SEP);
+        String[] splits = data.split(SEP);
         for (String split : splits) {
             q.offer(split);
         }
@@ -68,10 +74,6 @@ public class Serialize {
         return root;
     }
 
-
-    private void putToQueue(String[] strs) {
-
-    }
 
     /**
      * 层序

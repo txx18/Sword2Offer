@@ -54,47 +54,30 @@ public class BuildTreeByPreAndIn {
 
     Map<Integer, Integer> map = new HashMap<>();
 
-    public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
-        putToMap(in);
-        return build(pre, 0, pre.length - 1, in, 0);
+    public TreeNode reConstructBinaryTree(int[] preorder, int[] inorder) {
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+        // putToMap之后，只需奥 pre preL preR，inL 4个就够了
+        return build(preorder, 0, preorder.length - 1, 0);
     }
 
-    private TreeNode build(int[] pre, int preL, int preR, int[] in, int inL) {
+    private TreeNode build(int[] pre, int preL, int preR, int inL) {
         if (preL > preR) {
             return null;
         }
         TreeNode root = new TreeNode(pre[preL]);
         int rootIndexOfIn = map.get(root.val);
         int leftSize = rootIndexOfIn - inL;
-        root.left = build(pre, preL + 1, preL + leftSize, in, inL);
-        root.right = build(pre, preL + leftSize + 1, preR, in, rootIndexOfIn + 1);
+        root.left = build(pre, preL + 1, preL + leftSize, inL);
+        root.right = build(pre, preL + leftSize + 1, preR, rootIndexOfIn + 1);
         return root;
     }
 
-    private void putToMap(int[] ints) {
-        for (int i = 0; i < ints.length; i++) {
-            map.put(ints[i], i);
-        }
-    }
 
     private Map<Integer, Integer> inorderMap = new HashMap<Integer, Integer>();
 
-    /**
-     * 执行用时 :
-     * 2 ms
-     * , 在所有 Java 提交中击败了
-     * 99.23%
-     * 的用户
-     * 内存消耗 :
-     * 41.7 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     *
-     * @param preorder
-     * @param inorder
-     * @return
-     */
+
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         if (preorder == null || inorder == null) {
             return null;

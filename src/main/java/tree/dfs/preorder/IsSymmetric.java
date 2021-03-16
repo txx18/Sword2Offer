@@ -13,7 +13,7 @@ public class IsSymmetric {
         if (p1 == null && p2 == null) {
             return true;
         }
-        if (p1 == null || p2 == null) {
+        if (p1 == null || p2 == null) { // 注意
             return false;
         }
         // 前序

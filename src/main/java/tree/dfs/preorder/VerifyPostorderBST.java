@@ -1,4 +1,4 @@
-package tree.dfs;
+package tree.dfs.preorder;
 
 /**
  * @author Shane Tang
@@ -17,10 +17,15 @@ public class VerifyPostorderBST {
         System.out.println("res = " + res);
     }
 
-    public boolean VerifySequenceOfBST(int[] sequence) {
-        if (sequence == null || sequence.length == 0)
+    /**
+     * 通过LC
+     * @param postorder
+     * @return
+     */
+    public boolean VerifySequenceOfBST(int[] postorder) {
+        if (postorder == null || postorder.length == 0)
             return false;
-        return verify(sequence, 0, sequence.length - 1);
+        return verify(postorder, 0, postorder.length - 1);
     }
 
     private boolean verify(int[] seq, int l, int r) {
@@ -38,30 +43,15 @@ public class VerifyPostorderBST {
             if (seq[i] < rootVal) {
                 return false;
             }
-        return verify(seq, l, cutIndex - 1) && verify(seq, cutIndex, r - 1);
+        return verify(seq, l, cutIndex - 1) && verify(seq, cutIndex, r - 1); // 注意
     }
 
-    private boolean test(int[] seq, int l, int r) {
-        if (r - l <= 1) {
-            return true;
-        }
-        int rootVal = seq[r];
-        int cutIndex = l;
-        for (int i = l; i < r; i++) {
-            if (seq[i] > rootVal) {
-                cutIndex = i;
-                break;
-            }
-            cutIndex = r;
-        }
-        for (int i = cutIndex; i < r; i++) {
-            if (seq[i] < rootVal) {
-                return false;
-            }
-        }
-        return test(seq, l, cutIndex - 1) && test(seq, cutIndex, r - 1);
-    }
 
+    /**
+     * 通过LC
+     * @param postorder
+     * @return
+     */
     // 数组的最后一个元素是头结点的值
     // 如果是BST，以头结点可以二分数组，而且左边都是小于，右边都是大于
     // 递归判断
@@ -69,14 +59,14 @@ public class VerifyPostorderBST {
         if (postorder == null) {
             return false;
         }
-        recur(postorder, 0, postorder.length - 1);
+        postorder(postorder, 0, postorder.length - 1);
         return isValid;
         // return verify(postorder, 0, postorder.length - 1);
     }
 
     boolean isValid = true;
 
-    private void recur(int[] postorder, int l, int r) {
+    private void postorder(int[] postorder, int l, int r) {
         // base case
         if (r - l < 2) {
             return;
@@ -85,9 +75,8 @@ public class VerifyPostorderBST {
         int pivotIdx = getIdxOfPostorder(postorder, l, r, postorder[r]);
         // 检查pivotIdx~r-1下标（左边不用比较），跟postorder[r]比较
         judge(postorder, pivotIdx, r);
-        recur(postorder, l, pivotIdx - 1);
-        recur(postorder, pivotIdx, r - 1);
-
+        postorder(postorder, l, pivotIdx - 1);
+        postorder(postorder, pivotIdx, r - 1);
     }
 
     private int getIdxOfPostorder(int[] arr, int l, int r, int pivot) {

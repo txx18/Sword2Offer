@@ -10,25 +10,29 @@ public class ProductArray {
 
     public static void main(String[] args) {
         ProductArray obj = new ProductArray();
-        int[] res = obj.leftRight(new int[]{1, 2, 3, 4, 5});
+        int[] res = obj.solutionTwiceTraverse(new int[]{1, 2, 3, 4, 5});
         System.out.println("res = " + Arrays.toString(res));
     }
 
-
-    public int[] leftRight(int[] A) {
-        int n = A.length;
-        int[] B = new int[n];
+    /**
+     * 通过LC
+     *
+     * @param a
+     * @return
+     */
+    public int[] solutionTwiceTraverse(int[] a) {
         int product = 1;
-        for (int i = 0; i < n; i++) {
-            B[i] = product;
-            product *= A[i];
+        int[] res = new int[a.length];
+        for (int i = 0; i < a.length; i++) {
+            res[i] = product;
+            product *= a[i];
         }
         product = 1;
-        for (int i = n - 1; i >= 0; i--) {
-            B[i] *= product;
-            product *= A[i];
+        for (int i = a.length - 1; i >= 0; i--) {
+            res[i] *= product;
+            product *= a[i];
         }
-        return B;
+        return res;
     }
 
     public int[] nestFor(int[] A) {
