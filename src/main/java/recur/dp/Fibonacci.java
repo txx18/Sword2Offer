@@ -72,9 +72,17 @@ public class Fibonacci {
         return memoArray[n];
     }
 
-
+    /**
+     * 需要注意的是：题目中说了n是一个正整数，题目根本就没说n有为0的情况。
+     *
+     * 所以本题其实就不应该讨论dp[0]的初始化！
+     *
+     * 我相信dp[1] = 1，dp[2] = 2，这个初始化大家应该都没有争议的。
+     * @param n
+     * @return
+     */
     public int solutionDpTable(int n) {
-        if (n < 1) {
+        if (n <= 1) {
             return n;
         }
         int[] dp = new int[n + 1];
@@ -83,7 +91,7 @@ public class Fibonacci {
         dp[1] = 1;
         for (int i = 2; i <= n; i++) {
             dp[i] = dp[i - 1] + dp[i - 2];
-            dp[i] %= 1000000007;
+//            dp[i] %= 1000000007;
         }
         return dp[n];
     }

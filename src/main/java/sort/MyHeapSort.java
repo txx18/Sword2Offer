@@ -32,7 +32,9 @@ public class MyHeapSort {
         }*/
         // 堆排序
         while (heapSize > 0) {
+            // 交换堆顶到最右边，heapSize--得到最大的
             swap(arr, 0, heapSize--);
+            // 继续堆化
             sink(arr, 0, heapSize);
         }
         return arr;
