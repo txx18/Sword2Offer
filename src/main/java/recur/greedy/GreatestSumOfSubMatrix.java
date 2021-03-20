@@ -1,4 +1,4 @@
-package recur.dp.max;
+package recur.greedy;
 
 /**
  * 子矩阵的最大和

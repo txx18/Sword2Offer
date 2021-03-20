@@ -58,7 +58,7 @@ public class Combine {
             res.add(new LinkedList<>(track));
         }
         // 从 index 开始逐渐缩小选择集，
-        for (int i = index; i < nums.length; i++) {
+        for (int i = index; i < nums.length - (k - track.size()) + 1; i++) { // i <
             track.add(nums[i]);
             // 不含以前有的（交换位置不算）
             bt(i + 1);
@@ -76,11 +76,16 @@ public class Combine {
         return res;
     }
 
-    private void bt1ToN(int num) {
+    private void bt1ToN(int startNum) {
         if (track.size() == k) {
             res.add(new LinkedList<>(track));
+            return;
         }
-        for (int i = num; i <= n; i++) {
+//        已经选择的元素个数：path.size();
+//        还需要的元素个数为: k - path.size();
+//        在集合n中至多要遍历到 : n - (k - path.size()) + 1
+//        为什么有个+1呢，因为包括起始位置，我们要是一个左闭的集合。
+        for (int i = startNum; i <= n - (k - track.size()) + 1; i++) { // 不剪枝是 <= n
             track.add(i);
             bt1ToN(i + 1);
             track.remove(track.size() - 1);

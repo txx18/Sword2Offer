@@ -1,4 +1,4 @@
-package recur.dp.max;
+package recur.greedy;
 
 import java.util.Arrays;
 

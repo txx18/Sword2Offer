@@ -35,6 +35,26 @@ public class Bag01 {
         System.out.println("res = " + res);
     }
 
+    public int solutionDpTable(int V, int n, int[][] vw) {
+        // write code here
+        // dp的含义：选择[0..index][V..0]时的最大重量
+        int[][] dp = new int[n + 1][V + 1];
+        // 需要初始化 recur.dp[n][...] == 0， 但已经默认为0了
+        // 注意这个遍历顺序，已知index == n行，要推index == 0行，应该逆序遍历
+        for (int index = n - 1; index >= 0; index--) { // 注意
+            for (int rest = 0; rest <= V; rest++) {
+                int res1 = dp[index + 1][rest];
+                int res2 = -1;
+                if (rest - vw[index][0] >= 0) {
+                    int res2try = dp[index + 1][rest - vw[index][0]];
+                    res2 = vw[index][1] + res2try;
+                }
+                dp[index][rest] = Math.max(res1, res2);
+            }
+        }
+        return dp[0][V];
+    }
+
     int[][] vw;
     int V;
     int n;
@@ -134,25 +154,6 @@ public class Bag01 {
         return cache[index][rest];
     }
 
-    public int solutionDpTable(int V, int n, int[][] vw) {
-        // write code here
-        // dp的含义：选择[0..index][V..0]时的最大重量
-        int[][] dp = new int[n + 1][V + 1];
-        // 需要初始化 recur.dp[n][...] == 0， 但已经默认为0了
-        // 注意这个遍历顺序，已知index == n行，要推index == 0行，应该逆序遍历
-        for (int index = n - 1; index >= 0; index--) { // 注意
-            for (int rest = 0; rest <= V; rest++) {
-                int res1 = dp[index + 1][rest];
-                int res2 = -1;
-                if (rest - vw[index][0] >= 0) {
-                    int res2try = dp[index + 1][rest - vw[index][0]];
-                    res2 = vw[index][1] + res2try;
-                }
-                dp[index][rest] = Math.max(res1, res2);
-            }
-        }
-        return dp[0][V];
-    }
 
     /**
      * 参数少，形式简单，便于改动态规划

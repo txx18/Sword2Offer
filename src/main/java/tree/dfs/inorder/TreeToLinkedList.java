@@ -77,7 +77,7 @@ public class TreeToLinkedList {
             return;
         }
         inorder(root.left);
-        // 来到root节点，先设置left指针
+        // 来到root节点，先设置root的left指针，后面才能设置pre的
         root.left = pre;
         // pre初始为null，设置head
         if (pre != null) {
