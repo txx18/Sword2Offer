@@ -11,9 +11,11 @@ public class RobotWalkWaysObstacle {
         int m = obstacleGrid.length;
         int n = obstacleGrid[0].length;
         int[][] dp = new int[m][n];
+        // obstacleGrid[i][0]以下仍然为0
         for (int i = 0; i < m && obstacleGrid[i][0] == 0; i++) {
             dp[i][0] = 1;
         }
+        // obstacleGrid[0][j]以右仍然为0
         for (int j = 0; j < n && obstacleGrid[0][j] == 0; j++) {
             dp[0][j] = 1;
         }

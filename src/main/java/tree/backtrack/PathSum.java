@@ -1,4 +1,4 @@
-package tree.dfs;
+package tree.backtrack;
 
 import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
@@ -42,27 +42,33 @@ import java.util.List;
  * @version V1.0
  * @create 2020-03-14 16:21
  */
-public class PathSumE34 {
+public class PathSum {
 
     public static void main(String[] args) {
         String data = "[5,4,8,11,null,13,4,7,2,null,null,5,1]";
         TreeNode treeNode = TreeUtils.deserialize(data);
 //        TreeUtils.printTree(treeNode);
 
-        PathSumE34 obj = new PathSumE34();
-        ArrayList<ArrayList<Integer>> res = obj.pathSum(treeNode, 22);
+        PathSum obj = new PathSum();
+        List<List<Integer>> res = obj.pathSum(treeNode, 22);
         for (List<Integer> path : res) {
             System.out.println(path.toString());
         }
     }
 
-    ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+    List<List<Integer>> res = new ArrayList<>();
     ArrayList<Integer> track = new ArrayList<>();
     int sum;
     int curSum;
     boolean resBool;
 
-    public ArrayList<ArrayList<Integer>> pathSum(TreeNode root, int sum) {
+    /**
+     * 通过LC
+     * @param root
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> pathSum(TreeNode root, int target) {
         // write code here
         if (root == null) {
             return res;
@@ -70,12 +76,12 @@ public class PathSumE34 {
         curSum += root.val;
         track.add(root.val);
         if (root.left == null && root.right == null) {
-            if (curSum == sum) {
+            if (curSum == target) {
                 res.add(new ArrayList<>(track));
             }
         }
-        pathSum(root.left, sum);
-        pathSum(root.right, sum);
+        pathSum(root.left, target);
+        pathSum(root.right, target);
         curSum -= root.val;
         track.remove(track.size() - 1);
         return res;
@@ -125,7 +131,7 @@ public class PathSumE34 {
     }
 
 
-    public ArrayList<ArrayList<Integer>> pathSum4(TreeNode root, int sum) {
+    public List<List<Integer>> pathSum4(TreeNode root, int sum) {
         if (root == null) {
             return res;
         }

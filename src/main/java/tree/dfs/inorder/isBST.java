@@ -71,23 +71,24 @@ public class isBST {
 
     /**
      * 中序递归方法
-     * 在NK有错误
+     * 通过LC 在NK有错误
      *
      * @param root
      * @return
      */
-    boolean inorderRecur(TreeNode root) {
+    public boolean inorderRecur(TreeNode root) {
         if (root == null) {
             return true;
         }
-        boolean left = inorderRecur(root.left);
+        // 只有寻找某一条边（或者一个节点）的时候，递归函数会有bool类型的返回值。
+        boolean leftRes = inorderRecur(root.left);
         if (pre != null && pre.val >= root.val) {
             return false;
         }
         // 记录前一个节点
         pre = root;
-        boolean right = inorderRecur(root.right);
-        return left && right;
+        boolean rightRes = inorderRecur(root.right);
+        return leftRes && rightRes;
     }
 
 

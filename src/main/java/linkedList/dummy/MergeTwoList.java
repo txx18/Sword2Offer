@@ -1,4 +1,4 @@
-package linkedList;
+package linkedList.dummy;
 
 import zhelper.ListUtils;
 import zhelper.ListUtils.*;

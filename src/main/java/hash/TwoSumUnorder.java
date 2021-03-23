@@ -9,18 +9,24 @@ import java.util.Map;
  */
 public class TwoSumUnorder {
 
-    public int[] twoSum(int[] numbers, int target) {
+    /**
+     * 通过LC
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] twoSum(int[] nums, int target) {
         // write code here
         // 倒排map
-        int n = numbers.length;
+        int n = nums.length;
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            map.put(numbers[i], i);
+            map.put(nums[i], i);
         }
         for (int i = 0; i < n; i++) {
-            int other = target - numbers[i];
-            if (map.containsKey(other) && map.get(other) != i) {
-                return new int[]{i + 1, map.get(other) + 1};
+            int other = target - nums[i];
+            if (map.containsKey(other) && map.get(other) != i) { // 注意
+                return new int[]{i, map.get(other)};
             }
         }
         return null;

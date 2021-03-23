@@ -6,14 +6,20 @@ package array;
  */
 public class FindIn2dArray {
 
-    public static boolean Find(int target, int[][] array) {
+    /**
+     * 通过LC
+     * @param target
+     * @param matrix
+     * @return
+     */
+    public static boolean findNumberIn2DArray(int target, int[][] matrix) {
         // 初始为左下角的数，target比它大肯定往右找，target比他小肯定往上找
-        int row = array.length - 1;
+        int row = matrix.length - 1;
         int col = 0;
-        for (int i = row, j = col; i >= 0 && j < array[0].length; ) { // i >= , j <
-            if (target > array[i][j]) {
+        for (int i = row, j = col; i >= 0 && j < matrix[0].length; ) { // i >= , j <
+            if (target > matrix[i][j]) {
                 j++;
-            } else if (target < array[i][j]) {
+            } else if (target < matrix[i][j]) {
                 i--;
             } else {
                 return true;

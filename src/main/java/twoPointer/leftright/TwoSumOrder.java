@@ -1,9 +1,6 @@
 package twoPointer.leftright;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author ShaneTang
@@ -11,28 +8,35 @@ import java.util.Map;
  */
 public class TwoSumOrder {
 
-    public ArrayList<Integer> FindNumbersWithSum(int[] array, int sum) {
-        ArrayList<Integer> res = new ArrayList<>();
+    /**
+     * 通过LC
+     *
+     * @param numbers
+     * @param target
+     * @return
+     */
+    public int[] twoSum(int[] numbers, int target) {
         int l, r;
         l = 0;
-        r = array.length - 1;
+        r = numbers.length - 1;
         while (l < r) {
-            int cur = array[l] + array[r];
-            if (cur < sum) {
+            int cur = numbers[l] + numbers[r];
+            if (cur < target) {
                 l++;
-            } else if (cur > sum) {
+            } else if (cur > target) {
                 r--;
             } else {
-//                 res.add(array[l]);
-//                 res.add(array[r]);
-//                 return res;
-//                 return new ArrayList<>(Arrays.asList(array[l], array[r]));
-                ArrayList<Integer> list = new ArrayList<>(2);
-                Collections.addAll(list, new Integer[]{array[l], array[r]});
-                return list;
+/*                 res.add(numbers[l]);
+                 res.add(numbers[r]);
+                 return res;
+                 return new ArrayList<>(Arrays.asList(numbers[l], numbers[r]));*/
+/*                ArrayList<Integer> list = new ArrayList<>(2);
+                Collections.addAll(list, new Integer[]{numbers[l], numbers[r]});
+                return list;*/
+                return new int[]{l + 1, r + 1};
             }
         }
-        return res;
+        return null;
     }
 
 

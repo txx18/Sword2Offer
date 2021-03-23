@@ -14,28 +14,55 @@ public class NumCountOfSortedArray {
     public static void main(String[] args) {
         int[] arr1 = {3, 5, 11, 17, 21, 23, 28, 28, 28, 28, 30, 32, 50, 64, 64, 78, 81, 95, 101};
         int[] arr2 = {1, 2, 3, 3, 3, 3, 4, 6};
-        int res = search(arr2, 3);
+        NumCountOfSortedArray onb = new NumCountOfSortedArray();
+        int res = onb.solutionBSLoop(arr2, 3);
         System.out.println("res = " + res);
     }
 
-
     /**
-     * LC
+     * 通过LC
      *
+     * 给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。
+     *
+     * 如果数组中不存在目标值 target，返回 [-1, -1]。
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      * @param nums
      * @param target
      * @return
      */
-    public static int search(int[] nums, int target) {
-//        return mySolutionBSRecur(nums, target);
-//        return solutionByTraverse(nums, target);
-        return solutionBSLoop(nums, target);
+    public int[] searchRange(int[] nums, int target) {
+        // 搜索k和k+1的左边界
+        int l = leftBS1(nums, target);
+        if (l == -1) {
+            return new int[]{-1, -1};
+        }
+        int r = leftBS(nums, target + 1);
+        return new int[]{l, r - 1};
+    }
+
+    private static int leftBS1(int[] nums, int k) {
+        int l = 0, r = nums.length;
+        while (l < r) {
+            int m = l + ((r - l) >> 1);
+            if (k <= nums[m]) {
+                r = m;
+            } else {
+                l = m + 1;
+            }
+        }
+        if (l == nums.length || nums[l] != k) { // l或r都行
+            return -1;
+        }
+        return l;
     }
 
     /**
      * 已通过NKOJ
      */
-    public static int solutionBSLoop(int[] array, int k) {
+    public int solutionBSLoop(int[] array, int k) {
         // 搜索k和k+1的左边界
         int l = leftBS(array, k);
         int r = leftBS(array, k + 1);
@@ -53,7 +80,7 @@ public class NumCountOfSortedArray {
                 l = m + 1;
             }
         }
-        return l;
+        return l; // l或r都行
     }
 
     /**

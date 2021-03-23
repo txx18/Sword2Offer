@@ -36,6 +36,30 @@ public class FindKthToTail {
         System.out.println(res);
     }
 
+    /**
+     * 通过LC
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        if (head == null) {
+            return null;
+        }
+        ListNode behind = head;
+        ListNode front = head;
+        for (int i = 0; i < k; i++) {
+            if (front == null) {
+                return null;
+            }
+            front = front.next;
+        }
+        while (front != null) {
+            behind = behind.next;
+            front = front.next;
+        }
+        return behind;
+    }
 
     private ListNode input(String str) {
         String[] splits = str.split(",");
@@ -80,33 +104,7 @@ public class FindKthToTail {
         return solutionTwoPointerSTO(head, k);
     }
 
-    /**
-     * LC
-     *
-     * @param head
-     * @param k
-     * @return
-     */
-    public ListNode getKthFromEnd(ListNode head, int k) {
-        return solutionTwoPointerSTO(head, k);
-    }
 
-    /**
-     * 执行用时 :
-     * 0 ms
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * 内存消耗 :
-     * 40.7 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     *
-     * @param head
-     * @param k
-     * @return
-     */
     private static ListNode solutionTwoPointerSTO(ListNode head, int k) {
         if (head == null) {
             return null;

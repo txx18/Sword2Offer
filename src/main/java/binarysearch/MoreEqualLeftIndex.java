@@ -1,6 +1,8 @@
 package binarysearch;
 
 /**
+ * 左边界，插入位置
+ * <p>
  * 在arr上，找满足>=value的最左位置
  * 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
  * <p>
@@ -38,29 +40,6 @@ public class MoreEqualLeftIndex {
         System.out.println("index = " + index);
     }
 
-    /**
-     * 输出位置从1开始计算
-     * @param n
-     * @param v
-     * @param a
-     * @return
-     */
-    public int upper_bound_(int n, int v, int[] a) {
-        if (a.length == 0) {
-            return -1;
-        }
-        int l = 0;
-        int r = a.length; // 注意 不是n-1
-        while (l < r) { // 注意
-            int mid = l + ((r - l) >> 1);
-            if (v <= a[mid]) {
-                r = mid;
-            } else if (v > a[mid]) {
-                l = mid + 1;
-            }
-        }
-        return l + 1;
-    }
 
     int left_bound(int[] nums, int target) {
         if (nums.length == 0) {
@@ -71,19 +50,19 @@ public class MoreEqualLeftIndex {
             int mid = l + ((r - l) >> 1);
             if (target <= nums[mid]) {
                 r = mid;
-            } else if (target > nums[mid]) {
+            } else { // else if (target > nums[mid]) {
                 l = mid + 1;
             }
         }
-        // 如果需求是 左边界 / 顺序插入位置
-        return l;
-        // 如果需求是不存在时返回-1
+        // 如果需求是：左边界 / 顺序插入位置
+        return l; // l或r都行
+        // 如果需求是：存在时返回下标，不存在时返回-1
 /*        // target 比所有数都大
-        if (l == nums.length) {
+        if (l == nums.length) { // l或r都行
             return -1;
         }
         // 类似之前算法的处理方式
-        return nums[l] == target ? l : -1;*/
+        return nums[l] == target ? l : -1;*/ // l或r都行
     }
 
 

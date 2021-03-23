@@ -1,5 +1,6 @@
-package tree.dfs;
+package tree.dfs.mutiorder;
 
+import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
 
 /**
@@ -40,21 +41,11 @@ import zhelper.TreeUtils.*;
  * @version V1.0
  * @create 2020-03-13 16:09
  */
-public class MirrorTreeE27 {
+public class MirrorTree {
 
 
     /**
-     * 执行用时 :
-     * 0 ms
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     * 内存消耗 :
-     * 37 MB
-     * , 在所有 Java 提交中击败了
-     * 100.00%
-     * 的用户
-     *
+     * 通过LC
      * @param root
      * @return
      */
@@ -62,11 +53,21 @@ public class MirrorTreeE27 {
         if (root == null) {
             return null;
         }
-        swap(root);
+        // 前序可以
+//        swap(root);
         mirrorTree(root.left);
         mirrorTree(root.right);
+        // 后序也可以
+        swap(root);
         return root;
     }
+
+    // 错误的swap
+//    private void swap2(TreeNode left, TreeNode right) {
+//        TreeNode tmp = left;
+//        left = right;
+//        right = tmp;
+//    }
 
     private void swap(TreeNode root) {
         TreeNode tmp = root.left;

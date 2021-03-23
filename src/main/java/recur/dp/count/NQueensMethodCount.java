@@ -90,6 +90,31 @@ public class NQueensMethodCount {
 
     int res = 0;
 
+    private void backtrack(int row) {
+        // 决策到最后一层，满足决策条件
+        if (row == n) {
+            res++;
+        }
+        for (int col = 0; col < n; col++) {
+            if (!isValid(row, col)) {
+                continue;
+            }
+            track[row] = col;
+            backtrack(row + 1);
+//            track[row] = -1; // 这句不需要
+        }
+    }
+
+
+    private boolean isValidTrack(int i, int j, int[] track) {
+        for (int k = 0; k < i; k++) {
+            if (j == track[k] || Math.abs(j - track[k]) == Math.abs(i - k)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     Map<Integer, Integer> map = new HashMap<>();
 
     public int Nqueen(int n) {
@@ -123,31 +148,6 @@ public class NQueensMethodCount {
             // int qCol = track[i];
             int qCol = map.get(i);
             if (qCol == col || Math.abs(row - i) == Math.abs(qCol - col)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private void backtrack(int row) {
-        // 决策到最后一层，满足决策条件
-        if (row == n) {
-            res++;
-        }
-        for (int col = 0; col < n; col++) {
-            if (!isValid(row, col)) {
-                continue;
-            }
-            track[row] = col;
-            backtrack(row + 1);
-//            track[row] = -1; // 这句不需要
-        }
-    }
-
-
-    private boolean isValidTrack(int i, int j, int[] track) {
-        for (int k = 0; k < i; k++) {
-            if (j == track[k] || Math.abs(j - track[k]) == Math.abs(i - k)) {
                 return false;
             }
         }

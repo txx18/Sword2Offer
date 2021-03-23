@@ -26,8 +26,11 @@ public class RotateArrayMinNum {
     }
 
 
-    int[] numbers;
-
+    /**
+     * 通过LC
+     * @param numbers
+     * @return
+     */
     public int solutionBSLoop(int[] numbers) {
         if (numbers.length == 0) {
             return 0;

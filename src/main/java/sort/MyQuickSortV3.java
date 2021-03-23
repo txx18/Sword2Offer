@@ -15,20 +15,25 @@ public class MyQuickSortV3 {
         int[] arr1 = {1, 2, 3, 2, 2, 2, 5, 4, 2};
         System.out.println(Arrays.toString(arr1));
         MyQuickSortV3 obj = new MyQuickSortV3();
-        obj.MySort(arr1);
+        obj.sortArray(arr1);
         System.out.println(Arrays.toString(arr1));
     }
 
-    public int[] MySort(int[] arr) {
-        if (arr == null || arr.length < 2) {
-            return null;
+    /**
+     * 通过LC
+     * @param nums
+     * @return
+     */
+    public int[] sortArray(int[] nums) {
+        if (nums == null || nums.length < 2) {
+            return nums;
         }
-        return recurProcess(arr, 0, arr.length - 1);
+        return recurProcess(nums, 0, nums.length - 1);
     }
 
 
     private int[] recurProcess(int[] arr, int l, int r) {
-        if (l >= r) {
+        if (l >= r) { // 可以l > r
             return arr;
         }
         // 先partition
@@ -52,7 +57,7 @@ public class MyQuickSortV3 {
         // 大于区左边界
         int greatLeft = r;
         // 指针
-        for (int i = l; i < greatLeft; ) { // < 大于区左边界
+        for (int i = l; i < greatLeft; ) { // < 大于区左边界，不能<=
             if (arr[i] < pivotVal) {
                 swap(arr, i++, ++lessRight);
             } else if (arr[i] > pivotVal) {

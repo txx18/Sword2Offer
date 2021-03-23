@@ -6,6 +6,7 @@ import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
 
 /**
+ * 关于根节点的深度究竟是1 还是 0，不同的地方有不一样的标准，leetcode的题目中都是以节点为一度，即根节点深度是1。但维基百科上定义用边为一度，即根节点的深度是0，我们暂时以leetcode为准（毕竟要在这上面刷题）。
  * @author ShaneTang
  * @create 2021-02-06 10:57
  */
@@ -21,20 +22,20 @@ public class IsBBT {
 
 
     public boolean IsBalanced_Solution(TreeNode root) {
-        return heightOpt(root) != -1;
+        return postorder(root) != -1;
     }
 
 
-    private int heightOpt(TreeNode root) {
+    private int postorder(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        int hLeft = heightOpt(root.left);
-        // 用h判断的话，必须有提前判断（为啥呢？） 如果判断非法，提前返回剪枝
+        int hLeft = postorder(root.left);
+        // 用h判断的话，必须有提前判断（为啥呢？） 如果判断非法，提前返回 -1
         if (hLeft == -1) {
             return -1;
         }
-        int hRight = heightOpt(root.right);
+        int hRight = postorder(root.right);
         if (hRight == -1) {
             return -1;
         }
@@ -46,12 +47,12 @@ public class IsBBT {
 
     boolean res = true;
 
-    private int height(TreeNode root) {
+    private int postorderBool(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        int hLeft = height(root.left);
-        int hRight = height(root.right);
+        int hLeft = postorderBool(root.left);
+        int hRight = postorderBool(root.right);
         if (Math.abs(hLeft - hRight) > 1) {
             res = false;
         }

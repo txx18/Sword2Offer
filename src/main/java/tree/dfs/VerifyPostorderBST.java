@@ -1,4 +1,4 @@
-package tree.dfs.preorder;
+package tree.dfs;
 
 /**
  * @author Shane Tang

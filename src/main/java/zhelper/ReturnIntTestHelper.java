@@ -19,7 +19,8 @@ public class ReturnIntTestHelper {
 
     // for test
     public static int comparator(int[] arr) {
-        return NumCountOfSortedArray.solutionBSLoop(arr, 1);
+        NumCountOfSortedArray obj = new NumCountOfSortedArray();
+        return obj.solutionBSLoop(arr, 1);
     }
 
     // for test

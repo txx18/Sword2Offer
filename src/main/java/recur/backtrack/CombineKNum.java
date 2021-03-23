@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * 组合这类问题，默认是，如果输入里就有重复的，那结果中这些重复的各可以使用1次
+ *
  * 给定两个整数 n 和 k，返回 1 ... n 中所有可能的 k 个数的组合。
  * <p>
  * 示例:
@@ -26,10 +28,10 @@ import java.util.List;
  * @author ShaneTang
  * @create 2021-01-12 11:17
  */
-public class Combine {
+public class CombineKNum {
 
     public static void main(String[] args) {
-        Combine obj = new Combine();
+        CombineKNum obj = new CombineKNum();
         int[] test = new int[]{4, 1, 3, 2, 2};
 //        List<List<Integer>> res = obj.combine(4, 2);
         List<List<Integer>> res = obj.combine(test, 3);
@@ -52,13 +54,13 @@ public class Combine {
         return res;
     }
 
-    private void bt(int index) {
+    private void bt(int startIndex) {
         // 到达树的底部，要求层数为k
         if (track.size() == k) {
             res.add(new LinkedList<>(track));
         }
-        // 从 index 开始逐渐缩小选择集，
-        for (int i = index; i < nums.length - (k - track.size()) + 1; i++) { // i <
+        // 从 startIndex 开始逐渐缩小选择集，
+        for (int i = startIndex; i < nums.length; i++) {
             track.add(nums[i]);
             // 不含以前有的（交换位置不算）
             bt(i + 1);

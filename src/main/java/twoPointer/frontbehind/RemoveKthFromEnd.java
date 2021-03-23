@@ -17,6 +17,12 @@ public class RemoveKthFromEnd {
         ListUtils.printSingleList(res);
     }
 
+    /**
+     * 通过LC
+     * @param head
+     * @param n
+     * @return
+     */
     public ListNode removeNthFromEnd(ListNode head, int n) {
         // write code here
         if (head == null) {

@@ -1,4 +1,4 @@
-package tree.dfs.preorder;
+package tree.dfs;
 
 import zhelper.TreeUtils;
 import zhelper.TreeUtils.TreeNode;
