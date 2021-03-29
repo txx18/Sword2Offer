@@ -17,7 +17,7 @@ import java.util.HashSet;
  * @version V1.0
  * @create 2020-02-07 11:22
  */
-public class DuplicateNum {
+public class FindRepeatNumber {
 
     /**
      * NK
@@ -61,6 +61,16 @@ public class DuplicateNum {
         return -1;
     }
 
+    private static void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+        // 异或方法i不能等于j
+/*        arr[i] = arr[i] ^ arr[j];
+        arr[j] = arr[i] ^ arr[j];
+        arr[i] = arr[i] ^ arr[j];*/
+    }
+
     /**
      * 通过NK
      *
@@ -88,16 +98,6 @@ public class DuplicateNum {
             swap(numbers, numbers[i], i);
         }
         return false;
-    }
-
-    private static void swap(int[] arr, int i, int j) {
-        int tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-        // 异或方法i不能等于j
-/*        arr[i] = arr[i] ^ arr[j];
-        arr[j] = arr[i] ^ arr[j];
-        arr[i] = arr[i] ^ arr[j];*/
     }
 
 

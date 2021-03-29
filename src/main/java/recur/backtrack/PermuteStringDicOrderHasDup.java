@@ -2,6 +2,7 @@ package recur.backtrack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author ShaneTang
@@ -11,8 +12,8 @@ public class PermuteStringDicOrderHasDup {
 
     public static void main(String[] args) {
         PermuteStringDicOrderHasDup obj = new PermuteStringDicOrderHasDup();
-        ArrayList<String> res = obj.solutionBackTracking("ab");
-        System.out.println("res = " + res);
+        String[] res = obj.permutation("ab");
+        System.out.println("res = " + Arrays.toString(res));
     }
 
     ArrayList<String> res = new ArrayList<>();
@@ -20,13 +21,18 @@ public class PermuteStringDicOrderHasDup {
     boolean[] hasUsed;
     StringBuilder track = new StringBuilder();
 
-    public ArrayList<String> solutionBackTracking(String str) {
-        chars = str.toCharArray();
+    /**
+     * 通过LC
+     * @param s
+     * @return
+     */
+    public String[] permutation(String s) {
+        chars = s.toCharArray();
         // 排序使重复的挨在一起
         Arrays.sort(chars);
         hasUsed = new boolean[chars.length];
         bt();
-        return res;
+        return res.toArray(new String[0]); // list转array
     }
 
     private void bt() {

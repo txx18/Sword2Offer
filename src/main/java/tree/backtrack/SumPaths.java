@@ -42,14 +42,14 @@ import java.util.List;
  * @version V1.0
  * @create 2020-03-14 16:21
  */
-public class PathSum {
+public class SumPaths {
 
     public static void main(String[] args) {
         String data = "[5,4,8,11,null,13,4,7,2,null,null,5,1]";
         TreeNode treeNode = TreeUtils.deserialize(data);
 //        TreeUtils.printTree(treeNode);
 
-        PathSum obj = new PathSum();
+        SumPaths obj = new SumPaths();
         List<List<Integer>> res = obj.pathSum(treeNode, 22);
         for (List<Integer> path : res) {
             System.out.println(path.toString());

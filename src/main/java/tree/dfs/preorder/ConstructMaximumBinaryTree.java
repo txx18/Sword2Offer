@@ -1,4 +1,4 @@
-package tree.dfs;
+package tree.dfs.preorder;
 
 import zhelper.TreeUtils;
 import zhelper.TreeUtils.*;
@@ -35,7 +35,6 @@ public class ConstructMaximumBinaryTree {
         TreeNode root = new TreeNode(max);
         root.left = constructMaximumBinaryTree(nums, l, index - 1);
         root.right = constructMaximumBinaryTree(nums, index + 1, r);
-
         return root;
     }
 

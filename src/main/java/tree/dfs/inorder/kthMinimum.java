@@ -50,15 +50,36 @@ public class kthMinimum {
     public static void main(String[] args) {
         TreeNode treeNode = TreeTest.BSTree();
         kthMinimum obj = new kthMinimum();
-        TreeNode res = obj.KthMinNK(treeNode, 1);
-        System.out.println("res = " + res.val);
+        int res = obj.kthSmallest(treeNode, 1);
+        System.out.println("res = " + res);
     }
 
 
     int rank;
     TreeNode res = null;
+    int k;
 
-    TreeNode KthMinNK(TreeNode pRoot, int k) {
+    public int kthSmallest(TreeNode root, int k) {
+        this.k = k;
+        inorder(root);
+        return res.val;
+    }
+
+    private void inorder(TreeNode pRoot) {
+        if (pRoot == null) {
+            return;
+        }
+        inorder(pRoot.left);
+        rank++;
+        if (rank == k) {
+            res = pRoot;
+            return;
+        }
+        inorder(pRoot.right);
+    }
+
+
+/*    TreeNode KthMinNK(TreeNode pRoot, int k) {
         if (pRoot == null) {
             return null;
         }
@@ -71,8 +92,7 @@ public class kthMinimum {
         KthMinNK(pRoot.right, k);
         // 这个必须返回外部变量，不然递归返回的就是根结点了
         return res;
-    }
-
+    }*/
 
     List<Integer> inorderList = new ArrayList<>();
 

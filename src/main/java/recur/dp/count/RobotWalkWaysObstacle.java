@@ -30,3 +30,4 @@ public class RobotWalkWaysObstacle {
         return dp[m - 1][n - 1];
     }
 }
+

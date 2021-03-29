@@ -1,4 +1,4 @@
-package tree.dfs;
+package tree;
 
 /**
  * @author Shane Tang

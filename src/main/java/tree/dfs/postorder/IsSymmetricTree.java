@@ -2,7 +2,7 @@ package tree.dfs.postorder;
 
 import zhelper.TreeUtils.*;
 
-public class IsSymmetric {
+public class IsSymmetricTree {
 
     public boolean isSymmetric(TreeNode pRoot) {
         // 一个头左右遍历，一个头右左遍历

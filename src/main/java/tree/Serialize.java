@@ -1,4 +1,4 @@
-package tree.dfs;
+package tree;
 
 import zhelper.TreeTest;
 import zhelper.TreeUtils;

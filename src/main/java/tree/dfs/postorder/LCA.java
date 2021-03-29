@@ -9,6 +9,26 @@ import zhelper.TreeUtils.*;
  */
 public class LCA {
 
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        return postorder2(root, p, q);
+    }
+
+    private TreeNode postorder2(TreeNode root, TreeNode p, TreeNode q) {
+        // base case
+        if (root == null || root == p || root == q) {
+            return root;
+        }
+        // 递归
+        TreeNode left = postorder2(root.left, p, q);
+        TreeNode right = postorder2(root.right, p, q);
+        // 如果都不为null（互为祖先的情况）
+        if (left != null && right != null) {
+            return root;
+        }
+        // 否则至少一个为Null ，返回不是Null的那个（不互为祖先的情况）
+        return left != null ? left : right;
+    }
+
     public int lowestCommonAncestor(TreeNode root, int o1, int o2) {
         // write code here
         return postorder(root, o1, o2).val;
@@ -21,7 +41,7 @@ public class LCA {
         }
         TreeNode left = postorder(root.left, o1, o2);
         TreeNode right = postorder(root.right, o1, o2);
-        // 如果都不为null（互为祖先的情况）e
+        // 如果都不为null（互为祖先的情况）
         if (left != null && right != null) {
             return root;
         }

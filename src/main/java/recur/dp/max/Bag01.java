@@ -31,11 +31,43 @@ public class Bag01 {
 
         Bag01 obj = new Bag01();
 //        int res = obj.solution(weights, values, bag);
-        int res = obj.solutionRecur(10, 2, new int[][]{{1, 3}, {10, 4}});
+//        int res = obj.solutionDpTable(10, 2, new int[][]{{1, 3}, {10, 4}});
+        int res = obj.solutionDpTable(4, 3, new int[][]{{1, 15}, {3, 20}, {4, 30}});
         System.out.println("res = " + res);
     }
 
+    /**
+     * dp[i][j] 表示从 下标为[0- i] 的物品里任意取，放进容量为 j 的背包，价值总和最大是多少。
+     *
+     * @param V
+     * @param n
+     * @param vw
+     * @return
+     */
     public int solutionDpTable(int V, int n, int[][] vw) {
+        int[][] dp = new int[n][V + 1];
+        // 初始化
+/*        for (int j = V; j >= vw[0][0]; j--) {
+            dp[0][j] = vw[0][1] + dp[0][j - vw[0][0]];
+        }*/
+        for (int j = vw[0][0]; j <= V; j++) {
+            dp[0][j] = vw[0][1];
+        }
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j <= V; j++) {
+                if (j - vw[i][0] < 0) {
+                    dp[i][j] = dp[i - 1][j];
+                }else {
+                    // 递推公式
+                    dp[i][j] = Math.max(dp[i - 1][j], vw[i][1] + dp[i - 1][j - vw[i][0]]);
+                }
+            }
+        }
+        return dp[n - 1][V];
+    }
+
+
+    public int solutionDpTableFromRecur(int V, int n, int[][] vw) {
         // write code here
         // dp的含义：选择[0..index][V..0]时的最大重量
         int[][] dp = new int[n + 1][V + 1];
@@ -88,6 +120,7 @@ public class Bag01 {
         int res1 = recurNK2(index + 1, rest);
         int res2 = -1;
         // 发现 rest - vw[index][0] 可能 <0 越界，所以在base case 判断
+        // 我感觉：这种改变参数继续递归的尝试方法，就是隐含的回溯
         int res2try = recurNK2(index + 1, rest - vw[index][0]);
         if (res2try != -1) {
             res2 = vw[index][1] + res2try;
