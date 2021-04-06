@@ -29,18 +29,25 @@ package binarysearch;
  * 链接：https://leetcode-cn.com/problems/search-insert-position
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class MoreEqualLeftIndex {
+public class DupGreatEqualLeftIndex {
 
     public static void main(String[] args) {
         int[] arr = {1, 1, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5};
         int[] arr2 = {1, 3, 5, 6};
-        MoreEqualLeftIndex obj = new MoreEqualLeftIndex();
+        DupGreatEqualLeftIndex obj = new DupGreatEqualLeftIndex();
 
         int index = obj.left_bound(arr, 2);
         System.out.println("index = " + index);
     }
 
-
+    /**
+     * 通过LC
+     * 返回左边界的情况应用于：数字在排序数组中出现的次数
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
     int left_bound(int[] nums, int target) {
         if (nums.length == 0) {
             return -1;
@@ -55,14 +62,15 @@ public class MoreEqualLeftIndex {
             }
         }
         // 如果需求是：左边界 / 顺序插入位置
-        return l; // l或r都行
+        /*        return l; // l或r都行*/
         // 如果需求是：存在时返回下标，不存在时返回-1
-/*        // target 比所有数都大
+        // target 比所有数都大
         if (l == nums.length) { // l或r都行
             return -1;
         }
         // 类似之前算法的处理方式
-        return nums[l] == target ? l : -1;*/ // l或r都行
+        // l或r都行
+        return nums[l] == target ? l : -1;
     }
 
 

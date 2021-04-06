@@ -1,4 +1,4 @@
-package string;
+package hash;
 
 /**
  * @author ShaneTang
@@ -16,6 +16,7 @@ public class FirstNotRepeatingChar {
         // char常用的有128个，用一个计数数组记录每个字符出现的次数
         int[] charCounts = new int[128];
         char[] chars = str.toCharArray();
+        // 先记录每个字符的出现次数
         for (int i = 0; i < chars.length; i++) {
             charCounts[chars[i]]++;
         }

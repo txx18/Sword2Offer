@@ -4,6 +4,8 @@ import zhelper.ListUtils;
 import zhelper.ListUtils.ListNode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -23,24 +25,45 @@ public class PrintListFromTailToHead {
 //        ArrayList<Integer> reverseValues = printListFromTailToHead(head);
 //        System.out.println(reverseValues.toString());
         PrintListFromTailToHead obj = new PrintListFromTailToHead();
-        ArrayList<Integer> res = obj.printListFromTailToHead(test);
+        int[] res = obj.reversePrint(test);
         System.out.println(res);
     }
 
-    ArrayList<Integer> res = new ArrayList<>();
+    ArrayList<Integer> resList = new ArrayList<>();
+    List<Integer> resLinkedList = new LinkedList<>();
+
+    public int[] reversePrint(ListNode head) {
+        recur(head);
+        int[] res = new int[resList.size()];
+        for (int i = 0; i < resList.size(); i++) {
+            res[i] = resList.get(i);
+        }
+        return res;
+    }
+
+    private void recur(ListNode head) {
+        if (head == null) {
+            return;
+        }
+        ListNode nxt = head.next;
+        recur(nxt);
+        resList.add(head.val);
+    }
+
 
     public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
         if (listNode == null) {
-            return res;
+            return resList;
         }
         ListNode nxt = listNode.next;
         printListFromTailToHead(nxt);
-        res.add(listNode.val);
-        return res;
+        resList.add(listNode.val);
+        return resList;
     }
 
     /**
      * NK
+     *
      * @param listNode
      * @return
      */
@@ -48,16 +71,6 @@ public class PrintListFromTailToHead {
 //        return stoSolutionRecur(listNode);
 //        return zsSolutionReversePointer(listNode);
         return solutionInsertHeadNodeCYC(listNode);
-    }
-
-    /**
-     * LC
-     * @param head
-     * @return
-     */
-    public static int[] reversePrint(ListNode head) {
-//        return solutionReversePointer(head);
-        return solutionStack(head);
     }
 
 
@@ -105,7 +118,6 @@ public class PrintListFromTailToHead {
 
 
     /**
-     *
      * @param head head
      * @return
      */

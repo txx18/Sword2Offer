@@ -19,21 +19,6 @@ import java.util.HashSet;
  */
 public class FindRepeatNumber {
 
-    /**
-     * NK
-     *
-     * @param numbers
-     * @param length
-     * @param duplication
-     * @return
-     */
-    public boolean duplicate(int[] numbers, int length, int[] duplication) {
-//        return solutionBySort(numbers, length, duplication);
-//        return solutionByHashMap(numbers, length, duplication);
-//        return solutionByHashSet(numbers, length, duplication);
-        return solutionSwap(numbers, length, duplication);
-    }
-
 
     /**
      * 通过LC
@@ -41,17 +26,17 @@ public class FindRepeatNumber {
      * @param nums
      * @return
      */
-    private int solutionSwapSTO(int[] nums) {
+    private int findRepeatNumber(int[] nums) {
         if (nums == null || nums.length < 2) {
             return -1;
         }
-        // 遍历数组，arr[i]的值本来是i，如果是不是i，则准备与下标为arr[i]的元素交换（换到它应该在的位置）
+        // 遍历数组，期待arr[i]的值是i，如果是不是i，则准备与下标为i的元素交换（换到它应该在的位置）
         for (int i = 0; i < nums.length; i++) {
             // 如果正常，判断下一个
             if (nums[i] == i) {
                 continue;
             }
-            // 如果两元素相等，则返回
+            // 如果两元素相等，则找到重复，返回
             if (nums[i] == nums[nums[i]]) {
                 return nums[i];
             }
@@ -72,6 +57,21 @@ public class FindRepeatNumber {
     }
 
     /**
+     * NK
+     *
+     * @param numbers
+     * @param length
+     * @param duplication
+     * @return
+     */
+    public boolean duplicate(int[] numbers, int length, int[] duplication) {
+//        return solutionBySort(numbers, length, duplication);
+//        return solutionByHashMap(numbers, length, duplication);
+//        return solutionByHashSet(numbers, length, duplication);
+        return solutionSwap(numbers, length, duplication);
+    }
+
+    /**
      * 通过NK
      *
      * @param numbers
@@ -83,7 +83,6 @@ public class FindRepeatNumber {
         if (numbers == null || length < 2) {
             return false;
         }
-        // 遍历数组，arr[i]的值本来是i，如果是不是i，则准备与下标为arr[i]的元素交换（换到它应该在的位置）
         for (int i = 0; i < length; i++) {
             // 如果正常，判断下一个
             if (numbers[i] == i) {

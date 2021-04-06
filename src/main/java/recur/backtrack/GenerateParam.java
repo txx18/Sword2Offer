@@ -1,6 +1,7 @@
 package recur.backtrack;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author ShaneTang
@@ -14,16 +15,18 @@ public class GenerateParam {
         System.out.println(obj.res);
     }
 
-    ArrayList<String> res = new ArrayList<>();
+    List<String> res = new ArrayList<>();
     StringBuilder track = new StringBuilder();
     int n;
 
 
     /**
+     * 通过LC
+     *
      * @param n int整型
      * @return string字符串ArrayList
      */
-    public ArrayList<String> generateParenthesis(int n) {
+    public List<String> generateParenthesis(int n) {
         // write code here
         if (n == 0) {
             return res;

@@ -6,25 +6,25 @@ package digit;
  */
 public class AddNotUsePlus {
 
-    public int solutionRecur(int num1, int num2) {
-        if (num2 == 0) {
-            return num1;
+    public int solutionRecur(int a, int b) {
+        if (b == 0) {
+            return a;
         }
-        return solutionRecur(num1 ^ num2, (num1 & num2) << 1);
+        return solutionRecur(a ^ b, (a & b) << 1);
     }
 
-    public int solutionLoop(int num1, int num2) {
+    public int solutionLoop(int a, int b) {
         int sum = 0;
         int carry = 0;
-        while (num2 != 0) {
+        while (b != 0) {
             // 1、不考虑进位，每一位相加
-            sum = num1 ^ num2;
+            sum = a ^ b;
             // 2、只考虑进位
-            carry = (num1 & num2) << 1;
+            carry = (a & b) << 1;
             // 3、相加
-            num1 = sum;
-            num2 = carry;
+            a = sum;
+            b = carry;
         }
-        return num1;
+        return a;
     }
 }

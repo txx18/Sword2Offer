@@ -7,7 +7,7 @@ import java.util.List;
  * @author ShaneTang
  * @create 2021-03-23 17:39
  */
-public class CombineSumNoDupUseInf {
+public class CombineSumUseInf {
 
     List<List<Integer>> res = new ArrayList<>();
     List<Integer> track = new ArrayList<>();

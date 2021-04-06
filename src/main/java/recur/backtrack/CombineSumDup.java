@@ -38,11 +38,12 @@ import java.util.List;
  * @author ShaneTang
  * @create 2021-03-20 18:33
  */
-public class CombineSumHasDup {
+public class CombineSumDup {
 
     List<List<Integer>> res = new ArrayList<>();
     ArrayList<Integer> track = new ArrayList<>();
     int[] nums;
+    boolean[] hasUsed;
     int targetSum;
     int curSum;
 
@@ -56,6 +57,7 @@ public class CombineSumHasDup {
         Arrays.sort(candidates); // 注意
         nums = candidates;
         targetSum = target;
+        hasUsed = new boolean[candidates.length];
         bt(0);
         return res;
     }
@@ -70,7 +72,13 @@ public class CombineSumHasDup {
             return;
         }
         for (int i = startIndex; i < nums.length; i++) {
-            if (i > startIndex && nums[i - 1] == nums[i]) { // 注意。去重，不去重的话会出现相同的组合，同一树层上不能重复选择
+            if (hasUsed[i]) {
+                continue;
+            }
+            // used[i - 1] == true，说明同一树支candidates[i - 1]使用过
+            // used[i - 1] == false，说明同一树层candidates[i - 1]使用过
+            // 要对同一树层使用过的元素进行跳过
+            if (i > startIndex && nums[i - 1] == nums[i] && !hasUsed[i - 1]) { // 注意。去重，不去重的话会出现相同的组合，同一树层上不能重复选择
                 continue;
             }
             curSum += nums[i];

@@ -10,43 +10,23 @@ import java.util.LinkedList;
 public class IsPushPopOrder {
 
     /**
-     * NK
+     * 通过LC
      *
-     * @param pushA
-     * @param popA
+     * @param pushed
+     * @param popped
      * @return
      */
-    public boolean solutionSimulate(int[] pushA, int[] popA) {
-        int n = pushA.length;
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        int n = pushed.length;
         Deque<Integer> stack = new LinkedList<>();
         for (int pushIndex = 0, popIndex = 0; pushIndex < n; pushIndex++) {
             // pop之前的都要push
-            stack.push(pushA[pushIndex]);
-            while (!stack.isEmpty() && popA[popIndex] == stack.peek()) { // while
+            stack.push(pushed[pushIndex]);
+            while (!stack.isEmpty() && popped[popIndex] == stack.peek()) { // 注意while
                 stack.pop();
                 popIndex++;
             }
         }
         return stack.isEmpty();
     }
-
-//    /**
-//     * LC
-//     *
-//     * @param pushed
-//     * @param popped
-//     * @return
-//     */
-//    public boolean validateStackSequences(int[] pushed, int[] popped) {
-//        int n = pushed.length;
-//        Deque<Integer> stack = new LinkedList<>();
-//        for (int pushIndex = 0, popIndex = 0; pushIndex < n; pushIndex++) {
-//            stack.push(pushed[pushIndex]);
-//            while (!stack.isEmpty() && stack.peek() == popped[popIndex]) {
-//                stack.pop();
-//                popIndex++;
-//            }
-//        }
-//        return stack.isEmpty();
-//    }
 }

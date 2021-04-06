@@ -24,13 +24,13 @@ public class VerifyPostorderBST {
      */
     public boolean VerifySequenceOfBST(int[] postorder) {
         if (postorder == null || postorder.length == 0)
-            return false;
+            return true;
         return verify(postorder, 0, postorder.length - 1);
     }
 
     private boolean verify(int[] seq, int l, int r) {
         // base case
-        if (r - l <= 1)
+        if (l >= r)
             return true;
         int rootVal = seq[r];
         // 就当做BST来检验，试图找到左右子树分界点
@@ -39,11 +39,11 @@ public class VerifyPostorderBST {
             cutIndex++;
         }
         // 验证 右 >= 根
-        for (int i = cutIndex; i < r; i++)
+        for (int i = cutIndex; i < r; i++) // < r
             if (seq[i] < rootVal) {
                 return false;
             }
-        return verify(seq, l, cutIndex - 1) && verify(seq, cutIndex, r - 1); // 注意
+        return verify(seq, l, cutIndex - 1) && verify(seq, cutIndex, r - 1); // 注意覆盖 l ~ r-1
     }
 
 

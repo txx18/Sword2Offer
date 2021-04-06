@@ -24,7 +24,7 @@ public class Subsets {
     public static void main(String[] args) {
         Subsets obj = new Subsets();
 //        List<List<Integer>> res = obj.subsets(new int[]{1, 2, 3});
-        ArrayList<ArrayList<Integer>> res = obj.subsets(new int[]{1, 2, 3});
+        List<List<Integer>> res = obj.subsets(new int[]{1, 2, 3});
 //        obj.processZS(new char[]{'a', 'b', 'c'}, 0);
         System.out.println("res = " + res);
     }
@@ -32,35 +32,8 @@ public class Subsets {
 
     ArrayList<Integer> track = new ArrayList<>();
     int[] S;
-    ArrayList<ArrayList<Integer>> resNK = new ArrayList<>();
 
     List<List<Integer>> resLC = new LinkedList<>();
-
-    /**
-     * 通过NK
-     *
-     * @param S
-     * @return
-     */
-    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
-        this.S = S;
-        bt(0);
-        return resNK;
-    }
-
-
-    private void bt(int index) {
-        // 每一层的track都是一个结果
-        resNK.add(new ArrayList<>(track));
-//        resLC.add(new ArrayList<>(track));
-        // 从 index 开始逐渐缩小选择集，
-        for (int i = index; i < S.length; i++) {
-            track.add(S[i]);
-            // 不含以前有的（交换位置不算）
-            bt(i + 1);
-            track.remove(track.size() - 1);
-        }
-    }
 
     /**
      * 通过LC
@@ -68,12 +41,28 @@ public class Subsets {
      * @param S
      * @return
      */
-    public List<List<Integer>> solutionBtLC(int[] S) {
+    public List<List<Integer>> subsets(int[] S) {
         this.S = S;
         bt(0);
         return resLC;
     }
 
+
+    private void bt(int startIndex) {
+        // 没有必要加终止条件，若startIndex>=S.length则for循环终止
+/*        if (startIndex >= S.length) {
+            return;
+        }*/
+        // 每一层的track都是一个结果
+        resLC.add(new ArrayList<>(track));
+        // 从 startIndex 开始逐渐缩小选择集，
+        for (int i = startIndex; i < S.length; i++) {
+            track.add(S[i]);
+            // 不含以前有的（交换位置不算）
+            bt(i + 1);
+            track.remove(track.size() - 1);
+        }
+    }
 
 
 //    private void btParam(LinkedList<Integer> track, int[] S, int index) {

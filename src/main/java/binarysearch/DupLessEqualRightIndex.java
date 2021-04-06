@@ -1,6 +1,6 @@
 package binarysearch;
 
-public class LessEqualRightIndex {
+public class DupLessEqualRightIndex {
 
     public static void main(String[] args) {
         int[] arr = {1, 1, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5};

@@ -1,6 +1,8 @@
 package recur.backtrack;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 输入一个字符串，打印出该字符串中字符的所有排列。
@@ -29,7 +31,7 @@ import java.util.Arrays;
  * @version V1.0
  * @create 2020-03-16 21:11
  */
-public class PermutationCount {
+public class PermuteDup {
 
     /*
      * 回溯法
@@ -81,14 +83,52 @@ public class PermutationCount {
 
         String str = "abc";
 
-        PermutationCount obj = new PermutationCount();
+        PermuteDup obj = new PermuteDup();
 
         int resCnt = obj.permutationCnt(str);
         System.out.println("resCnt = " + resCnt);
     }
 
-    char[] chars;
+    List<List<Integer>> res = new ArrayList<>();
+    List<Integer> track = new ArrayList<>();
     boolean[] hasUsed;
+    int[] nums;
+
+    /**
+     * 通过LC
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        Arrays.sort(nums);
+        this.nums = nums;
+        this.hasUsed = new boolean[nums.length];
+        bt();
+        return res;
+    }
+
+    private void bt() {
+        if (track.size() == nums.length) {
+            res.add(new ArrayList<>(track));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (hasUsed[i]) {
+                continue;
+            }
+            if (i > 0 && nums[i - 1] == nums[i] && !hasUsed[i - 1]) {
+                continue;
+            }
+            track.add(nums[i]);
+            hasUsed[i] = true;
+            bt();
+            track.remove(track.size() - 1);
+            hasUsed[i] = false;
+        }
+    }
+
+
+    char[] chars;
 
     public int permutationCnt(String s) {
         if (s == null || s.length() == 0) {

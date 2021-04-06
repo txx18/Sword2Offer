@@ -2,16 +2,15 @@ package recur.backtrack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author ShaneTang
  * @create 2021-02-08 15:33
  */
-public class PermuteStringDicOrderHasDup {
+public class PermuteDupStringReturnDicOrder {
 
     public static void main(String[] args) {
-        PermuteStringDicOrderHasDup obj = new PermuteStringDicOrderHasDup();
+        PermuteDupStringReturnDicOrder obj = new PermuteDupStringReturnDicOrder();
         String[] res = obj.permutation("ab");
         System.out.println("res = " + Arrays.toString(res));
     }

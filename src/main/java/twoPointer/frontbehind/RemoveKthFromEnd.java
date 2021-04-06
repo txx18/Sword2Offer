@@ -19,34 +19,34 @@ public class RemoveKthFromEnd {
 
     /**
      * 通过LC
+     *
      * @param head
      * @param n
      * @return
      */
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        // write code here
         if (head == null) {
             return null;
         }
-        ListNode fast, slow;
-        fast = slow = head;
+        ListNode front, behind;
+        front = behind = head;
         for (int i = 0; i < n; i++) {
             // 如果n超过数组长度
-            if (fast == null) {
+            if (front == null) {
                 return null;
             }
-            fast = fast.next;
+            front = front.next;
         }
         // 如果链表长度为n, fast正好为null
-        if (fast == null) {
+        if (front == null) {
             return head.next;
         }
-        // 为了记录倒数第n个的前一个节点，所以不是fast!=null
-        while (fast.next != null) {
-            fast = fast.next;
-            slow = slow.next;
+        // 为了记录倒数第n个的前一个节点，所以是 front.next != null
+        while (front.next != null) {
+            front = front.next;
+            behind = behind.next;
         }
-        slow.next = slow.next.next;
+        behind.next = behind.next.next;
         return head;
     }
 }

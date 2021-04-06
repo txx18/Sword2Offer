@@ -25,46 +25,33 @@ import java.util.*;
  * @author ShaneTang
  * @create 2021-01-12 11:09
  */
-public class PermuteNumNoDup {
+public class PermuteNum {
 
     public static void main(String[] args) {
-        PermuteNumNoDup obj = new PermuteNumNoDup();
+        PermuteNum obj = new PermuteNum();
         int[] arr = {1, 2, 3};
 //        ArrayList<ArrayList<Integer>> res = obj.permute(arr);
         List<List<Integer>> res = obj.solutionSwap(arr);
         System.out.println("res = " + res);
     }
 
-    ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+    List<List<Integer>> res = new ArrayList<>();
     LinkedList<Integer> track = new LinkedList<>();
     int[] nums;
 
 
     /**
-     * 通过NK
+     * 通过LC
      *
-     * @param num
+     * @param nums
      * @return
      */
-    ArrayList<ArrayList<Integer>> solutionBt(int[] num) {
-        this.nums = num;
+    List<List<Integer>> permuteLC(int[] nums) {
+        this.nums = nums;
         btContains(0);
 //        btMap();
         return res;
     }
-
-
-//    /**
-//     * 通过LC
-//     * @param nums
-//     * @return
-//     */
-//    List<List<Integer>> permuteLC(int[] nums) {
-//        this.nums = nums;
-//        btContains(0);
-////        btMap();
-//        return resLC;
-//    }
 
     private void btContains(int index) {
         // 用index作参数可以
@@ -83,7 +70,6 @@ public class PermuteNumNoDup {
         }
     }
 
-    List<List<Integer>> resLC = new ArrayList<>();
 
     /**
      * 通过LC
@@ -94,7 +80,7 @@ public class PermuteNumNoDup {
     public List<List<Integer>> solutionSwap(int[] nums) {
         this.nums = nums;
         process(0);
-        return resLC;
+        return res;
     }
 
     private void process(int i) {
@@ -104,7 +90,7 @@ public class PermuteNumNoDup {
                 integerArr[j] = nums[j];
             }
 //            Integer[] integerArr = Arrays.stream(nums).boxed().toArray(Integer[]::new);
-            resLC.add(Arrays.asList(integerArr));
+            res.add(Arrays.asList(integerArr));
         }
         for (int j = i; j < nums.length; j++) {
             swap(nums, i, j);

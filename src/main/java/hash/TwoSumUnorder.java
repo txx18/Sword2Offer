@@ -11,6 +11,7 @@ public class TwoSumUnorder {
 
     /**
      * 通过LC
+     *
      * @param nums
      * @param target
      * @return
@@ -25,7 +26,7 @@ public class TwoSumUnorder {
         }
         for (int i = 0; i < n; i++) {
             int other = target - nums[i];
-            if (map.containsKey(other) && map.get(other) != i) { // 注意
+            if (map.containsKey(other) && map.get(other) != i) { // 注意两下标不能相同
                 return new int[]{i, map.get(other)};
             }
         }

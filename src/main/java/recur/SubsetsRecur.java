@@ -8,7 +8,7 @@ import java.util.List;
  * @author ShaneTang
  * @create 2021-03-07 21:35
  */
-public class Subsets {
+public class SubsetsRecur {
 
     int[] S;
 

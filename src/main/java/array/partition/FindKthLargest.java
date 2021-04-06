@@ -37,7 +37,9 @@ public class FindKthLargest {
             findK(a, lessEqualRight + 1, r, K);
         }
         return a[K];
-/*        int pivotIdx = l + (int) (Math.random() * (r - l + 1));
+/*
+        // threePartition
+        int pivotIdx = l + (int) (Math.random() * (r - l + 1));
         swap(a, pivotIdx, r);
         int[] indexes = threePartition(a, l, r);
         if (K > indexes[1]) {
@@ -57,6 +59,28 @@ public class FindKthLargest {
             }
         }
         return lessEqualRight;
+    }
+
+    public int[] threePartition(int[] arr, int l, int r) {
+        int pivotVal = arr[r];
+        // 小于区右边界
+        int lessRight = l - 1;
+        // 大于区左边界
+        int greatLeft = r;
+        // 指针
+        for (int i = l; i < greatLeft; ) { // < 大于区左边界
+            if (arr[i] < pivotVal) {
+                swap(arr, i++, ++lessRight);
+            } else if (arr[i] > pivotVal) {
+                // i不++因为换过来的arr[greatLeft-1]还没判断
+                swap(arr, i, --greatLeft);
+            } else { // == num
+                i++;
+            }
+        }
+        // 交换 大于区域左边界 和 r位置，大于区域左边界变成了等于区域右边界
+        swap(arr, greatLeft, r);
+        return new int[]{lessRight + 1, greatLeft};
     }
 
     private void swap(int[] arr, int i, int j) {
