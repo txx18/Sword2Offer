@@ -1,4 +1,4 @@
-package array.partition;
+package twoPointer.partition;
 
 import zhelper.ArrayUtils;
 

@@ -28,6 +28,7 @@ public class RotateArrayMinNum {
 
     /**
      * 通过LC
+     *
      * @param numbers
      * @return
      */
@@ -45,8 +46,7 @@ public class RotateArrayMinNum {
             // 右边是非递减数组，target在左边
             else if (numbers[m] <= numbers[r]) {
                 r = m;
-            }
-            else {
+            } else {
                 l = m + 1;
             }
         }
@@ -62,6 +62,12 @@ public class RotateArrayMinNum {
             }
         }
         return array[minIndex];
+/*        for (; l < r; l++) {
+            if (array[l + 1] < array[l]) {
+                return array[l + 1];
+            }
+            return array[l];
+        }*/
 /*        for (int i = l; i < r; i++) {
             if (array[i + 1] < array[i])
                 return array[i + 1];

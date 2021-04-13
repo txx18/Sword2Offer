@@ -65,7 +65,7 @@ public class LRUCache {
         // 每次get都要【重新插入】：删除同时获取值，再插入
         Integer remove = linkedHashMap.remove(key);
         linkedHashMap.put(key, remove);
-        return linkedHashMap.get(key);
+        return remove;
     }
 
     /**
@@ -83,8 +83,7 @@ public class LRUCache {
         }
         // key不存在，而且达到容量了，移除头结点，再【新增插入】
         if (linkedHashMap.size() == capacity) {
-            Integer head = linkedHashMap.keySet().iterator().next(); // 头结点 是最近最久未使用的
-            linkedHashMap.remove(head);
+            linkedHashMap.remove(linkedHashMap.keySet().iterator().next()); // 头结点 是最近最久未使用的
             linkedHashMap.put(key, value);
             return;
         }

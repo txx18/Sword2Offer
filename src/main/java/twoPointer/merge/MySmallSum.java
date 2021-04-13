@@ -1,4 +1,4 @@
-package array.merge;
+package twoPointer.merge;
 
 /**
  * 小和问题

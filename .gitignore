@@ -4,6 +4,7 @@
 *.iml
 Course/
 test/
+resources/
 
 ### Java template
 # Compiled class file

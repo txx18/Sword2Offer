@@ -40,7 +40,7 @@ public class ReverseKGroup {
         }
         // 先序，返回newHead
         ListNode newHead = reverse(p1, p2);
-        // p1.next接上递归
+        // p1.next接上递归，跨到p2
         p1.next = reverseKGroup(p2, k);
         return newHead;
     }

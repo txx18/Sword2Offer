@@ -6,14 +6,34 @@ import java.util.Arrays;
  * @author ShaneTang
  * @create 2021-03-09 15:54
  */
-public class ChangesMethodCount {
+public class ChangesCombine {
 
     public static void main(String[] args) {
-        ChangesMethodCount obj = new ChangesMethodCount();
+        ChangesCombine obj = new ChangesCombine();
         int[] coins = new int[]{1, 2, 5};
         int res = obj.solutionRecur(5, coins);
         System.out.println("res = " + res);
     }
+
+    /**
+     * 通过LC
+     *
+     * @param amount
+     * @param coins
+     * @return
+     */
+    public int change(int amount, int[] coins) {
+        int[] dp = new int[amount + 1];
+        int n = coins.length;
+        dp[0] = 1;
+        for (int i = 0; i < n; i++) {
+            for (int j = coins[i]; j <= amount; j++) {
+                dp[j] += dp[j - coins[i]];
+            }
+        }
+        return dp[amount];
+    }
+
 
     int[] coinVals;
 

@@ -1,4 +1,4 @@
-package array.partition;
+package twoPointer.partition;
 
 /**
  * 根据快速排序的思路

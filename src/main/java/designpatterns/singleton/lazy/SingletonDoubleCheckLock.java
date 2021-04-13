@@ -1,4 +1,4 @@
-package designpatterns.singleton;
+package designpatterns.singleton.lazy;
 
 /**
  * @author ShaneTang
@@ -12,12 +12,7 @@ public final class SingletonDoubleCheckLock {
 
     }
 
-    /**
-     * 等价写法
-     *
-     * @return
-     */
-    public static SingletonDoubleCheckLock getInstance2() {
+    public static SingletonDoubleCheckLock getInstance() {
         if (instance != null) { // 这行代码不受同步代码块约束
             return instance;
         }

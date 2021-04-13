@@ -19,6 +19,7 @@ public class MinDepth {
 
     /**
      * 通过 LC
+     *
      * @param root
      * @return
      */
@@ -42,6 +43,7 @@ public class MinDepth {
 
     /**
      * 通过LC
+     *
      * @param root
      * @return
      */

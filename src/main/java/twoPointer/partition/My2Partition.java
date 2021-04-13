@@ -1,8 +1,6 @@
-package array.partition;
+package twoPointer.partition;
 
 import zhelper.ArrayUtils;
-
-import static zhelper.ArrayUtils.*;
 
 import java.util.Arrays;
 
