@@ -1,4 +1,4 @@
-package recur.dp;
+package recur.dp.count;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,31 +47,6 @@ public class Fibonacci {
         System.out.println("res = " + res);
     }
 
-    public int solutionRecurForce(int n) {
-        if (n <= 1) {
-            return n;
-        }
-        return solutionRecurForce(n - 1) + solutionRecurForce(n - 2);
-    }
-
-    int[] memoArray;
-
-    public int solutionMemoArray(int n) {
-        memoArray = new int[n + 1];
-        return recurMemoArray(n);
-    }
-
-    private int recurMemoArray(int n) {
-        if (n == 1 || n == 2) {
-            return 1;
-        }
-        if (memoArray[n] != 0) {
-            return memoArray[n];
-        }
-        memoArray[n] = recurMemoArray(n - 1) + recurMemoArray(n - 2);
-        return memoArray[n];
-    }
-
     /**
      * 通过 LC
      *
@@ -92,6 +67,7 @@ public class Fibonacci {
         }
         return dp[n];
     }
+
 
     /**
      * 优化空间
@@ -116,6 +92,31 @@ public class Fibonacci {
             p2 = res;
         }
         return res;
+    }
+
+    public int solutionRecurForce(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        return solutionRecurForce(n - 1) + solutionRecurForce(n - 2);
+    }
+
+    int[] memoArray;
+
+    public int solutionMemoArray(int n) {
+        memoArray = new int[n + 1];
+        return recurMemoArray(n);
+    }
+
+    private int recurMemoArray(int n) {
+        if (n == 1 || n == 2) {
+            return 1;
+        }
+        if (memoArray[n] != 0) {
+            return memoArray[n];
+        }
+        memoArray[n] = recurMemoArray(n - 1) + recurMemoArray(n - 2);
+        return memoArray[n];
     }
 
 

@@ -13,7 +13,7 @@ public final class SingletonLockClassOrMethod {
     }
 
     /**
-     * synchronized加载方法上
+     * synchronized加在方法上
      *
      * @return
      */

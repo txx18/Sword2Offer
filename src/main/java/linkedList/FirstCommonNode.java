@@ -1,5 +1,6 @@
 package linkedList;
 
+import zhelper.ListUtils;
 import zhelper.ListUtils.*;
 
 public class FirstCommonNode {
@@ -48,12 +49,19 @@ public class FirstCommonNode {
 
     }
 
-    public ListNode solutionTwoPointer(ListNode pHead1, ListNode pHead2) {
-        ListNode p1 = pHead1;
-        ListNode p2 = pHead2;
+    /**
+     * 通过LC
+     *
+     * @param headA
+     * @param headB
+     * @return
+     */
+    public ListNode solutionTwoPointer(ListNode headA, ListNode headB) {
+        ListNode p1 = headA;
+        ListNode p2 = headB;
         while (p1 != p2) {
-            p1 = (p1 != null) ? p1.next: pHead2;
-            p2 = (p2 != null) ? p2.next: pHead1;
+            p1 = (p1 != null) ? p1.next : headB;
+            p2 = (p2 != null) ? p2.next : headA;
         }
         // p1 == p2
         return p1;
@@ -205,6 +213,48 @@ public class FirstCommonNode {
             // 否则不相交
             return null;
         }
+    }
+
+    /**
+     * 执行用时 :
+     * 2 ms
+     * , 在所有 Java 提交中击败了
+     * 42.17%
+     * 的用户
+     * 内存消耗 :
+     * 43 MB
+     * , 在所有 Java 提交中击败了
+     * 100.00%
+     * 的用户
+     *
+     * @param head1
+     * @param head2
+     * @return
+     */
+    private static ListNode solutionFSPointerME(ListNode head1, ListNode head2) {
+        // 计算两个链表的长度差
+        int listSize1 = ListUtils.size(head1);
+        int listSize2 = ListUtils.size(head2);
+        int diff = Math.abs(listSize1 - listSize2);
+        ListNode cur1 = head1;
+        ListNode cur2 = head2;
+        if (listSize2 > listSize1) {
+            // list2 先走 diff 步
+            for (int i = 0; i < diff; i++) {
+                cur2 = cur2.next;
+            }
+        } else if (listSize1 > listSize2) {
+            // list1 先走 diff 步
+            for (int i = 0; i < diff; i++) {
+                cur1 = cur1.next;
+            }
+        }
+        // 包括listSize1 == listSize2的情况
+        while (cur1 != cur2) {
+            cur1 = cur1.next;
+            cur2 = cur2.next;
+        }
+        return cur1;
     }
 
 
