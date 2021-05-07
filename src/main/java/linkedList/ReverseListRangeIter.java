@@ -2,6 +2,7 @@ package linkedList;
 
 import zhelper.ListUtils;
 import zhelper.ListUtils.*;
+
 /**
  * @author ShaneTang
  * @create 2021-02-07 8:57
@@ -37,5 +38,35 @@ public class ReverseListRangeIter {
             a = nxt;
         }
         return pre;
+    }
+
+    private ListNode reverseLoop(ListNode head) {
+        ListNode pre, nxt, cur;
+        pre = nxt = null;
+        cur = head;
+        while (cur != null) {
+            nxt = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = nxt;
+        }
+        return pre;
+    }
+
+    private static ListNode solutionInsertHeadNodeCYC(ListNode head) {
+        // 创建新的结点
+        ListNode newHead = new ListNode(-1);
+        while (head != null) {
+            // 记住head的nextNode
+            ListNode next = head.next;
+            // 断开原来的next指针，指向新增结点的next
+            head.next = newHead.next;
+            // 新结点的next指针指向head
+            newHead.next = head;
+            // head后移
+            head = next;
+        }
+        // 循环结束后，链表反转完毕，头结点就是newNode.next
+        return newHead.next;
     }
 }

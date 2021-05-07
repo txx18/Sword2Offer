@@ -3,10 +3,10 @@ package recur.dp.count;
 import java.util.Arrays;
 
 
-public class FrogJumpFloorAbnormal {
+public class JumpFloorAbnormal {
 
     public static void main(String[] args) {
-        FrogJumpFloorAbnormal obj = new FrogJumpFloorAbnormal();
+        JumpFloorAbnormal obj = new JumpFloorAbnormal();
         int res = obj.solutionRecurForce(8);
         System.out.println("res = " + res);
     }

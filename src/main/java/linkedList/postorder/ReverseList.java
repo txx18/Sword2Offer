@@ -36,6 +36,7 @@ public class ReverseList {
 
     /**
      * 通过LC
+     *
      * @param head
      * @return
      */
@@ -49,34 +50,4 @@ public class ReverseList {
         return newHead;
     }
 
-    private ListNode reverseLoop(ListNode head) {
-        ListNode pre, nxt, cur;
-        pre = nxt = null;
-        cur = head;
-        while (cur != null) {
-            nxt = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = nxt;
-        }
-        return pre;
-    }
-
-
-    private static ListNode solutionInsertHeadNodeCYC(ListNode head) {
-        // 创建新的结点
-        ListNode newHead = new ListNode(-1);
-        while (head != null) {
-            // 记住head的nextNode
-            ListNode next = head.next;
-            // 断开原来的next指针，指向新增结点的next
-            head.next = newHead.next;
-            // 新结点的next指针指向head
-            newHead.next = head;
-            // head后移
-            head = next;
-        }
-        // 循环结束后，链表反转完毕，头结点就是newNode.next
-        return newHead.next;
-    }
 }

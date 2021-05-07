@@ -3,7 +3,7 @@ package linkedList;
 import zhelper.ListUtils;
 import zhelper.ListUtils.*;
 
-public class FirstCommonNode {
+public class GetIntersectionNode {
 
 
     public static void main(String[] args) {
