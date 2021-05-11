@@ -10,10 +10,10 @@ import zhelper.TreeUtils.*;
  * @author ShaneTang
  * @create 2021-02-06 10:57
  */
-public class IsBBT {
+public class IsBalancedTree {
 
     public static void main(String[] args) {
-        IsBBT obj = new IsBBT();
+        IsBalancedTree obj = new IsBalancedTree();
         TreeNode deserialize = TreeUtils.deserialize("[1,2,2,3,null,null,null,4,4]");
 //        TreeNode deserialize = TreeUtils.deserialize("[1,2,2,null,null,3,3,4,4]");
         boolean res = obj.IsBalanced_Solution(deserialize);

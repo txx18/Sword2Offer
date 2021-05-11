@@ -33,7 +33,8 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			rst = &ListNode{Val: noCarrySum}
 			cur = rst
 		} else {
-			cur.Next = &ListNode{Val: noCarrySum}
+			nxt := ListNode{Val: noCarrySum}
+			cur.Next = &nxt
 			cur = cur.Next
 		}
 	}
@@ -67,7 +68,10 @@ func addInList(head1 *ListNode, head2 *ListNode) *ListNode {
 		noCarrySum := sum % 10
 		carry = sum / 10
 		if rst == nil {
-			rst = &ListNode{Val: noCarrySum} // 指针变量 = 地址
+			// 结构体变量的地址赋给指针变量 <=> 指针变量指向结构体 <=> 结构体指针
+			// 什么赋值给指针变量？ 1、指针变量 2、普通变量的地址
+			// 指定成员初始化
+			rst = &ListNode{Val: noCarrySum}
 			cur = rst
 		} else {
 			cur.Next = &ListNode{Val: noCarrySum}
@@ -80,6 +84,10 @@ func addInList(head1 *ListNode, head2 *ListNode) *ListNode {
 	return reverseList(rst)
 }
 
+/**
+head参数是结构体指针
+不使用结构体指针默认是值传递
+*/
 func reverseList(head *ListNode) *ListNode {
 	var pre *ListNode
 	for head != nil {

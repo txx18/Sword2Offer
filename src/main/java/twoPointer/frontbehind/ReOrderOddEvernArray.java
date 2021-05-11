@@ -20,7 +20,7 @@ import java.util.Arrays;
  * @version V1.0
  * @create 2020-02-14 14:53
  */
-public class ReOrderArray {
+public class ReOrderOddEvernArray {
 
     public static void main(String[] args) {
         int[] arr1 = {1, 2, 3, 4, 5, 6, 7};

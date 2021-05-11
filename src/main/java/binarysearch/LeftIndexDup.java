@@ -29,12 +29,12 @@ package binarysearch;
  * 链接：https://leetcode-cn.com/problems/search-insert-position
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class DupGreatEqualLeftIndex {
+public class LeftIndexDup {
 
     public static void main(String[] args) {
         int[] arr = {1, 1, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5};
         int[] arr2 = {1, 3, 5, 6};
-        DupGreatEqualLeftIndex obj = new DupGreatEqualLeftIndex();
+        LeftIndexDup obj = new LeftIndexDup();
 
         int index = obj.left_bound(arr, 2);
         System.out.println("index = " + index);

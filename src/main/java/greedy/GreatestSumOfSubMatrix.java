@@ -1,4 +1,4 @@
-package recur.greedy;
+package greedy;
 
 /**
  * 子矩阵的最大和

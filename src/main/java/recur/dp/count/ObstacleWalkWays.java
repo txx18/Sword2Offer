@@ -4,7 +4,7 @@ package recur.dp.count;
  * @author ShaneTang
  * @create 2021-03-16 19:24
  */
-public class RobotWalkWaysObstacle {
+public class ObstacleWalkWays {
 
 
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {

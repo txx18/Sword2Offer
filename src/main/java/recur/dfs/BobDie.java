@@ -1,4 +1,4 @@
-package recur.dp.count;
+package recur.dfs;
 
 /**
  * Bob的生存概率

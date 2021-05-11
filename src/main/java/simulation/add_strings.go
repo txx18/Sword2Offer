@@ -21,10 +21,10 @@ func addStrings(num1 string, num2 string) string {
 		}
 		// 算进位的总和
 		sum := x + y + carry
-		// 去掉进位把高位加上去
 		noCarrySum := sum % 10
 		// 进位
 		carry = sum / 10
+		// 去掉进位把无进位和加上去
 		rst = strconv.Itoa(noCarrySum) + rst
 		//rst = strconv.FormatInt(int64(noCarrySum), 10) + rst
 	}

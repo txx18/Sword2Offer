@@ -19,12 +19,12 @@ import java.util.*;
  * @author ShaneTang
  * @create 2021-01-12 10:20
  */
-public class Subsets {
+public class SubsetsNoDup {
 
     public static void main(String[] args) {
-        Subsets obj = new Subsets();
+        SubsetsNoDup obj = new SubsetsNoDup();
 //        List<List<Integer>> res = obj.subsets(new int[]{1, 2, 3});
-        List<List<Integer>> res = obj.subsets(new int[]{1, 2, 3});
+        List<List<Integer>> res = obj.subsets(new int[]{1, 2});
 //        obj.processZS(new char[]{'a', 'b', 'c'}, 0);
         System.out.println("res = " + res);
     }

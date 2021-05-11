@@ -4,10 +4,10 @@ package recur.dp.count;
  * @author ShaneTang
  * @create 2021-03-16 19:24
  */
-public class RobotWalkWaysRectangle {
+public class RectangleWalkWays {
 
     public static void main(String[] args) {
-        RobotWalkWaysRectangle obj = new RobotWalkWaysRectangle();
+        RectangleWalkWays obj = new RectangleWalkWays();
         int res = obj.uniquePaths(3, 7);
         System.out.println("res = " + res);
     }
