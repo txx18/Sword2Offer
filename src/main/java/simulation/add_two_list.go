@@ -10,13 +10,13 @@ type ListNode struct {
 }
 
 /**
-LC 逆序存储
+LC 逆序存储 不用反转
 */
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var rst *ListNode
 	var cur *ListNode
 	carry := 0
-	for l1 != nil || l2 != nil {
+	for l1 != nil || l2 != nil || carry != 0 {
 		x, y := 0, 0
 		if l1 != nil {
 			x = l1.Val
@@ -38,14 +38,15 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			cur = cur.Next
 		}
 	}
-	if carry != 0 {
+	/*	if carry != 0 {
 		cur.Next = &ListNode{Val: carry}
-	}
+	}*/
 	return rst
 }
 
 /**
 NK 顺序存储
+先反转，最后结果也要反转
 */
 func addInList(head1 *ListNode, head2 *ListNode) *ListNode {
 	// write code here

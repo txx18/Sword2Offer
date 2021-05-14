@@ -1,7 +1,9 @@
 package main
 
 func main() {
-
+	test := &ListNode{Val: 1}
+	test.Next = &ListNode{Val: 3}
+	test.Next.Next = &ListNode{Val: 2}
 }
 
 func reverseBetween(head *ListNode, left int, right int) *ListNode {

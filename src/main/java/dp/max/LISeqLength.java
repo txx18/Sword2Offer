@@ -1,8 +1,6 @@
-package recur.dp.max;
+package dp.max;
 
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author ShaneTang

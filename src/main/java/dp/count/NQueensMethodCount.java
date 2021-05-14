@@ -1,4 +1,4 @@
-package recur.dp.count;
+package dp.count;
 
 import java.util.HashMap;
 import java.util.Map;

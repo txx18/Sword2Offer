@@ -1,4 +1,4 @@
-package recur.dp.min;
+package dp.min;
 
 /**
  * @author ShaneTang

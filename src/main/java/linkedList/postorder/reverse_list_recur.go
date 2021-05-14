@@ -1,12 +1,9 @@
 package main
 
 func main() {
-
-}
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
+	test := &ListNode{Val: 1}
+	test.Next = &ListNode{Val: 3}
+	test.Next.Next = &ListNode{Val: 2}
 }
 
 func reverseList(head *ListNode) *ListNode {

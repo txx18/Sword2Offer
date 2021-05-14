@@ -1,4 +1,4 @@
-package recur.dp.min;
+package dp.min;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -229,7 +229,7 @@ public class ChangesMinCount {
 
     private int solutionDpTable(int[] arr, int aim) {
         // write code
-        // 根据实际情况初始化dp数组，recur.dp[i]代表 aim==i 时最少的硬币数
+        // 根据实际情况初始化dp数组，dp[i]代表 aim==i 时最少的硬币数
         int[] dp = new int[aim + 1];
         Arrays.fill(dp, aim + 1);
         dp[0] = 0;

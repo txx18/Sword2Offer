@@ -1,4 +1,4 @@
-package recur.dp.count;
+package dp.count;
 
 /**
  * 矩形覆盖问题

@@ -1,4 +1,4 @@
-package recur.dp.count;
+package dp.count;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +43,7 @@ public class Fibonacci {
         Fibonacci obj = new Fibonacci();
 //        long res = obj.fibDpTable(19);
         long res = obj.solutionDpTable(3);
-//        long res = recur.dp(45);
+//        long res = dp(45);
         System.out.println("res = " + res);
     }
 

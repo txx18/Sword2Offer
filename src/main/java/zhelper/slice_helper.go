@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 func main() {
-	arr := [][]int{{1, 2}, {3, 4}}
-	print2dSlice(arr)
+	//arr := [][]int{{1, 2}, {3, 4}}
+	//print2dSlice(arr)
+	var slice []int
+	println(maxOfSlice(slice))
+
 }
 
 func print2dSlice(slice [][]int) {
@@ -30,7 +32,7 @@ func swap(nums []int, i int, j int) {
 }
 
 func maxOfSlice(slice []int) int {
-	max := math.MinInt64
+	max := slice[0]
 	for _, val := range slice {
 		if val > max {
 			max = val
@@ -40,7 +42,7 @@ func maxOfSlice(slice []int) int {
 }
 
 func minOfSlice(slice []int) int {
-	min := math.MaxInt64
+	min := slice[0]
 	for _, val := range slice {
 		if val < min {
 			min = val

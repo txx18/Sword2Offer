@@ -1,4 +1,4 @@
-package recur.dp.count;
+package dp.count;
 
 /**
  * 给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。
@@ -173,7 +173,7 @@ public class TranslateNumToLetter {
             return 0;
         }
         int N = nums.length();
-        // recur.dp: [0..index]的解的个数
+        // dp: [0..index]的解的个数
         int[] dp = new int[N + 1];
         dp[N] = 1;
         // 注意遍历顺序，已知 下标N，要推下标0，应该逆序遍历

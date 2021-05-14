@@ -9,9 +9,11 @@ func main() {
 
 func addStrings(num1 string, num2 string) string {
 	carry := 0
-	rst := ""
+	res := ""
+	// 倒着循环，判断3个条件
 	for i, j := len(num1)-1, len(num2)-1; i >= 0 || j >= 0 || carry != 0; i, j = i-1, j-1 {
 		/*x, y := 0, 0*/
+		// 用两个变量取得低位数值
 		var x, y int
 		if i >= 0 {
 			x = int(num1[i] - '0')
@@ -21,12 +23,13 @@ func addStrings(num1 string, num2 string) string {
 		}
 		// 算进位的总和
 		sum := x + y + carry
+		// 无进位和
 		noCarrySum := sum % 10
-		// 进位
+		// 进位值carry
 		carry = sum / 10
-		// 去掉进位把无进位和加上去
-		rst = strconv.Itoa(noCarrySum) + rst
-		//rst = strconv.FormatInt(int64(noCarrySum), 10) + rst
+		// 把无进位和拼在前面
+		res = strconv.Itoa(noCarrySum) + res
+		//res = strconv.FormatInt(int64(noCarrySum), 10) + res
 	}
-	return rst
+	return res
 }

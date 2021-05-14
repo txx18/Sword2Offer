@@ -1,4 +1,4 @@
-package recur.dp.max;
+package dp.max;
 
 import java.util.Arrays;
 

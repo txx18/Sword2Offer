@@ -32,18 +32,18 @@ var track []int
 
 func subsets(A []int) [][]int {
 	gNums = A
-	bt(0)
+	btOuter(0)
 	return *res
 }
 
-func bt(startIndex int) {
+func btOuter(startIndex int) {
 	*res = append(*res, append([]int(nil), track...))
 	for i := startIndex; i < len(gNums); i++ {
 		/*		if startIndex == len(gNums) {
 				return
 			}*/
 		track = append(track, gNums[i])
-		bt(i + 1)
+		btOuter(i + 1)
 		track = track[:len(track)-1]
 	}
 }

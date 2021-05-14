@@ -1,9 +1,7 @@
 package main
 
-import "math"
-
 func main() {
-	println(maxSubArray([]int{-2, 1, -3, 4, -1, 2, 1, -5, 4}))
+	println(dpTable([]int{-2, 1, -3, 4, -1, 2, 1, -5, 4}))
 }
 
 func maxSubArray(nums []int) int {
@@ -40,9 +38,9 @@ func max(a, b int) int {
 	return b
 }
 
-func maxOfSlice(vals []int) int {
-	max := math.MinInt64
-	for _, val := range vals {
+func maxOfSlice(slice []int) int {
+	max := slice[0]
+	for _, val := range slice {
 		if val > max {
 			max = val
 		}

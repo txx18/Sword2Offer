@@ -1,4 +1,4 @@
-package recur.dp.max;
+package dp.max;
 
 import java.util.Arrays;
 
@@ -107,7 +107,7 @@ public class Bag01 {
         // write code here
         // dp的含义：选择[0..index][V..0]时的最大重量
         int[][] dp = new int[n + 1][V + 1];
-        // 需要初始化 recur.dp[n][...] == 0， 但已经默认为0了
+        // 需要初始化 dp[n][...] == 0， 但已经默认为0了
         // 注意这个遍历顺序，已知index == n行，要推index == 0行，应该逆序遍历
         for (int index = n - 1; index >= 0; index--) { // 注意
             for (int rest = 0; rest <= V; rest++) {
