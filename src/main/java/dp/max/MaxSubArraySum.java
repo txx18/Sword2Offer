@@ -1,15 +1,13 @@
-package greedy;
-
-import java.util.Arrays;
+package dp.max;
 
 /**
  * @author ShaneTang
  * @create 2021-02-21 17:33
  */
-public class GreatestSumOfSubArray {
+public class MaxSubArraySum {
 
     public static void main(String[] args) {
-        GreatestSumOfSubArray obj = new GreatestSumOfSubArray();
+        MaxSubArraySum obj = new MaxSubArraySum();
         int res = obj.solutionGreedy(new int[]{1, -2, 3, 10, -4, 7, 2, -5});
         System.out.println("res = " + res);
     }

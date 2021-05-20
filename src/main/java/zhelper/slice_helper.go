@@ -25,10 +25,11 @@ func print2dSlice(slice [][]int) {
 	fmt.Print("]")
 }
 
-func swap(nums []int, i int, j int) {
-	tmp := nums[i]
-	nums[i] = nums[j]
-	nums[j] = tmp
+func swap(nums []interface{}, i int, j int) {
+	/*	tmp := nums[i]
+		nums[i] = nums[j]
+		nums[j] = tmp*/
+	nums[i], nums[j] = nums[j], nums[i]
 }
 
 func maxOfSlice(slice []int) int {

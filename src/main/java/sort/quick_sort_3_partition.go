@@ -12,21 +12,21 @@ func sortArray(nums []int) []int {
 	if nums == nil || len(nums) < 2 {
 		return nums
 	}
-	return sort(nums, 0, len(nums)-1)
+	return recur(nums, 0, len(nums)-1)
 }
 
-func sort(nums []int, l int, r int) []int {
+func recur(nums []int, l int, r int) []int {
 	if l >= r {
 		return nums
 	}
 	pivotIndex := l + rand.Intn(r-l+1)
 	swap(nums, pivotIndex, r)
 	/*	lessEqualRight := twoPartition(nums, l, r)
-		sort(nums, l, lessEqualRight-1)
-		sort(nums, lessEqualRight+1, r)*/
+		recurMerge(nums, l, lessEqualRight-1)
+		recurMerge(nums, lessEqualRight+1, r)*/
 	equalLeft, equalRight := threePartition(nums, l, r)
-	sort(nums, l, equalLeft-1)
-	sort(nums, equalRight+1, r)
+	recur(nums, l, equalLeft-1)
+	recur(nums, equalRight+1, r)
 	return nums
 }
 

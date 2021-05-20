@@ -9,8 +9,8 @@ func main() {
 }
 
 func subsetsAnonymousFunc(nums []int) [][]int {
-	var track []int
 	var res [][]int
+	var track []int
 	var bt func(int)
 	// 匿名函数实现闭包
 	bt = func(startIndex int) {

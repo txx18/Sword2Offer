@@ -34,10 +34,3 @@ func knapsack(V int, n int, vw [][]int) int {
 	}
 	return dp[n-1][V]
 }
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}

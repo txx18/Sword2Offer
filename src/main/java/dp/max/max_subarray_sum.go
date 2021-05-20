@@ -22,20 +22,15 @@ func maxSubArray(nums []int) int {
 func dpTable(nums []int) int {
 	//当 dp[i - 1] > 0 dp[i−1]>0 时：执行 dp[i] = dp[i-1] + nums[i] ；
 	//当 dp[i - 1] < 0 dp[i−1]≤0 时：执行 dp[i] = nums[i] ；
+	res := nums[0]
 	dp := make([]int, len(nums))
 	dp[0] = nums[0]
 	for i := 1; i < len(dp); i++ {
 		dp[i] = max(dp[i-1]+nums[i], nums[i])
+		res = max(res, dp[i])
 	}
-	return maxOfSlice(dp)
+	return res
 
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }
 
 func maxOfSlice(slice []int) int {

@@ -21,8 +21,7 @@ public class LISeqLength {
     }
 
     /**
-     * dp[i]表示下标为i-1及其之前的最长上升子序列，
-     * 总下标[0, n-1], 求dp[n-1]和res的较大值
+     * dp[i]表示下标i-1及其之前的最长上升子序列，
      *
      * @param nums
      * @return

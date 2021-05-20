@@ -4,10 +4,10 @@ package hash;
  * @author ShaneTang
  * @create 2021-02-05 23:03
  */
-public class FirstNotRepeatingChar {
+public class FirstUniqChar {
 
     public static void main(String[] args) {
-        FirstNotRepeatingChar obj = new FirstNotRepeatingChar();
+        FirstUniqChar obj = new FirstUniqChar();
         int res = obj.FirstNotRepeatingChar("google");
         System.out.println("res = " + res);
     }
