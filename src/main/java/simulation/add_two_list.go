@@ -13,7 +13,7 @@ type ListNode struct {
 LC 逆序存储 不用反转
 */
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	var rst *ListNode
+	var res *ListNode
 	var cur *ListNode
 	carry := 0
 	for l1 != nil || l2 != nil || carry != 0 {
@@ -29,9 +29,10 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		sum := x + y + carry
 		noCarrySum := sum % 10
 		carry = sum / 10
-		if rst == nil {
-			rst = &ListNode{Val: noCarrySum}
-			cur = rst
+		// 如果res还是空的，指向第1个当头，用一个指针指向；否则用cur连下一个
+		if res == nil {
+			res = &ListNode{Val: noCarrySum}
+			cur = res
 		} else {
 			nxt := ListNode{Val: noCarrySum}
 			cur.Next = &nxt
@@ -41,7 +42,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	/*	if carry != 0 {
 		cur.Next = &ListNode{Val: carry}
 	}*/
-	return rst
+	return res
 }
 
 /**

@@ -6,20 +6,23 @@ func main() {
 
 func maxProfit(prices []int) int {
 	curMin := prices[0]
-	rst := 0
+	res := 0
 	for _, val := range prices {
-		if val < curMin {
-			curMin = val
-		}
-		if val-curMin > rst {
-			rst = val - curMin
-		}
+		curMin = min(curMin, val)
+		res = max(res, val-curMin)
 	}
-	return rst
+	return res
 }
 
 func min(a, b int) int {
 	if a < b {
+		return a
+	}
+	return b
+}
+
+func max(a, b int) int {
+	if a > b {
 		return a
 	}
 	return b

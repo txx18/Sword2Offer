@@ -18,7 +18,7 @@ func countNodes(root *TreeNode) int {
 		pr = pr.Right
 	}
 	if dl == dr {
-		return int(math.Pow(2, float64(dr-1)))
+		return int(math.Pow(2, float64(dr)) - 1)
 	}
 	left := countNodes(root.Left)
 	right := countNodes(root.Right)

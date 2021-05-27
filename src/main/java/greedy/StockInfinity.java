@@ -11,6 +11,7 @@ public class StockInfinity {
         int res = 0;
         for (int i = 1; i < prices.length; i++) {
             int profit = prices[i] - prices[i - 1];
+            // 收集正利润
             if (profit > 0) {
                 res += profit;
             }

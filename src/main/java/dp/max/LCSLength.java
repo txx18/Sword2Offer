@@ -4,10 +4,10 @@ package dp.max;
  * @author ShaneTang
  * @create 2021-01-25 11:17
  */
-public class LCSeqLength {
+public class LCSLength {
 
     public static void main(String[] args) {
-        LCSeqLength obj = new LCSeqLength();
+        LCSLength obj = new LCSLength();
         String str1 = "1A2C3D4B56";
         String str2 = "B1D23CA45B6A";
         int res = obj.dpTable(str1, str2);

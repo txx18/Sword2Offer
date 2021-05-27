@@ -5,18 +5,16 @@ func main() {
 }
 
 func maxSubArray(nums []int) int {
-	rst := nums[0]
+	res := nums[0]
 	curSum := 0
 	for _, val := range nums {
 		curSum += val
-		if curSum > rst {
-			rst = curSum
-		}
+		res = max(res, curSum)
 		if curSum < 0 {
 			curSum = 0
 		}
 	}
-	return rst
+	return res
 }
 
 func dpTable(nums []int) int {
