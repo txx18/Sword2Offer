@@ -1,4 +1,4 @@
-package designpatterns.factorymethod;
+package designpattern.factorymethod;
 
 
 interface Product {

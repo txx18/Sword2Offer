@@ -1,4 +1,4 @@
-package designpatterns.dynamicproxy;
+package designpattern.dynamicproxy;
 
 /**
  * @author ShaneTang
@@ -10,5 +10,11 @@ public class Calculator implements ICalculator{
     public int add(int a, int b) {
         System.out.println(a + b);
         return a + b;
+    }
+
+    @Override
+    public int sub(int a, int b) {
+        System.out.println(a - b);
+        return a - b;
     }
 }

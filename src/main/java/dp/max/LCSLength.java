@@ -18,7 +18,6 @@ public class LCSLength {
     /**
      * 通过LC
      * <p>
-     * 前插0行和0列，dp[i][j] A下标为[1, i] B下标为[1, j]时 LCS的长度
      *
      * @param text1
      * @param text2
@@ -27,9 +26,9 @@ public class LCSLength {
     public int dpTable(String text1, String text2) {
         int n = text1.length();
         int m = text2.length();
-        // 为了在下标二维数组中前插0行和0列，表示 ""
+        // 定义dp[i][j] 原字符串下标为[0,i-1]和[0,j-1]的结果
+        // 相当于在下标二维数组中前插0行和0列，表示 ""
         int[][] dp = new int[n + 1][m + 1];
-        // 默认初始为0了，主要是第一行第一列初始化为0，其余后面会更新
         for (int i = 1; i < n + 1; i++) {
             for (int j = 1; j < m + 1; j++) {
                 if (text1.charAt(i - 1) == text2.charAt(j - 1)) {

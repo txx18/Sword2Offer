@@ -1,4 +1,4 @@
-package designpatterns.singleton.hungry;
+package designpattern.singleton.hungry;
 
 /**
  * @author ShaneTang

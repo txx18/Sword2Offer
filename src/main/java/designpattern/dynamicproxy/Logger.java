@@ -1,4 +1,4 @@
-package designpatterns.dynamicproxy;
+package designpattern.dynamicproxy;
 
 /**
  * @author ShaneTang

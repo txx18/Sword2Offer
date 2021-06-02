@@ -1,4 +1,4 @@
-package designpatterns.singleton.lazy;
+package designpattern.singleton.lazy;
 
 /**
  * @author ShaneTang

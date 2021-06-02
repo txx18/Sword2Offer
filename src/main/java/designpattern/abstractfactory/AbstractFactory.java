@@ -1,4 +1,4 @@
-package designpatterns.abstractfactory;
+package designpattern.abstractfactory;
 
 
 class AbstractProductA {
