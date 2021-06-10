@@ -11,7 +11,7 @@ public class BagComplete {
         int[] dp = new int[limit + 1];
         // 既可以外物品内背包，也可以外背包内物品
         for (int i = 0; i < n; i++) {
-            for (int j = weights[i]; j <= limit; j++) {
+            for (int j = weights[i]; j < limit + 1; j++) {
                 dp[j] = Math.max(dp[j], values[i] + dp[j - weights[i]]);
             }
         }

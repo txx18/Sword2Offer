@@ -46,9 +46,11 @@ public class MinEdit {
                 }
                 // 增 删 改，右边的状态怎么变成左边（赋值表达式啊）
                 else {
-                    dp[i][j] = min(dp[i][j - 1] + ic, // 从左到右变是要dc，那么倒推，左边的状态是右边ic之后的
-                            dp[i - 1][j] + dc,
-                            dp[i - 1][j - 1] + rc);
+                    dp[i][j] = min(
+                            ic + dp[i][j - 1],
+                            dc + dp[i - 1][j],
+                            rc + dp[i - 1][j - 1]
+                    );
                 }
             }
         }

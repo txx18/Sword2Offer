@@ -7,6 +7,7 @@ import java.util.List;
  * @author ShaneTang
  * @create 2021-02-03 11:09
  */
+@Deprecated
 public class LISeq {
 
     public static void main(String[] args) {

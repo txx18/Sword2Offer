@@ -24,7 +24,7 @@ func findLength(nums1 []int, nums2 []int) int {
 				res = max(res, dp[i][j])
 			}
 		}*/
-	// dp[i][j]如果定义成以下标i-1和j-1结尾的结果
+	// dp[i][j]如果定义成 以下标i-1和j-1结尾的最长重复子数组
 	// i,j: [0, n]
 	// 取0的结果没有意义，从1开始遍历，但需要初始化，默认为0为两个空字符串的结果，符合题意
 	dp := make([][]int, len(nums1)+1)
@@ -35,7 +35,7 @@ func findLength(nums1 []int, nums2 []int) int {
 	for i := 1; i < len(nums1)+1; i++ {
 		for j := 1; j < len(nums2)+1; j++ {
 			if nums1[i-1] == nums2[j-1] {
-				dp[i][j] = dp[i-1][j-1] + 1
+				dp[i][j] = 1 + dp[i-1][j-1]
 			}
 			res = max(res, dp[i][j])
 		}

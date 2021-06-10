@@ -40,28 +40,29 @@ public class Bag01 {
     }
 
     /**
-     * dp[i][j] 表示从 下标为[0,i-1] 的物品里任意取，放进容量为[0,j] 的背包，价值总和最大是多少。
-     * 结果dp[n-1][limit]
+     * 通过NK
+     * 结果dp[n-1][V]
      *
-     * @param limit
+     * @param V
      * @param n
      * @param vw
      * @return
      */
-    public int dpTable2d(int n, int limit, int[][] vw) {
+    public int dpTable2d(int V, int n, int[][] vw) {
+        // dp[i][j] 表示从 下标为[0,i-1] 的物品里，放进容量为j 的背包，价值总和最大是多少。
         // 可以取到V，那必须开辟V+1
-        int[][] dp = new int[n][limit + 1];
+        int[][] dp = new int[n][V + 1];
         // i=0时，只放0号物品，从大于它体积小于总体积的部分有价值；其余省略初始化
-        // 倒序初始化
-        for (int j = limit; j >= vw[0][0]; j--) {
+        // 倒序初始化 i=0时
+        for (int j = V; j >= vw[0][0]; j--) {
             dp[0][j] = vw[0][1] + dp[0][j - vw[0][0]];
         }
-/*        for (int j = vw[0][0]; j < limit + 1; j++) {
+/*        for (int j = vw[0][0]; j < V + 1; j++) {
             dp[0][j] = vw[0][1];
         }*/
         // 外物品内背包
         for (int i = 1; i < n; i++) {
-            for (int j = 0; j < limit + 1; j++) {
+            for (int j = 0; j < V + 1; j++) {
                 if (j - vw[i][0] < 0) {
                     dp[i][j] = dp[i - 1][j];
                 } else {
@@ -70,17 +71,39 @@ public class Bag01 {
                 }
             }
         }
-        return dp[n - 1][limit];
+        return dp[n - 1][V];
     }
 
-    public int dpTable2d(int[] weights, int[] values, int limit) {
+    public int dpTable1d(int[] weights, int[] values, int W) {
         int n = weights.length;
-        int[][] dp = new int[n][limit + 1];
-        for (int j = limit; j >= weights[0]; j--) {
+        // dp[j] 定义为 放入容量为j的背包 的最大价值
+        int[] dp = new int[W + 1];
+        for (int i = 0; i < n; i++) {
+            // 必须逆序遍历
+            for (int j = W; j >= weights[i]; j--) {
+                dp[j] = Math.max(dp[j], values[i] + dp[j - weights[i]]);
+            }
+        }
+        return dp[W];
+    }
+
+    /**
+     * Carl
+     *
+     * @param weights
+     * @param values
+     * @param W
+     * @return
+     */
+    public int dpTable2d(int[] weights, int[] values, int W) {
+        int n = weights.length;
+        int[][] dp = new int[n][W + 1];
+        // 倒序，保证values[0]只被加入一次
+        for (int j = W; j >= weights[0]; j--) {
             dp[0][j] = values[0] + dp[0][j - weights[0]];
         }
         for (int i = 1; i < n; i++) {
-            for (int j = 0; j < limit + 1; j++) {
+            for (int j = 0; j < W + 1; j++) {
                 if (j - weights[i] < 0) {
                     dp[i][j] = dp[i - 1][j];
                 } else {
@@ -88,18 +111,7 @@ public class Bag01 {
                 }
             }
         }
-        return dp[n - 1][limit];
-    }
-
-    public int dpTable1d(int[] weights, int[] values, int limit) {
-        int n = weights.length;
-        int[] dp = new int[limit + 1];
-        for (int i = 0; i < n; i++) {
-            for (int j = limit; j >= weights[i]; j--) {
-                dp[j] = Math.max(dp[j], values[i] + dp[j - weights[i]]);
-            }
-        }
-        return dp[limit];
+        return dp[n - 1][W];
     }
 
 

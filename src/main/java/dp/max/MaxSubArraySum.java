@@ -12,33 +12,23 @@ public class MaxSubArraySum {
         System.out.println("res = " + res);
     }
 
-    public int solutionGreedy(int[] nums) {
-        int res = Integer.MIN_VALUE;
-        int curSum = 0;
-        for (int i = 0; i < nums.length; i++) {
-            curSum += nums[i];
-            res = Math.max(res, curSum);
-            if (curSum < 0) {
-                curSum = 0;
-            }
+    public int dpTable(int[] nums) {
+        int n = nums.length;
+        int res = nums[0];
+        int[] dp = new int[n];
+        dp[0] = nums[0];
+        for (int i = 1; i < n; i++) {
+            dp[i] = Math.max(nums[i] + dp[i - 1], nums[i]);
+            res = Math.max(res, dp[i]);
         }
         return res;
     }
 
-    public int solutionDpOpt(int[] array) {
-        if (array == null || array.length == 0) {
-            return 0;
-        }
-        int res = Integer.MIN_VALUE;
-        int sum = 0;
-        for (int val : array) {
-            if (sum <= 0) {
-                sum = val;
-            } else {
-                sum += val;
-            }
-            res = Math.max(res, sum);
-        }
-        return res;
+    public int solutionGreedy(int[] nums) {
+        return new greedy.MaxSubArraySum().solutionGreedy(nums);
+    }
+
+    public int solutionDpOpt(int[] nums) {
+        return new greedy.MaxSubArraySum().solutionDpOpt(nums);
     }
 }

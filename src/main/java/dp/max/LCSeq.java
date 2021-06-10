@@ -6,6 +6,7 @@ import java.util.Arrays;
  * @author ShaneTang
  * @create 2021-02-03 9:50
  */
+@Deprecated
 public class LCSeq {
 
     public static void main(String[] args) {

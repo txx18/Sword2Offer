@@ -57,6 +57,7 @@ public class Fibonacci {
         if (n <= 1) {
             return n;
         }
+        // dp[i] 定义为 下标为i时 f(i)的值
         int[] dp = new int[n + 1];
         // 从0开始，第0项为0，第1项是1
         dp[0] = 0;
