@@ -4,7 +4,7 @@ package dp.max;
  * @author ShaneTang
  * @create 2021-01-25 11:17
  */
-public class LCS {
+public class LCSubsequence {
 
 
     static class MaxLength {

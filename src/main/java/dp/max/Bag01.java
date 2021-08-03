@@ -41,7 +41,6 @@ public class Bag01 {
 
     /**
      * 通过NK
-     * 结果dp[n-1][V]
      *
      * @param V
      * @param n

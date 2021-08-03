@@ -6,7 +6,7 @@ import java.util.Arrays;
  * @author ShaneTang
  * @create 2021-01-25 10:31
  */
-public class LIS {
+public class LISubsequence {
 
     static class MaxLength {
         public static void main(String[] args) {

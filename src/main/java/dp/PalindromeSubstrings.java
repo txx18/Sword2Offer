@@ -5,8 +5,10 @@ package dp;
  * @create 2021-06-03 20:25
  */
 public class PalindromeSubstrings {
-
-    class MaxLength {
+    /**
+     * 通过NK
+     */
+    static class LPSubStringLength {
         public int getLongestPalindrome(String A, int n) {
             // write code here
             int res = 0;
@@ -30,7 +32,7 @@ public class PalindromeSubstrings {
         }
     }
 
-    class Count {
+    static class CombineCount {
         public int dp(String s) {
             int n = s.length();
             int res = 0;
