@@ -3,7 +3,6 @@
 .idea/
 *.iml
 Course/
-test/
 resources/
 
 ### Java template

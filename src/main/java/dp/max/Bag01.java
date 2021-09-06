@@ -73,17 +73,17 @@ public class Bag01 {
         return dp[n - 1][V];
     }
 
-    public int dpTable1d(int[] weights, int[] values, int W) {
-        int n = weights.length;
+    public int dpTable1d(int[] volumns, int[] weights, int V) {
+        int n = volumns.length;
         // dp[j] 定义为 放入容量为j的背包 的最大价值
-        int[] dp = new int[W + 1];
+        int[] dp = new int[V + 1];
         for (int i = 0; i < n; i++) {
             // 必须逆序遍历
-            for (int j = W; j >= weights[i]; j--) {
-                dp[j] = Math.max(dp[j], values[i] + dp[j - weights[i]]);
+            for (int j = V; j >= volumns[i]; j--) {
+                dp[j] = Math.max(dp[j], weights[i] + dp[j - volumns[i]]);
             }
         }
-        return dp[W];
+        return dp[V];
     }
 
     /**
