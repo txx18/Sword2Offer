@@ -6,7 +6,11 @@ package designpattern.singleton.lazy;
  */
 public final class SingletonDoubleCheckLock {
 
-    private static volatile SingletonDoubleCheckLock instance = null; // volatile加读写屏障
+    /**
+     *  volatile加读写屏障
+     *  final 和 volatile 不能共存
+     */
+    private static volatile SingletonDoubleCheckLock instance = null;
 
     private SingletonDoubleCheckLock() {
 

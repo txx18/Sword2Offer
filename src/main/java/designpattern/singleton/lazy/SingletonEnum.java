@@ -6,5 +6,6 @@ package designpattern.singleton.lazy;
  */
 public enum SingletonEnum {
 
-    INSTANCE;
+    INSTANCE
+
 }

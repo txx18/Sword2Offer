@@ -1,35 +1,26 @@
-package designpattern.abstractfactory;
+package designpattern.factory.abstractfactory;
 
 
 class AbstractProductA {
-
 }
 
 class AbstractProductB {
-
 }
 
 class ProductA1 extends AbstractProductA {
-
 }
 
 class ProductA2 extends AbstractProductA {
-
 }
 
 class ProductB1 extends AbstractProductB {
-
 }
 
 class ProductB2 extends AbstractProductB {
-
 }
 
 
-/**
- * @author ShaneTang
- * @create 2021-03-04 21:26
- */
+
 public abstract class AbstractFactory {
 
     abstract AbstractProductA createProductA();

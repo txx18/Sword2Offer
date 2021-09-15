@@ -78,7 +78,7 @@ public class CallbackDemo {
         }
     }
 
-    class FileIO {
+    static class FileIO {
         public boolean saveStrToFile(String fileName, String content) {
             try {
                 File file = getExistsFile(fileName);
