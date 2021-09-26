@@ -25,10 +25,10 @@ public class ListUtils {
         System.out.println(Arrays.toString(res));
     }
 
-    public static int[] convertToArray(List<Integer> arrayList) {
-        int[] res = new int[arrayList.size()];
+    public static int[] convertToArray(List<Integer> list) {
+        int[] res = new int[list.size()];
         for (int i = 0; i < res.length; i++) {
-            res[i] = arrayList.get(i);
+            res[i] = list.get(i);
         }
         return res;
     }

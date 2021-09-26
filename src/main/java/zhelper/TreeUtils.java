@@ -1,9 +1,6 @@
 package zhelper;
 
-import java.sql.PreparedStatement;
-import java.util.LinkedList;
-import java.util.Objects;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * @author Shane Tang
@@ -180,19 +177,76 @@ public class TreeUtils {
             val = x;
         }
 
+        public TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    public static class NTreeNode {
+        public int val;
+        public NTreeNode[] children;
+
+        public NTreeNode(int x) {
+           val = x;
+        }
+
+        public NTreeNode(int val, NTreeNode[] children) {
+            this.val = val;
+            this.children = children;
+        }
+
+        public NTreeNode(int val, int[] children) {
+            this.val = val;
+            this.children = new NTreeNode[children.length];
+            for (int i = 0; i < children.length; i++) {
+                this.children[i] = new NTreeNode(children[i]);
+            }
+        }
+
+        public NTreeNode[] adj() {
+            return children;
+        }
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-            TreeNode treeNode = (TreeNode) o;
-            return val == treeNode.val &&
-                    Objects.equals(left, treeNode.left) &&
-                    Objects.equals(right, treeNode.right);
+            NTreeNode nTreeNode = (NTreeNode) o;
+            return val == nTreeNode.val && Arrays.equals(children, nTreeNode.children);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(val, left, right);
+            int result = Objects.hash(val);
+            result = 31 * result + Arrays.hashCode(children);
+            return result;
         }
+
+        @Override
+        public String toString() {
+            return "NTreeNode{" +
+                    "val=" + val +
+                    ", children=" + Arrays.toString(children) +
+                    '}';
+        }
+    }
+
+    static List<Integer> nTreeNodes = new ArrayList<>();
+
+    public static List<Integer> preorderNTree(NTreeNode root) {
+        if (root == null) {
+            return nTreeNodes;
+        }
+        nTreeNodes.add(root.val);
+        NTreeNode[] children = root.adj();
+        if (children == null) {
+            return nTreeNodes;
+        }
+        for (NTreeNode cur: root.adj()) {
+            preorderNTree(cur);
+        }
+        return nTreeNodes;
     }
 }

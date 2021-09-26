@@ -1,8 +1,6 @@
 package zhelper;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import zhelper.ListUtils.*;
 
@@ -15,13 +13,38 @@ import zhelper.TreeUtils.*;
 public class ArrayUtils {
 
     public static void main(String[] args) {
-        int[] arr1 = {4, 5, 1, 6, 2, 7, 3, 8};
-        Integer[] arr2 = {1,3,2,5,3, null, 9};
-        Integer[] arr3 = {5, 4, 7, 3, null, 2, null, -1, null, 9};
-        Integer[] arr4 = {1, 2, 3, 4, 5};
+//        int[] arr1 = {4, 5, 1, 6, 2, 7, 3, 8};
+//        Integer[] arr2 = {1,3,2,5,3, null, 9};
+//        Integer[] arr3 = {5, 4, 7, 3, null, 2, null, -1, null, 9};
+//        Integer[] arr4 = {1, 2, 3, 4, 5};
+//
+//        TreeNode res = convertToCBT(arr4);
+//        TreeUtils.printTree(res);
 
-        TreeNode res = convertToCBT(arr4);
-        TreeUtils.printTree(res);
+        int[][] arr = input2dArray(9, 9);
+        print2dArray(arr, " ");
+    }
+
+    public static void print2dArray(int[][] arr, String SEP) {
+        for (int i = 0; i < arr.length; i++) {
+            StringJoiner sj = new StringJoiner(SEP);
+            for (int j = 0; j < arr[0].length; j++) {
+                sj.add(arr[i][j] + "");
+            }
+            System.out.println(sj);
+        }
+    }
+
+    public static int[][] input2dArray(int rowLength, int colLength) {
+        Scanner sc = new Scanner(System.in);
+        int[][] res = new int[rowLength][colLength];
+        for (int i = 0; i < rowLength; i++) {
+            String[] splits = sc.nextLine().split(" ");
+            for (int j = 0; j < colLength; j++) {
+                res[i][j] = Integer.parseInt(splits[j]);
+            }
+        }
+        return res;
     }
 
     /**
