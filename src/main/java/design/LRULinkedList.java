@@ -1,11 +1,11 @@
-package linkedList;
+package design;
 
 // 超时
 @Deprecated
-class LRUCache {
+class LRULinkedList {
 
     public static void main(String[] args) {
-        LRUCache cache = new LRUCache( 2 /* 缓存容量 */ );
+        LRULinkedList cache = new LRULinkedList( 2 /* 缓存容量 */ );
 
         cache.put(1, 1);
         cache.put(2, 2);
@@ -33,7 +33,7 @@ class LRUCache {
     ListNode dummy;
     int nodeCount;
 
-    public LRUCache(int capacity) {
+    public LRULinkedList(int capacity) {
         this.cacheCapacity = capacity;
         this.dummy = new ListNode(-1, -1);
     }
@@ -73,13 +73,6 @@ class LRUCache {
                 return;
             }
         }
-        // 如果原缓存不存在，检查缓存是否满了
-        // 如果没满，插入链表头
-/*        if (nodeCount < cacheCapacity) {
-            newNode.next = dummy.next;
-            dummy.next = newNode;
-            nodeCount++;
-        }*/
         // 如果满了，删除最后的结点，插入头结点
         if (nodeCount == cacheCapacity) {
             ListNode cur = dummy;
@@ -94,6 +87,8 @@ class LRUCache {
             dummy.next = newNode;
             nodeCount++;
         }
+        // 如果原缓存不存在，检查缓存是否满了
+        // 如果没满，插入链表头
         if (nodeCount < cacheCapacity) {
             newNode.next = dummy.next;
             dummy.next = newNode;

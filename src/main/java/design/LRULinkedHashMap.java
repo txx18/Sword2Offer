@@ -8,10 +8,10 @@ import java.util.LinkedList;
  * @author ShaneTang
  * @create 2021-03-31 11:06
  */
-public class LRUCache {
+public class LRULinkedHashMap {
 
     public static void main(String[] args) {
-        LRUCache lruCache = new LRUCache(2);
+        LRULinkedHashMap lruCache = new LRULinkedHashMap(2);
 /*        lruCache.put(1, 1);
         lruCache.put(2, 2);
         lruCache.get(1);
@@ -44,7 +44,7 @@ public class LRUCache {
     LinkedHashMap<Integer, Integer> linkedHashMap;
     int capacity;
 
-    public LRUCache(int capacity) {
+    public LRULinkedHashMap(int capacity) {
         list = new LinkedList<>();
         hashMap = new HashMap<>(capacity);
         linkedHashMap = new LinkedHashMap<>();
