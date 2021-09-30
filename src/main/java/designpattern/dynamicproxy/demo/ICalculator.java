@@ -1,4 +1,4 @@
-package designpattern.dynamicproxy;
+package designpattern.dynamicproxy.demo;
 
 public interface ICalculator {
 
