@@ -1,4 +1,4 @@
-package designpattern.dynamicproxy.demo;
+package designpattern.dynamicproxy;
 
 import org.junit.Test;
 
