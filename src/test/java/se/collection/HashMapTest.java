@@ -43,9 +43,15 @@ public class HashMapTest {
     @Test
     public void testHashCode() {
         Set<Student> hashSet = new HashSet<>();
-
-        hashSet.add(new Student("tx"));
-        hashSet.add(new Student("tx"));
+        Student s1 = new Student("tx");
+        Student s2 = new Student("tx");
+        Student s3 = s1;
+        System.out.println(s1.hashCode());
+        System.out.println(s2.hashCode());
+        System.out.println(s3.hashCode());
+        hashSet.add(s1);
+        hashSet.add(s2);
+        hashSet.add(s3);
         System.out.println("hashSet = " + hashSet);
     }
 }

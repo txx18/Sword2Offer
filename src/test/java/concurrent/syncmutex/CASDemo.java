@@ -45,7 +45,7 @@ public class CASDemo {
         /**
          * 共享变量
          */
-        private int value;
+        private volatile int value;
 
         /**
          * 悲观锁访问共享变量

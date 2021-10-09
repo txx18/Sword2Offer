@@ -8,6 +8,9 @@ public class ThreadLocalDemo {
 
     static class Context {
 
+        /**
+         * static 导致垃圾回收时不会清理
+         */
         private static final ThreadLocal<String> mThreadLocal = new ThreadLocal<>();
 
         public static void setTrackerID(String id) {

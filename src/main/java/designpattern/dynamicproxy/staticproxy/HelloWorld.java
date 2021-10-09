@@ -1,10 +1,10 @@
-package designpattern.dynamicproxy;
+package designpattern.dynamicproxy.staticproxy;
 
 /**
  * @author ShaneTang
  * @create 2021-05-20 22:19
  */
-public class HelloWorld implements IHelloWorld{
+public class HelloWorld implements IHelloWorld {
 
     @Override
     public void sayHello() {
